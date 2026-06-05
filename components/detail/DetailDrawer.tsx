@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { isTopologyEdge } from '@/types/topology';
+import { BUILDINGS } from '@/data/buildings';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
 import { ASSET_CONFIG, SPEC_LABELS, ZONE_CONFIG } from '@/lib/zoneConfig';
 import { getCascadeTargets } from '@/lib/troubleshooting';
@@ -214,13 +215,46 @@ export function DetailDrawer({
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                          <SpecRow label="Building" value={BUILDINGS[loc.building].label} />
                           <SpecRow label="Floor" value={loc.floor} />
                           <SpecRow label="Elevation" value={loc.elevation} />
                           <SpecRow label="Area / Zone" value={loc.area} />
+                          {loc.gridRef && (
+                            <SpecRow label="Grid reference" value={loc.gridRef} />
+                          )}
                         </div>
                       </>
                     );
                   })()}
+                </Section>
+              )}
+
+              {isEdge && (element as TopologyEdge).route?.spansBuildings && (
+                <Section title="Cross-building route" icon="↔">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                    <SpecRow
+                      label="From"
+                      value={
+                        (element as TopologyEdge).route?.fromBuilding
+                          ? BUILDINGS[(element as TopologyEdge).route!.fromBuilding!].label
+                          : '—'
+                      }
+                    />
+                    <SpecRow
+                      label="To"
+                      value={
+                        (element as TopologyEdge).route?.toBuilding
+                          ? BUILDINGS[(element as TopologyEdge).route!.toBuilding!].label
+                          : '—'
+                      }
+                    />
+                    {(element as TopologyEdge).specs.installationType && (
+                      <SpecRow
+                        label="Installation"
+                        value={(element as TopologyEdge).specs.installationType!}
+                      />
+                    )}
+                  </div>
                 </Section>
               )}
 

@@ -1,11 +1,10 @@
 import type { TopologyZone } from '@/types/topology';
 
-/** Horizontal layer bands — tree grows upward (lower Y = higher in power path). */
 export const topologyZones: TopologyZone[] = [
   {
     id: 'band-mv-feed',
-    zone: 'basement-mv',
-    label: '11 kV Main Incoming',
+    zone: 'utility-basement-mv',
+    label: 'Utility Building — 11 kV incoming',
     layerLabel: 'MV Feed — Root',
     position: { x: -20, y: 800 },
     width: 1120,
@@ -13,8 +12,8 @@ export const topologyZones: TopologyZone[] = [
   },
   {
     id: 'band-mv-sw',
-    zone: 'basement-mv',
-    label: 'MV Switchgear Room MV-01',
+    zone: 'utility-basement-mv',
+    label: 'Utility — MV switchgear room (−3 m)',
     layerLabel: 'MV Switchgear',
     position: { x: -20, y: 660 },
     width: 1120,
@@ -22,8 +21,8 @@ export const topologyZones: TopologyZone[] = [
   },
   {
     id: 'band-transformer',
-    zone: 'substation',
-    label: 'Substation Alpha — Transformer Bay',
+    zone: 'utility-ground',
+    label: 'Utility — transformer bay',
     layerLabel: 'Transformer',
     position: { x: -20, y: 520 },
     width: 1120,
@@ -31,8 +30,8 @@ export const topologyZones: TopologyZone[] = [
   },
   {
     id: 'band-lv-panel',
-    zone: 'substation',
-    label: 'Substation Alpha — LV Panel Room',
+    zone: 'utility-ground',
+    label: 'Utility — main LV panel (site hub)',
     layerLabel: 'LV Distribution Panel',
     position: { x: -20, y: 380 },
     width: 1120,
@@ -40,8 +39,8 @@ export const topologyZones: TopologyZone[] = [
   },
   {
     id: 'band-cabinets',
-    zone: 'hall-a-ground',
-    label: 'Factory Halls — Distribution Cabinets',
+    zone: 'furnace-10-ground',
+    label: 'Furnace 10 · Batch House — field cabinets',
     layerLabel: 'Distribution Cabinets',
     position: { x: -20, y: 220 },
     width: 1120,
@@ -49,8 +48,8 @@ export const topologyZones: TopologyZone[] = [
   },
   {
     id: 'band-junction',
-    zone: 'hall-a-ground',
-    label: 'Field Junction Boxes — by floor & elevation',
+    zone: 'furnace-10-ground',
+    label: 'Field junction boxes — by building & elevation',
     layerLabel: 'Junction Boxes',
     position: { x: -20, y: 60 },
     width: 1120,
@@ -58,8 +57,8 @@ export const topologyZones: TopologyZone[] = [
   },
   {
     id: 'band-loads',
-    zone: 'hall-a-mezzanine',
-    label: 'Motors & Loads — end devices',
+    zone: 'batch-house-ground',
+    label: 'Motors & loads — end devices',
     layerLabel: 'Loads / Devices',
     position: { x: -20, y: -100 },
     width: 1120,

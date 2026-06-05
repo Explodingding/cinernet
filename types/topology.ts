@@ -7,7 +7,8 @@ export type AssetType =
   | 'junction-box'
   | 'motor';
 
-/** Vertical layer in the power-flow tree (0 = root / MV base at bottom). */
+export type BuildingId = 'utility' | 'furnace-10' | 'batch-house';
+
 export type TopologyLayer =
   | 'mv-feed'
   | 'mv-switchgear'
@@ -17,13 +18,13 @@ export type TopologyLayer =
   | 'junction'
   | 'load';
 
+/** Visual zone stripe — maps to building + elevation band */
 export type LocationZone =
-  | 'basement-mv'
-  | 'substation'
-  | 'hall-a-ground'
-  | 'hall-a-mezzanine'
-  | 'hall-b-ground'
-  | 'hall-c-ground';
+  | 'utility-basement-mv'
+  | 'utility-ground'
+  | 'furnace-10-ground'
+  | 'furnace-10-elevated'
+  | 'batch-house-ground';
 
 export type Status = 'operational' | 'investigation' | 'fault';
 
@@ -35,10 +36,25 @@ export interface ExternalRefs {
 }
 
 export interface PhysicalLocation {
+  building: BuildingId;
   zone: LocationZone;
   floor: string;
   elevation: string;
   area: string;
+  gridRef?: string;
+}
+
+export interface NodeLayout {
+  building: BuildingId;
+  /** Horizontal slot within a building branch (0 = centre / first) */
+  branchIndex?: number;
+}
+
+export interface CableRoute {
+  pathType: 'cable-tray' | 'underground' | 'riser' | 'overhead' | 'internal';
+  spansBuildings?: boolean;
+  fromBuilding?: BuildingId;
+  toBuilding?: BuildingId;
 }
 
 export interface TroubleshootingStep {
@@ -65,7 +81,8 @@ export interface CableSpecs {
   notes?: string;
 }
 
-export interface TopologyNode {
+/** Node input without canvas position — layout is computed from building + layer */
+export interface TopologyNodeInput {
   id: string;
   name: string;
   assetType: AssetType;
@@ -73,13 +90,17 @@ export interface TopologyNode {
   status: Status;
   specs: DeviceSpecs;
   physicalLocation: PhysicalLocation;
+  layout: NodeLayout;
   troubleshootingSteps: TroubleshootingStep[];
-  position: { x: number; y: number };
   externalRefs?: ExternalRefs;
   upstreamHint?: string;
 }
 
-export interface TopologyEdge {
+export interface TopologyNode extends Omit<TopologyNodeInput, 'layout'> {
+  position: { x: number; y: number };
+}
+
+export interface TopologyEdgeInput {
   id: string;
   name: string;
   source: string;
@@ -88,11 +109,20 @@ export interface TopologyEdge {
   status: Status;
   specs: CableSpecs;
   troubleshootingSteps: TroubleshootingStep[];
+  route?: CableRoute;
   externalRefs?: ExternalRefs;
   upstreamHint?: string;
 }
 
-/** Background band grouping nodes by physical zone / elevation. */
+export type TopologyEdge = TopologyEdgeInput;
+
+export interface SiteInstallation {
+  id: BuildingId;
+  label: string;
+  nodes: TopologyNodeInput[];
+  edges: TopologyEdgeInput[];
+}
+
 export interface TopologyZone {
   id: string;
   zone: LocationZone;

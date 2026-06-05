@@ -1,4 +1,4 @@
-import type { AssetType, LocationZone, TopologyLayer } from '@/types/topology';
+import type { AssetType, BuildingId, LocationZone, TopologyLayer } from '@/types/topology';
 
 export interface ZoneConfig {
   label: string;
@@ -6,50 +6,49 @@ export interface ZoneConfig {
   color: string;
   bgColor: string;
   borderColor: string;
+  building: BuildingId;
 }
 
 export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
-  'basement-mv': {
-    label: 'Basement — MV Switchgear',
-    shortLabel: 'B1 MV',
+  'utility-basement-mv': {
+    label: 'Utility — Basement MV (−3 m)',
+    shortLabel: 'UTL B1',
     color: '#f472b6',
     bgColor: 'rgba(244, 114, 182, 0.06)',
     borderColor: 'rgba(244, 114, 182, 0.25)',
+    building: 'utility',
   },
-  substation: {
-    label: 'Substation — Ground Level',
-    shortLabel: 'SS',
+  'utility-ground': {
+    label: 'Utility — Ground Level',
+    shortLabel: 'UTL G',
     color: '#34d399',
     bgColor: 'rgba(52, 211, 153, 0.06)',
     borderColor: 'rgba(52, 211, 153, 0.25)',
+    building: 'utility',
   },
-  'hall-a-ground': {
-    label: 'Hall A — Ground Floor',
-    shortLabel: 'A0',
+  'furnace-10-ground': {
+    label: 'Furnace 10 — Ground Floor',
+    shortLabel: 'F10 G',
     color: '#818cf8',
     bgColor: 'rgba(129, 140, 248, 0.06)',
     borderColor: 'rgba(129, 140, 248, 0.25)',
+    building: 'furnace-10',
   },
-  'hall-a-mezzanine': {
-    label: 'Hall A — Mezzanine (+5 m)',
-    shortLabel: 'A+5',
+  'furnace-10-elevated': {
+    label: 'Furnace 10 — Elevated (+5 m)',
+    shortLabel: 'F10 +5',
     color: '#38bdf8',
     bgColor: 'rgba(56, 189, 248, 0.06)',
     borderColor: 'rgba(56, 189, 248, 0.25)',
+    building: 'furnace-10',
   },
-  'hall-b-ground': {
-    label: 'Hall B — Ground Floor',
-    shortLabel: 'B0',
-    color: '#fbbf24',
-    bgColor: 'rgba(251, 191, 36, 0.06)',
-    borderColor: 'rgba(251, 191, 36, 0.25)',
-  },
-  'hall-c-ground': {
-    label: 'Hall C — Ground Floor',
-    shortLabel: 'C0',
+  'batch-house-ground': {
+    label: 'Batch House — Ground Floor',
+    shortLabel: 'BH G',
     color: '#c084fc',
     bgColor: 'rgba(192, 132, 252, 0.06)',
     borderColor: 'rgba(192, 132, 252, 0.25)',
+    building: 'batch-house',
   },
 };
 
@@ -93,4 +92,6 @@ export const SPEC_LABELS: Record<string, string> = {
   floor: 'Floor',
   elevation: 'Elevation',
   area: 'Area / Zone',
+  building: 'Building',
+  gridRef: 'Grid reference',
 };

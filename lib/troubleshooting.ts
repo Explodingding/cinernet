@@ -3,9 +3,9 @@ export const RESOLVE_CASCADE: Record<
   string,
   { nodes: string[]; edges: string[] }
 > = {
-  'DC-A1': {
-    nodes: ['JB-A1', 'M-PUMP-A1'],
-    edges: ['PC-A1', 'PC-M01'],
+  'DC-F10-01': {
+    nodes: ['JB-F10-01', 'M-F10-PUMP'],
+    edges: ['PC-F10-JB1', 'PC-F10-M01'],
   },
 };
 

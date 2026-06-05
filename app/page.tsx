@@ -8,9 +8,12 @@ import { BrandHeader } from '@/components/layout/BrandHeader';
 import { KpiBar } from '@/components/layout/KpiBar';
 import { AlertBanner } from '@/components/layout/AlertBanner';
 import { StatusFilterBar } from '@/components/topology/StatusFilterBar';
+import { BuildingFilterBar } from '@/components/topology/BuildingFilterBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
 import { Toast } from '@/components/ui/Toast';
 import { getCascadeTargets } from '@/lib/troubleshooting';
+import { filterTopologyByBuilding } from '@/lib/topologyFilters';
+import type { BuildingFilter } from '@/components/topology/BuildingFilterBar';
 
 const TopologyMap = dynamic(
   () => import('@/components/topology/TopologyMap').then((m) => m.TopologyMap),
@@ -44,6 +47,7 @@ export default function Dashboard() {
     type: 'node' | 'edge';
   } | null>(null);
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
+  const [buildingFilter, setBuildingFilter] = useState<BuildingFilter>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const effectiveNodes = useMemo(
@@ -62,6 +66,11 @@ export default function Dashboard() {
         status: edgeStatuses[e.id] ?? e.status,
       })),
     [edgeStatuses]
+  );
+
+  const { nodes: visibleNodes, edges: visibleEdges } = useMemo(
+    () => filterTopologyByBuilding(effectiveNodes, effectiveEdges, buildingFilter),
+    [effectiveNodes, effectiveEdges, buildingFilter]
   );
 
   const faultNodes = useMemo(
@@ -150,12 +159,16 @@ export default function Dashboard() {
       <BrandHeader />
       <KpiBar nodes={effectiveNodes} edges={effectiveEdges} />
       <AlertBanner faultNodes={faultNodes} onNodeClick={handleAlertClick} />
+      <BuildingFilterBar
+        activeBuilding={buildingFilter}
+        onBuildingChange={setBuildingFilter}
+      />
       <StatusFilterBar activeFilter={statusFilter} onFilterChange={setStatusFilter} />
 
       <div className="flex-1 relative overflow-hidden min-h-0">
         <TopologyMap
-          nodes={effectiveNodes}
-          edges={effectiveEdges}
+          nodes={visibleNodes}
+          edges={visibleEdges}
           selectedId={selectedId}
           onNodeSelect={handleNodeSelect}
           onEdgeSelect={handleEdgeSelect}

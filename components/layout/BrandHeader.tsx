@@ -88,7 +88,7 @@ export function BrandHeader() {
             Lommel Glass Factory
           </div>
           <div className="text-[10px] text-slate-500 tracking-wider truncate">
-            Substation Alpha — Power Flow Tree
+            Utility · Furnace 10 · Batch House
           </div>
         </div>
       </div>
