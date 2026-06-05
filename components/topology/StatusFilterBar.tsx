@@ -11,28 +11,28 @@ interface StatusFilterBarProps {
 }
 
 const filters: { id: Filter; label: string; color?: string }[] = [
-  { id: 'all', label: 'Wszystkie', color: '#64748b' },
-  { id: 'operational', label: STATUS_CONFIG.operational.labelPl, color: STATUS_CONFIG.operational.color },
-  { id: 'investigation', label: STATUS_CONFIG.investigation.labelPl, color: STATUS_CONFIG.investigation.color },
-  { id: 'fault', label: STATUS_CONFIG.fault.labelPl, color: STATUS_CONFIG.fault.color },
+  { id: 'all', label: 'All', color: '#64748b' },
+  { id: 'operational', label: STATUS_CONFIG.operational.label, color: STATUS_CONFIG.operational.color },
+  { id: 'investigation', label: STATUS_CONFIG.investigation.label, color: STATUS_CONFIG.investigation.color },
+  { id: 'fault', label: STATUS_CONFIG.fault.label, color: STATUS_CONFIG.fault.color },
 ];
 
 const comingSoon = [
-  { label: 'Sygnały PLC', icon: '⬡' },
-  { label: 'Linia SN', icon: '⚡' },
+  { label: 'PLC Signals', icon: '⬡' },
+  { label: 'MV Line', icon: '⚡' },
 ];
 
 export function StatusFilterBar({ activeFilter, onFilterChange }: StatusFilterBarProps) {
   return (
     <div
-      className="flex items-center gap-2 px-5 py-2 shrink-0"
+      className="flex items-center gap-2 px-3 md:px-5 py-2 shrink-0 overflow-x-auto min-h-[44px]"
       style={{
         background: 'rgba(10, 15, 26, 0.6)',
         borderBottom: '1px solid rgba(255,255,255,0.05)',
       }}
     >
-      <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mr-1">
-        Filtr:
+      <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mr-1 shrink-0">
+        Filter:
       </span>
 
       {filters.map((f) => {
@@ -41,7 +41,7 @@ export function StatusFilterBar({ activeFilter, onFilterChange }: StatusFilterBa
           <button
             key={f.id}
             onClick={() => onFilterChange(f.id)}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold transition-all duration-150"
+            className="flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-full text-[11px] font-semibold transition-all duration-150 shrink-0"
             style={{
               background: isActive
                 ? `rgba(${f.color ? hexToRgb(f.color) : '100,116,139'}, 0.15)`
@@ -66,21 +66,19 @@ export function StatusFilterBar({ activeFilter, onFilterChange }: StatusFilterBa
         );
       })}
 
-      {/* Divider */}
       <div
-        className="h-5 w-px mx-2 shrink-0"
+        className="h-5 w-px mx-2 shrink-0 hidden md:block"
         style={{ background: '#1e293b' }}
       />
 
-      {/* Coming soon filters */}
-      <span className="text-[10px] font-semibold text-slate-600 uppercase tracking-widest">
-        Wkrótce:
+      <span className="text-[10px] font-semibold text-slate-600 uppercase tracking-widest shrink-0 hidden md:inline">
+        Coming soon:
       </span>
       {comingSoon.map((f) => (
         <button
           key={f.label}
           disabled
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold opacity-30 cursor-not-allowed"
+          className="hidden md:flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-full text-[11px] font-semibold opacity-30 cursor-not-allowed shrink-0"
           style={{
             background: 'rgba(30, 41, 59, 0.4)',
             border: '1px solid rgba(255,255,255,0.04)',

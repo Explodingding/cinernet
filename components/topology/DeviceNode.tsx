@@ -82,6 +82,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
     <div
       style={{
         width: 196,
+        minHeight: 88,
         background: 'rgba(10, 15, 26, 0.96)',
         border: `1.5px solid ${selected ? cfg.color : cfg.borderColor}`,
         borderRadius: 10,
@@ -90,6 +91,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
         animation,
         cursor: 'pointer',
         backdropFilter: 'blur(8px)',
+        touchAction: 'manipulation',
       }}
     >
       {/* Status bar at top */}
@@ -137,7 +139,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
             className="text-[9px] font-semibold tracking-wider uppercase"
             style={{ color: cfg.color }}
           >
-            {cfg.labelPl}
+            {cfg.label}
           </span>
         </div>
       </div>

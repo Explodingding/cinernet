@@ -1,31 +1,42 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { isTopologyEdge } from '@/types/topology';
-import { STATUS_CONFIG, ASSET_CONFIG } from '@/lib/statusConfig';
+import { STATUS_CONFIG, ASSET_CONFIG, SPEC_LABELS } from '@/lib/statusConfig';
+import { getCascadeTargets } from '@/lib/troubleshooting';
 
 interface DetailDrawerProps {
   element: TopologyNode | TopologyEdge | null;
   elementType: 'node' | 'edge' | null;
   onClose: () => void;
   onStatusChange: (id: string, type: 'node' | 'edge', newStatus: Status) => void;
+  onMarkResolved: (id: string, type: 'node' | 'edge') => void;
+  onIntegrationAction: (message: string) => void;
 }
 
 const STATUS_ACTIONS: { status: Status; label: string }[] = [
-  { status: 'operational', label: 'Oznacz jako Sprawny' },
-  { status: 'investigation', label: 'Do sprawdzenia' },
-  { status: 'fault', label: 'Zgłoś awarię' },
+  { status: 'operational', label: 'Mark as operational' },
+  { status: 'investigation', label: 'Under investigation' },
+  { status: 'fault', label: 'Report fault' },
 ];
+
+const INTEGRATION_TOAST = 'Demo mode — integration planned';
 
 export function DetailDrawer({
   element,
   elementType,
   onClose,
   onStatusChange,
+  onMarkResolved,
+  onIntegrationAction,
 }: DetailDrawerProps) {
   const [checkedSteps, setCheckedSteps] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    setCheckedSteps(new Set());
+  }, [element?.id]);
 
   const toggleStep = (stepId: string) => {
     setCheckedSteps((prev) => {
@@ -38,12 +49,21 @@ export function DetailDrawer({
 
   const isEdge = element ? isTopologyEdge(element) : false;
   const cfg = element ? STATUS_CONFIG[element.status] : null;
+  const stepCount = element?.troubleshootingSteps.length ?? 0;
+  const allStepsChecked =
+    stepCount > 0 && checkedSteps.size === stepCount;
+  const canMarkResolved =
+    element &&
+    element.status !== 'operational' &&
+    stepCount > 0 &&
+    allStepsChecked;
+  const cascadeTargets =
+    element && elementType === 'node' ? getCascadeTargets(element.id) : null;
 
   return (
     <AnimatePresence>
       {element && (
         <>
-          {/* Backdrop — click outside to close */}
           <motion.div
             key="backdrop"
             initial={{ opacity: 0 }}
@@ -55,16 +75,14 @@ export function DetailDrawer({
             onClick={onClose}
           />
 
-          {/* Drawer panel */}
           <motion.div
             key="drawer"
             initial={{ x: '100%', opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: '100%', opacity: 0 }}
             transition={{ type: 'spring', stiffness: 380, damping: 38 }}
-            className="absolute right-0 top-0 bottom-0 z-30 flex flex-col overflow-hidden"
+            className="absolute right-0 top-0 bottom-0 z-30 flex flex-col overflow-hidden w-full max-w-md md:w-[420px]"
             style={{
-              width: 420,
               background: 'rgba(8, 13, 22, 0.97)',
               borderLeft: `1px solid ${cfg?.borderColor ?? '#334155'}`,
               boxShadow: `-4px 0 40px rgba(0,0,0,0.6), -1px 0 0 rgba(255,255,255,0.03)`,
@@ -72,13 +90,7 @@ export function DetailDrawer({
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* ── Header ── */}
-            <div
-              style={{
-                borderBottom: `1px solid ${cfg?.borderColor ?? '#334155'}`,
-              }}
-            >
-              {/* Status color bar */}
+            <div style={{ borderBottom: `1px solid ${cfg?.borderColor ?? '#334155'}` }}>
               <div
                 style={{
                   height: 4,
@@ -86,11 +98,10 @@ export function DetailDrawer({
                 }}
               />
 
-              <div className="px-5 pt-4 pb-3">
+              <div className="px-4 md:px-5 pt-4 pb-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    {/* Element type badge */}
-                    <div className="flex items-center gap-2 mb-1.5">
+                    <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                       <span
                         className="text-[9px] font-bold tracking-widest uppercase px-1.5 py-0.5 rounded"
                         style={{
@@ -100,11 +111,10 @@ export function DetailDrawer({
                         }}
                       >
                         {isEdge
-                          ? 'KABEL MOCOWY'
-                          : ASSET_CONFIG[(element as TopologyNode).assetType]?.labelPl.toUpperCase()}
+                          ? 'POWER CABLE'
+                          : ASSET_CONFIG[(element as TopologyNode).assetType]?.label.toUpperCase()}
                       </span>
 
-                      {/* Status badge */}
                       <span
                         className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded"
                         style={{
@@ -113,11 +123,10 @@ export function DetailDrawer({
                           border: `1px solid ${cfg?.borderColor}`,
                         }}
                       >
-                        {cfg?.labelPl}
+                        {cfg?.label}
                       </span>
                     </div>
 
-                    {/* ID */}
                     <div
                       className="text-xl font-bold mb-0.5"
                       style={{
@@ -129,57 +138,35 @@ export function DetailDrawer({
                       {element.id}
                     </div>
 
-                    {/* Name */}
-                    <div className="text-sm font-medium text-slate-300">
-                      {element.name}
-                    </div>
+                    <div className="text-sm font-medium text-slate-300">{element.name}</div>
 
-                    {/* Edge route */}
                     {isEdge && (
                       <div className="flex items-center gap-1.5 mt-1.5 text-[10px] text-slate-500">
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-jetbrains-mono)',
-                            color: '#64748b',
-                          }}
-                        >
+                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#64748b' }}>
                           {(element as TopologyEdge).source}
                         </span>
                         <svg width="16" height="8" viewBox="0 0 16 8">
                           <line x1="0" y1="4" x2="12" y2="4" stroke="#475569" strokeWidth="1.5" />
                           <path d="M10 1 L13 4 L10 7" stroke="#475569" strokeWidth="1.5" fill="none" strokeLinecap="round" />
                         </svg>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-jetbrains-mono)',
-                            color: '#64748b',
-                          }}
-                        >
+                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#64748b' }}>
                           {(element as TopologyEdge).target}
                         </span>
                       </div>
                     )}
                   </div>
 
-                  {/* Close button */}
                   <button
                     onClick={onClose}
-                    className="flex items-center justify-center w-7 h-7 rounded-lg shrink-0 transition-colors"
+                    aria-label="Close panel"
+                    className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shrink-0 transition-colors active:bg-red-500/10"
                     style={{
                       background: 'rgba(255,255,255,0.04)',
                       border: '1px solid rgba(255,255,255,0.08)',
                       color: '#64748b',
                     }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLButtonElement).style.background = 'rgba(248,113,113,0.1)';
-                      (e.currentTarget as HTMLButtonElement).style.color = '#f87171';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)';
-                      (e.currentTarget as HTMLButtonElement).style.color = '#64748b';
-                    }}
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                       <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                     </svg>
                   </button>
@@ -187,28 +174,37 @@ export function DetailDrawer({
               </div>
             </div>
 
-            {/* ── Scrollable content ── */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto min-h-0">
+              {element.upstreamHint && element.status === 'fault' && (
+                <div
+                  className="mx-4 md:mx-5 mt-4 px-3 py-3 rounded-lg"
+                  style={{
+                    background: 'rgba(251, 191, 36, 0.08)',
+                    border: '1px solid rgba(251, 191, 36, 0.35)',
+                  }}
+                >
+                  <div className="text-[9px] font-bold tracking-widest uppercase text-amber-400 mb-1">
+                    Upstream diagnosis
+                  </div>
+                  <p className="text-xs leading-relaxed text-amber-100/80">{element.upstreamHint}</p>
+                </div>
+              )}
 
-              {/* Specs section */}
-              <Section title="Specyfikacja techniczna" icon="⊞">
+              <Section title="Technical specification" icon="⊞">
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                   {Object.entries(
-                    isEdge
-                      ? (element as TopologyEdge).specs
-                      : (element as TopologyNode).specs
+                    isEdge ? (element as TopologyEdge).specs : (element as TopologyNode).specs
                   )
                     .filter(([, v]) => v)
                     .map(([key, value]) => (
-                      <SpecRow key={key} label={specLabel(key)} value={value!} />
+                      <SpecRow key={key} label={SPEC_LABELS[key] ?? key} value={value!} />
                     ))}
                 </div>
               </Section>
 
-              {/* Troubleshooting checklist */}
-              <Section title="Checklista diagnostyczna" icon="✓">
+              <Section title="Diagnostic checklist" icon="✓">
                 {element.troubleshootingSteps.length === 0 ? (
-                  <p className="text-xs text-slate-500 italic">Brak kroków diagnostycznych.</p>
+                  <p className="text-xs text-slate-500 italic">No diagnostic steps defined.</p>
                 ) : (
                   <div className="flex flex-col gap-2">
                     {element.troubleshootingSteps.map((step, idx) => {
@@ -217,7 +213,7 @@ export function DetailDrawer({
                         <button
                           key={step.id}
                           onClick={() => toggleStep(step.id)}
-                          className="flex items-start gap-3 p-2.5 rounded-lg text-left w-full transition-all duration-150"
+                          className="flex items-start gap-3 p-3 min-h-[48px] rounded-lg text-left w-full transition-all duration-150 active:scale-[0.99]"
                           style={{
                             background: done
                               ? 'rgba(52, 211, 153, 0.06)'
@@ -227,9 +223,8 @@ export function DetailDrawer({
                               : '1px solid rgba(255,255,255,0.05)',
                           }}
                         >
-                          {/* Step number / checkmark */}
                           <div
-                            className="flex items-center justify-center w-5 h-5 rounded-full shrink-0 text-[10px] font-bold mt-0.5"
+                            className="flex items-center justify-center w-6 h-6 min-w-[24px] rounded-full shrink-0 text-[10px] font-bold mt-0.5"
                             style={{
                               background: done
                                 ? 'rgba(52, 211, 153, 0.15)'
@@ -265,14 +260,11 @@ export function DetailDrawer({
                   </div>
                 )}
 
-                {/* Progress indicator */}
                 {element.troubleshootingSteps.length > 0 && (
                   <div className="mt-3">
                     <div className="flex justify-between text-[10px] text-slate-500 mb-1">
-                      <span>Postęp diagnostyki</span>
-                      <span
-                        style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#34d399' }}
-                      >
+                      <span>Diagnostic progress</span>
+                      <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#34d399' }}>
                         {checkedSteps.size}/{element.troubleshootingSteps.length}
                       </span>
                     </div>
@@ -291,10 +283,45 @@ export function DetailDrawer({
                     </div>
                   </div>
                 )}
+
+                {stepCount > 0 && element.status !== 'operational' && (
+                  <button
+                    disabled={!canMarkResolved}
+                    onClick={() => onMarkResolved(element.id, elementType!)}
+                    className="mt-4 w-full min-h-[48px] px-4 py-3 rounded-lg text-sm font-bold transition-all duration-150"
+                    style={{
+                      background: canMarkResolved
+                        ? 'rgba(52, 211, 153, 0.15)'
+                        : 'rgba(255,255,255,0.03)',
+                      border: canMarkResolved
+                        ? '1px solid rgba(52, 211, 153, 0.5)'
+                        : '1px solid rgba(255,255,255,0.06)',
+                      color: canMarkResolved ? '#34d399' : '#475569',
+                      cursor: canMarkResolved ? 'pointer' : 'not-allowed',
+                      boxShadow: canMarkResolved
+                        ? '0 0 16px rgba(52, 211, 153, 0.2)'
+                        : 'none',
+                    }}
+                  >
+                    Mark as resolved
+                  </button>
+                )}
+
+                {stepCount > 0 && element.status !== 'operational' && !allStepsChecked && (
+                  <p className="mt-2 text-[10px] text-slate-500 text-center">
+                    Complete all checklist steps to enable resolution
+                  </p>
+                )}
+
+                {cascadeTargets &&
+                  (cascadeTargets.nodes.length > 0 || cascadeTargets.edges.length > 0) && (
+                    <p className="mt-2 text-[10px] text-slate-500 text-center">
+                      Resolving {element.id} will also restore downstream assets
+                    </p>
+                  )}
               </Section>
 
-              {/* Status actions */}
-              <Section title="Zmień status" icon="◎">
+              <Section title="Change status" icon="◎">
                 <div className="flex flex-col gap-2">
                   {STATUS_ACTIONS.map((action) => {
                     const sCfg = STATUS_CONFIG[action.status];
@@ -303,43 +330,20 @@ export function DetailDrawer({
                       <button
                         key={action.status}
                         disabled={isCurrent}
-                        onClick={() =>
-                          onStatusChange(element.id, elementType!, action.status)
-                        }
-                        className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
+                        onClick={() => onStatusChange(element.id, elementType!, action.status)}
+                        className="flex items-center justify-between w-full px-3 py-3 min-h-[48px] rounded-lg text-sm font-medium transition-all duration-150"
                         style={{
-                          background: isCurrent
-                            ? sCfg.bgColor
-                            : 'rgba(255,255,255,0.03)',
+                          background: isCurrent ? sCfg.bgColor : 'rgba(255,255,255,0.03)',
                           border: isCurrent
                             ? `1px solid ${sCfg.borderColor}`
                             : '1px solid rgba(255,255,255,0.06)',
                           color: isCurrent ? sCfg.color : '#64748b',
                           cursor: isCurrent ? 'default' : 'pointer',
-                          opacity: isCurrent ? 1 : 0.8,
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isCurrent) {
-                            (e.currentTarget as HTMLButtonElement).style.background = sCfg.bgColor;
-                            (e.currentTarget as HTMLButtonElement).style.borderColor = sCfg.borderColor;
-                            (e.currentTarget as HTMLButtonElement).style.color = sCfg.color;
-                            (e.currentTarget as HTMLButtonElement).style.opacity = '1';
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isCurrent) {
-                            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.03)';
-                            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.06)';
-                            (e.currentTarget as HTMLButtonElement).style.color = '#64748b';
-                            (e.currentTarget as HTMLButtonElement).style.opacity = '0.8';
-                          }
+                          opacity: isCurrent ? 1 : 0.85,
                         }}
                       >
                         <div className="flex items-center gap-2.5">
-                          <span
-                            className="w-2 h-2 rounded-full"
-                            style={{ background: sCfg.color }}
-                          />
+                          <span className="w-2 h-2 rounded-full" style={{ background: sCfg.color }} />
                           {action.label}
                         </div>
                         {isCurrent && (
@@ -351,7 +355,7 @@ export function DetailDrawer({
                               border: `1px solid ${sCfg.borderColor}`,
                             }}
                           >
-                            Aktualny
+                            Current
                           </span>
                         )}
                       </button>
@@ -359,7 +363,42 @@ export function DetailDrawer({
                   })}
                 </div>
               </Section>
+            </div>
 
+            <div
+              className="px-4 md:px-5 py-4 shrink-0"
+              style={{
+                borderTop: '1px solid rgba(255,255,255,0.06)',
+                background: 'rgba(10, 15, 26, 0.5)',
+              }}
+            >
+              <div className="text-[9px] font-bold tracking-widest uppercase text-slate-600 mb-2">
+                Integration layer
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  onClick={() => onIntegrationAction(INTEGRATION_TOAST)}
+                  className="flex-1 min-h-[48px] px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors active:bg-slate-700/50"
+                  style={{
+                    background: 'rgba(30, 41, 59, 0.6)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    color: '#94a3b8',
+                  }}
+                >
+                  Sync from SCADA
+                </button>
+                <button
+                  onClick={() => onIntegrationAction(INTEGRATION_TOAST)}
+                  className="flex-1 min-h-[48px] px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors active:bg-slate-700/50"
+                  style={{
+                    background: 'rgba(30, 41, 59, 0.6)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    color: '#94a3b8',
+                  }}
+                >
+                  Close in osapiens
+                </button>
+              </div>
             </div>
           </motion.div>
         </>
@@ -367,8 +406,6 @@ export function DetailDrawer({
     </AnimatePresence>
   );
 }
-
-/* ── Helper components ── */
 
 function Section({
   title,
@@ -380,15 +417,10 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className="px-5 py-4"
-      style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
-    >
+    <div className="px-4 md:px-5 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
       <div className="flex items-center gap-2 mb-3">
         <span className="text-[11px] text-slate-600">{icon}</span>
-        <h3 className="text-[11px] font-bold tracking-widest uppercase text-slate-400">
-          {title}
-        </h3>
+        <h3 className="text-[11px] font-bold tracking-widest uppercase text-slate-400">{title}</h3>
       </div>
       {children}
     </div>
@@ -409,21 +441,4 @@ function SpecRow({ label, value }: { label: string; value: string }) {
       </div>
     </div>
   );
-}
-
-function specLabel(key: string): string {
-  const map: Record<string, string> = {
-    voltage: 'Napięcie',
-    current: 'Prąd maks.',
-    power: 'Moc',
-    protection: 'Stopień IP',
-    manufacturer: 'Producent',
-    location: 'Lokalizacja',
-    notes: 'Uwagi',
-    crossSection: 'Przekrój',
-    maxLoad: 'Obciążalność',
-    length: 'Długość',
-    installationType: 'Instalacja',
-  };
-  return map[key] ?? key;
 }

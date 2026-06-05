@@ -9,6 +9,11 @@ export type Status = 'operational' | 'investigation' | 'fault';
 
 export type EdgeType = 'power' | 'plc' | 'mv';
 
+export interface ExternalRefs {
+  scadaTag?: string;
+  osapiensAssetId?: string;
+}
+
 export interface TroubleshootingStep {
   id: string;
   text: string;
@@ -41,6 +46,9 @@ export interface TopologyNode {
   specs: DeviceSpecs;
   troubleshootingSteps: TroubleshootingStep[];
   position: { x: number; y: number };
+  externalRefs?: ExternalRefs;
+  /** Shown when this fault is likely caused by an upstream asset */
+  upstreamHint?: string;
 }
 
 export interface TopologyEdge {
@@ -52,6 +60,8 @@ export interface TopologyEdge {
   status: Status;
   specs: CableSpecs;
   troubleshootingSteps: TroubleshootingStep[];
+  externalRefs?: ExternalRefs;
+  upstreamHint?: string;
 }
 
 export function isTopologyEdge(

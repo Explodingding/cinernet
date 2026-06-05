@@ -52,7 +52,7 @@ export function PowerCableEdge({
       <path
         d={edgePath}
         stroke="transparent"
-        strokeWidth={20}
+        strokeWidth={28}
         fill="none"
         className="react-flow__edge-interaction"
       />
@@ -111,7 +111,7 @@ export function PowerCableEdge({
           className="nodrag nopan"
         >
           <div
-            className="px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wider cursor-pointer select-none"
+            className="px-2 py-1.5 min-h-[36px] min-w-[48px] flex items-center justify-center rounded text-[9px] font-bold tracking-wider cursor-pointer select-none"
             style={{
               fontFamily: 'var(--font-jetbrains-mono)',
               background: selected

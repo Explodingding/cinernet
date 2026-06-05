@@ -4,14 +4,14 @@ import { useState, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodes, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
-import { isTopologyEdge } from '@/types/topology';
 import { BrandHeader } from '@/components/layout/BrandHeader';
 import { KpiBar } from '@/components/layout/KpiBar';
 import { AlertBanner } from '@/components/layout/AlertBanner';
 import { StatusFilterBar } from '@/components/topology/StatusFilterBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
+import { Toast } from '@/components/ui/Toast';
+import { getCascadeTargets } from '@/lib/troubleshooting';
 
-/* Dynamic import prevents SSR issues with React Flow */
 const TopologyMap = dynamic(
   () => import('@/components/topology/TopologyMap').then((m) => m.TopologyMap),
   { ssr: false, loading: () => <MapLoading /> }
@@ -29,7 +29,7 @@ function MapLoading() {
           className="text-sm text-slate-500 tracking-wider"
           style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
         >
-          Ładowanie topologii...
+          Loading topology...
         </span>
       </div>
     </div>
@@ -37,20 +37,15 @@ function MapLoading() {
 }
 
 export default function Dashboard() {
-  /* Status overrides (delta from mock data) */
   const [nodeStatuses, setNodeStatuses] = useState<Record<string, Status>>({});
   const [edgeStatuses, setEdgeStatuses] = useState<Record<string, Status>>({});
-
-  /* Selected element */
   const [selected, setSelected] = useState<{
     data: TopologyNode | TopologyEdge;
     type: 'node' | 'edge';
   } | null>(null);
-
-  /* Status filter */
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  /* Merge status overrides into data */
   const effectiveNodes = useMemo(
     () =>
       topologyNodes.map((n) => ({
@@ -74,19 +69,16 @@ export default function Dashboard() {
     [effectiveNodes]
   );
 
-  /* Selected element with effective status */
   const selectedWithStatus = useMemo(() => {
     if (!selected) return null;
     if (selected.type === 'node') {
       const n = effectiveNodes.find((n) => n.id === selected.data.id);
       return n ? { data: n, type: 'node' as const } : null;
-    } else {
-      const e = effectiveEdges.find((e) => e.id === selected.data.id);
-      return e ? { data: e, type: 'edge' as const } : null;
     }
+    const e = effectiveEdges.find((e) => e.id === selected.data.id);
+    return e ? { data: e, type: 'edge' as const } : null;
   }, [selected, effectiveNodes, effectiveEdges]);
 
-  /* Callbacks */
   const handleNodeSelect = useCallback((node: TopologyNode) => {
     setSelected({ data: node, type: 'node' });
   }, []);
@@ -118,27 +110,49 @@ export default function Dashboard() {
     []
   );
 
+  const handleMarkResolved = useCallback(
+    (id: string, type: 'node' | 'edge') => {
+      if (type === 'node') {
+        setNodeStatuses((prev) => {
+          const next: Record<string, Status> = { ...prev, [id]: 'operational' };
+          const cascade = getCascadeTargets(id);
+          cascade.nodes.forEach((nodeId) => {
+            next[nodeId] = 'operational';
+          });
+          return next;
+        });
+        const cascade = getCascadeTargets(id);
+        if (cascade.edges.length > 0) {
+          setEdgeStatuses((prev) => {
+            const next: Record<string, Status> = { ...prev };
+            cascade.edges.forEach((edgeId) => {
+              next[edgeId] = 'operational';
+            });
+            return next;
+          });
+        }
+      } else {
+        setEdgeStatuses((prev) => ({ ...prev, [id]: 'operational' }));
+      }
+    },
+    []
+  );
+
+  const showToast = useCallback((message: string) => {
+    setToastMessage(message);
+    window.setTimeout(() => setToastMessage(null), 3200);
+  }, []);
+
   const selectedId = selectedWithStatus?.data.id ?? null;
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      {/* ── Top header ── */}
       <BrandHeader />
-
-      {/* ── KPI metrics bar ── */}
       <KpiBar nodes={effectiveNodes} edges={effectiveEdges} />
-
-      {/* ── Alert banner (only when faults exist) ── */}
       <AlertBanner faultNodes={faultNodes} onNodeClick={handleAlertClick} />
+      <StatusFilterBar activeFilter={statusFilter} onFilterChange={setStatusFilter} />
 
-      {/* ── Filter bar ── */}
-      <StatusFilterBar
-        activeFilter={statusFilter}
-        onFilterChange={setStatusFilter}
-      />
-
-      {/* ── Main canvas area ── */}
-      <div className="flex-1 relative overflow-hidden">
+      <div className="flex-1 relative overflow-hidden min-h-0">
         <TopologyMap
           nodes={effectiveNodes}
           edges={effectiveEdges}
@@ -148,14 +162,17 @@ export default function Dashboard() {
           statusFilter={statusFilter}
         />
 
-        {/* ── Detail drawer ── */}
         <DetailDrawer
           element={selectedWithStatus?.data ?? null}
           elementType={selectedWithStatus?.type ?? null}
           onClose={handleClose}
           onStatusChange={handleStatusChange}
+          onMarkResolved={handleMarkResolved}
+          onIntegrationAction={showToast}
         />
       </div>
+
+      <Toast message={toastMessage} onDismiss={() => setToastMessage(null)} />
     </div>
   );
 }

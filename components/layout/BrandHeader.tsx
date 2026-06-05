@@ -10,14 +10,14 @@ export function BrandHeader() {
     const update = () => {
       const now = new Date();
       setTime(
-        now.toLocaleTimeString('pl-PL', {
+        now.toLocaleTimeString('en-GB', {
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit',
         })
       );
       setDate(
-        now.toLocaleDateString('pl-PL', {
+        now.toLocaleDateString('en-GB', {
           weekday: 'long',
           year: 'numeric',
           month: 'long',
@@ -32,7 +32,7 @@ export function BrandHeader() {
 
   return (
     <header
-      className="flex items-center justify-between px-6 py-3 shrink-0"
+      className="flex items-center justify-between px-4 md:px-6 py-2 md:py-3 shrink-0 gap-3"
       style={{
         background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
         borderBottom: '1px solid rgba(52, 211, 153, 0.3)',
@@ -40,9 +40,8 @@ export function BrandHeader() {
       }}
     >
       {/* Left: Logo + brand */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2.5">
-          {/* Lightning bolt logo */}
+      <div className="flex items-center gap-3 md:gap-4 min-w-0">
+        <div className="flex items-center gap-2.5 shrink-0">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center"
             style={{
@@ -73,29 +72,44 @@ export function BrandHeader() {
             >
               CINERNET
             </div>
-            <div className="text-[10px] text-slate-500 tracking-wider uppercase">
+            <div className="text-[10px] text-slate-500 tracking-wider uppercase hidden sm:block">
               Electrical Topology Platform
             </div>
           </div>
         </div>
 
         <div
-          className="h-8 w-px mx-1"
+          className="h-8 w-px mx-1 shrink-0 hidden md:block"
           style={{ background: 'linear-gradient(to bottom, transparent, #334155, transparent)' }}
         />
 
-        <div>
-          <div className="text-xs font-semibold text-slate-200 tracking-wide">
+        <div className="min-w-0 hidden sm:block">
+          <div className="text-xs font-semibold text-slate-200 tracking-wide truncate">
             Lommel Glass Factory
           </div>
-          <div className="text-[10px] text-slate-500 tracking-wider">
-            LV Distribution Topology — Sekcja Alpha
+          <div className="text-[10px] text-slate-500 tracking-wider truncate">
+            LV Distribution — Alpha Section
           </div>
         </div>
       </div>
 
-      {/* Right: Clock + live indicator */}
-      <div className="flex items-center gap-5">
+      {/* Right: Integration badge + clock */}
+      <div className="flex items-center gap-3 md:gap-5 shrink-0">
+        <div
+          className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-semibold tracking-wider uppercase"
+          style={{
+            background: 'rgba(52, 211, 153, 0.06)',
+            border: '1px solid rgba(52, 211, 153, 0.25)',
+            color: '#94a3b8',
+          }}
+        >
+          <span style={{ color: '#64748b' }}>SCADA</span>
+          <span className="text-slate-600">·</span>
+          <span style={{ color: '#64748b' }}>osapiens</span>
+          <span className="text-slate-600">·</span>
+          <span style={{ color: '#34d399' }}>Cinernet</span>
+        </div>
+
         <div
           className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase"
           style={{
@@ -113,7 +127,7 @@ export function BrandHeader() {
 
         <div className="text-right">
           <div
-            className="text-base font-bold tabular-nums"
+            className="text-sm md:text-base font-bold tabular-nums"
             style={{
               fontFamily: 'var(--font-jetbrains-mono)',
               color: '#e2e8f0',
@@ -121,7 +135,7 @@ export function BrandHeader() {
           >
             {time}
           </div>
-          <div className="text-[10px] text-slate-500 capitalize">{date}</div>
+          <div className="text-[10px] text-slate-500 capitalize hidden md:block">{date}</div>
         </div>
       </div>
     </header>

@@ -6,7 +6,6 @@ export interface StatusConfig {
   borderColor: string;
   glowColor: string;
   label: string;
-  labelPl: string;
   edgeStyle: 'solid' | 'dashed';
 }
 
@@ -17,7 +16,6 @@ export const STATUS_CONFIG: Record<Status, StatusConfig> = {
     borderColor: 'rgba(52, 211, 153, 0.45)',
     glowColor: 'rgba(52, 211, 153, 0.35)',
     label: 'Operational',
-    labelPl: 'Sprawny',
     edgeStyle: 'solid',
   },
   investigation: {
@@ -26,7 +24,6 @@ export const STATUS_CONFIG: Record<Status, StatusConfig> = {
     borderColor: 'rgba(251, 191, 36, 0.45)',
     glowColor: 'rgba(251, 191, 36, 0.28)',
     label: 'Under Investigation',
-    labelPl: 'Do sprawdzenia',
     edgeStyle: 'dashed',
   },
   fault: {
@@ -35,20 +32,33 @@ export const STATUS_CONFIG: Record<Status, StatusConfig> = {
     borderColor: 'rgba(248, 113, 113, 0.55)',
     glowColor: 'rgba(248, 113, 113, 0.4)',
     label: 'Fault',
-    labelPl: 'Awaria',
     edgeStyle: 'dashed',
   },
 };
 
 export interface AssetConfig {
-  labelPl: string;
+  label: string;
   shortLabel: string;
 }
 
 export const ASSET_CONFIG: Record<AssetType, AssetConfig> = {
-  transformer: { labelPl: 'Transformator', shortLabel: 'TR' },
-  panel: { labelPl: 'Rozdzielnia', shortLabel: 'MDP' },
-  cabinet: { labelPl: 'Szafa Dystr.', shortLabel: 'DC' },
-  'junction-box': { labelPl: 'Skrzynka Przyłącz.', shortLabel: 'JB' },
-  motor: { labelPl: 'Silnik', shortLabel: 'M' },
+  transformer: { label: 'Transformer', shortLabel: 'TR' },
+  panel: { label: 'Distribution Panel', shortLabel: 'MDP' },
+  cabinet: { label: 'Dist. Cabinet', shortLabel: 'DC' },
+  'junction-box': { label: 'Junction Box', shortLabel: 'JB' },
+  motor: { label: 'Motor', shortLabel: 'M' },
+};
+
+export const SPEC_LABELS: Record<string, string> = {
+  voltage: 'Voltage',
+  current: 'Max. current',
+  power: 'Power',
+  protection: 'IP rating',
+  manufacturer: 'Manufacturer',
+  location: 'Location',
+  notes: 'Notes',
+  crossSection: 'Cross-section',
+  maxLoad: 'Max load',
+  length: 'Length',
+  installationType: 'Installation',
 };

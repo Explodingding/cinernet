@@ -12,18 +12,21 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
 
   return (
     <div
-      className="flex items-center gap-3 px-5 py-2 shrink-0 cursor-pointer group"
+      className="flex items-center gap-3 px-3 md:px-5 py-2 shrink-0 cursor-pointer group min-h-[44px]"
       style={{
         background:
           'linear-gradient(90deg, rgba(127, 29, 29, 0.5) 0%, rgba(153, 27, 27, 0.3) 50%, rgba(127, 29, 29, 0.2) 100%)',
         borderBottom: '1px solid rgba(248, 113, 113, 0.35)',
-        animation: 'none',
       }}
       onClick={() => onNodeClick(primary.id)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') onNodeClick(primary.id);
+      }}
     >
-      {/* Alert icon */}
       <div
-        className="flex items-center justify-center w-6 h-6 rounded-full shrink-0"
+        className="flex items-center justify-center w-7 h-7 rounded-full shrink-0"
         style={{
           background: 'rgba(248, 113, 113, 0.2)',
           border: '1px solid rgba(248, 113, 113, 0.5)',
@@ -41,13 +44,12 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
         </svg>
       </div>
 
-      {/* Message */}
       <div className="flex items-center gap-2 min-w-0 flex-1">
         <span
           className="text-xs font-bold tracking-wider uppercase shrink-0"
           style={{ color: '#f87171', fontFamily: 'var(--font-jetbrains-mono)' }}
         >
-          AKTYWNA AWARIA
+          ACTIVE FAULT
         </span>
         <span className="text-xs text-red-200/70 shrink-0">—</span>
         <span
@@ -56,9 +58,7 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
         >
           {primary.id}
         </span>
-        <span className="text-xs text-red-200/60 truncate">
-          {primary.name}
-        </span>
+        <span className="text-xs text-red-200/60 truncate">{primary.name}</span>
 
         {faultNodes.length > 1 && (
           <span
@@ -69,17 +69,16 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
               border: '1px solid rgba(248, 113, 113, 0.3)',
             }}
           >
-            +{faultNodes.length - 1} więcej
+            +{faultNodes.length - 1} more
           </span>
         )}
       </div>
 
-      {/* CTA */}
       <div
-        className="flex items-center gap-1.5 text-xs font-semibold shrink-0 group-hover:gap-2.5 transition-all"
+        className="flex items-center gap-1.5 text-xs font-semibold shrink-0"
         style={{ color: '#fca5a5' }}
       >
-        <span>Przejdź do awarii</span>
+        <span className="hidden sm:inline">Go to fault</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
           <path
             d="M5 12h14M12 5l7 7-7 7"
