@@ -4,12 +4,34 @@ import { Handle, Position } from '@xyflow/react';
 import type { NodeProps } from '@xyflow/react';
 import type { TopologyNode, AssetType } from '@/types/topology';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
+import { ZONE_CONFIG, ASSET_CONFIG } from '@/lib/zoneConfig';
 
-/* ── Asset SVG icons ── */
 function AssetIcon({ type, color }: { type: AssetType; color: string }) {
-  const s = { stroke: color, strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  const s = {
+    stroke: color,
+    strokeWidth: 1.5,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+  };
 
   switch (type) {
+    case 'mv-feed':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill={color} fillOpacity={0.2} {...s} />
+        </svg>
+      );
+    case 'mv-switchgear':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="5" width="20" height="14" rx="2" {...s} />
+          <line x1="8" y1="5" x2="8" y2="19" {...s} strokeWidth={1} />
+          <line x1="16" y1="5" x2="16" y2="19" {...s} strokeWidth={1} />
+          <circle cx="5" cy="12" r="1.2" fill={color} />
+          <circle cx="12" cy="12" r="1.2" fill={color} />
+          <circle cx="19" cy="12" r="1.2" fill={color} />
+        </svg>
+      );
     case 'transformer':
       return (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -37,17 +59,14 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
           <line x1="12" y1="2" x2="12" y2="22" {...s} strokeWidth={0.8} strokeDasharray="2 2" />
           <circle cx="9.5" cy="12" r="1.5" fill={color} />
           <circle cx="14.5" cy="12" r="1.5" fill={color} />
-          <line x1="4" y1="7" x2="20" y2="7" {...s} strokeWidth={0.8} />
         </svg>
       );
     case 'junction-box':
       return (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <rect x="5" y="7" width="14" height="10" rx="2" {...s} />
-          <line x1="1" y1="10" x2="5.5" y2="10" {...s} />
-          <line x1="1" y1="14" x2="5.5" y2="14" {...s} />
-          <line x1="18.5" y1="10" x2="23" y2="10" {...s} />
-          <line x1="18.5" y1="14" x2="23" y2="14" {...s} />
+          <line x1="12" y1="2" x2="12" y2="7" {...s} />
+          <line x1="12" y1="17" x2="12" y2="22" {...s} />
         </svg>
       );
     case 'motor':
@@ -62,17 +81,17 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
   }
 }
 
-/* ── Node component ── */
 export function DeviceNode({ data, selected }: NodeProps) {
   const nodeData = data as unknown as TopologyNode;
   const cfg = STATUS_CONFIG[nodeData.status];
+  const zoneCfg = ZONE_CONFIG[nodeData.physicalLocation.zone];
 
   const animation =
     nodeData.status === 'fault'
       ? 'fault-pulse 1.6s ease-in-out infinite'
       : nodeData.status === 'investigation'
-      ? 'investigation-pulse 3s ease-in-out infinite'
-      : 'none';
+        ? 'investigation-pulse 3s ease-in-out infinite'
+        : 'none';
 
   const baseShadow = selected
     ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
@@ -80,80 +99,92 @@ export function DeviceNode({ data, selected }: NodeProps) {
 
   return (
     <div
+      className="flex"
       style={{
-        width: 196,
-        minHeight: 88,
-        background: 'rgba(10, 15, 26, 0.96)',
-        border: `1.5px solid ${selected ? cfg.color : cfg.borderColor}`,
-        borderRadius: 10,
-        overflow: 'hidden',
-        boxShadow: baseShadow,
+        width: 176,
+        minHeight: 96,
         animation,
         cursor: 'pointer',
-        backdropFilter: 'blur(8px)',
         touchAction: 'manipulation',
       }}
     >
-      {/* Status bar at top */}
+      {/* Zone colour stripe — physical location */}
       <div
+        className="shrink-0 rounded-l-[10px]"
         style={{
-          height: 3,
-          background: `linear-gradient(90deg, ${cfg.color} 0%, ${cfg.color}44 100%)`,
+          width: 5,
+          background: `linear-gradient(to bottom, ${zoneCfg.color}, ${zoneCfg.color}44)`,
+          boxShadow: `0 0 8px ${zoneCfg.color}40`,
         }}
       />
 
-      <div className="px-3 py-2.5">
-        {/* Header row */}
-        <div className="flex items-center gap-2 mb-1.5">
-          <AssetIcon type={nodeData.assetType} color={cfg.color} />
-          <span
-            className="text-[11px] font-bold tracking-widest"
+      <div
+        className="flex-1 rounded-r-[10px] overflow-hidden"
+        style={{
+          background: 'rgba(10, 15, 26, 0.96)',
+          border: `1.5px solid ${selected ? cfg.color : cfg.borderColor}`,
+          borderLeft: 'none',
+          boxShadow: baseShadow,
+          backdropFilter: 'blur(8px)',
+        }}
+      >
+        <div
+          style={{
+            height: 3,
+            background: `linear-gradient(90deg, ${cfg.color} 0%, ${cfg.color}44 100%)`,
+          }}
+        />
+
+        <div className="px-2.5 py-2">
+          <div className="flex items-center gap-2 mb-1">
+            <AssetIcon type={nodeData.assetType} color={cfg.color} />
+            <span
+              className="text-[11px] font-bold tracking-widest truncate"
+              style={{
+                fontFamily: 'var(--font-jetbrains-mono)',
+                color: cfg.color,
+              }}
+            >
+              {nodeData.id}
+            </span>
+          </div>
+
+          <div className="text-[10px] font-medium text-slate-200 leading-snug mb-1.5 line-clamp-2">
+            {nodeData.name}
+          </div>
+
+          <div
+            className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-semibold mb-1.5"
             style={{
-              fontFamily: 'var(--font-jetbrains-mono)',
-              color: cfg.color,
-              textShadow: `0 0 8px ${cfg.color}80`,
+              background: zoneCfg.bgColor,
+              border: `1px solid ${zoneCfg.borderColor}`,
+              color: zoneCfg.color,
             }}
           >
-            {nodeData.id}
-          </span>
-        </div>
+            {nodeData.physicalLocation.elevation} · {nodeData.physicalLocation.floor}
+          </div>
 
-        {/* Node name */}
-        <div className="text-[11px] font-medium text-slate-200 leading-snug mb-2">
-          {nodeData.name}
-        </div>
-
-        {/* Status badge */}
-        <div
-          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full"
-          style={{
-            background: cfg.bgColor,
-            border: `1px solid ${cfg.borderColor}`,
-          }}
-        >
-          <span
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: cfg.color }}
-          />
-          <span
-            className="text-[9px] font-semibold tracking-wider uppercase"
-            style={{ color: cfg.color }}
+          <div
+            className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full"
+            style={{
+              background: cfg.bgColor,
+              border: `1px solid ${cfg.borderColor}`,
+            }}
           >
-            {cfg.label}
-          </span>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: cfg.color }} />
+            <span
+              className="text-[9px] font-semibold tracking-wider uppercase"
+              style={{ color: cfg.color }}
+            >
+              {cfg.label}
+            </span>
+          </div>
         </div>
       </div>
 
-      <Handle
-        type="target"
-        position={Position.Left}
-        style={{ left: -4 }}
-      />
-      <Handle
-        type="source"
-        position={Position.Right}
-        style={{ right: -4 }}
-      />
+      {/* Vertical tree: power in from bottom, out to top */}
+      <Handle type="target" position={Position.Bottom} style={{ bottom: -4 }} />
+      <Handle type="source" position={Position.Top} style={{ top: -4 }} />
     </div>
   );
 }

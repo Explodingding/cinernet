@@ -22,6 +22,9 @@ export function PowerCableEdge({
 }: EdgeProps) {
   const edgeData = data as unknown as TopologyEdge;
   const cfg = STATUS_CONFIG[edgeData?.status ?? 'operational'];
+  const isMv = edgeData?.edgeType === 'mv';
+  const mvColor = '#f472b6';
+  const activeColor = isMv ? mvColor : cfg.color;
   const isOperational = edgeData?.status === 'operational';
   const isFault = edgeData?.status === 'fault';
 
@@ -35,10 +38,10 @@ export function PowerCableEdge({
   });
 
   const pathId = `flow-path-${id}`;
-  const strokeColor = selected ? cfg.color : cfg.color + 'cc';
-  const strokeWidth = selected ? 3 : 2;
-  const dashArray = isOperational ? undefined : '6 3';
-  const filterStyle = `drop-shadow(0 0 4px ${cfg.glowColor})`;
+  const strokeColor = selected ? activeColor : activeColor + 'cc';
+  const strokeWidth = selected ? 3 : isMv ? 2.5 : 2;
+  const dashArray = isOperational && !isMv ? undefined : isOperational && isMv ? undefined : '6 3';
+  const filterStyle = `drop-shadow(0 0 4px ${isMv ? 'rgba(244,114,182,0.4)' : cfg.glowColor})`;
 
   const dashAnimation = isFault
     ? 'dash-march 0.55s linear infinite'
@@ -61,7 +64,7 @@ export function PowerCableEdge({
       {selected && (
         <path
           d={edgePath}
-          stroke={cfg.color}
+          stroke={activeColor}
           strokeWidth={6}
           fill="none"
           style={{ filter: `blur(3px)`, opacity: 0.4 }}
@@ -86,8 +89,8 @@ export function PowerCableEdge({
       {isOperational && (
         <circle
           r="4"
-          fill={cfg.color}
-          style={{ filter: `drop-shadow(0 0 5px ${cfg.color})` }}
+          fill={activeColor}
+          style={{ filter: `drop-shadow(0 0 5px ${activeColor})` }}
         >
           <animateMotion
             dur="2.2s"
@@ -117,8 +120,8 @@ export function PowerCableEdge({
               background: selected
                 ? `rgba(10, 15, 26, 0.98)`
                 : 'rgba(10, 15, 26, 0.85)',
-              color: cfg.color,
-              border: `1px solid ${selected ? cfg.color : cfg.borderColor}`,
+              color: activeColor,
+              border: `1px solid ${selected ? activeColor : isMv ? 'rgba(244,114,182,0.45)' : cfg.borderColor}`,
               backdropFilter: 'blur(4px)',
               textShadow: selected ? `0 0 8px ${cfg.color}` : 'none',
               boxShadow: selected ? `0 0 8px ${cfg.glowColor}` : 'none',

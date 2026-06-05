@@ -88,7 +88,7 @@ export function BrandHeader() {
             Lommel Glass Factory
           </div>
           <div className="text-[10px] text-slate-500 tracking-wider truncate">
-            LV Distribution — Alpha Section
+            Substation Alpha — Power Flow Tree
           </div>
         </div>
       </div>

@@ -1,0 +1,68 @@
+import type { TopologyZone } from '@/types/topology';
+
+/** Horizontal layer bands — tree grows upward (lower Y = higher in power path). */
+export const topologyZones: TopologyZone[] = [
+  {
+    id: 'band-mv-feed',
+    zone: 'basement-mv',
+    label: '11 kV Main Incoming',
+    layerLabel: 'MV Feed — Root',
+    position: { x: -20, y: 800 },
+    width: 1120,
+    height: 110,
+  },
+  {
+    id: 'band-mv-sw',
+    zone: 'basement-mv',
+    label: 'MV Switchgear Room MV-01',
+    layerLabel: 'MV Switchgear',
+    position: { x: -20, y: 660 },
+    width: 1120,
+    height: 110,
+  },
+  {
+    id: 'band-transformer',
+    zone: 'substation',
+    label: 'Substation Alpha — Transformer Bay',
+    layerLabel: 'Transformer',
+    position: { x: -20, y: 520 },
+    width: 1120,
+    height: 110,
+  },
+  {
+    id: 'band-lv-panel',
+    zone: 'substation',
+    label: 'Substation Alpha — LV Panel Room',
+    layerLabel: 'LV Distribution Panel',
+    position: { x: -20, y: 380 },
+    width: 1120,
+    height: 110,
+  },
+  {
+    id: 'band-cabinets',
+    zone: 'hall-a-ground',
+    label: 'Factory Halls — Distribution Cabinets',
+    layerLabel: 'Distribution Cabinets',
+    position: { x: -20, y: 220 },
+    width: 1120,
+    height: 110,
+  },
+  {
+    id: 'band-junction',
+    zone: 'hall-a-ground',
+    label: 'Field Junction Boxes — by floor & elevation',
+    layerLabel: 'Junction Boxes',
+    position: { x: -20, y: 60 },
+    width: 1120,
+    height: 110,
+  },
+  {
+    id: 'band-loads',
+    zone: 'hall-a-mezzanine',
+    label: 'Motors & Loads — end devices',
+    layerLabel: 'Loads / Devices',
+    position: { x: -20, y: -100 },
+    width: 1120,
+    height: 110,
+  },
+];

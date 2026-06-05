@@ -14,11 +14,15 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { DeviceNode } from './DeviceNode';
+import { ZoneBandNode } from './ZoneBandNode';
+import { ZoneLegend } from './ZoneLegend';
 import { PowerCableEdge } from './PowerCableEdge';
+import { topologyZones } from '@/data/topologyZones';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
+import { ZONE_CONFIG } from '@/lib/zoneConfig';
 
-const nodeTypes: NodeTypes = { device: DeviceNode };
+const nodeTypes: NodeTypes = { device: DeviceNode, zone: ZoneBandNode };
 const edgeTypes: EdgeTypes = { powerCable: PowerCableEdge };
 
 interface TopologyMapProps {
@@ -38,23 +42,48 @@ export function TopologyMap({
   onEdgeSelect,
   statusFilter,
 }: TopologyMapProps) {
-  const rfNodes = useMemo(
+  const zoneNodes = useMemo(
     () =>
-      nodes.map((node) => ({
-        id: node.id,
-        type: 'device',
-        position: node.position,
-        data: node as unknown as Record<string, unknown>,
-        selectable: true,
-        draggable: false,
-        selected: node.id === selectedId,
-        style: {
-          opacity:
-            statusFilter === 'all' || node.status === statusFilter ? 1 : 0.18,
-          transition: 'opacity 0.25s ease',
-        },
-      })) as Node[],
-    [nodes, selectedId, statusFilter]
+      topologyZones.map(
+        (zone) =>
+          ({
+            id: zone.id,
+            type: 'zone',
+            position: zone.position,
+            data: zone as unknown as Record<string, unknown>,
+            draggable: false,
+            selectable: false,
+            connectable: false,
+            focusable: false,
+            zIndex: -1,
+          }) as Node
+      ),
+    []
+  );
+
+  const rfNodes = useMemo(
+    () => [
+      ...zoneNodes,
+      ...nodes.map(
+        (node) =>
+          ({
+            id: node.id,
+            type: 'device',
+            position: node.position,
+            data: node as unknown as Record<string, unknown>,
+            selectable: true,
+            draggable: false,
+            selected: node.id === selectedId,
+            zIndex: 1,
+            style: {
+              opacity:
+                statusFilter === 'all' || node.status === statusFilter ? 1 : 0.18,
+              transition: 'opacity 0.25s ease',
+            },
+          }) as Node
+      ),
+    ],
+    [nodes, selectedId, statusFilter, zoneNodes]
   );
 
   const rfEdges = useMemo(
@@ -66,6 +95,7 @@ export function TopologyMap({
         type: 'powerCable',
         data: edge as unknown as Record<string, unknown>,
         selected: edge.id === selectedId,
+        zIndex: 0,
         style: {
           opacity:
             statusFilter === 'all' || edge.status === statusFilter ? 1 : 0.12,
@@ -77,6 +107,7 @@ export function TopologyMap({
 
   const onNodeClick = useCallback(
     (_event: React.MouseEvent, node: Node) => {
+      if (node.type === 'zone') return;
       onNodeSelect(node.data as unknown as TopologyNode);
     },
     [onNodeSelect]
@@ -90,7 +121,7 @@ export function TopologyMap({
   );
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full relative">
       <ReactFlow
         nodes={rfNodes}
         edges={rfEdges}
@@ -99,14 +130,14 @@ export function TopologyMap({
         onNodeClick={onNodeClick}
         onEdgeClick={onEdgeClick}
         fitView
-        fitViewOptions={{ padding: 0.12 }}
+        fitViewOptions={{ padding: 0.08, minZoom: 0.35, maxZoom: 1.2 }}
         nodesDraggable={false}
         nodesConnectable={false}
         panOnScroll
         zoomOnScroll
         zoomOnPinch
-        minZoom={0.25}
-        maxZoom={3}
+        minZoom={0.2}
+        maxZoom={2.5}
         colorMode="dark"
         proOptions={{ hideAttribution: true }}
         style={{ background: 'transparent' }}
@@ -116,12 +147,16 @@ export function TopologyMap({
           gap={50}
           size={1}
           color="#1e293b"
-          style={{ opacity: 0.6 }}
+          style={{ opacity: 0.5 }}
         />
 
         <MiniMap
           nodeColor={(node: Node) => {
+            if (node.type === 'zone') return '#1e293b';
             const d = node.data as unknown as TopologyNode | undefined;
+            if (d?.physicalLocation?.zone) {
+              return ZONE_CONFIG[d.physicalLocation.zone].color;
+            }
             return STATUS_CONFIG[d?.status ?? 'operational'].color;
           }}
           style={{
@@ -135,6 +170,8 @@ export function TopologyMap({
 
         <Controls showInteractive={false} />
       </ReactFlow>
+
+      <ZoneLegend />
     </div>
   );
 }

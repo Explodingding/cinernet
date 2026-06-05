@@ -1,4 +1,4 @@
-import type { AssetType, Status } from '@/types/topology';
+import type { Status } from '@/types/topology';
 
 export interface StatusConfig {
   color: string;
@@ -34,31 +34,4 @@ export const STATUS_CONFIG: Record<Status, StatusConfig> = {
     label: 'Fault',
     edgeStyle: 'dashed',
   },
-};
-
-export interface AssetConfig {
-  label: string;
-  shortLabel: string;
-}
-
-export const ASSET_CONFIG: Record<AssetType, AssetConfig> = {
-  transformer: { label: 'Transformer', shortLabel: 'TR' },
-  panel: { label: 'Distribution Panel', shortLabel: 'MDP' },
-  cabinet: { label: 'Dist. Cabinet', shortLabel: 'DC' },
-  'junction-box': { label: 'Junction Box', shortLabel: 'JB' },
-  motor: { label: 'Motor', shortLabel: 'M' },
-};
-
-export const SPEC_LABELS: Record<string, string> = {
-  voltage: 'Voltage',
-  current: 'Max. current',
-  power: 'Power',
-  protection: 'IP rating',
-  manufacturer: 'Manufacturer',
-  location: 'Location',
-  notes: 'Notes',
-  crossSection: 'Cross-section',
-  maxLoad: 'Max load',
-  length: 'Length',
-  installationType: 'Installation',
 };

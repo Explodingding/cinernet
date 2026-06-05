@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { isTopologyEdge } from '@/types/topology';
-import { STATUS_CONFIG, ASSET_CONFIG, SPEC_LABELS } from '@/lib/statusConfig';
+import { STATUS_CONFIG } from '@/lib/statusConfig';
+import { ASSET_CONFIG, SPEC_LABELS, ZONE_CONFIG } from '@/lib/zoneConfig';
 import { getCascadeTargets } from '@/lib/troubleshooting';
 
 interface DetailDrawerProps {
@@ -188,6 +189,39 @@ export function DetailDrawer({
                   </div>
                   <p className="text-xs leading-relaxed text-amber-100/80">{element.upstreamHint}</p>
                 </div>
+              )}
+
+              {!isEdge && (
+                <Section title="Physical location" icon="◎">
+                  {(() => {
+                    const loc = (element as TopologyNode).physicalLocation;
+                    const zoneCfg = ZONE_CONFIG[loc.zone];
+                    return (
+                      <>
+                        <div
+                          className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full mb-3"
+                          style={{
+                            background: zoneCfg.bgColor,
+                            border: `1px solid ${zoneCfg.borderColor}`,
+                          }}
+                        >
+                          <span
+                            className="w-2 h-2 rounded-sm"
+                            style={{ background: zoneCfg.color }}
+                          />
+                          <span className="text-[10px] font-semibold" style={{ color: zoneCfg.color }}>
+                            {zoneCfg.label}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                          <SpecRow label="Floor" value={loc.floor} />
+                          <SpecRow label="Elevation" value={loc.elevation} />
+                          <SpecRow label="Area / Zone" value={loc.area} />
+                        </div>
+                      </>
+                    );
+                  })()}
+                </Section>
               )}
 
               <Section title="Technical specification" icon="⊞">
