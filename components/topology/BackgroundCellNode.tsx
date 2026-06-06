@@ -19,9 +19,9 @@ export interface BackgroundCellData {
 
 /** Which floor band is "topmost" (lowest yCenter index) for each building — shown in full site view */
 const BUILDING_TOP_BAND: Record<BuildingId, FloorBandId> = {
-  'furnace-10': 'elevated',
-  utility: 'ground',
-  'batch-house': 'ground',
+  'furnace-10': 'elevated',  // F10 has mezzanine nodes
+  utility: 'ground',         // Utility starts at ground (MV-SW-01 is now ground)
+  'batch-house': 'ground',   // BH has no elevated or basement nodes
 };
 
 /** Background grid cells for all 9 building×floor combinations.
