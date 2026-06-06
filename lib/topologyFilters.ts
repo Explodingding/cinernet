@@ -1,29 +1,59 @@
-import type { BuildingId, TopologyEdge, TopologyNode, TopologyNodeInput } from '@/types/topology';
+import type {
+  BuildingId,
+  EdgeType,
+  TopologyEdge,
+  TopologyNode,
+  TopologyNodeInput,
+} from '@/types/topology';
 import type { LayoutScope } from '@/lib/siteLayout';
 import { layoutNodes } from '@/lib/siteLayout';
 
 export type BuildingFilter = BuildingId | 'all';
 
+/** The three progressive disclosure tiers. */
+export type DepthTier = 1 | 2 | 3;
+
+/**
+ * Which TopologyLayer values become visible at each tier.
+ * Higher tiers accumulate lower-tier layers.
+ */
+const TIER_LAYERS: Record<DepthTier, Set<TopologyNodeInput['layer']>> = {
+  1: new Set(['mv-feed', 'mv-switchgear', 'transformer', 'lv-panel']),
+  2: new Set(['mv-feed', 'mv-switchgear', 'transformer', 'lv-panel', 'cabinet']),
+  3: new Set(['mv-feed', 'mv-switchgear', 'transformer', 'lv-panel', 'cabinet', 'junction', 'load']),
+};
+
 function toLayoutScope(building: BuildingFilter): LayoutScope {
   return building === 'all' ? 'overview' : building;
 }
 
-/** Hide building-detail nodes (e.g. TB grid) on full-site overview */
+/** Returns true when a node should appear at the given depth tier */
+function nodeVisibleAtTier(n: TopologyNodeInput, tier: DepthTier): boolean {
+  const nodeTier = n.displayTier ?? 1;
+  if (nodeTier > tier) return false;
+  return TIER_LAYERS[tier].has(n.layer);
+}
+
+/** Hide building-detail nodes on full-site overview; apply depth tier */
 export function filterMapNodes(
   nodes: TopologyNodeInput[],
   edges: TopologyEdge[],
-  building: BuildingFilter
+  building: BuildingFilter,
+  tier: DepthTier
 ): TopologyNodeInput[] {
+  const tierFiltered = nodes.filter((n) => nodeVisibleAtTier(n, tier));
+
   if (building === 'all') {
-    return nodes.filter((n) => n.mapScope !== 'building-detail');
+    return tierFiltered.filter((n) => n.mapScope !== 'building-detail');
   }
 
-  const inBuilding = nodes.filter(
+  const inBuilding = tierFiltered.filter(
     (n) =>
       n.physicalLocation.building === building && n.mapScope !== 'overview-only'
   );
   const visibleIds = new Set(inBuilding.map((n) => n.id));
 
+  // Keep remote endpoints of cross-building edges visible
   const remoteIds = new Set<string>();
   for (const e of edges) {
     if (!e.route?.spansBuildings) continue;
@@ -39,20 +69,24 @@ export function filterMapNodes(
 export function filterMapEdges(
   nodes: TopologyNode[],
   edges: TopologyEdge[],
-  building: BuildingFilter
+  building: BuildingFilter,
+  visibleEdgeTypes: Set<EdgeType>
 ): TopologyEdge[] {
   const visibleIds = new Set(nodes.map((n) => n.id));
 
   return edges.filter((e) => {
+    // Both endpoints must be visible
     if (!visibleIds.has(e.source) || !visibleIds.has(e.target)) return false;
-    if (building !== 'all') {
-      const touchesBuilding =
-        e.route?.spansBuildings &&
-        (e.route.fromBuilding === building ||
-          e.route.toBuilding === building ||
-          visibleIds.has(e.source) ||
-          visibleIds.has(e.target));
-      if (e.route?.spansBuildings) return touchesBuilding;
+    // Cable type must be toggled on
+    if (!visibleEdgeTypes.has(e.edgeType)) return false;
+
+    if (building !== 'all' && e.route?.spansBuildings) {
+      return (
+        e.route.fromBuilding === building ||
+        e.route.toBuilding === building ||
+        visibleIds.has(e.source) ||
+        visibleIds.has(e.target)
+      );
     }
     return true;
   });
@@ -62,9 +96,14 @@ export function prepareMapTopology(
   nodeInputs: TopologyNodeInput[],
   edges: TopologyEdge[],
   building: BuildingFilter,
-  statusOverrides: { nodes: Record<string, TopologyNode['status']>; edges: Record<string, TopologyNode['status']> }
+  tier: DepthTier,
+  visibleEdgeTypes: Set<EdgeType>,
+  statusOverrides: {
+    nodes: Record<string, TopologyNode['status']>;
+    edges: Record<string, TopologyNode['status']>;
+  }
 ): { nodes: TopologyNode[]; edges: TopologyEdge[] } {
-  const filteredInputs = filterMapNodes(nodeInputs, edges, building).map((n) => ({
+  const filteredInputs = filterMapNodes(nodeInputs, edges, building, tier).map((n) => ({
     ...n,
     status: statusOverrides.nodes[n.id] ?? n.status,
   }));
@@ -77,9 +116,16 @@ export function prepareMapTopology(
     status: (statusOverrides.edges[e.id] ?? e.status) as TopologyEdge['status'],
   }));
 
-  const visibleEdges = filterMapEdges(nodes, layoutedEdges, building);
+  const visibleEdges = filterMapEdges(nodes, layoutedEdges, building, visibleEdgeTypes);
 
   return { nodes, edges: visibleEdges };
+}
+
+/** Returns all EdgeType values present in a set of edges */
+export function getUsedEdgeTypes(edges: TopologyEdge[]): Set<EdgeType> {
+  const used = new Set<EdgeType>();
+  for (const e of edges) used.add(e.edgeType);
+  return used;
 }
 
 /** @deprecated use prepareMapTopology */

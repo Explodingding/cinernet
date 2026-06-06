@@ -107,7 +107,7 @@ export function getFloorBandId(elevM: number): FloorBandId {
 export type LayoutScope = 'overview' | BuildingId;
 
 /** Horizontal gap between sibling nodes at the same (building, floor, layer) */
-const NODE_SLOT_SPACING = 200;
+const NODE_SLOT_SPACING = 240;
 
 /** Batch House TB compact grid constants */
 const TB_GRID_COLS  = 4;

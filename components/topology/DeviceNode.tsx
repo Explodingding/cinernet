@@ -5,6 +5,7 @@ import type { NodeProps } from '@xyflow/react';
 import type { TopologyNode, AssetType } from '@/types/topology';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
 import { ZONE_CONFIG, ASSET_CONFIG } from '@/lib/zoneConfig';
+import type { DerivedStatus } from '@/lib/faultCascade';
 
 function AssetIcon({ type, color }: { type: AssetType; color: string }) {
   const s = {
@@ -86,11 +87,16 @@ export function DeviceNode({ data, selected }: NodeProps) {
     compact?: boolean;
     highlighted?: boolean;
     opened?: boolean;
+    derivedStatus?: DerivedStatus | null;
   };
   const compact = Boolean(nodeData.compact);
-  const isOpened = Boolean(nodeData.opened);
+  const derivedStatus = nodeData.derivedStatus ?? null;
   const cfg = STATUS_CONFIG[nodeData.status];
   const zoneCfg = ZONE_CONFIG[nodeData.physicalLocation.zone];
+
+  // Derived status colours (softer than real faults)
+  const derivedColor = derivedStatus === 'derived-fault' ? '#f87171' : '#fbbf24';
+  const derivedAlpha = derivedStatus === 'derived-fault' ? '30' : '20';
 
   const animation =
     nodeData.status === 'fault'
@@ -99,14 +105,22 @@ export function DeviceNode({ data, selected }: NodeProps) {
         ? 'investigation-pulse 3s ease-in-out infinite'
         : 'none';
 
-  // opened = full accent ring; highlighted (single-click) = subtle outline
-  const baseShadow = isOpened
+  const baseShadow = selected
     ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
-    : selected
-    ? `0 0 0 1.5px ${cfg.color}40, 0 0 12px ${cfg.glowColor}60, 0 4px 16px rgba(0,0,0,0.5)`
-    : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
+    : derivedStatus
+      ? `0 0 0 1.5px ${derivedColor}40, 0 0 10px ${derivedColor}20, 0 4px 16px rgba(0,0,0,0.5)`
+      : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
 
-  const borderColor = isOpened ? cfg.color : selected ? `${cfg.color}80` : cfg.borderColor;
+  const borderColor = selected
+    ? cfg.color
+    : derivedStatus
+      ? `${derivedColor}${derivedAlpha}`
+      : cfg.borderColor;
+
+  const circuitCount = (nodeData as unknown as { circuitCount?: number }).circuitCount;
+  const showCircuitBadge =
+    circuitCount !== undefined && circuitCount > 0 &&
+    ['lv-panel', 'cabinet'].includes(nodeData.layer);
   const width = compact ? 148 : 176;
   const minHeight = compact ? 72 : 96;
 
@@ -196,6 +210,42 @@ export function DeviceNode({ data, selected }: NodeProps) {
               {cfg.label}
             </span>
           </div>
+
+          {/* Circuit-count badge — shown when downstream nodes are hidden at current tier */}
+          {showCircuitBadge && !compact && (
+            <div
+              className="inline-flex items-center gap-1 mt-1.5 px-1.5 py-0.5 rounded text-[8px] font-bold tracking-wider"
+              style={{
+                background: 'rgba(148,163,184,0.07)',
+                border: '1px solid rgba(148,163,184,0.15)',
+                color: '#64748b',
+              }}
+            >
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {circuitCount} circuits
+            </div>
+          )}
+
+          {/* Derived fault indicator — upstream fault is propagating here */}
+          {derivedStatus && !compact && (
+            <div
+              className="inline-flex items-center gap-1 mt-0.5 px-1.5 py-0.5 rounded text-[8px] font-bold tracking-wider"
+              style={{
+                background: derivedStatus === 'derived-fault'
+                  ? 'rgba(248,113,113,0.07)'
+                  : 'rgba(251,191,36,0.07)',
+                border: `1px solid ${derivedStatus === 'derived-fault' ? 'rgba(248,113,113,0.2)' : 'rgba(251,191,36,0.2)'}`,
+                color: derivedStatus === 'derived-fault' ? '#fca5a5' : '#fde68a',
+              }}
+            >
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              upstream {derivedStatus === 'derived-fault' ? 'fault' : 'issue'}
+            </div>
+          )}
         </div>
       </div>
 

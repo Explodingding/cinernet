@@ -60,11 +60,11 @@ export function ZoneLegend({ buildingFilter }: ZoneLegendProps) {
         <div className="mt-1.5 flex flex-col gap-1">
           <div className="flex items-center gap-1.5">
             <span className="text-[9px] text-slate-600">Click</span>
-            <span className="text-[9px] text-slate-500">→ select</span>
+            <span className="text-[9px] text-slate-500">→ open details</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-[9px] text-slate-600">Double-click</span>
-            <span className="text-[9px] text-slate-500">→ open details</span>
+            <span className="text-[9px] text-slate-600">Tier 1→2→3</span>
+            <span className="text-[9px] text-slate-500">→ more depth</span>
           </div>
         </div>
       </div>

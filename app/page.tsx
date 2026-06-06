@@ -3,13 +3,14 @@
 import { useState, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
-import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
+import type { TopologyNode, TopologyEdge, Status, EdgeType } from '@/types/topology';
 import { TopBar } from '@/components/layout/TopBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
 import { Toast } from '@/components/ui/Toast';
 import { getCascadeTargets } from '@/lib/troubleshooting';
-import { prepareMapTopology } from '@/lib/topologyFilters';
-import type { BuildingFilter } from '@/lib/topologyFilters';
+import { prepareMapTopology, getUsedEdgeTypes } from '@/lib/topologyFilters';
+import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
+import { computeDerivedStatuses } from '@/lib/faultCascade';
 
 const TopologyMap = dynamic(
   () => import('@/components/topology/TopologyMap').then((m) => m.TopologyMap),
@@ -35,18 +36,22 @@ function MapLoading() {
   );
 }
 
+/** All edge types that appear in the dataset — used to populate the cable filter */
+const ALL_EDGE_TYPES = getUsedEdgeTypes(topologyEdges);
+
 export default function Dashboard() {
   const [nodeStatuses, setNodeStatuses] = useState<Record<string, Status>>({});
   const [edgeStatuses, setEdgeStatuses] = useState<Record<string, Status>>({});
-  /** Currently highlighted element (single click — ring only) */
-  const [highlightedId, setHighlightedId] = useState<string | null>(null);
-  /** Element whose detail drawer is open (double click on node, single click on edge) */
-  const [opened, setOpened] = useState<{
+  const [selected, setSelected] = useState<{
     data: TopologyNode | TopologyEdge;
     type: 'node' | 'edge';
   } | null>(null);
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
   const [buildingFilter, setBuildingFilter] = useState<BuildingFilter>('all');
+  const [activeTier, setActiveTier] = useState<DepthTier>(1);
+  const [visibleEdgeTypes, setVisibleEdgeTypes] = useState<Set<EdgeType>>(
+    new Set(ALL_EDGE_TYPES)
+  );
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // All nodes/edges with status overrides applied (catalog = full set, no layout)
@@ -71,11 +76,17 @@ export default function Dashboard() {
   // Positioned, filtered nodes/edges for the current view
   const { nodes: visibleNodes, edges: visibleEdges } = useMemo(
     () =>
-      prepareMapTopology(topologyNodeInputs, topologyEdges, buildingFilter, {
+      prepareMapTopology(topologyNodeInputs, topologyEdges, buildingFilter, activeTier, visibleEdgeTypes, {
         nodes: nodeStatuses,
         edges: edgeStatuses,
       }),
-    [buildingFilter, nodeStatuses, edgeStatuses]
+    [buildingFilter, activeTier, visibleEdgeTypes, nodeStatuses, edgeStatuses]
+  );
+
+  // Fault cascade — derived statuses computed at render time, never stored
+  const derivedStatuses = useMemo(
+    () => computeDerivedStatuses(visibleNodes, visibleEdges),
+    [visibleNodes, visibleEdges]
   );
 
   // KPI counts across the full catalog (not just visible)
@@ -97,48 +108,40 @@ export default function Dashboard() {
     [catalogNodes]
   );
 
-  // Resolve the opened element with current status + position
-  const openedWithStatus = useMemo(() => {
-    if (!opened) return null;
-    if (opened.type === 'node') {
-      const input = catalogNodes.find((n) => n.id === opened.data.id);
-      const laid = visibleNodes.find((n) => n.id === opened.data.id);
+  // Resolve the selected element with current status + position
+  const selectedWithStatus = useMemo(() => {
+    if (!selected) return null;
+    if (selected.type === 'node') {
+      const input = catalogNodes.find((n) => n.id === selected.data.id);
+      const laid = visibleNodes.find((n) => n.id === selected.data.id);
       if (!input) return null;
       return {
         data: { ...input, position: laid?.position ?? { x: 0, y: 0 } } as TopologyNode,
         type: 'node' as const,
       };
     }
-    const e = catalogEdges.find((e) => e.id === opened.data.id);
+    const e = catalogEdges.find((e) => e.id === selected.data.id);
     return e ? { data: e, type: 'edge' as const } : null;
-  }, [opened, catalogNodes, catalogEdges, visibleNodes]);
+  }, [selected, catalogNodes, catalogEdges, visibleNodes]);
 
-  /** Single click: highlight ring only */
-  const handleNodeHighlight = useCallback((node: TopologyNode | null) => {
-    setHighlightedId(node?.id ?? null);
+  const handleNodeSelect = useCallback((node: TopologyNode) => {
+    setSelected({ data: node, type: 'node' });
   }, []);
 
-  /** Double click: open detail drawer (also sets highlight ring) */
-  const handleNodeOpen = useCallback((node: TopologyNode) => {
-    setHighlightedId(node.id);
-    setOpened({ data: node, type: 'node' });
+  const handleEdgeSelect = useCallback((edge: TopologyEdge) => {
+    setSelected({ data: edge, type: 'edge' });
   }, []);
 
-  /** Edge single click: always opens drawer */
-  const handleEdgeOpen = useCallback((edge: TopologyEdge) => {
-    setHighlightedId(edge.id);
-    setOpened({ data: edge, type: 'edge' });
-  }, []);
-
-  const handleClose = useCallback(() => setOpened(null), []);
+  const handleClose = useCallback(() => setSelected(null), []);
 
   const handleFaultNodeClick = useCallback(
     (nodeId: string) => {
       const input = catalogNodes.find((n) => n.id === nodeId);
       if (input) {
-        const node = { ...input, position: { x: 0, y: 0 } } as TopologyNode;
-        setHighlightedId(nodeId);
-        setOpened({ data: node, type: 'node' });
+        setSelected({
+          data: { ...input, position: { x: 0, y: 0 } } as TopologyNode,
+          type: 'node',
+        });
       }
     },
     [catalogNodes]
@@ -175,6 +178,20 @@ export default function Dashboard() {
     []
   );
 
+  const handleToggleEdgeType = useCallback((type: EdgeType) => {
+    setVisibleEdgeTypes((prev) => {
+      const next = new Set(prev);
+      if (next.has(type)) {
+        // Don't allow hiding all types
+        if (next.size <= 1) return prev;
+        next.delete(type);
+      } else {
+        next.add(type);
+      }
+      return next;
+    });
+  }, []);
+
   const showToast = useCallback((message: string) => {
     setToastMessage(message);
     window.setTimeout(() => setToastMessage(null), 3200);
@@ -190,24 +207,28 @@ export default function Dashboard() {
         onStatusFilterChange={setStatusFilter}
         onFaultNodeClick={handleFaultNodeClick}
         kpiStats={kpiStats}
+        activeTier={activeTier}
+        onTierChange={setActiveTier}
+        visibleEdgeTypes={visibleEdgeTypes}
+        usedEdgeTypes={ALL_EDGE_TYPES}
+        onToggleEdgeType={handleToggleEdgeType}
       />
 
       <div className="flex-1 relative overflow-hidden min-h-0">
         <TopologyMap
           nodes={visibleNodes}
           edges={visibleEdges}
-          highlightedId={highlightedId}
-          openedId={openedWithStatus?.data.id ?? null}
+          selectedId={selectedWithStatus?.data.id ?? null}
           buildingFilter={buildingFilter}
-          onNodeHighlight={handleNodeHighlight}
-          onNodeOpen={handleNodeOpen}
-          onEdgeOpen={handleEdgeOpen}
+          onNodeSelect={handleNodeSelect}
+          onEdgeSelect={handleEdgeSelect}
           statusFilter={statusFilter}
+          derivedStatuses={derivedStatuses}
         />
 
         <DetailDrawer
-          element={openedWithStatus?.data ?? null}
-          elementType={openedWithStatus?.type ?? null}
+          element={selectedWithStatus?.data ?? null}
+          elementType={selectedWithStatus?.type ?? null}
           onClose={handleClose}
           onStatusChange={handleStatusChange}
           onMarkResolved={handleMarkResolved}

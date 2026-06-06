@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import type { TopologyNode, Status } from '@/types/topology';
-import type { BuildingFilter } from '@/lib/topologyFilters';
+import type { TopologyNode, Status, EdgeType } from '@/types/topology';
+import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
 import { BUILDINGS, SITE_BUILDING_ORDER } from '@/data/buildings';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Panel = 'fault' | 'building' | 'status' | 'kpi' | null;
+type Panel = 'fault' | 'building' | 'status' | 'kpi' | 'cables' | null;
 
 export interface KpiStats {
   total: number;
@@ -16,6 +16,22 @@ export interface KpiStats {
   investigation: number;
   fault: number;
 }
+
+/** Human-readable labels and icons for each cable/edge type */
+const EDGE_TYPE_META: Record<EdgeType, { label: string; shortLabel: string; color: string }> = {
+  mv:       { label: 'Medium Voltage',  shortLabel: 'MV',       color: '#f97316' },
+  power:    { label: 'LV Power',        shortLabel: 'Power',    color: '#34d399' },
+  plc:      { label: 'Control (PLC)',   shortLabel: 'PLC',      color: '#60a5fa' },
+  signal:   { label: 'Instrument',      shortLabel: 'Signal',   color: '#a78bfa' },
+  fieldbus: { label: 'Fieldbus',        shortLabel: 'Fieldbus', color: '#f0abfc' },
+  ethernet: { label: 'Network',         shortLabel: 'Network',  color: '#94a3b8' },
+};
+
+const TIER_META: Record<DepthTier, { label: string; sub: string }> = {
+  1: { label: 'Site',     sub: 'Main power lines' },
+  2: { label: 'Building', sub: 'Distribution cabinets' },
+  3: { label: 'Circuit',  sub: 'Loads & motors' },
+};
 
 interface TopBarProps {
   faultNodes: TopologyNode[];
@@ -25,6 +41,11 @@ interface TopBarProps {
   onStatusFilterChange: (s: Status | 'all') => void;
   onFaultNodeClick: (nodeId: string) => void;
   kpiStats: KpiStats;
+  activeTier: DepthTier;
+  onTierChange: (t: DepthTier) => void;
+  visibleEdgeTypes: Set<EdgeType>;
+  usedEdgeTypes: Set<EdgeType>;
+  onToggleEdgeType: (t: EdgeType) => void;
 }
 
 // ─── Shared panel container style ─────────────────────────────────────────────
@@ -91,6 +112,11 @@ export function TopBar({
   onStatusFilterChange,
   onFaultNodeClick,
   kpiStats,
+  activeTier,
+  onTierChange,
+  visibleEdgeTypes,
+  usedEdgeTypes,
+  onToggleEdgeType,
 }: TopBarProps) {
   const [openPanel, setOpenPanel] = useState<Panel>(null);
   const [time, setTime] = useState('');
@@ -243,6 +269,75 @@ export function TopBar({
 
       {/* ── Spacer ── */}
       <div className="flex-1 min-w-0" />
+
+      {/* ── Depth tier selector ── */}
+      <div
+        className="flex items-center gap-px rounded-lg overflow-hidden shrink-0"
+        style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(15,23,42,0.7)' }}
+      >
+        {([1, 2, 3] as DepthTier[]).map((tier) => {
+          const isActive = activeTier === tier;
+          return (
+            <button
+              key={tier}
+              onClick={() => onTierChange(tier)}
+              title={`${TIER_META[tier].label} — ${TIER_META[tier].sub}`}
+              className="flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-bold tracking-wider transition-all duration-150"
+              style={{
+                background: isActive ? 'rgba(52,211,153,0.15)' : 'transparent',
+                color: isActive ? '#34d399' : '#475569',
+                borderRight: tier < 3 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+              }}
+            >
+              <span
+                className="w-3.5 h-3.5 rounded-sm flex items-center justify-center text-[7px] font-black"
+                style={{
+                  background: isActive ? 'rgba(52,211,153,0.25)' : 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${isActive ? 'rgba(52,211,153,0.5)' : 'rgba(255,255,255,0.06)'}`,
+                  color: isActive ? '#34d399' : '#475569',
+                }}
+              >
+                {tier}
+              </span>
+              <span className="hidden md:inline">{TIER_META[tier].label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── Cable type filter ── */}
+      <div className="relative shrink-0">
+        <button
+          onClick={() => toggle('cables')}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-semibold transition-all duration-150"
+          style={{
+            background: openPanel === 'cables' ? 'rgba(148,163,184,0.12)' : 'rgba(15,23,42,0.7)',
+            border: `1px solid ${openPanel === 'cables' ? '#64748b' : 'rgba(255,255,255,0.08)'}`,
+            color: openPanel === 'cables' ? '#94a3b8' : '#475569',
+          }}
+          title="Cable type visibility"
+        >
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M5 6h14M5 18h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          <span className="hidden sm:inline">Cables</span>
+          {visibleEdgeTypes.size < usedEdgeTypes.size && (
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"
+              title="Some cable types hidden"
+            />
+          )}
+          <Chevron open={openPanel === 'cables'} />
+        </button>
+
+        {openPanel === 'cables' && (
+          <CableTypePanel
+            usedEdgeTypes={usedEdgeTypes}
+            visibleEdgeTypes={visibleEdgeTypes}
+            onToggle={(t) => { onToggleEdgeType(t); }}
+          />
+        )}
+      </div>
 
       {/* ── Building filter ── */}
       <div className="relative shrink-0">
@@ -617,6 +712,60 @@ function KpiPanel({ stats }: { stats: KpiStats }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+function CableTypePanel({
+  usedEdgeTypes,
+  visibleEdgeTypes,
+  onToggle,
+}: {
+  usedEdgeTypes: Set<EdgeType>;
+  visibleEdgeTypes: Set<EdgeType>;
+  onToggle: (t: EdgeType) => void;
+}) {
+  const types = Array.from(usedEdgeTypes);
+  return (
+    <div style={{ ...PANEL, right: 0, minWidth: 220 }}>
+      <div className="px-3 py-2 border-b border-white/[0.06]">
+        <span className="text-[9px] font-bold tracking-widest uppercase text-slate-600">
+          Cable types
+        </span>
+      </div>
+      {types.map((type) => {
+        const meta = EDGE_TYPE_META[type];
+        const isVisible = visibleEdgeTypes.has(type);
+        return (
+          <button
+            key={type}
+            onClick={() => onToggle(type)}
+            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
+            style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
+          >
+            <span
+              className="w-2.5 h-1 rounded-full shrink-0"
+              style={{ background: isVisible ? meta.color : 'rgba(100,116,139,0.2)' }}
+            />
+            <span
+              className="text-[11px] font-semibold flex-1"
+              style={{ color: isVisible ? meta.color : '#334155' }}
+            >
+              {meta.label}
+            </span>
+            <span
+              className="text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider"
+              style={{
+                background: isVisible ? `rgba(${hexRgb(meta.color)},0.12)` : 'rgba(255,255,255,0.03)',
+                color: isVisible ? meta.color : '#334155',
+                border: `1px solid ${isVisible ? `rgba(${hexRgb(meta.color)},0.25)` : 'rgba(255,255,255,0.04)'}`,
+              }}
+            >
+              {meta.shortLabel}
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 }

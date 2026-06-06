@@ -30,7 +30,13 @@ export type LocationZone =
 
 export type Status = 'operational' | 'investigation' | 'fault';
 
-export type EdgeType = 'power' | 'plc' | 'mv';
+export type EdgeType =
+  | 'mv'        // Medium-voltage power
+  | 'power'     // LV power cable
+  | 'plc'       // PLC / control signal
+  | 'signal'    // Analogue / digital instrument signal
+  | 'fieldbus'  // Profibus, PROFINET, EtherCAT, etc.
+  | 'ethernet'; // Network / supervisory
 
 export interface ExternalRefs {
   scadaTag?: string;
@@ -100,6 +106,16 @@ export interface TopologyNodeInput {
   terminalBox?: TerminalBoxDetail;
   /** building-detail nodes (e.g. TB grid) hidden on full-site overview */
   mapScope?: 'site' | 'building-detail' | 'overview-only';
+  /**
+   * Minimum depth tier at which this node is shown.
+   * Tier 1 = site overview (MV lines, transformers, main panels)
+   * Tier 2 = building detail (+ distribution cabinets, sub-panels)
+   * Tier 3 = circuit detail (+ individual loads, motors, drives)
+   * Defaults to 1 if omitted — no breaking change for existing nodes.
+   */
+  displayTier?: 1 | 2 | 3;
+  /** Shown as a badge on panel/cabinet cards when downstream circuits are not yet individually modelled */
+  circuitCount?: number;
   positionOverride?: { x: number; y: number };
 }
 
