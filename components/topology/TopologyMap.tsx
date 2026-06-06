@@ -14,7 +14,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { DeviceNode } from './DeviceNode';
-import { BuildingColumnGuides } from './BuildingColumnGuides';
+import { BackgroundCellNode, buildBackgroundCells } from './BackgroundCellNode';
 import { ZoneLegend } from './ZoneLegend';
 import { PowerCableEdge } from './PowerCableEdge';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
@@ -22,8 +22,14 @@ import { STATUS_CONFIG } from '@/lib/statusConfig';
 import { ZONE_CONFIG } from '@/lib/zoneConfig';
 import type { BuildingFilter } from '@/lib/topologyFilters';
 
-const nodeTypes: NodeTypes = { device: DeviceNode };
+const nodeTypes: NodeTypes = {
+  device: DeviceNode,
+  backgroundCell: BackgroundCellNode,
+};
 const edgeTypes: EdgeTypes = { powerCable: PowerCableEdge };
+
+/** Background cells are injected once — they don't change with filter or status */
+const BACKGROUND_CELLS = buildBackgroundCells();
 
 interface TopologyMapProps {
   nodes: TopologyNode[];
@@ -44,31 +50,37 @@ export function TopologyMap({
   onEdgeSelect,
   statusFilter,
 }: TopologyMapProps) {
-  const rfNodes = useMemo(
-    () =>
-      nodes.map(
-        (node) =>
-          ({
-            id: node.id,
-            type: 'device',
-            position: node.position,
-            data: {
-              ...(node as unknown as Record<string, unknown>),
-              compact: node.mapScope === 'building-detail' || node.layer === 'junction',
-            },
-            selectable: true,
-            draggable: false,
-            selected: node.id === selectedId,
-            zIndex: 1,
-            style: {
-              opacity:
-                statusFilter === 'all' || node.status === statusFilter ? 1 : 0.18,
-              transition: 'opacity 0.25s ease',
-            },
-          }) as Node
-      ),
-    [nodes, selectedId, statusFilter]
-  );
+  const rfNodes = useMemo(() => {
+    const deviceNodes: Node[] = nodes.map(
+      (node) =>
+        ({
+          id: node.id,
+          type: 'device',
+          position: node.position,
+          data: {
+            ...(node as unknown as Record<string, unknown>),
+            compact: node.mapScope === 'building-detail' || node.layer === 'junction',
+          },
+          selectable: true,
+          draggable: false,
+          selected: node.id === selectedId,
+          zIndex: 1,
+          style: {
+            opacity:
+              statusFilter === 'all' || node.status === statusFilter ? 1 : 0.18,
+            transition: 'opacity 0.25s ease',
+          },
+        }) as Node
+    );
+
+    // Only show background grid on full-site overview
+    const bgNodes: Node[] =
+      buildingFilter === 'all'
+        ? (BACKGROUND_CELLS as Node[])
+        : [];
+
+    return [...bgNodes, ...deviceNodes];
+  }, [nodes, selectedId, statusFilter, buildingFilter]);
 
   const rfEdges = useMemo(
     () =>
@@ -90,7 +102,8 @@ export function TopologyMap({
   );
 
   const onNodeClick = useCallback(
-    (_event: React.MouseEvent, node: Node) => {
+    (event: React.MouseEvent, node: Node) => {
+      if (node.id.startsWith('__bg-')) return;
       onNodeSelect(node.data as unknown as TopologyNode);
     },
     [onNodeSelect]
@@ -103,12 +116,8 @@ export function TopologyMap({
     [onEdgeSelect]
   );
 
-  const showColumnGuides = buildingFilter === 'all';
-
   return (
     <div className="w-full h-full relative">
-      <BuildingColumnGuides visible={showColumnGuides} />
-
       <ReactFlow
         nodes={rfNodes}
         edges={rfEdges}
@@ -117,13 +126,13 @@ export function TopologyMap({
         onNodeClick={onNodeClick}
         onEdgeClick={onEdgeClick}
         fitView
-        fitViewOptions={{ padding: 0.15, minZoom: 0.25, maxZoom: 1 }}
+        fitViewOptions={{ padding: 0.12, minZoom: 0.2, maxZoom: 1 }}
         nodesDraggable={false}
         nodesConnectable={false}
         panOnScroll
         zoomOnScroll
         zoomOnPinch
-        minZoom={0.15}
+        minZoom={0.12}
         maxZoom={2}
         colorMode="dark"
         proOptions={{ hideAttribution: true }}
@@ -131,14 +140,15 @@ export function TopologyMap({
       >
         <Background
           variant={BackgroundVariant.Dots}
-          gap={24}
+          gap={28}
           size={1}
           color="#1e293b"
-          style={{ opacity: 0.45 }}
+          style={{ opacity: 0.4 }}
         />
 
         <MiniMap
           nodeColor={(node: Node) => {
+            if (node.id.startsWith('__bg-')) return 'transparent';
             const d = node.data as unknown as TopologyNode | undefined;
             if (d?.physicalLocation?.zone) {
               return ZONE_CONFIG[d.physicalLocation.zone].color;
