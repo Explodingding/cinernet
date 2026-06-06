@@ -38,7 +38,10 @@ function MapLoading() {
 export default function Dashboard() {
   const [nodeStatuses, setNodeStatuses] = useState<Record<string, Status>>({});
   const [edgeStatuses, setEdgeStatuses] = useState<Record<string, Status>>({});
-  const [selected, setSelected] = useState<{
+  /** Currently highlighted element (single click — ring only) */
+  const [highlightedId, setHighlightedId] = useState<string | null>(null);
+  /** Element whose detail drawer is open (double click on node, single click on edge) */
+  const [opened, setOpened] = useState<{
     data: TopologyNode | TopologyEdge;
     type: 'node' | 'edge';
   } | null>(null);
@@ -94,40 +97,48 @@ export default function Dashboard() {
     [catalogNodes]
   );
 
-  // Resolve the selected element with current status + position
-  const selectedWithStatus = useMemo(() => {
-    if (!selected) return null;
-    if (selected.type === 'node') {
-      const input = catalogNodes.find((n) => n.id === selected.data.id);
-      const laid = visibleNodes.find((n) => n.id === selected.data.id);
+  // Resolve the opened element with current status + position
+  const openedWithStatus = useMemo(() => {
+    if (!opened) return null;
+    if (opened.type === 'node') {
+      const input = catalogNodes.find((n) => n.id === opened.data.id);
+      const laid = visibleNodes.find((n) => n.id === opened.data.id);
       if (!input) return null;
       return {
         data: { ...input, position: laid?.position ?? { x: 0, y: 0 } } as TopologyNode,
         type: 'node' as const,
       };
     }
-    const e = catalogEdges.find((e) => e.id === selected.data.id);
+    const e = catalogEdges.find((e) => e.id === opened.data.id);
     return e ? { data: e, type: 'edge' as const } : null;
-  }, [selected, catalogNodes, catalogEdges, visibleNodes]);
+  }, [opened, catalogNodes, catalogEdges, visibleNodes]);
 
-  const handleNodeSelect = useCallback((node: TopologyNode) => {
-    setSelected({ data: node, type: 'node' });
+  /** Single click: highlight ring only */
+  const handleNodeHighlight = useCallback((node: TopologyNode | null) => {
+    setHighlightedId(node?.id ?? null);
   }, []);
 
-  const handleEdgeSelect = useCallback((edge: TopologyEdge) => {
-    setSelected({ data: edge, type: 'edge' });
+  /** Double click: open detail drawer (also sets highlight ring) */
+  const handleNodeOpen = useCallback((node: TopologyNode) => {
+    setHighlightedId(node.id);
+    setOpened({ data: node, type: 'node' });
   }, []);
 
-  const handleClose = useCallback(() => setSelected(null), []);
+  /** Edge single click: always opens drawer */
+  const handleEdgeOpen = useCallback((edge: TopologyEdge) => {
+    setHighlightedId(edge.id);
+    setOpened({ data: edge, type: 'edge' });
+  }, []);
+
+  const handleClose = useCallback(() => setOpened(null), []);
 
   const handleFaultNodeClick = useCallback(
     (nodeId: string) => {
       const input = catalogNodes.find((n) => n.id === nodeId);
       if (input) {
-        setSelected({
-          data: { ...input, position: { x: 0, y: 0 } } as TopologyNode,
-          type: 'node',
-        });
+        const node = { ...input, position: { x: 0, y: 0 } } as TopologyNode;
+        setHighlightedId(nodeId);
+        setOpened({ data: node, type: 'node' });
       }
     },
     [catalogNodes]
@@ -146,9 +157,7 @@ export default function Dashboard() {
       if (type === 'node') {
         setNodeStatuses((prev) => {
           const next: Record<string, Status> = { ...prev, [id]: 'operational' };
-          getCascadeTargets(id).nodes.forEach((nid) => {
-            next[nid] = 'operational';
-          });
+          getCascadeTargets(id).nodes.forEach((nid) => { next[nid] = 'operational'; });
           return next;
         });
         const { edges: cascadeEdges } = getCascadeTargets(id);
@@ -173,7 +182,6 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      {/* Single slim top bar — all controls live here */}
       <TopBar
         faultNodes={faultNodes}
         buildingFilter={buildingFilter}
@@ -184,21 +192,22 @@ export default function Dashboard() {
         kpiStats={kpiStats}
       />
 
-      {/* Map fills all remaining space */}
       <div className="flex-1 relative overflow-hidden min-h-0">
         <TopologyMap
           nodes={visibleNodes}
           edges={visibleEdges}
-          selectedId={selectedWithStatus?.data.id ?? null}
+          highlightedId={highlightedId}
+          openedId={openedWithStatus?.data.id ?? null}
           buildingFilter={buildingFilter}
-          onNodeSelect={handleNodeSelect}
-          onEdgeSelect={handleEdgeSelect}
+          onNodeHighlight={handleNodeHighlight}
+          onNodeOpen={handleNodeOpen}
+          onEdgeOpen={handleEdgeOpen}
           statusFilter={statusFilter}
         />
 
         <DetailDrawer
-          element={selectedWithStatus?.data ?? null}
-          elementType={selectedWithStatus?.type ?? null}
+          element={openedWithStatus?.data ?? null}
+          elementType={openedWithStatus?.type ?? null}
           onClose={handleClose}
           onStatusChange={handleStatusChange}
           onMarkResolved={handleMarkResolved}

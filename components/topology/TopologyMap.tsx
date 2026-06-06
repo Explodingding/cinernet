@@ -17,7 +17,6 @@ import { BackgroundCellNode, buildBackgroundCells } from './BackgroundCellNode';
 import { ZoneLegend } from './ZoneLegend';
 import { PowerCableEdge } from './PowerCableEdge';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
-import { STATUS_CONFIG } from '@/lib/statusConfig';
 import type { BuildingFilter } from '@/lib/topologyFilters';
 
 const nodeTypes: NodeTypes = {
@@ -26,26 +25,34 @@ const nodeTypes: NodeTypes = {
 };
 const edgeTypes: EdgeTypes = { powerCable: PowerCableEdge };
 
-/** Background cells are injected once — they don't change with filter or status */
 const BACKGROUND_CELLS = buildBackgroundCells();
 
 interface TopologyMapProps {
   nodes: TopologyNode[];
   edges: TopologyEdge[];
-  selectedId: string | null;
+  /** Highlighted node/edge ID — visual ring only (single click) */
+  highlightedId: string | null;
+  /** Opened element ID — drives the detail drawer (double click) */
+  openedId: string | null;
   buildingFilter: BuildingFilter;
-  onNodeSelect: (node: TopologyNode) => void;
-  onEdgeSelect: (edge: TopologyEdge) => void;
+  /** Single click → highlight ring only, no drawer */
+  onNodeHighlight: (node: TopologyNode) => void;
+  /** Double click → open detail drawer */
+  onNodeOpen: (node: TopologyNode) => void;
+  /** Edge single click always opens the drawer (edges are small targets) */
+  onEdgeOpen: (edge: TopologyEdge) => void;
   statusFilter: Status | 'all';
 }
 
 export function TopologyMap({
   nodes,
   edges,
-  selectedId,
+  highlightedId,
+  openedId,
   buildingFilter,
-  onNodeSelect,
-  onEdgeSelect,
+  onNodeHighlight,
+  onNodeOpen,
+  onEdgeOpen,
   statusFilter,
 }: TopologyMapProps) {
   const rfNodes = useMemo(() => {
@@ -58,10 +65,14 @@ export function TopologyMap({
           data: {
             ...(node as unknown as Record<string, unknown>),
             compact: node.mapScope === 'building-detail' || node.layer === 'junction',
+            /** 'open' = detail drawer is showing this node */
+            highlighted: node.id === highlightedId,
+            opened: node.id === openedId,
           },
           selectable: true,
           draggable: false,
-          selected: node.id === selectedId,
+          /** React Flow 'selected' drives the blue outline — we repurpose it for highlight */
+          selected: node.id === highlightedId,
           zIndex: 1,
           style: {
             opacity:
@@ -71,14 +82,11 @@ export function TopologyMap({
         }) as Node
     );
 
-    // Only show background grid on full-site overview
     const bgNodes: Node[] =
-      buildingFilter === 'all'
-        ? (BACKGROUND_CELLS as Node[])
-        : [];
+      buildingFilter === 'all' ? (BACKGROUND_CELLS as Node[]) : [];
 
     return [...bgNodes, ...deviceNodes];
-  }, [nodes, selectedId, statusFilter, buildingFilter]);
+  }, [nodes, highlightedId, openedId, statusFilter, buildingFilter]);
 
   const rfEdges = useMemo(
     () =>
@@ -88,7 +96,7 @@ export function TopologyMap({
         target: edge.target,
         type: 'powerCable',
         data: edge as unknown as Record<string, unknown>,
-        selected: edge.id === selectedId,
+        selected: edge.id === openedId,
         zIndex: 0,
         style: {
           opacity:
@@ -96,23 +104,39 @@ export function TopologyMap({
           transition: 'opacity 0.25s ease',
         },
       })) as Edge[],
-    [edges, selectedId, statusFilter]
+    [edges, openedId, statusFilter]
   );
 
+  /** Single click → highlight ring only */
   const onNodeClick = useCallback(
-    (event: React.MouseEvent, node: Node) => {
+    (_event: React.MouseEvent, node: Node) => {
       if (node.id.startsWith('__bg-')) return;
-      onNodeSelect(node.data as unknown as TopologyNode);
+      onNodeHighlight(node.data as unknown as TopologyNode);
     },
-    [onNodeSelect]
+    [onNodeHighlight]
   );
 
+  /** Double click → open detail drawer */
+  const onNodeDoubleClick = useCallback(
+    (_event: React.MouseEvent, node: Node) => {
+      if (node.id.startsWith('__bg-')) return;
+      onNodeOpen(node.data as unknown as TopologyNode);
+    },
+    [onNodeOpen]
+  );
+
+  /** Edge click always opens drawer (edges are thin — too hard to double-click) */
   const onEdgeClick = useCallback(
     (_event: React.MouseEvent, edge: Edge) => {
-      onEdgeSelect(edge.data as unknown as TopologyEdge);
+      onEdgeOpen(edge.data as unknown as TopologyEdge);
     },
-    [onEdgeSelect]
+    [onEdgeOpen]
   );
+
+  /** Click on empty canvas → deselect */
+  const onPaneClick = useCallback(() => {
+    onNodeHighlight(null as unknown as TopologyNode);
+  }, [onNodeHighlight]);
 
   return (
     <div className="w-full h-full relative">
@@ -122,7 +146,9 @@ export function TopologyMap({
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onNodeClick={onNodeClick}
+        onNodeDoubleClick={onNodeDoubleClick}
         onEdgeClick={onEdgeClick}
+        onPaneClick={onPaneClick}
         fitView
         fitViewOptions={{ padding: 0.12, minZoom: 0.2, maxZoom: 1 }}
         nodesDraggable={false}
@@ -143,7 +169,6 @@ export function TopologyMap({
           color="#1e293b"
           style={{ opacity: 0.4 }}
         />
-
         <Controls showInteractive={false} />
       </ReactFlow>
 

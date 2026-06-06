@@ -57,6 +57,16 @@ export function ZoneLegend({ buildingFilter }: ZoneLegendProps) {
             ? 'Batch House terminal boxes collapse to one node here. Select Batch House to open the TB grid.'
             : 'Tap any asset or cable for specs, commissioning data, and troubleshooting steps.'}
         </div>
+        <div className="mt-1.5 flex flex-col gap-1">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[9px] text-slate-600">Click</span>
+            <span className="text-[9px] text-slate-500">→ select</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[9px] text-slate-600">Double-click</span>
+            <span className="text-[9px] text-slate-500">→ open details</span>
+          </div>
+        </div>
       </div>
     </div>
   );

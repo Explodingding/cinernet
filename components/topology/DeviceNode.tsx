@@ -82,8 +82,13 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
 }
 
 export function DeviceNode({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as TopologyNode & { compact?: boolean };
+  const nodeData = data as unknown as TopologyNode & {
+    compact?: boolean;
+    highlighted?: boolean;
+    opened?: boolean;
+  };
   const compact = Boolean(nodeData.compact);
+  const isOpened = Boolean(nodeData.opened);
   const cfg = STATUS_CONFIG[nodeData.status];
   const zoneCfg = ZONE_CONFIG[nodeData.physicalLocation.zone];
 
@@ -94,10 +99,14 @@ export function DeviceNode({ data, selected }: NodeProps) {
         ? 'investigation-pulse 3s ease-in-out infinite'
         : 'none';
 
-  const baseShadow = selected
+  // opened = full accent ring; highlighted (single-click) = subtle outline
+  const baseShadow = isOpened
     ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
-    : `0 0 8px ${cfg.glowColor}, 0 4px 16px rgba(0,0,0,0.5)`;
+    : selected
+    ? `0 0 0 1.5px ${cfg.color}40, 0 0 12px ${cfg.glowColor}60, 0 4px 16px rgba(0,0,0,0.5)`
+    : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
 
+  const borderColor = isOpened ? cfg.color : selected ? `${cfg.color}80` : cfg.borderColor;
   const width = compact ? 148 : 176;
   const minHeight = compact ? 72 : 96;
 
@@ -125,7 +134,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
         className="flex-1 rounded-r-[10px] overflow-hidden"
         style={{
           background: 'rgba(10, 15, 26, 0.96)',
-          border: `1.5px solid ${selected ? cfg.color : cfg.borderColor}`,
+          border: `1.5px solid ${borderColor}`,
           borderLeft: 'none',
           boxShadow: baseShadow,
           backdropFilter: 'blur(8px)',
