@@ -19,16 +19,31 @@ const BUILDING_X: Record<BuildingId, number> = {
 const BRANCH_SPACING = 168;
 
 export function layoutNode(node: TopologyNodeInput) {
+  if (node.positionOverride) {
+    const { layout: _layout, positionOverride, ...rest } = node;
+    return { ...rest, position: positionOverride };
+  }
+
   const baseX = BUILDING_X[node.layout.building];
   const branch = node.layout.branchIndex ?? 0;
-  const x =
+
+  let x =
     node.layout.building === 'utility'
       ? baseX
       : baseX + (branch - 1) * BRANCH_SPACING;
-  return {
-    ...node,
-    position: { x, y: LAYER_Y[node.layer] },
-  };
+  let y = LAYER_Y[node.layer];
+
+  /* Grid layout when many terminal boxes share one building branch */
+  if (node.layer === 'junction' && node.layout.building === 'batch-house' && branch > 0) {
+    const cols = 5;
+    const col = (branch - 1) % cols;
+    const row = Math.floor((branch - 1) / cols);
+    x = 480 + col * BRANCH_SPACING;
+    y = LAYER_Y.junction + row * 72;
+  }
+
+  const { layout: _layout, positionOverride: _pos, ...rest } = node;
+  return { ...rest, position: { x, y } };
 }
 
 export function layoutNodes(nodes: TopologyNodeInput[]) {

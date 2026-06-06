@@ -1,8 +1,11 @@
-import type { SiteInstallation } from '@/types/topology';
+import type { SiteInstallation, TopologyNodeInput } from '@/types/topology';
+import importedTb from '../imported/batch-house-terminal-boxes.json';
+
+const importedNodes = importedTb.nodes as TopologyNodeInput[];
 
 /**
- * Batch House — second branch, fully operational (shows multi-building management).
- * FILL IN: real batch plant equipment tags when available.
+ * Batch House — distribution cabinet + terminal boxes from CSV import.
+ * Power feeders to each TB: add manually when cable tags are known (RelatedCable column).
  */
 export const batchHouseInstallation: SiteInstallation = {
   id: 'batch-house',
@@ -20,7 +23,7 @@ export const batchHouseInstallation: SiteInstallation = {
         zone: 'batch-house-ground',
         floor: 'Ground',
         elevation: '0 m',
-        area: 'Batch hall — main feed',
+        area: 'Batch hall — main LV feed',
         gridRef: 'BH-DC-01',
       },
       externalRefs: { osapiensAssetId: 'AST-BH-DC-01' },
@@ -30,123 +33,26 @@ export const batchHouseInstallation: SiteInstallation = {
         { id: 'dcbh2', text: 'Measure output bus: 400 V ±2%.' },
       ],
     },
-    {
-      id: 'JB-BH-01',
-      name: 'Junction Box BH-JB-01',
-      assetType: 'junction-box',
-      layer: 'junction',
-      status: 'operational',
-      layout: { building: 'batch-house', branchIndex: 0 },
-      physicalLocation: {
-        building: 'batch-house',
-        zone: 'batch-house-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Mixer line M-01',
-        gridRef: 'BH-JB-01',
-      },
-      specs: { protection: 'IP65' },
-      troubleshootingSteps: [{ id: 'jbbh1', text: 'Verify input voltage: 400 V.' }],
-    },
-    {
-      id: 'JB-BH-02',
-      name: 'Junction Box BH-JB-02',
-      assetType: 'junction-box',
-      layer: 'junction',
-      status: 'operational',
-      layout: { building: 'batch-house', branchIndex: 1 },
-      physicalLocation: {
-        building: 'batch-house',
-        zone: 'batch-house-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Conveyor CV-01',
-        gridRef: 'BH-JB-02',
-      },
-      specs: { protection: 'IP65' },
-      troubleshootingSteps: [{ id: 'jbbh2', text: 'Check terminal torque: 2.5 Nm.' }],
-    },
-    {
-      id: 'M-BH-MIXER',
-      name: 'Batch Mixer M-01',
-      assetType: 'motor',
-      layer: 'load',
-      status: 'operational',
-      layout: { building: 'batch-house', branchIndex: 0 },
-      physicalLocation: {
-        building: 'batch-house',
-        zone: 'batch-house-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Mixer platform',
-        gridRef: 'BH-M-M01',
-      },
-      specs: { voltage: '400V AC', power: '18 kW', manufacturer: 'SEW' },
-      troubleshootingSteps: [{ id: 'mbh1', text: 'Check VFD status on mixer panel.' }],
-    },
-    {
-      id: 'M-BH-CONV',
-      name: 'Batch Conveyor CV-01',
-      assetType: 'motor',
-      layer: 'load',
-      status: 'operational',
-      layout: { building: 'batch-house', branchIndex: 1 },
-      physicalLocation: {
-        building: 'batch-house',
-        zone: 'batch-house-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Material feed line',
-        gridRef: 'BH-M-CV01',
-      },
-      specs: { voltage: '400V AC', power: '11 kW', manufacturer: 'SEW' },
-      troubleshootingSteps: [{ id: 'mbh2', text: 'Check conveyor drive thermal overload.' }],
-    },
+    ...importedNodes,
   ],
   edges: [
     {
-      id: 'PC-BH-JB1',
-      name: 'Cable PC-BH-JB1',
+      id: 'PC-BH-TB10',
+      name: 'Feeder DC-BH-01 → TB10',
       source: 'DC-BH-01',
-      target: 'JB-BH-01',
+      target: 'TB10',
       edgeType: 'power',
       status: 'operational',
-      specs: { crossSection: '4×10 mm²', length: '12 m', voltage: '400V AC' },
-      route: { pathType: 'cable-tray', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'PC-BH-JB2',
-      name: 'Cable PC-BH-JB2',
-      source: 'DC-BH-01',
-      target: 'JB-BH-02',
-      edgeType: 'power',
-      status: 'operational',
-      specs: { crossSection: '4×6 mm²', length: '18 m', voltage: '400V AC' },
-      route: { pathType: 'cable-tray', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'PC-BH-M01',
-      name: 'Motor cable PC-BH-M01',
-      source: 'JB-BH-01',
-      target: 'M-BH-MIXER',
-      edgeType: 'power',
-      status: 'operational',
-      specs: { crossSection: '4×6 mm²', length: '2 m', voltage: '400V AC' },
-      route: { pathType: 'cable-tray', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'PC-BH-M02',
-      name: 'Motor cable PC-BH-M02',
-      source: 'JB-BH-02',
-      target: 'M-BH-CONV',
-      edgeType: 'power',
-      status: 'operational',
-      specs: { crossSection: '4×4 mm²', length: '3 m', voltage: '400V AC' },
+      specs: {
+        crossSection: 'FILL from as-built',
+        length: 'FILL m',
+        voltage: '400V AC',
+        notes: 'Link other TB feeders when cable tags are added to CSV RelatedCable column',
+      },
       route: { pathType: 'cable-tray', spansBuildings: false },
       troubleshootingSteps: [],
     },
   ],
 };
+
+export const batchHouseImportMeta = importedTb.meta;

@@ -8,6 +8,7 @@ import { BUILDINGS } from '@/data/buildings';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
 import { ASSET_CONFIG, SPEC_LABELS, ZONE_CONFIG } from '@/lib/zoneConfig';
 import { getCascadeTargets } from '@/lib/troubleshooting';
+import { PLC_ITEM_GROUPS, type TerminalBoxDetail } from '@/types/terminalBox';
 
 interface DetailDrawerProps {
   element: TopologyNode | TopologyEdge | null;
@@ -227,6 +228,10 @@ export function DetailDrawer({
                     );
                   })()}
                 </Section>
+              )}
+
+              {!isEdge && (element as TopologyNode).terminalBox && (
+                <TerminalBoxSection detail={(element as TopologyNode).terminalBox!} />
               )}
 
               {isEdge && (element as TopologyEdge).route?.spansBuildings && (
@@ -472,6 +477,65 @@ export function DetailDrawer({
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+function TerminalBoxSection({ detail }: { detail: TerminalBoxDetail }) {
+  const { summary, items } = detail;
+  const plcItems = items.filter((i) => PLC_ITEM_GROUPS.includes(i.itemGroup));
+
+  return (
+    <Section title="Terminal box inventory (imported)" icon="⬡">
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        {Object.entries(summary.byGroup).map(([group, count]) => (
+          <div
+            key={group}
+            className="px-2 py-1.5 rounded text-[10px]"
+            style={{
+              background: PLC_ITEM_GROUPS.includes(group as typeof PLC_ITEM_GROUPS[number])
+                ? 'rgba(56, 189, 248, 0.06)'
+                : 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.06)',
+            }}
+          >
+            <span className="font-bold uppercase text-slate-500">{group}</span>
+            <span className="ml-2 font-mono text-slate-300">{count}</span>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-[10px] text-slate-500 mb-2">
+        {summary.powerItemCount} power-layer · {summary.plcItemCount} PLC-layer (signal map — coming soon)
+      </p>
+
+      {summary.drawingReferences.length > 0 && (
+        <p className="text-[10px] text-slate-400 mb-3">
+          Drawings: {summary.drawingReferences.join(', ')}
+        </p>
+      )}
+
+      {plcItems.length > 0 && (
+        <div
+          className="rounded-lg p-2.5 max-h-32 overflow-y-auto"
+          style={{
+            background: 'rgba(56, 189, 248, 0.04)',
+            border: '1px solid rgba(56, 189, 248, 0.15)',
+          }}
+        >
+          <div className="text-[9px] font-bold tracking-widest uppercase text-sky-400 mb-1.5">
+            PLC terminals (stored, not on power map)
+          </div>
+          {plcItems.slice(0, 8).map((item) => (
+            <div key={item.title} className="text-[10px] text-slate-500 font-mono truncate">
+              {item.itemId} · {item.equipmentClass}
+            </div>
+          ))}
+          {plcItems.length > 8 && (
+            <div className="text-[9px] text-slate-600 mt-1">+{plcItems.length - 8} more</div>
+          )}
+        </div>
+      )}
+    </Section>
   );
 }
 

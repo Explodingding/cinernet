@@ -1,3 +1,5 @@
+import type { TerminalBoxDetail } from '@/types/terminalBox';
+
 export type AssetType =
   | 'mv-feed'
   | 'mv-switchgear'
@@ -94,9 +96,13 @@ export interface TopologyNodeInput {
   troubleshootingSteps: TroubleshootingStep[];
   externalRefs?: ExternalRefs;
   upstreamHint?: string;
+  /** Populated from CSV import — internal terminals & commissioning items */
+  terminalBox?: TerminalBoxDetail;
+  /** Skip auto-layout (e.g. grid of many terminal boxes) */
+  positionOverride?: { x: number; y: number };
 }
 
-export interface TopologyNode extends Omit<TopologyNodeInput, 'layout'> {
+export interface TopologyNode extends Omit<TopologyNodeInput, 'layout' | 'positionOverride'> {
   position: { x: number; y: number };
 }
 

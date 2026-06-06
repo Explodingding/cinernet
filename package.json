@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "import:tb": "node scripts/import-terminal-boxes.mjs",
+    "analyze:tb": "node scripts/analyze-tb-csv.mjs"
   },
   "dependencies": {
     "@xyflow/react": "^12.11.0",
