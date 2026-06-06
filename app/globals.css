@@ -103,6 +103,12 @@ body {
   50% { opacity: 0.5; transform: scale(0.85); }
 }
 
+/* Dropdown panel slide-in */
+@keyframes panel-slide-down {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ── React Flow overrides ── */
 
 .react-flow {

@@ -4,11 +4,7 @@ import { useState, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
-import { BrandHeader } from '@/components/layout/BrandHeader';
-import { KpiBar } from '@/components/layout/KpiBar';
-import { AlertBanner } from '@/components/layout/AlertBanner';
-import { StatusFilterBar } from '@/components/topology/StatusFilterBar';
-import { BuildingFilterBar } from '@/components/topology/BuildingFilterBar';
+import { TopBar } from '@/components/layout/TopBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
 import { Toast } from '@/components/ui/Toast';
 import { getCascadeTargets } from '@/lib/troubleshooting';
@@ -25,7 +21,7 @@ function MapLoading() {
     <div className="w-full h-full flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <div
-          className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin"
+          className="w-10 h-10 rounded-full border-2 animate-spin"
           style={{ borderColor: '#34d399', borderTopColor: 'transparent' }}
         />
         <span
@@ -50,6 +46,7 @@ export default function Dashboard() {
   const [buildingFilter, setBuildingFilter] = useState<BuildingFilter>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // All nodes/edges with status overrides applied (catalog = full set, no layout)
   const catalogNodes = useMemo(
     () =>
       topologyNodeInputs.map((n) => ({
@@ -68,14 +65,7 @@ export default function Dashboard() {
     [edgeStatuses]
   );
 
-  const kpiNodes = useMemo(
-    () =>
-      catalogNodes.map(
-        (n) => ({ ...n, position: { x: 0, y: 0 } }) as TopologyNode
-      ),
-    [catalogNodes]
-  );
-
+  // Positioned, filtered nodes/edges for the current view
   const { nodes: visibleNodes, edges: visibleEdges } = useMemo(
     () =>
       prepareMapTopology(topologyNodeInputs, topologyEdges, buildingFilter, {
@@ -85,11 +75,26 @@ export default function Dashboard() {
     [buildingFilter, nodeStatuses, edgeStatuses]
   );
 
+  // KPI counts across the full catalog (not just visible)
+  const kpiStats = useMemo(() => {
+    const all = [...catalogNodes, ...catalogEdges] as { status: Status }[];
+    return {
+      total: all.length,
+      operational: all.filter((x) => x.status === 'operational').length,
+      investigation: all.filter((x) => x.status === 'investigation').length,
+      fault: all.filter((x) => x.status === 'fault').length,
+    };
+  }, [catalogNodes, catalogEdges]);
+
   const faultNodes = useMemo(
-    () => kpiNodes.filter((n) => n.status === 'fault'),
-    [kpiNodes]
+    () =>
+      catalogNodes
+        .filter((n) => n.status === 'fault')
+        .map((n) => ({ ...n, position: { x: 0, y: 0 } }) as TopologyNode),
+    [catalogNodes]
   );
 
+  // Resolve the selected element with current status + position
   const selectedWithStatus = useMemo(() => {
     if (!selected) return null;
     if (selected.type === 'node') {
@@ -97,10 +102,7 @@ export default function Dashboard() {
       const laid = visibleNodes.find((n) => n.id === selected.data.id);
       if (!input) return null;
       return {
-        data: {
-          ...input,
-          position: laid?.position ?? { x: 0, y: 0 },
-        } as TopologyNode,
+        data: { ...input, position: laid?.position ?? { x: 0, y: 0 } } as TopologyNode,
         type: 'node' as const,
       };
     }
@@ -116,25 +118,25 @@ export default function Dashboard() {
     setSelected({ data: edge, type: 'edge' });
   }, []);
 
-  const handleClose = useCallback(() => {
-    setSelected(null);
-  }, []);
+  const handleClose = useCallback(() => setSelected(null), []);
 
-  const handleAlertClick = useCallback(
+  const handleFaultNodeClick = useCallback(
     (nodeId: string) => {
-      const node = kpiNodes.find((n) => n.id === nodeId);
-      if (node) setSelected({ data: node, type: 'node' });
+      const input = catalogNodes.find((n) => n.id === nodeId);
+      if (input) {
+        setSelected({
+          data: { ...input, position: { x: 0, y: 0 } } as TopologyNode,
+          type: 'node',
+        });
+      }
     },
-    [kpiNodes]
+    [catalogNodes]
   );
 
   const handleStatusChange = useCallback(
     (id: string, type: 'node' | 'edge', newStatus: Status) => {
-      if (type === 'node') {
-        setNodeStatuses((prev) => ({ ...prev, [id]: newStatus }));
-      } else {
-        setEdgeStatuses((prev) => ({ ...prev, [id]: newStatus }));
-      }
+      if (type === 'node') setNodeStatuses((p) => ({ ...p, [id]: newStatus }));
+      else setEdgeStatuses((p) => ({ ...p, [id]: newStatus }));
     },
     []
   );
@@ -144,24 +146,21 @@ export default function Dashboard() {
       if (type === 'node') {
         setNodeStatuses((prev) => {
           const next: Record<string, Status> = { ...prev, [id]: 'operational' };
-          const cascade = getCascadeTargets(id);
-          cascade.nodes.forEach((nodeId) => {
-            next[nodeId] = 'operational';
+          getCascadeTargets(id).nodes.forEach((nid) => {
+            next[nid] = 'operational';
           });
           return next;
         });
-        const cascade = getCascadeTargets(id);
-        if (cascade.edges.length > 0) {
+        const { edges: cascadeEdges } = getCascadeTargets(id);
+        if (cascadeEdges.length) {
           setEdgeStatuses((prev) => {
-            const next: Record<string, Status> = { ...prev };
-            cascade.edges.forEach((edgeId) => {
-              next[edgeId] = 'operational';
-            });
+            const next = { ...prev };
+            cascadeEdges.forEach((eid) => { next[eid] = 'operational'; });
             return next;
           });
         }
       } else {
-        setEdgeStatuses((prev) => ({ ...prev, [id]: 'operational' }));
+        setEdgeStatuses((p) => ({ ...p, [id]: 'operational' }));
       }
     },
     []
@@ -172,24 +171,25 @@ export default function Dashboard() {
     window.setTimeout(() => setToastMessage(null), 3200);
   }, []);
 
-  const selectedId = selectedWithStatus?.data.id ?? null;
-
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <BrandHeader />
-      <KpiBar nodes={kpiNodes} edges={catalogEdges} />
-      <AlertBanner faultNodes={faultNodes} onNodeClick={handleAlertClick} />
-      <BuildingFilterBar
-        activeBuilding={buildingFilter}
+      {/* Single slim top bar — all controls live here */}
+      <TopBar
+        faultNodes={faultNodes}
+        buildingFilter={buildingFilter}
         onBuildingChange={setBuildingFilter}
+        statusFilter={statusFilter}
+        onStatusFilterChange={setStatusFilter}
+        onFaultNodeClick={handleFaultNodeClick}
+        kpiStats={kpiStats}
       />
-      <StatusFilterBar activeFilter={statusFilter} onFilterChange={setStatusFilter} />
 
+      {/* Map fills all remaining space */}
       <div className="flex-1 relative overflow-hidden min-h-0">
         <TopologyMap
           nodes={visibleNodes}
           edges={visibleEdges}
-          selectedId={selectedId}
+          selectedId={selectedWithStatus?.data.id ?? null}
           buildingFilter={buildingFilter}
           onNodeSelect={handleNodeSelect}
           onEdgeSelect={handleEdgeSelect}
