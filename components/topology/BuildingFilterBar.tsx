@@ -2,8 +2,9 @@
 
 import { BUILDINGS, SITE_BUILDING_ORDER } from '@/data/buildings';
 import type { BuildingId } from '@/types/topology';
+import type { BuildingFilter } from '@/lib/topologyFilters';
 
-export type BuildingFilter = BuildingId | 'all';
+export type { BuildingFilter };
 
 interface BuildingFilterBarProps {
   activeBuilding: BuildingFilter;

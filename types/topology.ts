@@ -98,7 +98,8 @@ export interface TopologyNodeInput {
   upstreamHint?: string;
   /** Populated from CSV import — internal terminals & commissioning items */
   terminalBox?: TerminalBoxDetail;
-  /** Skip auto-layout (e.g. grid of many terminal boxes) */
+  /** building-detail nodes (e.g. TB grid) hidden on full-site overview */
+  mapScope?: 'site' | 'building-detail' | 'overview-only';
   positionOverride?: { x: number; y: number };
 }
 

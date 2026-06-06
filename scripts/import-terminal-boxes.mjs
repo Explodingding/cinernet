@@ -122,6 +122,7 @@ function buildNode(tbId, project, items, branchIndex) {
     layer: 'junction',
     status: anyFault ? 'fault' : anyOpen ? 'investigation' : 'operational',
     layout: { building: 'batch-house', branchIndex },
+    mapScope: 'building-detail',
     physicalLocation: {
       building: 'batch-house',
       zone: 'batch-house-ground',

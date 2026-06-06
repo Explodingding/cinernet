@@ -46,3 +46,6 @@ export const BUILDINGS: Record<BuildingId, BuildingConfig> = {
 };
 
 export const SITE_BUILDING_ORDER: BuildingId[] = ['utility', 'furnace-10', 'batch-house'];
+
+/** Left-to-right column order on the map canvas */
+export const MAP_COLUMN_ORDER: BuildingId[] = ['furnace-10', 'utility', 'batch-house'];

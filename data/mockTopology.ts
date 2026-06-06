@@ -2,8 +2,7 @@ import { utilityInstallation } from './installations/utility';
 import { furnace10Installation } from './installations/furnace-10';
 import { batchHouseInstallation } from './installations/batch-house';
 import { siteFeederEdges } from './installations/site-feeders';
-import { layoutNodes } from '@/lib/siteLayout';
-import type { SiteInstallation } from '@/types/topology';
+import type { SiteInstallation, TopologyNodeInput } from '@/types/topology';
 
 export const SITE_INSTALLATIONS: SiteInstallation[] = [
   utilityInstallation,
@@ -11,13 +10,12 @@ export const SITE_INSTALLATIONS: SiteInstallation[] = [
   batchHouseInstallation,
 ];
 
-const allNodeInputs = SITE_INSTALLATIONS.flatMap((i) => i.nodes);
-const allEdgeInputs = [
+export const topologyNodeInputs: TopologyNodeInput[] =
+  SITE_INSTALLATIONS.flatMap((i) => i.nodes);
+
+export const topologyEdges = [
   ...SITE_INSTALLATIONS.flatMap((i) => i.edges),
   ...siteFeederEdges,
 ];
-
-export const topologyNodes = layoutNodes(allNodeInputs);
-export const topologyEdges = allEdgeInputs;
 
 export { utilityInstallation, furnace10Installation, batchHouseInstallation, siteFeederEdges };

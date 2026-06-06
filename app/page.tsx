@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { topologyNodes, topologyEdges } from '@/data/mockTopology';
+import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { BrandHeader } from '@/components/layout/BrandHeader';
 import { KpiBar } from '@/components/layout/KpiBar';
@@ -12,8 +12,8 @@ import { BuildingFilterBar } from '@/components/topology/BuildingFilterBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
 import { Toast } from '@/components/ui/Toast';
 import { getCascadeTargets } from '@/lib/troubleshooting';
-import { filterTopologyByBuilding } from '@/lib/topologyFilters';
-import type { BuildingFilter } from '@/components/topology/BuildingFilterBar';
+import { prepareMapTopology } from '@/lib/topologyFilters';
+import type { BuildingFilter } from '@/lib/topologyFilters';
 
 const TopologyMap = dynamic(
   () => import('@/components/topology/TopologyMap').then((m) => m.TopologyMap),
@@ -50,16 +50,16 @@ export default function Dashboard() {
   const [buildingFilter, setBuildingFilter] = useState<BuildingFilter>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const effectiveNodes = useMemo(
+  const catalogNodes = useMemo(
     () =>
-      topologyNodes.map((n) => ({
+      topologyNodeInputs.map((n) => ({
         ...n,
         status: nodeStatuses[n.id] ?? n.status,
       })),
     [nodeStatuses]
   );
 
-  const effectiveEdges = useMemo(
+  const catalogEdges = useMemo(
     () =>
       topologyEdges.map((e) => ({
         ...e,
@@ -68,25 +68,45 @@ export default function Dashboard() {
     [edgeStatuses]
   );
 
+  const kpiNodes = useMemo(
+    () =>
+      catalogNodes.map(
+        (n) => ({ ...n, position: { x: 0, y: 0 } }) as TopologyNode
+      ),
+    [catalogNodes]
+  );
+
   const { nodes: visibleNodes, edges: visibleEdges } = useMemo(
-    () => filterTopologyByBuilding(effectiveNodes, effectiveEdges, buildingFilter),
-    [effectiveNodes, effectiveEdges, buildingFilter]
+    () =>
+      prepareMapTopology(topologyNodeInputs, topologyEdges, buildingFilter, {
+        nodes: nodeStatuses,
+        edges: edgeStatuses,
+      }),
+    [buildingFilter, nodeStatuses, edgeStatuses]
   );
 
   const faultNodes = useMemo(
-    () => effectiveNodes.filter((n) => n.status === 'fault'),
-    [effectiveNodes]
+    () => kpiNodes.filter((n) => n.status === 'fault'),
+    [kpiNodes]
   );
 
   const selectedWithStatus = useMemo(() => {
     if (!selected) return null;
     if (selected.type === 'node') {
-      const n = effectiveNodes.find((n) => n.id === selected.data.id);
-      return n ? { data: n, type: 'node' as const } : null;
+      const input = catalogNodes.find((n) => n.id === selected.data.id);
+      const laid = visibleNodes.find((n) => n.id === selected.data.id);
+      if (!input) return null;
+      return {
+        data: {
+          ...input,
+          position: laid?.position ?? { x: 0, y: 0 },
+        } as TopologyNode,
+        type: 'node' as const,
+      };
     }
-    const e = effectiveEdges.find((e) => e.id === selected.data.id);
+    const e = catalogEdges.find((e) => e.id === selected.data.id);
     return e ? { data: e, type: 'edge' as const } : null;
-  }, [selected, effectiveNodes, effectiveEdges]);
+  }, [selected, catalogNodes, catalogEdges, visibleNodes]);
 
   const handleNodeSelect = useCallback((node: TopologyNode) => {
     setSelected({ data: node, type: 'node' });
@@ -102,10 +122,10 @@ export default function Dashboard() {
 
   const handleAlertClick = useCallback(
     (nodeId: string) => {
-      const node = effectiveNodes.find((n) => n.id === nodeId);
+      const node = kpiNodes.find((n) => n.id === nodeId);
       if (node) setSelected({ data: node, type: 'node' });
     },
-    [effectiveNodes]
+    [kpiNodes]
   );
 
   const handleStatusChange = useCallback(
@@ -157,7 +177,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <BrandHeader />
-      <KpiBar nodes={effectiveNodes} edges={effectiveEdges} />
+      <KpiBar nodes={kpiNodes} edges={catalogEdges} />
       <AlertBanner faultNodes={faultNodes} onNodeClick={handleAlertClick} />
       <BuildingFilterBar
         activeBuilding={buildingFilter}
@@ -170,6 +190,7 @@ export default function Dashboard() {
           nodes={visibleNodes}
           edges={visibleEdges}
           selectedId={selectedId}
+          buildingFilter={buildingFilter}
           onNodeSelect={handleNodeSelect}
           onEdgeSelect={handleEdgeSelect}
           statusFilter={statusFilter}

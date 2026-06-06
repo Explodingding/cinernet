@@ -1,6 +1,6 @@
 {
   "meta": {
-    "importedAt": "2026-06-06T00:51:38.243Z",
+    "importedAt": "2026-06-06T01:42:21.573Z",
     "sourceFile": "data\\source\\all_TB_commissioning_items.csv",
     "rowCount": 660,
     "terminalBoxCount": 20,
@@ -18,6 +18,7 @@
         "building": "batch-house",
         "branchIndex": 1
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -897,6 +898,7 @@
         "building": "batch-house",
         "branchIndex": 2
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -1639,6 +1641,7 @@
         "building": "batch-house",
         "branchIndex": 3
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -3690,6 +3693,7 @@
         "building": "batch-house",
         "branchIndex": 4
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -4432,6 +4436,7 @@
         "building": "batch-house",
         "branchIndex": 5
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -5157,6 +5162,7 @@
         "building": "batch-house",
         "branchIndex": 6
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -5916,6 +5922,7 @@
         "building": "batch-house",
         "branchIndex": 7
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -7287,6 +7294,7 @@
         "building": "batch-house",
         "branchIndex": 8
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -7842,6 +7850,7 @@
         "building": "batch-house",
         "branchIndex": 9
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -8415,6 +8424,7 @@
         "building": "batch-house",
         "branchIndex": 10
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -9004,6 +9014,7 @@
         "building": "batch-house",
         "branchIndex": 11
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -9474,6 +9485,7 @@
         "building": "batch-house",
         "branchIndex": 12
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -9992,6 +10004,7 @@
         "building": "batch-house",
         "branchIndex": 13
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -10661,6 +10674,7 @@
         "building": "batch-house",
         "branchIndex": 14
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -10850,6 +10864,7 @@
         "building": "batch-house",
         "branchIndex": 15
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -11060,6 +11075,7 @@
         "building": "batch-house",
         "branchIndex": 16
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -11371,6 +11387,7 @@
         "building": "batch-house",
         "branchIndex": 17
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -12006,6 +12023,7 @@
         "building": "batch-house",
         "branchIndex": 18
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -12437,6 +12455,7 @@
         "building": "batch-house",
         "branchIndex": 19
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
@@ -12563,6 +12582,7 @@
         "building": "batch-house",
         "branchIndex": 20
       },
+      "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",

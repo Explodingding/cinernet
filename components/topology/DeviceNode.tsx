@@ -82,7 +82,8 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
 }
 
 export function DeviceNode({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as TopologyNode;
+  const nodeData = data as unknown as TopologyNode & { compact?: boolean };
+  const compact = Boolean(nodeData.compact);
   const cfg = STATUS_CONFIG[nodeData.status];
   const zoneCfg = ZONE_CONFIG[nodeData.physicalLocation.zone];
 
@@ -97,22 +98,24 @@ export function DeviceNode({ data, selected }: NodeProps) {
     ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
     : `0 0 8px ${cfg.glowColor}, 0 4px 16px rgba(0,0,0,0.5)`;
 
+  const width = compact ? 148 : 176;
+  const minHeight = compact ? 72 : 96;
+
   return (
     <div
       className="flex"
       style={{
-        width: 176,
-        minHeight: 96,
+        width,
+        minHeight,
         animation,
         cursor: 'pointer',
         touchAction: 'manipulation',
       }}
     >
-      {/* Zone colour stripe — physical location */}
       <div
         className="shrink-0 rounded-l-[10px]"
         style={{
-          width: 5,
+          width: compact ? 4 : 5,
           background: `linear-gradient(to bottom, ${zoneCfg.color}, ${zoneCfg.color}44)`,
           boxShadow: `0 0 8px ${zoneCfg.color}40`,
         }}
@@ -135,34 +138,39 @@ export function DeviceNode({ data, selected }: NodeProps) {
           }}
         />
 
-        <div className="px-2.5 py-2">
-          <div className="flex items-center gap-2 mb-1">
-            <AssetIcon type={nodeData.assetType} color={cfg.color} />
+        <div className={compact ? 'px-2 py-1.5' : 'px-2.5 py-2'}>
+          <div className="flex items-center gap-1.5 mb-0.5">
+            {!compact && <AssetIcon type={nodeData.assetType} color={cfg.color} />}
             <span
               className="text-[11px] font-bold tracking-widest truncate"
               style={{
                 fontFamily: 'var(--font-jetbrains-mono)',
                 color: cfg.color,
+                fontSize: compact ? 10 : 11,
               }}
             >
               {nodeData.id}
             </span>
           </div>
 
-          <div className="text-[10px] font-medium text-slate-200 leading-snug mb-1.5 line-clamp-2">
-            {nodeData.name}
-          </div>
+          {!compact && (
+            <div className="text-[10px] font-medium text-slate-200 leading-snug mb-1.5 line-clamp-2">
+              {nodeData.name}
+            </div>
+          )}
 
-          <div
-            className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-semibold mb-1.5"
-            style={{
-              background: zoneCfg.bgColor,
-              border: `1px solid ${zoneCfg.borderColor}`,
-              color: zoneCfg.color,
-            }}
-          >
-            {nodeData.physicalLocation.elevation} · {nodeData.physicalLocation.floor}
-          </div>
+          {!compact && (
+            <div
+              className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-semibold mb-1.5"
+              style={{
+                background: zoneCfg.bgColor,
+                border: `1px solid ${zoneCfg.borderColor}`,
+                color: zoneCfg.color,
+              }}
+            >
+              {nodeData.physicalLocation.elevation} · {nodeData.physicalLocation.floor}
+            </div>
+          )}
 
           <div
             className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full"
@@ -174,7 +182,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: cfg.color }} />
             <span
               className="text-[9px] font-semibold tracking-wider uppercase"
-              style={{ color: cfg.color }}
+              style={{ color: cfg.color, fontSize: compact ? 8 : 9 }}
             >
               {cfg.label}
             </span>
@@ -182,7 +190,6 @@ export function DeviceNode({ data, selected }: NodeProps) {
         </div>
       </div>
 
-      {/* Vertical tree: power in from bottom, out to top */}
       <Handle type="target" position={Position.Bottom} style={{ bottom: -4 }} />
       <Handle type="source" position={Position.Top} style={{ top: -4 }} />
     </div>
