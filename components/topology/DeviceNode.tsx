@@ -190,8 +190,16 @@ export function DeviceNode({ data, selected }: NodeProps) {
         </div>
       </div>
 
-      <Handle type="target" position={Position.Bottom} style={{ bottom: -4 }} />
-      <Handle type="source" position={Position.Top} style={{ top: -4 }} />
+      {/* All four walls registered so React Flow resolves edge endpoints;
+          visual path is overridden in PowerCableEdge via useInternalNode */}
+      <Handle type="target" position={Position.Top}    id="t-top"    style={{ top: -4,     opacity: 0 }} />
+      <Handle type="target" position={Position.Bottom} id="t-bottom" style={{ bottom: -4,  opacity: 0 }} />
+      <Handle type="target" position={Position.Left}   id="t-left"   style={{ left: -4,    opacity: 0 }} />
+      <Handle type="target" position={Position.Right}  id="t-right"  style={{ right: -4,   opacity: 0 }} />
+      <Handle type="source" position={Position.Top}    id="s-top"    style={{ top: -4,     opacity: 0 }} />
+      <Handle type="source" position={Position.Bottom} id="s-bottom" style={{ bottom: -4,  opacity: 0 }} />
+      <Handle type="source" position={Position.Left}   id="s-left"   style={{ left: -4,    opacity: 0 }} />
+      <Handle type="source" position={Position.Right}  id="s-right"  style={{ right: -4,   opacity: 0 }} />
     </div>
   );
 }
