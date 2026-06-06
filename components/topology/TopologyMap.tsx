@@ -6,7 +6,6 @@ import {
   Background,
   BackgroundVariant,
   Controls,
-  MiniMap,
   type Node,
   type Edge,
   type NodeTypes,
@@ -19,7 +18,6 @@ import { ZoneLegend } from './ZoneLegend';
 import { PowerCableEdge } from './PowerCableEdge';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
-import { ZONE_CONFIG } from '@/lib/zoneConfig';
 import type { BuildingFilter } from '@/lib/topologyFilters';
 
 const nodeTypes: NodeTypes = {
@@ -144,24 +142,6 @@ export function TopologyMap({
           size={1}
           color="#1e293b"
           style={{ opacity: 0.4 }}
-        />
-
-        <MiniMap
-          nodeColor={(node: Node) => {
-            if (node.id.startsWith('__bg-')) return 'transparent';
-            const d = node.data as unknown as TopologyNode | undefined;
-            if (d?.physicalLocation?.zone) {
-              return ZONE_CONFIG[d.physicalLocation.zone].color;
-            }
-            return STATUS_CONFIG[d?.status ?? 'operational'].color;
-          }}
-          style={{
-            background: '#0a0f1a',
-            border: '1px solid #1e293b',
-          }}
-          maskColor="rgba(10, 15, 26, 0.65)"
-          pannable
-          zoomable
         />
 
         <Controls showInteractive={false} />
