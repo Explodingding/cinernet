@@ -42,6 +42,22 @@ export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
     borderColor: 'rgba(56, 189, 248, 0.25)',
     building: 'furnace-10',
   },
+  'furnace-20-ground': {
+    label: 'Furnace 20 — Ground Floor',
+    shortLabel: 'F20 G',
+    color: '#f59e0b',
+    bgColor: 'rgba(245, 158, 11, 0.06)',
+    borderColor: 'rgba(245, 158, 11, 0.25)',
+    building: 'furnace-20',
+  },
+  'furnace-20-elevated': {
+    label: 'Furnace 20 — Elevated (+5 m)',
+    shortLabel: 'F20 +5',
+    color: '#fbbf24',
+    bgColor: 'rgba(251, 191, 36, 0.06)',
+    borderColor: 'rgba(251, 191, 36, 0.25)',
+    building: 'furnace-20',
+  },
   'batch-house-ground': {
     label: 'Batch House — Ground Floor',
     shortLabel: 'BH G',

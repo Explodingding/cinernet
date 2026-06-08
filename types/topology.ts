@@ -9,7 +9,7 @@ export type AssetType =
   | 'junction-box'
   | 'motor';
 
-export type BuildingId = 'utility' | 'furnace-10' | 'batch-house';
+export type BuildingId = 'utility' | 'furnace-10' | 'furnace-20' | 'batch-house';
 
 export type TopologyLayer =
   | 'mv-feed'
@@ -26,6 +26,8 @@ export type LocationZone =
   | 'utility-ground'
   | 'furnace-10-ground'
   | 'furnace-10-elevated'
+  | 'furnace-20-ground'
+  | 'furnace-20-elevated'
   | 'batch-house-ground';
 
 export type Status = 'operational' | 'investigation' | 'fault';
@@ -85,6 +87,7 @@ export interface CableSpecs {
   maxLoad?: string;
   length?: string;
   voltage?: string;
+  power?: string;
   installationType?: string;
   notes?: string;
 }

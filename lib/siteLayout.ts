@@ -77,8 +77,9 @@ export interface BuildingColConfig {
 
 export const BUILDING_COLS: BuildingColConfig[] = [
   { id: 'furnace-10',  xCenter: 300,  width: 440 },
-  { id: 'utility',     xCenter: 760,  width: 440 },
-  { id: 'batch-house', xCenter: 1250, width: 520 },
+  { id: 'utility',     xCenter: 820,  width: 580 },
+  { id: 'furnace-20',  xCenter: 1370, width: 440 },
+  { id: 'batch-house', xCenter: 1870, width: 440 },
 ];
 
 export const BUILDING_COL_MAP = Object.fromEntries(
