@@ -27,6 +27,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'mv-feed',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'mv',
       layout: { building: 'utility' },
       physicalLocation: {
         building: 'utility',
@@ -56,6 +57,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'mv-switchgear',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'mv',
       layout: { building: 'utility', branchIndex: 0 },
       physicalLocation: {
         building: 'utility',
@@ -87,6 +89,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'mv-switchgear',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'mv',
       layout: { building: 'utility', branchIndex: 1 },
       physicalLocation: {
         building: 'utility',
@@ -117,6 +120,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'mv-switchgear',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'mv',
       layout: { building: 'utility', branchIndex: 2 },
       physicalLocation: {
         building: 'utility',
@@ -147,6 +151,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 0 },
       physicalLocation: {
         building: 'utility',
@@ -174,6 +179,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 1 },
       physicalLocation: {
         building: 'utility',
@@ -201,6 +207,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 2 },
       physicalLocation: {
         building: 'utility',
@@ -230,6 +237,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 3 },
       physicalLocation: {
         building: 'utility',
@@ -257,6 +265,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 4 },
       physicalLocation: {
         building: 'utility',
@@ -284,6 +293,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 5 },
       physicalLocation: {
         building: 'utility',
@@ -313,6 +323,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'investigation',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 6 },
       physicalLocation: {
         building: 'utility',
@@ -340,6 +351,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 1,
+      subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 7 },
       physicalLocation: {
         building: 'utility',
@@ -361,16 +373,17 @@ export const utilityInstallation: SiteInstallation = {
       ],
     },
 
-    // ── Turbo Compressor MV Transformers (35 → 6 kV) — Tier 2 ──────────────────
-    // branchIndex continues from the last Tier-1 transformer (TR-COMP-LV = 7)
-    // to avoid overlapping with Tier-1 nodes when both tiers are visible.
+    // ── Turbo Compressor MV Transformers (35 → 6 kV) — Tier 3 ──────────────────
+    // displayTier 3: hidden until "All systems" view is selected — 6 kV subsystem
+    // is deferred from the primary 400 V focus.
     {
       id: 'TR-COMP-1',
       name: 'TR Compressor-1 (UT-COMP 4.6-1)',
       assetType: 'transformer',
       layer: 'transformer',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'lv-6kv',
       circuitCount: 0,
       layout: { building: 'utility', branchIndex: 8 },
       physicalLocation: {
@@ -397,7 +410,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'transformer',
       layer: 'transformer',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'lv-6kv',
       layout: { building: 'utility', branchIndex: 9 },
       physicalLocation: {
         building: 'utility',
@@ -422,7 +436,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'transformer',
       layer: 'transformer',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'lv-6kv',
       layout: { building: 'utility', branchIndex: 10 },
       physicalLocation: {
         building: 'utility',
@@ -447,7 +462,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'transformer',
       layer: 'transformer',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'lv-6kv',
       layout: { building: 'utility', branchIndex: 11 },
       physicalLocation: {
         building: 'utility',
@@ -588,7 +604,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'panel',
       layer: 'lv-panel',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'generator',
       layout: { building: 'utility', branchIndex: 4 },
       physicalLocation: {
         building: 'utility',
@@ -614,7 +631,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'motor',
       layer: 'load',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'generator',
       layout: { building: 'utility', branchIndex: 0 },
       physicalLocation: {
         building: 'utility',
@@ -642,7 +660,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'motor',
       layer: 'load',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'generator',
       layout: { building: 'utility', branchIndex: 1 },
       physicalLocation: {
         building: 'utility',
@@ -665,7 +684,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'motor',
       layer: 'load',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'generator',
       layout: { building: 'utility', branchIndex: 2 },
       physicalLocation: {
         building: 'utility',
@@ -687,7 +707,8 @@ export const utilityInstallation: SiteInstallation = {
       assetType: 'motor',
       layer: 'load',
       status: 'operational',
-      displayTier: 2,
+      displayTier: 3,
+      subsystem: 'generator',
       layout: { building: 'utility', branchIndex: 3 },
       physicalLocation: {
         building: 'utility',

@@ -120,6 +120,17 @@ export interface TopologyNodeInput {
   /** Shown as a badge on panel/cabinet cards when downstream circuits are not yet individually modelled */
   circuitCount?: number;
   positionOverride?: { x: number; y: number };
+  /**
+   * Electrical subsystem classification — drives accent colour and the voltage badge
+   * on transformer cards.
+   *   mv        — 35 kV switchgear / MV feed (amber)
+   *   lv-400v   — Standard 400 V supply chain (teal/green)  ← primary focus
+   *   lv-6kv    — 6 kV compressor transformers (purple)
+   *   lv-boost  — Electrode boosting transformers (violet)
+   *   generator — Standby generator system (orange)
+   * Nodes without this field fall back to the zone colour accent.
+   */
+  subsystem?: 'mv' | 'lv-400v' | 'lv-6kv' | 'lv-boost' | 'generator';
 }
 
 export interface TopologyNode extends Omit<TopologyNodeInput, 'layout' | 'positionOverride'> {

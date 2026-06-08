@@ -28,9 +28,9 @@ const EDGE_TYPE_META: Record<EdgeType, { label: string; shortLabel: string; colo
 };
 
 const TIER_META: Record<DepthTier, { label: string; sub: string }> = {
-  1: { label: 'Site',     sub: 'Main power lines' },
-  2: { label: 'Building', sub: 'Distribution cabinets' },
-  3: { label: 'Circuit',  sub: 'Loads & motors' },
+  1: { label: '400V focus', sub: 'MV supply + 400V chain' },
+  2: { label: 'Distribution', sub: '+ MDPs & cabinets' },
+  3: { label: 'All systems', sub: '+ 6kV, generators, circuits' },
 };
 
 interface TopBarProps {

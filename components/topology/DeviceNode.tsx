@@ -82,17 +82,49 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
   }
 }
 
+// ─── Subsystem colour palette ─────────────────────────────────────────────────
+const SUBSYSTEM_ACCENT: Record<string, { color: string; label: string }> = {
+  mv:        { color: '#f59e0b', label: '35 kV' },
+  'lv-400v': { color: '#22d3ee', label: '400 V' },
+  'lv-6kv':  { color: '#a78bfa', label: '6 kV' },
+  'lv-boost':{ color: '#e879f9', label: 'Boost' },
+  generator: { color: '#fb923c', label: 'GEN' },
+};
+
+/** Derive a short output-voltage label for transformer cards */
+function transformerVoltageLabel(subsystem?: string): string | null {
+  if (!subsystem) return null;
+  if (subsystem === 'lv-400v') return '35 → 400 V';
+  if (subsystem === 'lv-6kv')  return '35 → 6 kV';
+  if (subsystem === 'lv-boost') return '35 → Boost';
+  return null;
+}
+
 export function DeviceNode({ data, selected }: NodeProps) {
   const nodeData = data as unknown as TopologyNode & {
     compact?: boolean;
     highlighted?: boolean;
     opened?: boolean;
     derivedStatus?: DerivedStatus | null;
+    subsystem?: string;
   };
   const compact = Boolean(nodeData.compact);
   const derivedStatus = nodeData.derivedStatus ?? null;
   const cfg = STATUS_CONFIG[nodeData.status];
   const zoneCfg = ZONE_CONFIG[nodeData.physicalLocation.zone];
+
+  // Subsystem accent — overrides zone colour for left bar when present
+  const subsysAccent = nodeData.subsystem
+    ? (SUBSYSTEM_ACCENT[nodeData.subsystem] ?? null)
+    : nodeData.layer === 'mv-feed' || nodeData.layer === 'mv-switchgear'
+      ? SUBSYSTEM_ACCENT['mv']
+      : null;
+  const accentColor = subsysAccent?.color ?? zoneCfg.color;
+
+  // Voltage label shown inside transformer cards
+  const voltageLabel = nodeData.layer === 'transformer'
+    ? transformerVoltageLabel(nodeData.subsystem)
+    : null;
 
   // Derived status colours (softer than real faults)
   const derivedColor = derivedStatus === 'derived-fault' ? '#f87171' : '#fbbf24';
@@ -139,8 +171,8 @@ export function DeviceNode({ data, selected }: NodeProps) {
         className="shrink-0 rounded-l-[10px]"
         style={{
           width: compact ? 4 : 5,
-          background: `linear-gradient(to bottom, ${zoneCfg.color}, ${zoneCfg.color}44)`,
-          boxShadow: `0 0 8px ${zoneCfg.color}40`,
+          background: `linear-gradient(to bottom, ${accentColor}, ${accentColor}44)`,
+          boxShadow: `0 0 8px ${accentColor}40`,
         }}
       />
 
@@ -165,7 +197,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
           <div className="flex items-center gap-1.5 mb-0.5">
             {!compact && <AssetIcon type={nodeData.assetType} color={cfg.color} />}
             <span
-              className="text-[11px] font-bold tracking-widest truncate"
+              className="font-bold tracking-widest truncate flex-1"
               style={{
                 fontFamily: 'var(--font-jetbrains-mono)',
                 color: cfg.color,
@@ -174,6 +206,19 @@ export function DeviceNode({ data, selected }: NodeProps) {
             >
               {nodeData.id}
             </span>
+            {subsysAccent && (
+              <span
+                className="shrink-0 rounded px-1 text-[7px] font-bold tracking-widest"
+                style={{
+                  background: `${accentColor}18`,
+                  border: `1px solid ${accentColor}35`,
+                  color: accentColor,
+                  fontFamily: 'var(--font-jetbrains-mono)',
+                }}
+              >
+                {subsysAccent.label}
+              </span>
+            )}
           </div>
 
           {!compact && (
@@ -183,15 +228,30 @@ export function DeviceNode({ data, selected }: NodeProps) {
           )}
 
           {!compact && (
-            <div
-              className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-semibold mb-1.5"
-              style={{
-                background: zoneCfg.bgColor,
-                border: `1px solid ${zoneCfg.borderColor}`,
-                color: zoneCfg.color,
-              }}
-            >
-              {nodeData.physicalLocation.elevation} · {nodeData.physicalLocation.floor}
+            <div className="flex items-center gap-1.5 flex-wrap mb-1.5">
+              <div
+                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-semibold"
+                style={{
+                  background: zoneCfg.bgColor,
+                  border: `1px solid ${zoneCfg.borderColor}`,
+                  color: zoneCfg.color,
+                }}
+              >
+                {nodeData.physicalLocation.elevation} · {nodeData.physicalLocation.floor}
+              </div>
+              {voltageLabel && (
+                <div
+                  className="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-bold tracking-wide"
+                  style={{
+                    background: `${accentColor}14`,
+                    border: `1px solid ${accentColor}40`,
+                    color: accentColor,
+                    fontFamily: 'var(--font-jetbrains-mono)',
+                  }}
+                >
+                  {voltageLabel}
+                </div>
+              )}
             </div>
           )}
 
