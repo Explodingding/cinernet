@@ -16,17 +16,25 @@ const LAYER_RANK: Record<TopologyLayer, number> = {
   'load':          6,
 };
 
-/** Vertical gap between adjacent hierarchy rows (px) */
-const ROW_SPACING = 80;
+/**
+ * Vertical gap between adjacent hierarchy rows (px).
+ *
+ * Node cards are ≈130 px tall.  A spacing of 180 px leaves ≈50 px of clear
+ * canvas between adjacent rows — enough to see cable lines clearly.
+ */
+const ROW_SPACING = 180;
 
 /**
  * Which ranks appear within each floor band.
  * Used to centre the hierarchy inside the band.
+ *
+ * Elevated includes cabinet (rank 4) because HOT-10/HOT-20/HOT-20 are
+ * cabinet-layer nodes physically located at +5 m.
  */
 const BAND_RANK_RANGE: Record<FloorBandId, { min: number; max: number }> = {
-  elevated: { min: 5, max: 6 },  // junction + load only
-  ground:   { min: 1, max: 6 },  // mv-switchgear → load
-  basement: { min: 0, max: 0 },  // mv-feed only
+  elevated: { min: 4, max: 6 },  // cabinet + junction + load at +5 m
+  ground:   { min: 1, max: 6 },  // mv-switchgear → load at ground level
+  basement: { min: 0, max: 0 },  // mv-feed only (basement / substation)
 };
 
 /** Y position of a node given its layer and the floor band it sits in */
@@ -41,11 +49,19 @@ function getLayerY(layer: TopologyLayer, bandId: FloorBandId): number {
 
 // ─── Floor bands (coarse Y positioning by physical elevation) ─────────────────
 //
-//  Band centers and heights are sized to contain all hierarchy rows with padding.
+//  All Y values are recomputed for ROW_SPACING = 180.
 //
-//  Elevated (+5m): junction=220, load=140 → band y: 80–300  → center 190, h 220
-//  Ground   (0m):  mv-sw=860, …, load=460 → band y: 390–930 → center 660, h 540
-//  Basement (−8m): mv-feed=1100            → band y: 1030–1170→ center 1100, h 140
+//  Elevated (+5 m)  ranks 4–6, midRank=5, yCenter=240:
+//    cabinet(4)=420  junction(5)=240  load(6)=60
+//    band spans ≈ −20 to 500  → h=520
+//
+//  Ground (0 m)  ranks 1–6, midRank=3.5, yCenter=1100:
+//    mv-sw(1)=1550  tr(2)=1370  lv-panel(3)=1190
+//    cabinet(4)=1010  junction(5)=830  load(6)=650
+//    band spans ≈ 550 to 1650  → h=1100
+//
+//  Basement (−8 m)  rank 0, yCenter=1850:
+//    mv-feed(0)=1850   band spans ≈ 1740 to 1960  → h=220
 
 export interface FloorBandConfig {
   id: FloorBandId;
@@ -56,9 +72,9 @@ export interface FloorBandConfig {
 }
 
 export const FLOOR_BANDS: FloorBandConfig[] = [
-  { id: 'elevated', label: 'Level +5 m',   elevLabel: 'Mezzanine · +5 m', yCenter: 190,  height: 220 },
-  { id: 'ground',   label: 'Ground floor',  elevLabel: 'Ground · 0 m',     yCenter: 660,  height: 540 },
-  { id: 'basement', label: 'Basement',      elevLabel: 'Basement · −8 m',  yCenter: 1100, height: 140 },
+  { id: 'elevated', label: 'Level +5 m',  elevLabel: 'Mezzanine · +5 m', yCenter: 240,  height: 540  },
+  { id: 'ground',   label: 'Ground floor', elevLabel: 'Ground · 0 m',     yCenter: 1100, height: 1120 },
+  { id: 'basement', label: 'Basement',     elevLabel: 'Basement · −8 m',  yCenter: 1850, height: 240  },
 ];
 
 export type FloorBandId = 'elevated' | 'ground' | 'basement';
