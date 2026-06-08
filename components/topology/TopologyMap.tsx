@@ -10,6 +10,7 @@ import {
   type Edge,
   type NodeTypes,
   type EdgeTypes,
+  type OnNodeDrag,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { DeviceNode } from './DeviceNode';
@@ -37,6 +38,8 @@ interface TopologyMapProps {
   statusFilter: Status | 'all';
   derivedStatuses: DerivedStatuses;
   buildingCols: BuildingColConfig[];
+  /** When true nodes are draggable; drag-stop logs positionOverride snippet to console */
+  layoutMode?: boolean;
 }
 
 export function TopologyMap({
@@ -49,6 +52,7 @@ export function TopologyMap({
   statusFilter,
   derivedStatuses,
   buildingCols,
+  layoutMode = false,
 }: TopologyMapProps) {
   const backgroundCells = useMemo(
     () => buildBackgroundCells(buildingCols),
@@ -68,13 +72,14 @@ export function TopologyMap({
             derivedStatus: derivedStatuses.get(node.id) ?? null,
           },
           selectable: true,
-          draggable: false,
+          draggable: layoutMode,
           selected: node.id === selectedId,
           zIndex: 1,
           style: {
             opacity:
               statusFilter === 'all' || node.status === statusFilter ? 1 : 0.18,
             transition: 'opacity 0.25s ease',
+            cursor: layoutMode ? 'grab' : undefined,
           },
         }) as Node
     );
@@ -119,6 +124,26 @@ export function TopologyMap({
     [onEdgeSelect]
   );
 
+  /**
+   * Layout Mode helper: when a node is dropped, log a ready-to-paste
+   * positionOverride snippet so you can persist the position in the data file.
+   */
+  const onNodeDragStop: OnNodeDrag = useCallback(
+    (_event, node: Node) => {
+      if (!layoutMode || node.id.startsWith('__bg-')) return;
+      const x = Math.round(node.position.x);
+      const y = Math.round(node.position.y);
+      console.info(
+        `%c[Layout] ${node.id}  →  positionOverride: { x: ${x}, y: ${y} }`,
+        'color: #fbbf24;'
+      );
+      console.info(
+        `  // In your installation .ts file, add to the node definition:\n  positionOverride: { x: ${x}, y: ${y} },`
+      );
+    },
+    [layoutMode]
+  );
+
   return (
     <div className="w-full h-full relative">
       <ReactFlow
@@ -128,11 +153,12 @@ export function TopologyMap({
         edgeTypes={edgeTypes}
         onNodeClick={onNodeClick}
         onEdgeClick={onEdgeClick}
+        onNodeDragStop={onNodeDragStop}
         fitView
         fitViewOptions={{ padding: 0.12, minZoom: 0.2, maxZoom: 1 }}
-        nodesDraggable={false}
+        nodesDraggable={layoutMode}
         nodesConnectable={false}
-        panOnScroll
+        panOnScroll={!layoutMode}
         zoomOnScroll
         zoomOnPinch
         minZoom={0.12}
@@ -150,6 +176,21 @@ export function TopologyMap({
         />
         <Controls showInteractive={false} />
       </ReactFlow>
+
+      {layoutMode && (
+        <div
+          className="absolute top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold pointer-events-none select-none"
+          style={{
+            background: 'rgba(251,191,36,0.15)',
+            border: '1px solid rgba(251,191,36,0.5)',
+            color: '#fbbf24',
+            backdropFilter: 'blur(6px)',
+          }}
+        >
+          <span style={{ fontSize: 10 }}>⠿</span>
+          Layout Mode — drag nodes · positions logged to console · press L to exit
+        </div>
+      )}
 
       <ZoneLegend buildingFilter={buildingFilter} />
     </div>

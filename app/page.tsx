@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status, EdgeType } from '@/types/topology';
@@ -60,6 +60,31 @@ export default function Dashboard() {
     new Set(ALL_EDGE_TYPES)
   );
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [layoutMode, setLayoutMode] = useState(false);
+
+  // Press L to toggle Layout Mode (dev helper — does not ship as a visible UI element)
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (
+        (e.key === 'l' || e.key === 'L') &&
+        !(e.target instanceof HTMLInputElement) &&
+        !(e.target instanceof HTMLTextAreaElement)
+      ) {
+        setLayoutMode((prev) => {
+          const next = !prev;
+          console.info(
+            next
+              ? '%c[Layout Mode ON]  Drag any node, then copy the positionOverride from the console.'
+              : '%c[Layout Mode OFF]',
+            'color: #fbbf24; font-weight: bold;'
+          );
+          return next;
+        });
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
 
   // All nodes/edges with status overrides applied (catalog = full set, no layout)
   const catalogNodes = useMemo(
@@ -234,6 +259,7 @@ export default function Dashboard() {
           statusFilter={statusFilter}
           derivedStatuses={derivedStatuses}
           buildingCols={BUILDING_COLS}
+          layoutMode={layoutMode}
         />
 
         <DetailDrawer
