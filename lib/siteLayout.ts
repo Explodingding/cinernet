@@ -1,4 +1,5 @@
 import type { BuildingId, TopologyLayer, TopologyNodeInput, TopologyNode } from '@/types/topology';
+import { MAP_COLUMN_ORDER } from '@/data/buildings';
 
 // ─── Electrical hierarchy (determines Y within each floor band) ───────────────
 //
@@ -21,7 +22,6 @@ const ROW_SPACING = 80;
 /**
  * Which ranks appear within each floor band.
  * Used to centre the hierarchy inside the band.
- * Ground floor: mv-switchgear (1) through load (6) after MV-SW is corrected to 0m.
  */
 const BAND_RANK_RANGE: Record<FloorBandId, { min: number; max: number }> = {
   elevated: { min: 5, max: 6 },  // junction + load only
@@ -45,7 +45,7 @@ function getLayerY(layer: TopologyLayer, bandId: FloorBandId): number {
 //
 //  Elevated (+5m): junction=220, load=140 → band y: 80–300  → center 190, h 220
 //  Ground   (0m):  mv-sw=860, …, load=460 → band y: 390–930 → center 660, h 540
-//  Basement (−3m): mv-feed=1100            → band y: 1030–1170→ center 1100, h 140
+//  Basement (−8m): mv-feed=1100            → band y: 1030–1170→ center 1100, h 140
 
 export interface FloorBandConfig {
   id: FloorBandId;
@@ -58,7 +58,7 @@ export interface FloorBandConfig {
 export const FLOOR_BANDS: FloorBandConfig[] = [
   { id: 'elevated', label: 'Level +5 m',   elevLabel: 'Mezzanine · +5 m', yCenter: 190,  height: 220 },
   { id: 'ground',   label: 'Ground floor',  elevLabel: 'Ground · 0 m',     yCenter: 660,  height: 540 },
-  { id: 'basement', label: 'Basement',      elevLabel: 'Basement · −3 m',  yCenter: 1100, height: 140 },
+  { id: 'basement', label: 'Basement',      elevLabel: 'Basement · −8 m',  yCenter: 1100, height: 140 },
 ];
 
 export type FloorBandId = 'elevated' | 'ground' | 'basement';
@@ -67,7 +67,7 @@ export const FLOOR_BAND_MAP = Object.fromEntries(
   FLOOR_BANDS.map((b) => [b.id, b])
 ) as Record<FloorBandId, FloorBandConfig>;
 
-// ─── Building columns (X axis) ────────────────────────────────────────────────
+// ─── Building column layout ───────────────────────────────────────────────────
 
 export interface BuildingColConfig {
   id: BuildingId;
@@ -75,23 +75,51 @@ export interface BuildingColConfig {
   width: number;
 }
 
-export const BUILDING_COLS: BuildingColConfig[] = [
-  { id: 'furnace-10',  xCenter: 300,  width: 440 },
-  { id: 'utility',     xCenter: 820,  width: 580 },
-  { id: 'furnace-20',  xCenter: 1370, width: 440 },
-  { id: 'batch-house', xCenter: 1870, width: 440 },
-];
+/** Horizontal spacing between adjacent branch slots within a building (px) */
+const NODE_SLOT_SPACING = 200;
 
-export const BUILDING_COL_MAP = Object.fromEntries(
-  BUILDING_COLS.map((c) => [c.id, c])
-) as Record<BuildingId, BuildingColConfig>;
+/** Inner horizontal padding on each side of a building column (px) */
+const BUILDING_PAD_X = 60;
+
+/** Horizontal gap between adjacent building column backgrounds (px) */
+const BUILDING_GAP = 80;
+
+/**
+ * Compute building column layout from the full node catalog.
+ *
+ * Call with ALL node inputs (not just the currently-visible tier) so the
+ * canvas width is stable and does not reflow when the user switches tiers.
+ *
+ * Each building's width = (maxBranchIndex + 1) × NODE_SLOT_SPACING + 2 × BUILDING_PAD_X.
+ * Buildings are arranged left-to-right in MAP_COLUMN_ORDER.
+ */
+export function computeBuildingCols(allNodes: TopologyNodeInput[]): BuildingColConfig[] {
+  // Find the maximum branchIndex used in each building
+  const maxBranch: Partial<Record<BuildingId, number>> = {};
+  for (const n of allNodes) {
+    if (n.positionOverride || n.mapScope === 'building-detail') continue;
+    const b  = n.physicalLocation.building;
+    const bi = n.layout?.branchIndex ?? 0;
+    if ((maxBranch[b] ?? -1) < bi) maxBranch[b] = bi;
+  }
+
+  // Position buildings left to right
+  let xLeft = 0;
+  return MAP_COLUMN_ORDER.map((bid) => {
+    const maxBi  = maxBranch[bid as BuildingId] ?? 0;
+    const width  = (maxBi + 1) * NODE_SLOT_SPACING + BUILDING_PAD_X * 2;
+    const xCenter = xLeft + width / 2;
+    xLeft += width + BUILDING_GAP;
+    return { id: bid as BuildingId, xCenter, width };
+  });
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /** Parse elevation strings like '−3 m', '+5 m', '0 m' → metres */
 export function parseElevationM(str: string): number {
   const cleaned = str
-    .replace('\u2212', '-')  // em-dash → hyphen
+    .replace('\u2212', '-')  // Unicode minus → ASCII hyphen
     .replace(/\s*m\s*$/i, '')
     .replace(/^\+/, '');
   return parseFloat(cleaned) || 0;
@@ -107,45 +135,54 @@ export function getFloorBandId(elevM: number): FloorBandId {
 
 export type LayoutScope = 'overview' | BuildingId;
 
-/** Horizontal gap between sibling nodes at the same (building, floor, layer) */
-const NODE_SLOT_SPACING = 240;
-
 /** Batch House TB compact grid constants */
 const TB_GRID_COLS  = 4;
 const TB_GRID_COL_W = 170;
 const TB_GRID_ROW_H = 90;
 
 /**
- * X-slot cell key: building × floor band × layer.
- * Nodes sharing the same key are siblings and spread out horizontally.
+ * Fallback x-slot cell key: building × floor band × layer.
+ * Used to auto-assign a branchIndex for nodes that don't declare one.
  */
 function xCell(b: BuildingId, band: FloorBandId, layer: TopologyLayer): string {
   return `${b}::${band}::${layer}`;
 }
 
+/**
+ * Position all nodes on the canvas.
+ *
+ * @param nodes          Filtered node inputs for the current view.
+ * @param scope          Layout scope ('overview' or a building id).
+ * @param buildingCols   Pre-computed column layout (from computeBuildingCols).
+ *                       If omitted, computed from `nodes` — use the pre-computed
+ *                       version to avoid jarring width changes when switching tiers.
+ */
 export function layoutNodes(
   nodes: TopologyNodeInput[],
-  scope: LayoutScope = 'overview'
+  scope: LayoutScope = 'overview',
+  buildingCols?: BuildingColConfig[]
 ): TopologyNode[] {
   if (nodes.length === 0) return [];
 
-  const tbNodes  = nodes.filter((n) => n.mapScope === 'building-detail');
+  const tbNodes   = nodes.filter((n) => n.mapScope === 'building-detail');
   const physNodes = nodes.filter((n) => n.mapScope !== 'building-detail');
 
-  // ── Pass 1: count horizontal siblings per (building × floor band × layer) ──
-  const cellCounts: Record<string, number> = {};
-  const slotAssign: Record<string, { slotIdx: number; bandId: FloorBandId }> = {};
+  // Resolve building column layout
+  const cols    = buildingCols ?? computeBuildingCols(nodes);
+  const colMap  = Object.fromEntries(cols.map((c) => [c.id, c])) as Record<BuildingId, BuildingColConfig>;
 
+  // Auto-assign branchIndex for nodes that don't declare one
+  const autoSlotCounters: Record<string, number> = {};
+  const autoSlot: Record<string, number> = {};
   for (const n of physNodes) {
-    if (n.positionOverride) continue;
+    if (n.positionOverride || n.layout?.branchIndex !== undefined) continue;
     const bandId = getFloorBandId(parseElevationM(n.physicalLocation.elevation));
-    const key = xCell(n.physicalLocation.building, bandId, n.layer);
-    const slot = cellCounts[key] ?? 0;
-    slotAssign[n.id] = { slotIdx: slot, bandId };
-    cellCounts[key] = slot + 1;
+    const key    = xCell(n.physicalLocation.building, bandId, n.layer);
+    const slot   = autoSlotCounters[key] ?? 0;
+    autoSlot[n.id] = slot;
+    autoSlotCounters[key] = slot + 1;
   }
 
-  // ── Pass 2: compute canvas positions ──────────────────────────────────────
   return nodes.map((n): TopologyNode => {
     if (n.positionOverride) {
       const { layout: _l, positionOverride, mapScope: _m, ...rest } = n;
@@ -153,16 +190,16 @@ export function layoutNodes(
     }
 
     const { layout: _layout, positionOverride: _pos, mapScope: _mapScope, ...rest } = n;
-    const col = BUILDING_COL_MAP[n.physicalLocation.building];
+    const col = colMap[n.physicalLocation.building];
 
-    // ── Batch House TB grid (detail view only) ────────────────────────────────
+    // ── Batch House TB grid (building-detail nodes) ───────────────────────────
     if (n.mapScope === 'building-detail') {
-      const idx      = Math.max(0, tbNodes.findIndex((t) => t.id === n.id));
-      const colIdx   = idx % TB_GRID_COLS;
-      const rowIdx   = Math.floor(idx / TB_GRID_COLS);
-      const gridW    = (TB_GRID_COLS - 1) * TB_GRID_COL_W;
-      const gBand    = FLOOR_BAND_MAP.ground;
-      const tbTop    = gBand.yCenter - gBand.height / 2 + 120;
+      const idx    = Math.max(0, tbNodes.findIndex((t) => t.id === n.id));
+      const colIdx = idx % TB_GRID_COLS;
+      const rowIdx = Math.floor(idx / TB_GRID_COLS);
+      const gridW  = (TB_GRID_COLS - 1) * TB_GRID_COL_W;
+      const gBand  = FLOOR_BAND_MAP.ground;
+      const tbTop  = gBand.yCenter - gBand.height / 2 + 120;
       return {
         ...rest,
         position: {
@@ -173,27 +210,23 @@ export function layoutNodes(
     }
 
     // ── Physical hierarchy placement ─────────────────────────────────────────
-    const sa = slotAssign[n.id];
-    if (!sa) {
-      return { ...rest, position: { x: col.xCenter, y: FLOOR_BAND_MAP.ground.yCenter } };
+    const bandId = getFloorBandId(parseElevationM(n.physicalLocation.elevation));
+    const bi     = n.layout?.branchIndex ?? autoSlot[n.id] ?? 0;
+
+    // Anchor from the left edge of the building column
+    const x = col.xCenter - col.width / 2 + BUILDING_PAD_X + bi * NODE_SLOT_SPACING;
+    const y = getLayerY(n.layer, bandId);
+
+    if (scope !== 'overview' && scope !== n.physicalLocation.building) {
+      // In BH detail, pin the feeding cabinet above the TB grid
+      if (tbNodes.length > 0 && bandId === 'ground') {
+        return {
+          ...rest,
+          position: { x, y: FLOOR_BAND_MAP.ground.yCenter - FLOOR_BAND_MAP.ground.height / 2 + 30 },
+        };
+      }
     }
 
-    const bnd   = FLOOR_BAND_MAP[sa.bandId];
-    const count = cellCounts[xCell(n.physicalLocation.building, sa.bandId, n.layer)] ?? 1;
-    const xOff  = (sa.slotIdx - (count - 1) / 2) * NODE_SLOT_SPACING;
-
-    // In BH detail, pin the feeding cabinet above the TB grid
-    if (scope === 'batch-house' && sa.bandId === 'ground' && tbNodes.length > 0) {
-      return {
-        ...rest,
-        position: { x: col.xCenter + xOff, y: bnd.yCenter - bnd.height / 2 + 30 },
-      };
-    }
-
-    // Y = layer position within band (upstream = bottom of band = higher Y)
-    return {
-      ...rest,
-      position: { x: col.xCenter + xOff, y: getLayerY(n.layer, sa.bandId) },
-    };
+    return { ...rest, position: { x, y } };
   });
 }

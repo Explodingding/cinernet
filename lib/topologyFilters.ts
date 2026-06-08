@@ -5,7 +5,7 @@ import type {
   TopologyNode,
   TopologyNodeInput,
 } from '@/types/topology';
-import type { LayoutScope } from '@/lib/siteLayout';
+import type { LayoutScope, BuildingColConfig } from '@/lib/siteLayout';
 import { layoutNodes } from '@/lib/siteLayout';
 
 export type BuildingFilter = BuildingId | 'all';
@@ -101,7 +101,8 @@ export function prepareMapTopology(
   statusOverrides: {
     nodes: Record<string, TopologyNode['status']>;
     edges: Record<string, TopologyNode['status']>;
-  }
+  },
+  buildingCols?: BuildingColConfig[]
 ): { nodes: TopologyNode[]; edges: TopologyEdge[] } {
   const filteredInputs = filterMapNodes(nodeInputs, edges, building, tier).map((n) => ({
     ...n,
@@ -109,7 +110,7 @@ export function prepareMapTopology(
   }));
 
   const scope = toLayoutScope(building);
-  const nodes = layoutNodes(filteredInputs, scope);
+  const nodes = layoutNodes(filteredInputs, scope, buildingCols);
 
   const layoutedEdges = edges.map((e) => ({
     ...e,

@@ -4,7 +4,7 @@ import type { NodeProps } from '@xyflow/react';
 import { BUILDINGS } from '@/data/buildings';
 import type { BuildingId } from '@/types/topology';
 import type { FloorBandId, FloorBandConfig, BuildingColConfig } from '@/lib/siteLayout';
-import { FLOOR_BANDS, BUILDING_COLS } from '@/lib/siteLayout';
+import { FLOOR_BANDS } from '@/lib/siteLayout';
 
 export interface BackgroundCellData {
   buildingId: BuildingId;
@@ -25,13 +25,15 @@ const BUILDING_TOP_BAND: Record<BuildingId, FloorBandId> = {
   'batch-house': 'ground',   // BH has no elevated or basement nodes
 };
 
-/** Background grid cells for all 9 building×floor combinations.
- *  These are injected as React Flow nodes at z-index −2 so they
- *  zoom and pan in sync with the topology nodes and cables. */
-export function buildBackgroundCells() {
-  const leftmostBuildingId = BUILDING_COLS[0].id;
+/**
+ * Build background grid cells for all building × floor-band combinations.
+ * Pass the result of `computeBuildingCols(allNodes)` from siteLayout so the
+ * background stripes always match the actual node layout.
+ */
+export function buildBackgroundCells(cols: BuildingColConfig[]) {
+  const leftmostBuildingId = cols[0]?.id;
 
-  return BUILDING_COLS.flatMap((col: BuildingColConfig) =>
+  return cols.flatMap((col: BuildingColConfig) =>
     FLOOR_BANDS.map((band: FloorBandConfig) => ({
       id: `__bg-${col.id}-${band.id}`,
       type: 'backgroundCell',

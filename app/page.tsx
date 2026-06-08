@@ -11,6 +11,7 @@ import { getCascadeTargets } from '@/lib/troubleshooting';
 import { prepareMapTopology, getUsedEdgeTypes } from '@/lib/topologyFilters';
 import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
 import { computeDerivedStatuses } from '@/lib/faultCascade';
+import { computeBuildingCols } from '@/lib/siteLayout';
 
 const TopologyMap = dynamic(
   () => import('@/components/topology/TopologyMap').then((m) => m.TopologyMap),
@@ -38,6 +39,12 @@ function MapLoading() {
 
 /** All edge types that appear in the dataset — used to populate the cable filter */
 const ALL_EDGE_TYPES = getUsedEdgeTypes(topologyEdges);
+
+/**
+ * Building column layout computed from ALL nodes (not just visible tier).
+ * Kept stable at module level so the canvas never reflows when switching tiers.
+ */
+const BUILDING_COLS = computeBuildingCols(topologyNodeInputs);
 
 export default function Dashboard() {
   const [nodeStatuses, setNodeStatuses] = useState<Record<string, Status>>({});
@@ -76,10 +83,12 @@ export default function Dashboard() {
   // Positioned, filtered nodes/edges for the current view
   const { nodes: visibleNodes, edges: visibleEdges } = useMemo(
     () =>
-      prepareMapTopology(topologyNodeInputs, topologyEdges, buildingFilter, activeTier, visibleEdgeTypes, {
-        nodes: nodeStatuses,
-        edges: edgeStatuses,
-      }),
+      prepareMapTopology(
+        topologyNodeInputs, topologyEdges,
+        buildingFilter, activeTier, visibleEdgeTypes,
+        { nodes: nodeStatuses, edges: edgeStatuses },
+        BUILDING_COLS
+      ),
     [buildingFilter, activeTier, visibleEdgeTypes, nodeStatuses, edgeStatuses]
   );
 
@@ -224,6 +233,7 @@ export default function Dashboard() {
           onEdgeSelect={handleEdgeSelect}
           statusFilter={statusFilter}
           derivedStatuses={derivedStatuses}
+          buildingCols={BUILDING_COLS}
         />
 
         <DetailDrawer

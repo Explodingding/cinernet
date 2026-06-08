@@ -362,6 +362,8 @@ export const utilityInstallation: SiteInstallation = {
     },
 
     // ── Turbo Compressor MV Transformers (35 → 6 kV) — Tier 2 ──────────────────
+    // branchIndex continues from the last Tier-1 transformer (TR-COMP-LV = 7)
+    // to avoid overlapping with Tier-1 nodes when both tiers are visible.
     {
       id: 'TR-COMP-1',
       name: 'TR Compressor-1 (UT-COMP 4.6-1)',
@@ -370,7 +372,7 @@ export const utilityInstallation: SiteInstallation = {
       status: 'operational',
       displayTier: 2,
       circuitCount: 0,
-      layout: { building: 'utility', branchIndex: 0 },
+      layout: { building: 'utility', branchIndex: 8 },
       physicalLocation: {
         building: 'utility',
         zone: 'utility-ground',
@@ -396,7 +398,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 2,
-      layout: { building: 'utility', branchIndex: 1 },
+      layout: { building: 'utility', branchIndex: 9 },
       physicalLocation: {
         building: 'utility',
         zone: 'utility-ground',
@@ -421,7 +423,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 2,
-      layout: { building: 'utility', branchIndex: 2 },
+      layout: { building: 'utility', branchIndex: 10 },
       physicalLocation: {
         building: 'utility',
         zone: 'utility-ground',
@@ -446,7 +448,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'transformer',
       status: 'operational',
       displayTier: 2,
-      layout: { building: 'utility', branchIndex: 3 },
+      layout: { building: 'utility', branchIndex: 11 },
       physicalLocation: {
         building: 'utility',
         zone: 'utility-ground',
@@ -587,7 +589,7 @@ export const utilityInstallation: SiteInstallation = {
       layer: 'lv-panel',
       status: 'operational',
       displayTier: 2,
-      layout: { building: 'utility', branchIndex: 0 },
+      layout: { building: 'utility', branchIndex: 4 },
       physicalLocation: {
         building: 'utility',
         zone: 'utility-ground',

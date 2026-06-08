@@ -19,14 +19,13 @@ import { PowerCableEdge } from './PowerCableEdge';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import type { BuildingFilter } from '@/lib/topologyFilters';
 import type { DerivedStatuses } from '@/lib/faultCascade';
+import type { BuildingColConfig } from '@/lib/siteLayout';
 
 const nodeTypes: NodeTypes = {
   device: DeviceNode,
   backgroundCell: BackgroundCellNode,
 };
 const edgeTypes: EdgeTypes = { powerCable: PowerCableEdge };
-
-const BACKGROUND_CELLS = buildBackgroundCells();
 
 interface TopologyMapProps {
   nodes: TopologyNode[];
@@ -37,6 +36,7 @@ interface TopologyMapProps {
   onEdgeSelect: (edge: TopologyEdge) => void;
   statusFilter: Status | 'all';
   derivedStatuses: DerivedStatuses;
+  buildingCols: BuildingColConfig[];
 }
 
 export function TopologyMap({
@@ -48,7 +48,13 @@ export function TopologyMap({
   onEdgeSelect,
   statusFilter,
   derivedStatuses,
+  buildingCols,
 }: TopologyMapProps) {
+  const backgroundCells = useMemo(
+    () => buildBackgroundCells(buildingCols),
+    [buildingCols]
+  );
+
   const rfNodes = useMemo(() => {
     const deviceNodes: Node[] = nodes.map(
       (node) =>
@@ -74,10 +80,10 @@ export function TopologyMap({
     );
 
     const bgNodes: Node[] =
-      buildingFilter === 'all' ? (BACKGROUND_CELLS as Node[]) : [];
+      buildingFilter === 'all' ? (backgroundCells as Node[]) : [];
 
     return [...bgNodes, ...deviceNodes];
-  }, [nodes, selectedId, statusFilter, buildingFilter, derivedStatuses]);
+  }, [nodes, selectedId, statusFilter, buildingFilter, derivedStatuses, backgroundCells]);
 
   const rfEdges = useMemo(
     () =>
