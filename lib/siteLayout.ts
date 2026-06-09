@@ -24,11 +24,13 @@ const LAYER_RANK: Record<TopologyLayer, number> = {
 
 /**
  * Vertical gap between adjacent hierarchy rows (px).
- * Node cards are ≈130 px tall. A spacing of 260 px leaves ≈130 px of clear
- * canvas between adjacent rows — enough for horizontal cable runs to bypass
- * nodes without clipping (intra-band air space for orthogonal routing).
+ * Node cards are ≈120 px tall.  200 px row-spacing leaves ≈80 px of clear
+ * canvas between adjacent hierarchy levels — enough for orthogonal cable runs.
+ *
+ * Must stay ≤ 200 px so that rank-1 (mv-switchgear) within the ground band
+ * does not visually overlap the elevated band above it.
  */
-const ROW_SPACING = 260;
+const ROW_SPACING = 200;
 
 /**
  * Which ranks appear within each floor band.
@@ -40,14 +42,27 @@ const BAND_RANK_RANGE: Record<FloorBandId, { min: number; max: number }> = {
   basement: { min: 0, max: 0 },  // mv-feed only (basement / substation)
 };
 
-/** Y position of a node given its layer and the floor band it sits in */
+/** Y position of a node given its layer and the floor band it sits in.
+ *
+ * Physical elevation rules (React Flow — Y increases downward):
+ *   • 'elevated' band  → small Y   → TOP of canvas    (+5 m floor)
+ *   • 'ground'   band  → medium Y  → MIDDLE of canvas  (0 m floor)
+ *   • 'basement' band  → large Y   → BOTTOM of canvas  (−8 m floor)
+ *
+ * Within each band upstream equipment is placed ABOVE downstream:
+ *   • Low rank (mv-switchgear=1) → smaller Y offset → TOP of its band
+ *   • High rank (load=6)         → larger  Y offset → BOTTOM of its band
+ *
+ * Therefore power enters from the BOTTOM (basement), flows UP through the
+ * ground floor panels, and continues UP into the elevated floor loads.
+ */
 function getLayerY(layer: TopologyLayer, bandId: FloorBandId): number {
   const rank = LAYER_RANK[layer];
   const band = FLOOR_BAND_MAP[bandId];
   const { min, max } = BAND_RANK_RANGE[bandId];
   const midRank = (min + max) / 2;
-  // SLD convention: power flows TOP → BOTTOM on canvas.
-  // Upstream (low rank, mv-feed) → small Y (top). Downstream (high rank, loads) → large Y (bottom).
+  // (rank - midRank): high rank (loads) → positive offset → larger Y → lower in band.
+  // Low rank (transformers) → negative offset → smaller Y → top of band.
   return band.yCenter + (rank - midRank) * ROW_SPACING;
 }
 
@@ -61,22 +76,29 @@ export interface FloorBandConfig {
   height: number;
 }
 
-// ── Floor bands are ordered TOP → BOTTOM on the SLD canvas ──────────────────
+// ── Floor bands — physical elevation → screen Y (Y increases downward) ───────
 //
-//   The SLD convention places the upstream MV supply at the TOP regardless of
-//   physical elevation, so:
-//     'basement'  → yCenter  220  (TOP)   — 35 kV grid interface
-//     'ground'    → yCenter 1320  (MID)   — transformers + LV distribution
-//     'elevated'  → yCenter 2640  (BOTTOM)— field cabinets + motors/loads
+//   Physical elevation maps directly to screen position:
+//     'elevated'  yCenter  240  → TOP of canvas    (physically highest, +5 m)
+//     'ground'    yCenter 1200  → MIDDLE of canvas  (0 m)
+//     'basement'  yCenter 2100  → BOTTOM of canvas  (physically lowest, −8 m)
 //
-//   Node Y positions inside each band are determined by getLayerY() which
-//   spreads ranks proportionally around the band's yCenter using ROW_SPACING.
-//   The band height must comfortably contain all rank positions ± padding.
+//   With ROW_SPACING = 200 and midRank offsets:
+//     • elevated band spans  ≈ y= 40 .. 440  (rank 4..6)
+//     • ground   band spans  ≈ y=700 ..1700  (rank 1..6)
+//     • basement band spans  ≈ y=2100        (rank 0 only)
+//
+//   Gaps between band node positions (not background stripes):
+//     elevated top (440) → ground top (700)  = 260 px gap ✓
+//     ground bottom (1700) → basement (2100) = 400 px gap ✓
+//
+//   Power flows visually UPWARD: cable from basement (large Y) runs up
+//   to ground switchgear (medium Y) and continues up to elevated loads (small Y).
 
 export const FLOOR_BANDS: FloorBandConfig[] = [
-  { id: 'basement', label: 'MV Supply',     elevLabel: 'Basement · −8 m',  yCenter:  220, height:  320 },
-  { id: 'ground',   label: 'Ground floor',  elevLabel: 'Ground · 0 m',     yCenter: 1320, height: 1760 },
-  { id: 'elevated', label: 'Level +5 m',    elevLabel: 'Mezzanine · +5 m', yCenter: 2640, height:  800 },
+  { id: 'elevated', label: 'Level +5 m',   elevLabel: 'Mezzanine · +5 m', yCenter:  240, height:  440 },
+  { id: 'ground',   label: 'Ground floor', elevLabel: 'Ground · 0 m',     yCenter: 1200, height: 1400 },
+  { id: 'basement', label: 'Basement',     elevLabel: 'Basement · −8 m',  yCenter: 2100, height:  300 },
 ];
 
 export type FloorBandId = 'elevated' | 'ground' | 'basement';

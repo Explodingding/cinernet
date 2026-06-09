@@ -17,21 +17,17 @@ export interface BackgroundCellData {
   showFloorLabel: boolean;
 }
 
-// After the SLD Y-flip (basement = top of canvas, elevated = bottom), the
-// "topmost" band on screen is the one with the SMALLEST yCenter:
-//   basement (yCenter≈220)  <  ground (yCenter≈1320)  <  elevated (yCenter≈2640)
-//
-// The building label is rendered inside the topmost OCCUPIED band for each
-// building column.  Utility is the only building with basement nodes
-// (DISTRIB-BLDG), so it shows its label in the basement stripe.
-// All other buildings start at the ground stripe.
+// 'elevated' now has the SMALLEST yCenter (≈240) so it is at the TOP of the
+// canvas.  The building label is shown in the topmost OCCUPIED band.
+// Buildings with mezzanine nodes (F10, F20) show the label in 'elevated'.
+// Utility and others start at 'ground' — basement is visually at the BOTTOM.
 const BUILDING_TOP_BAND: Record<BuildingId, FloorBandId> = {
-  'furnace-10':   'ground',    // F10 starts at ground (no basement nodes)
-  utility:        'basement',  // Utility has DISTRIB-BLDG at −8 m → topmost stripe
-  'furnace-20':   'ground',    // F20 starts at ground
-  'batch-house':  'ground',    // BH has no basement nodes
-  'cullet-tower': 'ground',    // Cullet Tower — future scope
-  warehouse:      'ground',    // Warehouse — placeholder
+  'furnace-10':   'elevated',  // F10 has mezzanine nodes at +5 m
+  utility:        'ground',    // Utility's topmost occupied band is ground floor
+  'furnace-20':   'elevated',  // F20 has elevated panels
+  'batch-house':  'ground',
+  'cullet-tower': 'ground',
+  warehouse:      'ground',
 };
 
 /**
