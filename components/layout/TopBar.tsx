@@ -8,7 +8,34 @@ import { STATUS_CONFIG } from '@/lib/statusConfig';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Panel = 'fault' | 'building' | 'status' | 'kpi' | 'cables' | null;
+type Panel = 'fault' | 'building' | 'status' | 'kpi' | 'cables' | 'demo' | null;
+
+// ─── Demo preset definitions ───────────────────────────────────────────────────
+
+export interface DemoPreset {
+  id: string;
+  label: string;
+  description: string;
+  color: string;
+  nodeIds: string[];
+}
+
+export const DEMO_PRESETS: DemoPreset[] = [
+  {
+    id: 'substation-fault',
+    label: 'MV Substation Fault',
+    description: 'F10 MV Panel → all 3 transformers → entire Furnace 10 supply chain goes dark',
+    color: '#f97316',
+    nodeIds: ['F10-MV-PANEL'],
+  },
+  {
+    id: 'hot-zone-fault',
+    label: 'F10 Hot Zone Cabinet Fault',
+    description: 'F1-HOT-DP → HOT-10 → furnace cooling fans offline (isolated sub-branch)',
+    color: '#f87171',
+    nodeIds: ['F1-HOT-DP'],
+  },
+];
 
 export interface KpiStats {
   total: number;
@@ -46,6 +73,12 @@ interface TopBarProps {
   visibleEdgeTypes: Set<EdgeType>;
   usedEdgeTypes: Set<EdgeType>;
   onToggleEdgeType: (t: EdgeType) => void;
+  /** Inject a set of node IDs as 'fault' for live demo */
+  onInjectPreset: (nodeIds: string[]) => void;
+  /** Clear all injected status overrides */
+  onResetAll: () => void;
+  /** True when any injections are active — adds a dot on the DEMO button */
+  hasInjections: boolean;
 }
 
 // ─── Shared panel container style ─────────────────────────────────────────────
@@ -117,6 +150,9 @@ export function TopBar({
   visibleEdgeTypes,
   usedEdgeTypes,
   onToggleEdgeType,
+  onInjectPreset,
+  onResetAll,
+  hasInjections,
 }: TopBarProps) {
   const [openPanel, setOpenPanel] = useState<Panel>(null);
   const [time, setTime] = useState('');
@@ -263,6 +299,45 @@ export function TopBar({
               close();
               onFaultNodeClick(id);
             }}
+          />
+        )}
+      </div>
+
+      {/* ── Demo presets ── */}
+      <div className="relative shrink-0">
+        <button
+          onClick={() => toggle('demo')}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-bold tracking-wider uppercase transition-all duration-150"
+          style={{
+            background:
+              openPanel === 'demo'
+                ? 'rgba(251,191,36,0.18)'
+                : hasInjections
+                  ? 'rgba(251,191,36,0.1)'
+                  : 'rgba(15,23,42,0.7)',
+            border: `1px solid ${openPanel === 'demo' || hasInjections ? 'rgba(251,191,36,0.5)' : 'rgba(255,255,255,0.08)'}`,
+            color: openPanel === 'demo' || hasInjections ? '#fbbf24' : '#64748b',
+          }}
+          title="Demo fault injection presets"
+        >
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="currentColor" stroke="currentColor" strokeWidth="0.5" />
+          </svg>
+          <span className="hidden sm:inline">Demo</span>
+          {hasInjections && (
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"
+              style={{ animation: 'live-pulse 1.4s ease-in-out infinite' }}
+            />
+          )}
+          <Chevron open={openPanel === 'demo'} />
+        </button>
+
+        {openPanel === 'demo' && (
+          <DemoPanel
+            hasInjections={hasInjections}
+            onInjectPreset={(nodeIds) => { onInjectPreset(nodeIds); close(); }}
+            onResetAll={() => { onResetAll(); close(); }}
           />
         )}
       </div>
@@ -711,6 +786,98 @@ function KpiPanel({ stats }: { stats: KpiStats }) {
             <span className="text-[9px] text-slate-600">{s.label}</span>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function DemoPanel({
+  hasInjections,
+  onInjectPreset,
+  onResetAll,
+}: {
+  hasInjections: boolean;
+  onInjectPreset: (nodeIds: string[]) => void;
+  onResetAll: () => void;
+}) {
+  return (
+    <div style={{ ...PANEL, left: 0, minWidth: 340 }}>
+      <div className="px-4 py-2.5 flex items-center gap-2 border-b border-white/[0.06]">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+          <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="#fbbf24" stroke="#fbbf24" strokeWidth="0.5" />
+        </svg>
+        <span className="text-[9px] font-bold tracking-widest uppercase text-amber-400 flex-1">
+          Demo Fault Injection
+        </span>
+        <span className="text-[9px] text-slate-600">BFS cascade activated on inject</span>
+      </div>
+
+      <div className="p-3 flex flex-col gap-2">
+        {DEMO_PRESETS.map((preset) => (
+          <button
+            key={preset.id}
+            onClick={() => onInjectPreset(preset.nodeIds)}
+            className="w-full flex items-start gap-3 px-3 py-3 rounded-lg text-left transition-all duration-150 hover:brightness-110 active:scale-[0.99]"
+            style={{
+              background: `rgba(${hexRgb(preset.color)},0.08)`,
+              border: `1px solid rgba(${hexRgb(preset.color)},0.3)`,
+            }}
+          >
+            <div
+              className="w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5"
+              style={{
+                background: `rgba(${hexRgb(preset.color)},0.15)`,
+                border: `1px solid rgba(${hexRgb(preset.color)},0.4)`,
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+                  stroke={preset.color}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <line x1="12" y1="9" x2="12" y2="13" stroke={preset.color} strokeWidth="2" strokeLinecap="round" />
+                <circle cx="12" cy="17" r="0.8" fill={preset.color} />
+              </svg>
+            </div>
+            <div className="min-w-0 flex-1">
+              <div
+                className="text-[11px] font-bold mb-0.5"
+                style={{ color: preset.color, fontFamily: 'var(--font-jetbrains-mono)' }}
+              >
+                {preset.label}
+              </div>
+              <div className="text-[10px] text-slate-500 leading-relaxed">{preset.description}</div>
+            </div>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="shrink-0 mt-1 opacity-40">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke={preset.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        ))}
+      </div>
+
+      <div className="px-3 pb-3">
+        <button
+          onClick={onResetAll}
+          disabled={!hasInjections}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-all duration-150"
+          style={{
+            background: hasInjections ? 'rgba(52,211,153,0.1)' : 'rgba(255,255,255,0.03)',
+            border: hasInjections
+              ? '1px solid rgba(52,211,153,0.35)'
+              : '1px solid rgba(255,255,255,0.06)',
+            color: hasInjections ? '#34d399' : '#334155',
+            cursor: hasInjections ? 'pointer' : 'not-allowed',
+          }}
+        >
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M3 3v5h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Reset All — Clear Injected Faults
+        </button>
       </div>
     </div>
   );

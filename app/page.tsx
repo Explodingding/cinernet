@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status, EdgeType } from '@/types/topology';
-import { TopBar } from '@/components/layout/TopBar';
+import { TopBar, DEMO_PRESETS } from '@/components/layout/TopBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
 import { Toast } from '@/components/ui/Toast';
 import { getCascadeTargets } from '@/lib/troubleshooting';
@@ -235,6 +235,34 @@ export default function Dashboard() {
     window.setTimeout(() => setToastMessage(null), 3200);
   }, []);
 
+  const handleInjectPreset = useCallback(
+    (nodeIds: string[]) => {
+      setNodeStatuses((prev) => {
+        const next = { ...prev };
+        nodeIds.forEach((id) => { next[id] = 'fault'; });
+        return next;
+      });
+      const preset = DEMO_PRESETS.find((p) => p.nodeIds.some((id) => nodeIds.includes(id)));
+      showToast(`Fault injected: ${preset?.label ?? nodeIds.join(', ')} — cascade propagating…`);
+    },
+    [showToast]
+  );
+
+  const handleResetAll = useCallback(() => {
+    setNodeStatuses({});
+    setEdgeStatuses({});
+    showToast('All injected faults cleared — system reset to operational');
+  }, [showToast]);
+
+  const handleSimulateFault = useCallback(
+    (id: string, type: 'node' | 'edge') => {
+      if (type === 'node') setNodeStatuses((p) => ({ ...p, [id]: 'fault' }));
+      else setEdgeStatuses((p) => ({ ...p, [id]: 'fault' }));
+      showToast(`Fault injected on ${id} — downstream cascade active`);
+    },
+    [showToast]
+  );
+
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <TopBar
@@ -250,6 +278,9 @@ export default function Dashboard() {
         visibleEdgeTypes={visibleEdgeTypes}
         usedEdgeTypes={ALL_EDGE_TYPES}
         onToggleEdgeType={handleToggleEdgeType}
+        onInjectPreset={handleInjectPreset}
+        onResetAll={handleResetAll}
+        hasInjections={Object.keys(nodeStatuses).length > 0 || Object.keys(edgeStatuses).length > 0}
       />
 
       <div className="flex-1 relative overflow-hidden min-h-0">
@@ -273,6 +304,7 @@ export default function Dashboard() {
           onStatusChange={handleStatusChange}
           onMarkResolved={handleMarkResolved}
           onIntegrationAction={showToast}
+          onSimulateFault={handleSimulateFault}
         />
       </div>
 

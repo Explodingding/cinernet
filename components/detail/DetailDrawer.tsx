@@ -17,6 +17,8 @@ interface DetailDrawerProps {
   onStatusChange: (id: string, type: 'node' | 'edge', newStatus: Status) => void;
   onMarkResolved: (id: string, type: 'node' | 'edge') => void;
   onIntegrationAction: (message: string) => void;
+  /** Inject this element as a fault for live demo */
+  onSimulateFault: (id: string, type: 'node' | 'edge') => void;
 }
 
 const STATUS_ACTIONS: { status: Status; label: string }[] = [
@@ -34,6 +36,7 @@ export function DetailDrawer({
   onStatusChange,
   onMarkResolved,
   onIntegrationAction,
+  onSimulateFault,
 }: DetailDrawerProps) {
   const [checkedStepsByElement, setCheckedStepsByElement] = useState<
     Record<string, string[]>
@@ -181,6 +184,70 @@ export function DetailDrawer({
             </div>
 
             <div className="flex-1 overflow-y-auto min-h-0">
+              {/* ── Demo quick-action strip ── */}
+              <div
+                className="mx-4 md:mx-5 mt-4 rounded-lg overflow-hidden"
+                style={{
+                  border: '1px solid rgba(251,191,36,0.2)',
+                  background: 'rgba(251,191,36,0.04)',
+                }}
+              >
+                <div className="px-3 py-1.5 flex items-center gap-1.5" style={{ borderBottom: '1px solid rgba(251,191,36,0.12)' }}>
+                  <svg width="7" height="7" viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="#fbbf24" />
+                  </svg>
+                  <span className="text-[8px] font-bold tracking-widest uppercase text-amber-500/70">
+                    Demo Controls
+                  </span>
+                </div>
+                <div className="flex gap-2 p-2">
+                  <button
+                    onClick={() => onSimulateFault(element.id, elementType!)}
+                    disabled={element.status === 'fault'}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-2 py-2.5 min-h-[44px] rounded-md text-[10px] font-bold tracking-wider uppercase transition-all duration-150"
+                    style={{
+                      background: element.status === 'fault'
+                        ? 'rgba(248,113,113,0.06)'
+                        : 'rgba(248,113,113,0.12)',
+                      border: element.status === 'fault'
+                        ? '1px solid rgba(248,113,113,0.15)'
+                        : '1px solid rgba(248,113,113,0.4)',
+                      color: element.status === 'fault' ? 'rgba(248,113,113,0.4)' : '#f87171',
+                      cursor: element.status === 'fault' ? 'not-allowed' : 'pointer',
+                      boxShadow: element.status === 'fault' ? 'none' : '0 0 12px rgba(248,113,113,0.15)',
+                    }}
+                  >
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      <circle cx="12" cy="17" r="0.8" fill="currentColor" />
+                    </svg>
+                    {element.status === 'fault' ? 'Fault active' : 'Inject Fault'}
+                  </button>
+                  <button
+                    onClick={() => onStatusChange(element.id, elementType!, 'operational')}
+                    disabled={element.status === 'operational'}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-2 py-2.5 min-h-[44px] rounded-md text-[10px] font-bold tracking-wider uppercase transition-all duration-150"
+                    style={{
+                      background: element.status === 'operational'
+                        ? 'rgba(52,211,153,0.06)'
+                        : 'rgba(52,211,153,0.12)',
+                      border: element.status === 'operational'
+                        ? '1px solid rgba(52,211,153,0.15)'
+                        : '1px solid rgba(52,211,153,0.4)',
+                      color: element.status === 'operational' ? 'rgba(52,211,153,0.4)' : '#34d399',
+                      cursor: element.status === 'operational' ? 'not-allowed' : 'pointer',
+                      boxShadow: element.status === 'operational' ? 'none' : '0 0 12px rgba(52,211,153,0.15)',
+                    }}
+                  >
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+                      <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {element.status === 'operational' ? 'All clear' : 'Clear Status'}
+                  </button>
+                </div>
+              </div>
+
               {element.upstreamHint && element.status === 'fault' && (
                 <div
                   className="mx-4 md:mx-5 mt-4 px-3 py-3 rounded-lg"
