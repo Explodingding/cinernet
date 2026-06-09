@@ -11,7 +11,8 @@ import { getCascadeTargets } from '@/lib/troubleshooting';
 import { prepareMapTopology, getUsedEdgeTypes } from '@/lib/topologyFilters';
 import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
 import { computeDerivedStatuses } from '@/lib/faultCascade';
-import { computeBuildingCols } from '@/lib/siteLayout';
+// computeBuildingCols is called inside prepareMapTopology via layoutNodes;
+// no longer needed at module level.
 
 const TopologyMap = dynamic(
   () => import('@/components/topology/TopologyMap').then((m) => m.TopologyMap),
@@ -40,11 +41,9 @@ function MapLoading() {
 /** All edge types that appear in the dataset — used to populate the cable filter */
 const ALL_EDGE_TYPES = getUsedEdgeTypes(topologyEdges);
 
-/**
- * Building column layout computed from ALL nodes (not just visible tier).
- * Kept stable at module level so the canvas never reflows when switching tiers.
- */
-const BUILDING_COLS = computeBuildingCols(topologyNodeInputs);
+// Building column widths are now computed per-tier inside prepareMapTopology
+// so each tier gets tightly-fitted columns (tree-based centering).
+// No module-level BUILDING_COLS constant needed.
 
 export default function Dashboard() {
   const [nodeStatuses, setNodeStatuses] = useState<Record<string, Status>>({});
@@ -105,14 +104,19 @@ export default function Dashboard() {
     [edgeStatuses]
   );
 
-  // Positioned, filtered nodes/edges for the current view
-  const { nodes: visibleNodes, edges: visibleEdges } = useMemo(
+  // Positioned, filtered nodes/edges + per-tier column layout for the current view
+  const {
+    nodes: visibleNodes,
+    edges: visibleEdges,
+    buildingCols: currentBuildingCols,
+  } = useMemo(
     () =>
       prepareMapTopology(
         topologyNodeInputs, topologyEdges,
         buildingFilter, activeTier, visibleEdgeTypes,
-        { nodes: nodeStatuses, edges: edgeStatuses },
-        BUILDING_COLS
+        { nodes: nodeStatuses, edges: edgeStatuses }
+        // No pre-computed buildingCols: prepareMapTopology derives tight per-tier
+        // tree-centred columns from visible nodes automatically.
       ),
     [buildingFilter, activeTier, visibleEdgeTypes, nodeStatuses, edgeStatuses]
   );
@@ -258,7 +262,7 @@ export default function Dashboard() {
           onEdgeSelect={handleEdgeSelect}
           statusFilter={statusFilter}
           derivedStatuses={derivedStatuses}
-          buildingCols={BUILDING_COLS}
+          buildingCols={currentBuildingCols}
           layoutMode={layoutMode}
         />
 

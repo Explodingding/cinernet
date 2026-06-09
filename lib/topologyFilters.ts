@@ -6,7 +6,7 @@ import type {
   TopologyNodeInput,
 } from '@/types/topology';
 import type { LayoutScope, BuildingColConfig } from '@/lib/siteLayout';
-import { layoutNodes } from '@/lib/siteLayout';
+import { layoutNodes, computeBuildingCols } from '@/lib/siteLayout';
 
 export type BuildingFilter = BuildingId | 'all';
 
@@ -103,14 +103,21 @@ export function prepareMapTopology(
     edges: Record<string, TopologyNode['status']>;
   },
   buildingCols?: BuildingColConfig[]
-): { nodes: TopologyNode[]; edges: TopologyEdge[] } {
+): { nodes: TopologyNode[]; edges: TopologyEdge[]; buildingCols: BuildingColConfig[] } {
   const filteredInputs = filterMapNodes(nodeInputs, edges, building, tier).map((n) => ({
     ...n,
     status: statusOverrides.nodes[n.id] ?? n.status,
   }));
 
   const scope = toLayoutScope(building);
-  const nodes = layoutNodes(filteredInputs, scope, buildingCols);
+
+  // Compute (or reuse) building columns.
+  // When buildingCols is not provided we derive tight per-tier columns from the
+  // filtered visible nodes + the full edge set for tree-based centering.
+  const cols = buildingCols ?? computeBuildingCols(filteredInputs, edges);
+
+  // Pass edges so layoutNodes uses tree-based X centering.
+  const nodes = layoutNodes(filteredInputs, scope, cols, edges);
 
   const layoutedEdges = edges.map((e) => ({
     ...e,
@@ -119,7 +126,7 @@ export function prepareMapTopology(
 
   const visibleEdges = filterMapEdges(nodes, layoutedEdges, building, visibleEdgeTypes);
 
-  return { nodes, edges: visibleEdges };
+  return { nodes, edges: visibleEdges, buildingCols: cols };
 }
 
 /** Returns all EdgeType values present in a set of edges */
