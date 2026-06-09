@@ -87,7 +87,7 @@ export const utilityInstallation: SiteInstallation = {
       name: 'Furnace 10 Main MV Panel',
       assetType: 'mv-switchgear',
       layer: 'mv-switchgear',
-      status: 'operational',
+      status: 'fault',   // DEMO: MV fault — cascades to TR1.1/1.2/1.3 and entire F10 chain
       displayTier: 1,
       subsystem: 'mv',
       layout: { building: 'utility', branchIndex: 1 },

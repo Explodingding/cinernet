@@ -66,6 +66,22 @@ export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
     borderColor: 'rgba(192, 132, 252, 0.25)',
     building: 'batch-house',
   },
+  'cullet-tower-ground': {
+    label: 'Cullet Tower — Ground Floor',
+    shortLabel: 'CT G',
+    color: '#94a3b8',
+    bgColor: 'rgba(148, 163, 184, 0.04)',
+    borderColor: 'rgba(148, 163, 184, 0.15)',
+    building: 'cullet-tower',
+  },
+  'warehouse-ground': {
+    label: 'Warehouse — Ground Floor',
+    shortLabel: 'WH G',
+    color: '#64748b',
+    bgColor: 'rgba(100, 116, 139, 0.03)',
+    borderColor: 'rgba(100, 116, 139, 0.1)',
+    building: 'warehouse',
+  },
 };
 
 export const LAYER_LABELS: Record<TopologyLayer, string> = {

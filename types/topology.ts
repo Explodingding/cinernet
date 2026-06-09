@@ -9,7 +9,13 @@ export type AssetType =
   | 'junction-box'
   | 'motor';
 
-export type BuildingId = 'utility' | 'furnace-10' | 'furnace-20' | 'batch-house';
+export type BuildingId =
+  | 'utility'
+  | 'furnace-10'
+  | 'furnace-20'
+  | 'batch-house'
+  | 'cullet-tower'
+  | 'warehouse';
 
 export type TopologyLayer =
   | 'mv-feed'
@@ -28,7 +34,9 @@ export type LocationZone =
   | 'furnace-10-elevated'
   | 'furnace-20-ground'
   | 'furnace-20-elevated'
-  | 'batch-house-ground';
+  | 'batch-house-ground'
+  | 'cullet-tower-ground'
+  | 'warehouse-ground';
 
 export type Status = 'operational' | 'investigation' | 'fault';
 

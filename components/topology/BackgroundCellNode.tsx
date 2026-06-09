@@ -19,10 +19,12 @@ export interface BackgroundCellData {
 
 /** Which floor band is "topmost" (lowest yCenter index) for each building — shown in full site view */
 const BUILDING_TOP_BAND: Record<BuildingId, FloorBandId> = {
-  'furnace-10': 'elevated',  // F10 has mezzanine nodes
-  utility: 'ground',         // Utility starts at ground
-  'furnace-20': 'elevated',  // F20 has elevated panels (HOT-20 at +5.135 m)
-  'batch-house': 'ground',   // BH has no elevated or basement nodes
+  'furnace-10':   'elevated',  // F10 has mezzanine nodes
+  utility:        'ground',    // Utility starts at ground (basement MV is below)
+  'furnace-20':   'elevated',  // F20 has elevated panels (HOT-20 at +5.135 m)
+  'batch-house':  'ground',    // BH has no elevated or basement nodes
+  'cullet-tower': 'ground',    // Cullet Tower — future scope, reserved column
+  warehouse:      'ground',    // Warehouse — placeholder, no electrical data yet
 };
 
 /**
