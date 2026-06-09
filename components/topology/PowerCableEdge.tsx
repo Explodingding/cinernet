@@ -13,10 +13,16 @@ interface AttachPoint {
   side: Side;
 }
 
-/** Choose which wall each node's cable exits/enters based on relative positions */
+/**
+ * Choose which wall a cable exits/enters based on node relative positions.
+ *
+ * @param forcedHorizontal  True for cross-building cables — forces left/right
+ *                          exits so the horizontal run precedes the vertical drop.
+ */
 function computeAttachments(
   sx: number, sy: number, sw: number, sh: number,
-  tx: number, ty: number, tw: number, th: number
+  tx: number, ty: number, tw: number, th: number,
+  forcedHorizontal = false
 ): { src: AttachPoint; tgt: AttachPoint } {
   const sCX = sx + sw / 2;
   const sCY = sy + sh / 2;
@@ -30,26 +36,28 @@ function computeAttachments(
   let srcSide: Side;
   let tgtSide: Side;
 
-  if (adx > ady * 1.4) {
-    // Primarily horizontal — exit/enter from side walls
+  if (forcedHorizontal) {
+    // Cross-building cable: always exit/enter from the side walls so the
+    // orthogonal router emits a horizontal run at source Y, then drops/rises
+    // vertically to the target level — classic SLD cross-building routing.
     srcSide = dx > 0 ? 'right' : 'left';
     tgtSide = dx > 0 ? 'left' : 'right';
-  } else if (ady > adx * 1.4) {
-    // Primarily vertical — exit/enter from top/bottom
-    srcSide = dy > 0 ? 'bottom' : 'top';
-    tgtSide = dy > 0 ? 'top' : 'bottom';
-  } else {
-    // Diagonal (cross-building + cross-floor) — exit from side, enter from top/bottom
+  } else if (adx > ady) {
+    // Primarily horizontal
     srcSide = dx > 0 ? 'right' : 'left';
+    tgtSide = dx > 0 ? 'left' : 'right';
+  } else {
+    // Primarily vertical (or equal) — standard SLD downward / upward flow
+    srcSide = dy > 0 ? 'bottom' : 'top';
     tgtSide = dy > 0 ? 'top' : 'bottom';
   }
 
   const wallPoint = (nx: number, ny: number, nw: number, nh: number, side: Side): AttachPoint => {
     switch (side) {
-      case 'left':   return { x: nx,        y: ny + nh / 2, side };
-      case 'right':  return { x: nx + nw,   y: ny + nh / 2, side };
-      case 'top':    return { x: nx + nw / 2, y: ny,        side };
-      case 'bottom': return { x: nx + nw / 2, y: ny + nh,   side };
+      case 'left':   return { x: nx,          y: ny + nh / 2, side };
+      case 'right':  return { x: nx + nw,     y: ny + nh / 2, side };
+      case 'top':    return { x: nx + nw / 2, y: ny,          side };
+      case 'bottom': return { x: nx + nw / 2, y: ny + nh,     side };
     }
   };
 
@@ -59,35 +67,65 @@ function computeAttachments(
   };
 }
 
-/** Build a cubic bezier SVG path whose control points respect the exit/entry directions */
-function buildBezierPath(
+/**
+ * Build a strict 90-degree orthogonal SVG path (all segments horizontal or
+ * vertical — no curves).  This produces the clean "L-shape" / "Z-shape" lines
+ * seen on professional electrical single-line diagrams.
+ *
+ * Routing rules:
+ *   • Vertical exit (top/bottom): go to vertical midpoint, turn horizontal
+ *     to target X, then continue to target — V → H → V
+ *   • Horizontal exit (left/right): go to horizontal midpoint, turn vertical
+ *     to target Y, then continue to target — H → V → H
+ *   • Degenerate (same X or same Y): single straight segment
+ *
+ * The cable label is placed at the centre of the longest segment.
+ */
+function buildOrthogonalPath(
   sx: number, sy: number, srcSide: Side,
-  tx: number, ty: number, tgtSide: Side
+  tx: number, ty: number
 ): { d: string; labelX: number; labelY: number } {
-  const dist = Math.hypot(tx - sx, ty - sy);
-  const offset = Math.max(60, Math.min(260, dist * 0.42));
+  type Pt = [number, number];
+  const pts: Pt[] = [[sx, sy]];
 
-  const ctrl = (x: number, y: number, side: Side, off: number) => {
-    switch (side) {
-      case 'right':  return [x + off, y] as const;
-      case 'left':   return [x - off, y] as const;
-      case 'bottom': return [x, y + off] as const;
-      case 'top':    return [x, y - off] as const;
+  const straightH = Math.abs(ty - sy) < 1;
+  const straightV = Math.abs(tx - sx) < 1;
+  const isHExit   = srcSide === 'left' || srcSide === 'right';
+
+  if (straightH || straightV) {
+    // Perfectly horizontal or vertical — single segment
+    pts.push([tx, ty]);
+  } else if (isHExit) {
+    // H → V → H: run horizontal to midpoint, drop/rise to target Y, finish
+    const midX = (sx + tx) / 2;
+    pts.push([midX, sy], [midX, ty], [tx, ty]);
+  } else {
+    // V → H → V: drop/rise to midpoint, run horizontal to target X, finish
+    const midY = (sy + ty) / 2;
+    pts.push([sx, midY], [tx, midY], [tx, ty]);
+  }
+
+  // Build the SVG path string
+  const d = pts
+    .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`)
+    .join(' ');
+
+  // Place the label at the centre of the longest segment
+  let maxLen = -1;
+  let labelX = (sx + tx) / 2;
+  let labelY = (sy + ty) / 2;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [ax, ay] = pts[i];
+    const [bx, by] = pts[i + 1];
+    const len = Math.abs(ax - bx) + Math.abs(ay - by);
+    if (len > maxLen) {
+      maxLen = len;
+      labelX = (ax + bx) / 2;
+      labelY = (ay + by) / 2;
     }
-  };
+  }
 
-  const [c1x, c1y] = ctrl(sx, sy, srcSide, offset);
-  const [c2x, c2y] = ctrl(tx, ty, tgtSide, offset);
-
-  // Bezier midpoint at t=0.5: B(0.5) = (P0 + 3P1 + 3P2 + P3) / 8
-  const labelX = (sx + 3 * c1x + 3 * c2x + tx) / 8;
-  const labelY = (sy + 3 * c1y + 3 * c2y + ty) / 8;
-
-  return {
-    d: `M ${sx} ${sy} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${tx} ${ty}`,
-    labelX,
-    labelY,
-  };
+  return { d, labelX, labelY };
 }
 
 export function PowerCableEdge({
@@ -125,8 +163,13 @@ export function PowerCableEdge({
   const th = targetNode?.measured?.height;
 
   if (sp && tp && sw && sh && tw && th) {
-    const { src, tgt } = computeAttachments(sp.x, sp.y, sw, sh, tp.x, tp.y, tw, th);
-    const built = buildBezierPath(src.x, src.y, src.side, tgt.x, tgt.y, tgt.side);
+    const isCrossBuilding = edgeData?.route?.spansBuildings === true;
+    const { src, tgt } = computeAttachments(
+      sp.x, sp.y, sw, sh,
+      tp.x, tp.y, tw, th,
+      isCrossBuilding
+    );
+    const built = buildOrthogonalPath(src.x, src.y, src.side, tgt.x, tgt.y);
     edgePath = built.d;
     labelX = built.labelX;
     labelY = built.labelY;
