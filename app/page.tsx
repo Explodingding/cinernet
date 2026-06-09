@@ -11,6 +11,7 @@ import { getCascadeTargets } from '@/lib/troubleshooting';
 import { prepareMapTopology, getUsedEdgeTypes } from '@/lib/topologyFilters';
 import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
 import { computeDerivedStatuses } from '@/lib/faultCascade';
+import { assignParallelIndices } from '@/lib/parallelEdges';
 // computeBuildingCols is called inside prepareMapTopology via layoutNodes;
 // no longer needed at module level.
 
@@ -121,10 +122,18 @@ export default function Dashboard() {
     [buildingFilter, activeTier, visibleEdgeTypes, nodeStatuses, edgeStatuses]
   );
 
+  // Parallel-lane metadata injected once per topology change, before React Flow
+  // receives the edges.  Each edge gets parallelIndex / totalParallel /
+  // parallelBothEnds so PowerCableEdge can laterally offset co-linear cables.
+  const indexedEdges = useMemo(
+    () => assignParallelIndices(visibleEdges, visibleNodes),
+    [visibleEdges, visibleNodes]
+  );
+
   // Fault cascade — derived statuses computed at render time, never stored
   const derivedStatuses = useMemo(
-    () => computeDerivedStatuses(visibleNodes, visibleEdges),
-    [visibleNodes, visibleEdges]
+    () => computeDerivedStatuses(visibleNodes, indexedEdges),
+    [visibleNodes, indexedEdges]
   );
 
   // KPI counts across the full catalog (not just visible)
@@ -286,7 +295,7 @@ export default function Dashboard() {
       <div className="flex-1 relative overflow-hidden min-h-0">
         <TopologyMap
           nodes={visibleNodes}
-          edges={visibleEdges}
+          edges={indexedEdges}
           selectedId={selectedWithStatus?.data.id ?? null}
           buildingFilter={buildingFilter}
           onNodeSelect={handleNodeSelect}

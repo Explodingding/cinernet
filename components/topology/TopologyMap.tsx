@@ -107,26 +107,6 @@ export function TopologyMap({
     return result;
   }, [nodes, edges, derivedStatuses]);
 
-  // ── Parallel edge groups: edges sharing the same source→target pair get
-  //    incremental lane indices so the router can spread them apart.
-  const { edgeParallelIndex, edgeParallelCount } = useMemo(() => {
-    const groupCount: Record<string, number> = {};
-    const groupAssign: Record<string, number> = {};
-    const idx: Record<string, number> = {};
-    const total: Record<string, number> = {};
-    for (const e of edges) {
-      const k = `${e.source}__${e.target}`;
-      groupCount[k] = (groupCount[k] ?? 0) + 1;
-    }
-    for (const e of edges) {
-      const k = `${e.source}__${e.target}`;
-      idx[e.id]   = groupAssign[k] ?? 0;
-      groupAssign[k] = (groupAssign[k] ?? 0) + 1;
-      total[e.id] = groupCount[k];
-    }
-    return { edgeParallelIndex: idx, edgeParallelCount: total };
-  }, [edges]);
-
   const rfEdges = useMemo(
     () =>
       edges.map((edge) => ({
@@ -135,10 +115,10 @@ export function TopologyMap({
         target: edge.target,
         type: 'powerCable',
         data: {
+          // parallelIndex / totalParallel / parallelBothEnds are already injected
+          // by assignParallelIndices in page.tsx — spread them through unchanged.
           ...(edge as unknown as Record<string, unknown>),
           derivedStatus: derivedEdgeStatusMap.get(edge.id) ?? null,
-          parallelIndex: edgeParallelIndex[edge.id] ?? 0,
-          parallelTotal: edgeParallelCount[edge.id] ?? 1,
         },
         selected: edge.id === selectedId,
         zIndex: 0,
@@ -148,7 +128,7 @@ export function TopologyMap({
           transition: 'opacity 0.25s ease',
         },
       })) as Edge[],
-    [edges, selectedId, statusFilter, derivedEdgeStatusMap, edgeParallelIndex, edgeParallelCount]
+    [edges, selectedId, statusFilter, derivedEdgeStatusMap]
   );
 
   const onNodeClick = useCallback(

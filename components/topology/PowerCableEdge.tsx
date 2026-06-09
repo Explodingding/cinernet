@@ -18,20 +18,23 @@ interface AttachPoint {
 }
 
 /**
- * Choose which wall a cable exits/enters and apply a lane offset so that
- * multiple cables on the same source→target path render as distinct parallel
- * lines rather than overlapping.
+ * Choose which wall a cable exits/enters and apply independent lateral offsets
+ * to the source and target attachment points.
  *
  * @param forcedHorizontal  True for cross-building cables — forces left/right exits.
- * @param laneOffset        Perpendicular pixel offset for this lane.
- *                          For top/bottom walls the offset shifts X (fan out side-by-side).
- *                          For left/right walls the offset shifts Y (stack above/below).
+ * @param srcOffset         Perpendicular pixel offset on the SOURCE wall.
+ *                          Top/bottom walls: shifts X (cables fan side-by-side).
+ *                          Left/right walls: shifts Y (cables stack above/below).
+ * @param tgtOffset         Same convention, applied on the TARGET wall.
+ *                          Pass 0 for fan-out cables (source-only separation);
+ *                          pass the same value as srcOffset for exact pair cables.
  */
 function computeAttachments(
   sx: number, sy: number, sw: number, sh: number,
   tx: number, ty: number, tw: number, th: number,
   forcedHorizontal = false,
-  laneOffset = 0
+  srcOffset = 0,
+  tgtOffset = 0
 ): { src: AttachPoint; tgt: AttachPoint } {
   const sCX = sx + sw / 2;
   const sCY = sy + sh / 2;
@@ -56,21 +59,21 @@ function computeAttachments(
     tgtSide = dy > 0 ? 'top' : 'bottom';
   }
 
-  // Apply the lane offset perpendicular to the cable's dominant direction.
-  // Top/bottom walls: fans cables horizontally (laneOffset shifts X).
-  // Left/right walls: stacks cables vertically (laneOffset shifts Y).
-  const wallPoint = (nx: number, ny: number, nw: number, nh: number, side: Side): AttachPoint => {
+  const wallPoint = (
+    nx: number, ny: number, nw: number, nh: number,
+    side: Side, offset: number
+  ): AttachPoint => {
     switch (side) {
-      case 'left':   return { x: nx,          y: ny + nh / 2 + laneOffset, side };
-      case 'right':  return { x: nx + nw,     y: ny + nh / 2 + laneOffset, side };
-      case 'top':    return { x: nx + nw / 2 + laneOffset, y: ny,          side };
-      case 'bottom': return { x: nx + nw / 2 + laneOffset, y: ny + nh,     side };
+      case 'left':   return { x: nx,          y: ny + nh / 2 + offset, side };
+      case 'right':  return { x: nx + nw,     y: ny + nh / 2 + offset, side };
+      case 'top':    return { x: nx + nw / 2 + offset, y: ny,          side };
+      case 'bottom': return { x: nx + nw / 2 + offset, y: ny + nh,     side };
     }
   };
 
   return {
-    src: wallPoint(sx, sy, sw, sh, srcSide),
-    tgt: wallPoint(tx, ty, tw, th, tgtSide),
+    src: wallPoint(sx, sy, sw, sh, srcSide, srcOffset),
+    tgt: wallPoint(tx, ty, tw, th, tgtSide, tgtOffset),
   };
 }
 
@@ -151,8 +154,6 @@ export function PowerCableEdge({
 
   const edgeData = data as unknown as TopologyEdge & {
     derivedStatus?: DerivedStatus | null;
-    parallelIndex?: number;
-    parallelTotal?: number;
   };
 
   const cfg          = STATUS_CONFIG[edgeData?.status ?? 'operational'];
@@ -165,12 +166,26 @@ export function PowerCableEdge({
   const isDerivFault  = derivedStatus === 'derived-fault';
   const isDerivInv    = derivedStatus === 'derived-investigation';
 
-  // ── Lane offset for parallel cables ────────────────────────────────────────────────
-  const parallelIndex = edgeData?.parallelIndex ?? 0;
-  const parallelTotal = edgeData?.parallelTotal ?? 1;
-  const laneOffset = parallelTotal > 1
-    ? (parallelIndex - (parallelTotal - 1) / 2) * LANE_SPACING
+  // ── Lane offsets for parallel cables ──────────────────────────────────────────────
+  // parallelIndex / totalParallel / parallelBothEnds are injected by
+  // assignParallelIndices (lib/parallelEdges.ts) in page.tsx before the edges
+  // are passed to React Flow.
+  //
+  // Fan-out case (parallelBothEnds = false): offset source wall only, so cables
+  //   splay out of the source node like wires from a terminal block, while each
+  //   cable still arrives at its own target's natural centre.
+  // Pair case (parallelBothEnds = true): same offset on both walls, keeping the
+  //   two cables perfectly parallel for their entire run.
+  const parallelIndex   = edgeData?.parallelIndex   ?? 0;
+  const totalParallel   = edgeData?.totalParallel   ?? 1;
+  const bothEnds        = edgeData?.parallelBothEnds ?? false;
+
+  const laneOffset = totalParallel > 1
+    ? (parallelIndex - (totalParallel - 1) / 2) * LANE_SPACING
     : 0;
+
+  const srcOffset = laneOffset;
+  const tgtOffset = bothEnds ? laneOffset : 0;
 
   // ── Compute smart attachment points ────────────────────────────────────────────────
   let edgePath: string;
@@ -190,7 +205,8 @@ export function PowerCableEdge({
       sp.x, sp.y, sw, sh,
       tp.x, tp.y, tw, th,
       isCrossBuilding,
-      laneOffset
+      srcOffset,
+      tgtOffset
     );
     const built = buildOrthogonalPath(src.x, src.y, src.side, tgt.x, tgt.y);
     edgePath = built.d;

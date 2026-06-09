@@ -157,6 +157,16 @@ export interface TopologyEdgeInput {
   route?: CableRoute;
   externalRefs?: ExternalRefs;
   upstreamHint?: string;
+  /**
+   * Injected at render-time by `assignParallelIndices` — never set in data files.
+   * Used by PowerCableEdge to laterally offset co-linear cables so they render
+   * as distinct parallel lines rather than a single merged stroke.
+   */
+  parallelIndex?: number;
+  totalParallel?: number;
+  /** True when source and target are the same pair (offset both ends).
+   *  False for fan-out groups (offset source end only). */
+  parallelBothEnds?: boolean;
 }
 
 export type TopologyEdge = TopologyEdgeInput;
