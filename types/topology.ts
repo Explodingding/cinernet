@@ -80,6 +80,28 @@ export interface TroubleshootingStep {
   text: string;
 }
 
+export type DocType =
+  | 'drawing'       // SLD, layout, single-line drawing
+  | 'protocol'      // maintenance checklist / procedure
+  | 'commissioning' // first-energisation / handover record
+  | 'fault-report'  // incident or investigation record
+  | 'datasheet'     // manufacturer datasheet
+  | 'note';         // free-text annotation
+
+export interface DocEntry {
+  id: string;
+  title: string;
+  type: DocType;
+  /** Path relative to /public — opens in new tab if set */
+  url?: string;
+  /** Inline text displayed expanded in the drawer */
+  content?: string;
+  author: string;
+  /** ISO date YYYY-MM-DD */
+  date: string;
+  revision?: string;
+}
+
 export interface DeviceSpecs {
   voltage?: string;
   current?: string;
@@ -139,6 +161,8 @@ export interface TopologyNodeInput {
    * Nodes without this field fall back to the zone colour accent.
    */
   subsystem?: 'mv' | 'lv-400v' | 'lv-6kv' | 'lv-boost' | 'generator';
+  /** Pre-loaded documents attached to this device (drawings, protocols, etc.) */
+  docs?: DocEntry[];
 }
 
 export interface TopologyNode extends Omit<TopologyNodeInput, 'layout' | 'positionOverride'> {

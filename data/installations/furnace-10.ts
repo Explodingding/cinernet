@@ -50,6 +50,47 @@ export const furnace10Installation: SiteInstallation = {
         { id: 'trdp11-2', text: 'Measure busbar voltage: 400 V ±5%.' },
         { id: 'trdp11-3', text: 'If PFC capacitor trip — check cooling and capacitor fuses.' },
       ],
+      docs: [
+        {
+          id: 'doc-trdp11-sld',
+          title: 'SLD — Furnace 10 LV Distribution (TR-DP1.x)',
+          type: 'drawing',
+          url: '/cinernet/docs/SMT-5255.pdf',
+          author: 'Engineering dept.',
+          date: '2025-12-01',
+          revision: 'Rev. 2',
+        },
+        {
+          id: 'doc-trdp11-comm',
+          title: 'Commissioning Record — TR-DP1.1 First Energisation',
+          type: 'commissioning',
+          author: 'M. Nowak',
+          date: '2026-04-11',
+          content: `TR-DP1.1 PFC PANEL — COMMISSIONING RECORD
+Asset: TR-DP1.1 — PFC Panel 1 500 kVAr, Furnace 10 electrical room
+Date: 11 April 2026
+Commissioning engineer: M. Nowak
+
+PRE-ENERGISATION CHECKS:
+✓ Panel delivery inspection — no transport damage
+✓ Busbar torque verified — all connections at rated torque
+✓ PFC controller (Nokian Capacitor) settings programmed:
+   Target power factor: cos φ = 0.97
+   Response delay: 20 s per step
+   Harmonic filter enabled (5th + 7th harmonics)
+✓ ACB Q0 settings: 1 600 A rating, overload 100%, short-circuit delay 300 ms
+✓ Insulation test 500 V DC: L1=840MΩ, L2=910MΩ, L3=875MΩ — pass
+
+ENERGISATION SEQUENCE:
+09:42 — Supply cable LV-TR11-DP11 energised from TR1.1 LV busbar
+09:44 — Busbar voltage: L1-L2=401V, L2-L3=400V, L3-L1=402V — within tolerance
+09:50 — PFC relay auto-switched capacitor bank 1 (step 1) — power factor improved to 0.96
+10:05 — All 12 outgoing MCCBs tested individually — all operate correctly
+10:20 — 2-hour load soak test completed — temperature rise normal
+
+STATUS: PASSED — panel handed over to operations 11 April 2026`,
+        },
+      ],
     },
     {
       id: 'TR-DP1-2',
@@ -132,6 +173,54 @@ export const furnace10Installation: SiteInstallation = {
       troubleshootingSteps: [
         { id: 'f1mdp1-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
         { id: 'f1mdp1-2', text: 'Measure busbar voltage L1-L2-L3.' },
+      ],
+      docs: [
+        {
+          id: 'doc-f1mdp1-layout',
+          title: 'Furnace 10 — Panel Location Drawing',
+          type: 'drawing',
+          url: '/cinernet/docs/LAY-5246.pdf',
+          author: 'Engineering dept.',
+          date: '2026-01-20',
+          revision: 'Rev. 1',
+        },
+        {
+          id: 'doc-f1mdp1-op',
+          title: 'Operating Instructions — F1-MDP Distribution Panels',
+          type: 'protocol',
+          author: 'Maintenance dept.',
+          date: '2026-04-12',
+          revision: 'Rev. 1',
+          content: `OPERATING INSTRUCTIONS — F1-MDP DISTRIBUTION PANELS
+Applies to: F1-MDP-1 through F1-MDP-9 (Furnace 10 Ground Floor)
+Revision: 1 — April 2026
+
+NORMAL OPERATION:
+• Main ACB Q0 should be ON (green indicator). Check every shift start.
+• Busbar voltage L1/L2/L3: 400 V ±5%. Measure monthly at Q0 downstream terminals.
+• All outgoing MCCBs should be ON unless circuit is decommissioned (tagged + locked).
+• Panel interior temperature max 45 °C. Check ventilation louvres are unobstructed.
+
+ISOLATION PROCEDURE (for maintenance on downstream circuit):
+1. Identify the specific outgoing MCCB to be isolated (see circuit schedule on panel door).
+2. Inform shift supervisor — record in shift log.
+3. Switch MCCB to OFF position.
+4. Apply LOTO: insert locking hasp into MCCB handle; attach personal padlock.
+5. Attach isolation tag: "CIRCUIT ISOLATED — DO NOT RE-ENERGISE".
+6. Verify absence of voltage at downstream terminals with approved test meter.
+
+RE-ENERGISATION AFTER MAINTENANCE:
+1. Receive confirmation from authorised maintenance person that work is complete.
+2. Confirm all personnel are clear of the circuit.
+3. Remove LOTO and isolation tag.
+4. Switch MCCB to ON position — check load current on ammeter if fitted.
+5. Record re-energisation time and operator name in shift log.
+
+EMERGENCY:
+• If smoke, burning smell, or fire: open main ACB Q0 IMMEDIATELY, evacuate.
+• If MCCB trips repeatedly: DO NOT reset more than once. Investigate fault cause.
+• Emergency contact: Shift Supervisor ext. 2100 / Site Emergency 2999`,
+        },
       ],
     },
     {

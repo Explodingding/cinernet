@@ -79,6 +79,55 @@ export const utilityInstallation: SiteInstallation = {
         { id: 'mmv-2', text: 'Verify busbar voltage: 26–30 kV nominal.' },
         { id: 'mmv-3', text: 'Confirm both MAIN SUPPLY-1 and MAIN SUPPLY-2 are healthy before isolating one feeder.' },
       ],
+      docs: [
+        {
+          id: 'doc-mmv-sld',
+          title: 'SLD — Main MV Switchgear Utility Building',
+          type: 'drawing',
+          url: '/cinernet/docs/SMT-5250.pdf',
+          author: 'P. Smith / Siemens',
+          date: '2025-11-14',
+          revision: 'Rev. 3',
+        },
+        {
+          id: 'doc-mmv-panel-loc',
+          title: 'Electrical Panel Locations — Utility Building',
+          type: 'drawing',
+          url: '/cinernet/docs/panel-locations.pdf',
+          author: 'Engineering dept.',
+          date: '2026-03-18',
+          revision: 'Model 5.5',
+        },
+        {
+          id: 'doc-mmv-comm',
+          title: 'Commissioning Record — Initial Energisation',
+          type: 'commissioning',
+          author: 'P. Smith',
+          date: '2026-04-10',
+          content: `MAIN MV PANEL — First Energisation Record
+Date: 10 April 2026
+Engineer: P. Smith (Siemens Service)
+Witnessed by: J. Kowalski (Cinernet)
+
+CHECKS PERFORMED:
+✓ Busbar continuity test — all three phases confirmed
+✓ Insulation resistance (phase-to-earth): L1 = 2 840 MΩ, L2 = 3 110 MΩ, L3 = 2 970 MΩ (all > 1 000 MΩ — pass)
+✓ VCB operating mechanism tested (5 close/open cycles each cubicle)
+✓ Protection relay settings uploaded and verified (SIPROTEC 7SJ85)
+✓ Earth fault protection tested at 10 % of rated current
+✓ Interlocking logic verified — no simultaneous close of main/tie breakers
+✓ SICAM-Q100 energy analyser commissioned and reading correctly
+
+ENERGISATION SEQUENCE:
+08:14 — MAIN SUPPLY-1 energised at 28.4 kV
+08:17 — Busbar voltage stable, all outgoing VCBs confirmed open
+08:22 — F10 feeder VCB closed; secondary voltage at TR1-1 confirmed
+08:35 — F20 feeder VCB closed; secondary voltage at TR2-1 confirmed
+08:41 — Commissioning complete, system handed over to operations
+
+STATUS: PASSED — panel ready for service`,
+        },
+      ],
     },
 
     // ── F10 MV Panel — 35 kV (physically in Utility Building) ──────────────────
@@ -170,6 +219,39 @@ export const utilityInstallation: SiteInstallation = {
       troubleshootingSteps: [
         { id: 'tr1-1-1', text: 'Check winding temperature — max 80 °C (thermistor).' },
         { id: 'tr1-1-2', text: 'Measure LV output on 400 V busbar: 395–405 V.' },
+      ],
+      docs: [
+        {
+          id: 'doc-tr11-protocol',
+          title: 'Annual Maintenance Protocol — Power Transformer',
+          type: 'protocol',
+          author: 'Maintenance dept.',
+          date: '2026-04-15',
+          revision: 'Rev. 1',
+          content: `TR1-1 ANNUAL MAINTENANCE PROTOCOL
+Asset: 2 500 kVA 35 kV / 400 V oil-immersed transformer
+Frequency: Annual (April)
+Required qualifications: HV-authorised electrician
+
+PRE-WORK (de-energised, locked-out, earthed):
+1. Confirm LOTO: MV VCB open and locked, LV ACB open, earthing switches closed.
+2. Visually inspect oil level in conservator — refill if below MIN mark.
+3. Check for oil leaks at gaskets, bushings, drain valve — record any findings.
+4. Clean HV / LV bushings with dry cloth; inspect for tracking or cracks.
+5. Tighten HV cable lugs and LV busbar bolts (torque: HV 120 N·m, LV 80 N·m).
+6. Test Buchholz relay: hand-actuate float — alarm and trip relays must respond.
+7. Inspect silica-gel breather — replace if > 2/3 pink (saturated).
+8. Check oil temperature thermometer calibration (test at 20 °C reference).
+9. Measure insulation resistance (winding-to-earth and winding-to-winding) — min 1 000 MΩ.
+10. Perform turns-ratio test on all tap positions — deviation < 0.5%.
+
+POST-WORK:
+11. Remove all earthing, close guards, restore LOTO in reverse order.
+12. Re-energise at off-load tap changer position per operating schedule.
+13. Verify oil temperature stabilises within ±5 °C of ambient after 30 min.
+
+Sign-off required by: Maintenance Engineer + Shift Supervisor`,
+        },
       ],
     },
     {
@@ -342,6 +424,49 @@ export const utilityInstallation: SiteInstallation = {
       troubleshootingSteps: [
         { id: 'tr-spare-1', text: 'Confirm spare transformer is on isolator before energisation.' },
         { id: 'tr-spare-2', text: 'Check MV cubicle 66-15-020c-1 — open position confirmed.' },
+      ],
+      docs: [
+        {
+          id: 'doc-tr-spare-fault',
+          title: 'Fault Investigation Report — TR-SPARE',
+          type: 'fault-report',
+          author: 'J. Kowalski',
+          date: '2026-05-15',
+          revision: 'Open',
+          content: `FAULT INVESTIGATION REPORT
+Asset: TR-SPARE — 3 150 kVA 35 kV / 400 V spare transformer
+Report No.: FIR-2026-012
+Date opened: 15 May 2026
+Reported by: J. Kowalski (Shift Supervisor)
+Status: UNDER INVESTIGATION
+
+OBSERVATION:
+During routine weekly patrol (14 May 2026, 22:40), operator noticed unusually warm
+surface temperature on the LV bushing cluster of TR-SPARE. Infrared scan performed
+at 23:15 confirmed Phase L2 bushing at 67 °C vs. ambient 21 °C (ΔT = 46 K).
+Normal operating ΔT for this asset at no-load: < 5 K.
+
+IMMEDIATE ACTIONS TAKEN:
+- Transformer isolated (MV VCB and LV ACB opened, earth switches closed) at 23:30.
+- LOTO applied: tag ref LOTO-2026-0112.
+- SCADA alarm suppressed; status changed to INVESTIGATION.
+
+ROOT CAUSE INVESTIGATION (in progress):
+• Initial hypothesis: loose or corroded contact at L2 bushing terminal.
+• Oil sample taken 15/05 — awaiting dissolved gas analysis (DGA) from lab.
+• Insulation resistance measured: L1=2800 MΩ, L2=48 MΩ (significantly low), L3=2950 MΩ.
+• Low L2 insulation resistance suggests possible winding fault or moisture ingress.
+
+NEXT STEPS:
+□ ABB service engineer on-site — scheduled 4 June 2026 (ticket ABB-2026-0421)
+□ DGA results expected by 30 May 2026
+□ Potential repair: rewind L2 coil or replace complete LV winding assembly
+
+IMPACT:
+TR-SPARE is the site hot-standby for TR1.x and TR2.x transformers. While it remains
+offline, there is no standby capacity for a main transformer failure. Risk accepted by
+Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
+        },
       ],
     },
     {

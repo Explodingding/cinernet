@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
+import type { TopologyNode, TopologyEdge, Status, DocEntry, DocType } from '@/types/topology';
 import { isTopologyEdge } from '@/types/topology';
 import { BUILDINGS } from '@/data/buildings';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
 import { ASSET_CONFIG, SPEC_LABELS, ZONE_CONFIG } from '@/lib/zoneConfig';
 import { getCascadeTargets } from '@/lib/troubleshooting';
 import { PLC_ITEM_GROUPS, type TerminalBoxDetail } from '@/types/terminalBox';
+import type { ElementHistoryApi } from '@/lib/useElementHistory';
+import type { ChangeLogEntry } from '@/types/history';
 
 interface DetailDrawerProps {
   element: TopologyNode | TopologyEdge | null;
@@ -19,6 +21,8 @@ interface DetailDrawerProps {
   onIntegrationAction: (message: string) => void;
   /** Inject this element as a fault for live demo */
   onSimulateFault: (id: string, type: 'node' | 'edge') => void;
+  /** History API for displaying and writing change-log entries */
+  history: ElementHistoryApi;
 }
 
 const STATUS_ACTIONS: { status: Status; label: string }[] = [
@@ -37,10 +41,15 @@ export function DetailDrawer({
   onMarkResolved,
   onIntegrationAction,
   onSimulateFault,
+  history,
 }: DetailDrawerProps) {
   const [checkedStepsByElement, setCheckedStepsByElement] = useState<
     Record<string, string[]>
   >({});
+  const [noteText, setNoteText] = useState('');
+  const [noteAuthor, setNoteAuthor] = useState('Operator');
+  const [showNoteForm, setShowNoteForm] = useState(false);
+  const [expandedDocId, setExpandedDocId] = useState<string | null>(null);
 
   const checkedSteps = new Set(
     element ? checkedStepsByElement[element.id] ?? [] : []
@@ -464,6 +473,27 @@ export function DetailDrawer({
                   )}
               </Section>
 
+              {/* ── Documents & History ── */}
+              <DocsAndHistory
+                element={element}
+                history={history}
+                noteText={noteText}
+                noteAuthor={noteAuthor}
+                showNoteForm={showNoteForm}
+                expandedDocId={expandedDocId}
+                onNoteTextChange={setNoteText}
+                onNoteAuthorChange={setNoteAuthor}
+                onToggleNoteForm={() => { setShowNoteForm((v) => !v); setNoteText(''); }}
+                onSaveNote={() => {
+                  if (noteText.trim()) {
+                    history.addNote(element.id, noteText.trim(), noteAuthor.trim() || 'Operator');
+                    setNoteText('');
+                    setShowNoteForm(false);
+                  }
+                }}
+                onToggleDoc={(id) => setExpandedDocId((prev) => (prev === id ? null : id))}
+              />
+
               <Section title="Change status" icon="◎">
                 <div className="flex flex-col gap-2">
                   {STATUS_ACTIONS.map((action) => {
@@ -606,6 +636,328 @@ function TerminalBoxSection({ detail }: { detail: TerminalBoxDetail }) {
         </div>
       )}
     </Section>
+  );
+}
+
+// ─── Document type metadata ───────────────────────────────────────────────────
+
+const DOC_TYPE_META: Record<DocType, { icon: string; label: string; color: string }> = {
+  drawing:       { icon: '⬚', label: 'Drawing',       color: '#38bdf8' },
+  protocol:      { icon: '✓', label: 'Protocol',      color: '#34d399' },
+  commissioning: { icon: '⚡', label: 'Commissioning', color: '#a78bfa' },
+  'fault-report':{ icon: '⚠', label: 'Fault report',  color: '#f87171' },
+  datasheet:     { icon: '≡', label: 'Datasheet',     color: '#94a3b8' },
+  note:          { icon: '✎', label: 'Note',          color: '#fbbf24' },
+};
+
+// ─── DocsAndHistory section ───────────────────────────────────────────────────
+
+interface DocsAndHistoryProps {
+  element: TopologyNode | TopologyEdge;
+  history: ElementHistoryApi;
+  noteText: string;
+  noteAuthor: string;
+  showNoteForm: boolean;
+  expandedDocId: string | null;
+  onNoteTextChange: (v: string) => void;
+  onNoteAuthorChange: (v: string) => void;
+  onToggleNoteForm: () => void;
+  onSaveNote: () => void;
+  onToggleDoc: (id: string) => void;
+}
+
+function DocsAndHistory({
+  element,
+  history,
+  noteText,
+  noteAuthor,
+  showNoteForm,
+  expandedDocId,
+  onNoteTextChange,
+  onNoteAuthorChange,
+  onToggleNoteForm,
+  onSaveNote,
+  onToggleDoc,
+}: DocsAndHistoryProps) {
+  const docs = (element as TopologyNode).docs ?? [];
+  const log = history.getHistory(element.id);
+  const hasContent = docs.length > 0 || log.length > 0;
+
+  return (
+    <Section title="Documents & history" icon="📋">
+      {/* Pre-loaded document cards */}
+      {docs.length > 0 && (
+        <div className="flex flex-col gap-2 mb-4">
+          {docs.map((doc) => (
+            <DocumentCard
+              key={doc.id}
+              doc={doc}
+              expanded={expandedDocId === doc.id}
+              onToggle={() => onToggleDoc(doc.id)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Change-log timeline */}
+      {log.length > 0 && (
+        <div className="flex flex-col gap-0 mb-4 relative">
+          <div
+            className="absolute left-[7px] top-3 bottom-3 w-px"
+            style={{ background: 'rgba(255,255,255,0.06)' }}
+          />
+          {log.map((entry) => (
+            <HistoryEntryRow key={entry.id} entry={entry} />
+          ))}
+        </div>
+      )}
+
+      {!hasContent && !showNoteForm && (
+        <p className="text-xs text-slate-500 italic mb-3">No documents or history yet.</p>
+      )}
+
+      {/* Add note form */}
+      {showNoteForm ? (
+        <div
+          className="rounded-lg p-3 mt-1"
+          style={{
+            background: 'rgba(251,191,36,0.05)',
+            border: '1px solid rgba(251,191,36,0.2)',
+          }}
+        >
+          <textarea
+            value={noteText}
+            onChange={(e) => onNoteTextChange(e.target.value)}
+            placeholder="Type your note…"
+            rows={3}
+            className="w-full text-xs text-slate-200 resize-none rounded-md px-2.5 py-2 mb-2 focus:outline-none"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              fontFamily: 'inherit',
+            }}
+          />
+          <input
+            value={noteAuthor}
+            onChange={(e) => onNoteAuthorChange(e.target.value)}
+            placeholder="Your name"
+            className="w-full text-xs text-slate-300 rounded-md px-2.5 py-1.5 mb-2 focus:outline-none"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+            }}
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={onSaveNote}
+              disabled={!noteText.trim()}
+              className="flex-1 min-h-[36px] rounded-md text-xs font-bold transition-all"
+              style={{
+                background: noteText.trim() ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.03)',
+                border: noteText.trim() ? '1px solid rgba(251,191,36,0.4)' : '1px solid rgba(255,255,255,0.06)',
+                color: noteText.trim() ? '#fbbf24' : '#475569',
+                cursor: noteText.trim() ? 'pointer' : 'not-allowed',
+              }}
+            >
+              Save note
+            </button>
+            <button
+              onClick={onToggleNoteForm}
+              className="px-4 min-h-[36px] rounded-md text-xs text-slate-500 transition-colors"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          onClick={onToggleNoteForm}
+          className="w-full min-h-[40px] rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors mt-1"
+          style={{
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            color: '#64748b',
+          }}
+        >
+          <span style={{ fontSize: 14 }}>+</span>
+          Add note
+        </button>
+      )}
+    </Section>
+  );
+}
+
+function DocumentCard({
+  doc,
+  expanded,
+  onToggle,
+}: {
+  doc: DocEntry;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const meta = DOC_TYPE_META[doc.type];
+  return (
+    <div
+      className="rounded-lg overflow-hidden"
+      style={{
+        background: 'rgba(255,255,255,0.03)',
+        border: `1px solid rgba(255,255,255,0.07)`,
+      }}
+    >
+      {/* Header row */}
+      <div className="flex items-center gap-2 px-3 py-2.5">
+        <span
+          className="flex items-center justify-center w-6 h-6 rounded shrink-0 text-[11px]"
+          style={{ background: `${meta.color}18`, color: meta.color }}
+        >
+          {meta.icon}
+        </span>
+        <div className="flex-1 min-w-0">
+          <div className="text-xs font-semibold text-slate-200 truncate">{doc.title}</div>
+          <div className="flex items-center gap-2 mt-0.5">
+            <span className="text-[9px] uppercase tracking-wider font-bold" style={{ color: meta.color }}>
+              {meta.label}
+            </span>
+            {doc.revision && (
+              <span
+                className="text-[9px] px-1 rounded"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  color: '#64748b',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                }}
+              >
+                {doc.revision}
+              </span>
+            )}
+            <span className="text-[9px] text-slate-600">{doc.date}</span>
+            <span className="text-[9px] text-slate-600 truncate">· {doc.author}</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
+          {doc.url && (
+            <a
+              href={doc.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1 px-2 py-1 rounded text-[9px] font-bold uppercase tracking-wide transition-colors"
+              style={{
+                background: `${meta.color}18`,
+                border: `1px solid ${meta.color}40`,
+                color: meta.color,
+              }}
+            >
+              PDF ↗
+            </a>
+          )}
+          {doc.content && (
+            <button
+              onClick={onToggle}
+              className="flex items-center justify-center w-6 h-6 rounded text-slate-500 transition-colors"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                transform: expanded ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.2s',
+              }}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Expandable content */}
+      {doc.content && expanded && (
+        <div
+          className="px-3 pb-3 text-xs text-slate-300 leading-relaxed whitespace-pre-wrap"
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.05)',
+            paddingTop: 10,
+          }}
+        >
+          {doc.content}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HistoryEntryRow({ entry }: { entry: ChangeLogEntry }) {
+  const date = new Date(entry.timestamp);
+  const dateStr = date.toLocaleDateString('pl-PL', {
+    day: '2-digit', month: '2-digit', year: 'numeric',
+  });
+  const timeStr = date.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+
+  return (
+    <div className="flex gap-3 pb-3 relative pl-5">
+      {/* Timeline dot */}
+      <div
+        className="absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0"
+        style={{
+          background: entry.type === 'status-change' ? 'rgba(99,102,241,0.25)' : 'rgba(251,191,36,0.2)',
+          border: `1px solid ${entry.type === 'status-change' ? 'rgba(99,102,241,0.5)' : 'rgba(251,191,36,0.4)'}`,
+          zIndex: 1,
+        }}
+      >
+        <span style={{ fontSize: 7, color: entry.type === 'status-change' ? '#818cf8' : '#fbbf24' }}>
+          {entry.type === 'status-change' ? '⇄' : '✎'}
+        </span>
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap mb-0.5">
+          <span className="text-[9px] font-semibold text-slate-400">{entry.author}</span>
+          <span className="text-[9px] text-slate-600">{dateStr} {timeStr}</span>
+        </div>
+
+        {entry.type === 'status-change' && entry.fromStatus && entry.toStatus && (
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <StatusChip status={entry.fromStatus} />
+            <span style={{ color: '#475569', fontSize: 9 }}>→</span>
+            <StatusChip status={entry.toStatus} />
+          </div>
+        )}
+
+        {entry.type === 'note-added' && entry.note && (
+          <p
+            className="text-[11px] leading-relaxed mt-0.5"
+            style={{
+              color: '#94a3b8',
+              borderLeft: '2px solid rgba(251,191,36,0.3)',
+              paddingLeft: 8,
+            }}
+          >
+            {entry.note}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StatusChip({ status }: { status: Status }) {
+  const cfg = STATUS_CONFIG[status];
+  return (
+    <span
+      className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+      style={{
+        background: cfg.bgColor,
+        color: cfg.color,
+        border: `1px solid ${cfg.borderColor}`,
+      }}
+    >
+      {cfg.label}
+    </span>
   );
 }
 

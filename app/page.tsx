@@ -12,6 +12,7 @@ import { prepareMapTopology, getUsedEdgeTypes } from '@/lib/topologyFilters';
 import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
 import { computeDerivedStatuses } from '@/lib/faultCascade';
 import { assignParallelIndices } from '@/lib/parallelEdges';
+import { useElementHistory } from '@/lib/useElementHistory';
 // computeBuildingCols is called inside prepareMapTopology via layoutNodes;
 // no longer needed at module level.
 
@@ -61,6 +62,7 @@ export default function Dashboard() {
   );
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [layoutMode, setLayoutMode] = useState(false);
+  const history = useElementHistory();
 
   // Press L to toggle Layout Mode (dev helper — does not ship as a visible UI element)
   useEffect(() => {
@@ -196,10 +198,16 @@ export default function Dashboard() {
 
   const handleStatusChange = useCallback(
     (id: string, type: 'node' | 'edge', newStatus: Status) => {
+      // Derive the current status before overwriting so the history entry is accurate
+      const prevStatus: Status =
+        type === 'node'
+          ? (nodeStatuses[id] ?? (topologyNodeInputs.find((n) => n.id === id)?.status ?? 'operational'))
+          : (edgeStatuses[id] ?? (topologyEdges.find((e) => e.id === id)?.status ?? 'operational'));
       if (type === 'node') setNodeStatuses((p) => ({ ...p, [id]: newStatus }));
       else setEdgeStatuses((p) => ({ ...p, [id]: newStatus }));
+      history.addStatusChange(id, prevStatus, newStatus);
     },
-    []
+    [nodeStatuses, edgeStatuses, history]
   );
 
   const handleMarkResolved = useCallback(
@@ -314,6 +322,7 @@ export default function Dashboard() {
           onMarkResolved={handleMarkResolved}
           onIntegrationAction={showToast}
           onSimulateFault={handleSimulateFault}
+          history={history}
         />
       </div>
 
