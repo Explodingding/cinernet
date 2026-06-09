@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import { isTopologyEdge } from '@/types/topology';
@@ -35,18 +35,21 @@ export function DetailDrawer({
   onMarkResolved,
   onIntegrationAction,
 }: DetailDrawerProps) {
-  const [checkedSteps, setCheckedSteps] = useState<Set<string>>(new Set());
+  const [checkedStepsByElement, setCheckedStepsByElement] = useState<
+    Record<string, string[]>
+  >({});
 
-  useEffect(() => {
-    setCheckedSteps(new Set());
-  }, [element?.id]);
+  const checkedSteps = new Set(
+    element ? checkedStepsByElement[element.id] ?? [] : []
+  );
 
   const toggleStep = (stepId: string) => {
-    setCheckedSteps((prev) => {
-      const next = new Set(prev);
-      if (next.has(stepId)) next.delete(stepId);
-      else next.add(stepId);
-      return next;
+    if (!element) return;
+    setCheckedStepsByElement((prev) => {
+      const current = new Set(prev[element.id] ?? []);
+      if (current.has(stepId)) current.delete(stepId);
+      else current.add(stepId);
+      return { ...prev, [element.id]: [...current] };
     });
   };
 
