@@ -19,7 +19,7 @@ import { ZoneLegend } from './ZoneLegend';
 import { PowerCableEdge } from './PowerCableEdge';
 import type { TopologyNode, TopologyEdge, Status } from '@/types/topology';
 import type { BuildingFilter } from '@/lib/topologyFilters';
-import type { DerivedStatuses } from '@/lib/faultCascade';
+import type { DerivedStatuses, DerivedStatus } from '@/lib/faultCascade';
 import type { BuildingColConfig } from '@/lib/siteLayout';
 
 const nodeTypes: NodeTypes = {
@@ -90,6 +90,43 @@ export function TopologyMap({
     return [...bgNodes, ...deviceNodes];
   }, [nodes, selectedId, statusFilter, buildingFilter, derivedStatuses, backgroundCells]);
 
+  // ── Derived edge status: an edge inherits fault/investigation if its
+  //    source node is faulted/derived-faulted in the BFS cascade result.
+  const derivedEdgeStatusMap = useMemo((): Map<string, DerivedStatus> => {
+    const nodeActual = new Map(nodes.map((n) => [n.id, n.status]));
+    const result = new Map<string, DerivedStatus>();
+    for (const e of edges) {
+      const src = nodeActual.get(e.source);
+      const srcD = derivedStatuses.get(e.source);
+      if (src === 'fault' || srcD === 'derived-fault') {
+        result.set(e.id, 'derived-fault');
+      } else if (src === 'investigation' || srcD === 'derived-investigation') {
+        result.set(e.id, 'derived-investigation');
+      }
+    }
+    return result;
+  }, [nodes, edges, derivedStatuses]);
+
+  // ── Parallel edge groups: edges sharing the same source→target pair get
+  //    incremental lane indices so the router can spread them apart.
+  const { edgeParallelIndex, edgeParallelCount } = useMemo(() => {
+    const groupCount: Record<string, number> = {};
+    const groupAssign: Record<string, number> = {};
+    const idx: Record<string, number> = {};
+    const total: Record<string, number> = {};
+    for (const e of edges) {
+      const k = `${e.source}__${e.target}`;
+      groupCount[k] = (groupCount[k] ?? 0) + 1;
+    }
+    for (const e of edges) {
+      const k = `${e.source}__${e.target}`;
+      idx[e.id]   = groupAssign[k] ?? 0;
+      groupAssign[k] = (groupAssign[k] ?? 0) + 1;
+      total[e.id] = groupCount[k];
+    }
+    return { edgeParallelIndex: idx, edgeParallelCount: total };
+  }, [edges]);
+
   const rfEdges = useMemo(
     () =>
       edges.map((edge) => ({
@@ -97,7 +134,12 @@ export function TopologyMap({
         source: edge.source,
         target: edge.target,
         type: 'powerCable',
-        data: edge as unknown as Record<string, unknown>,
+        data: {
+          ...(edge as unknown as Record<string, unknown>),
+          derivedStatus: derivedEdgeStatusMap.get(edge.id) ?? null,
+          parallelIndex: edgeParallelIndex[edge.id] ?? 0,
+          parallelTotal: edgeParallelCount[edge.id] ?? 1,
+        },
         selected: edge.id === selectedId,
         zIndex: 0,
         style: {
@@ -106,7 +148,7 @@ export function TopologyMap({
           transition: 'opacity 0.25s ease',
         },
       })) as Edge[],
-    [edges, selectedId, statusFilter]
+    [edges, selectedId, statusFilter, derivedEdgeStatusMap, edgeParallelIndex, edgeParallelCount]
   );
 
   const onNodeClick = useCallback(

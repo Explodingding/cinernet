@@ -3,7 +3,11 @@
 import { useInternalNode, EdgeLabelRenderer } from '@xyflow/react';
 import type { EdgeProps } from '@xyflow/react';
 import type { TopologyEdge } from '@/types/topology';
+import type { DerivedStatus } from '@/lib/faultCascade';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
+
+/** Pixel gap between adjacent parallel cable lanes */
+const LANE_SPACING = 14;
 
 type Side = 'left' | 'right' | 'top' | 'bottom';
 
@@ -14,15 +18,20 @@ interface AttachPoint {
 }
 
 /**
- * Choose which wall a cable exits/enters based on node relative positions.
+ * Choose which wall a cable exits/enters and apply a lane offset so that
+ * multiple cables on the same source→target path render as distinct parallel
+ * lines rather than overlapping.
  *
- * @param forcedHorizontal  True for cross-building cables — forces left/right
- *                          exits so the horizontal run precedes the vertical drop.
+ * @param forcedHorizontal  True for cross-building cables — forces left/right exits.
+ * @param laneOffset        Perpendicular pixel offset for this lane.
+ *                          For top/bottom walls the offset shifts X (fan out side-by-side).
+ *                          For left/right walls the offset shifts Y (stack above/below).
  */
 function computeAttachments(
   sx: number, sy: number, sw: number, sh: number,
   tx: number, ty: number, tw: number, th: number,
-  forcedHorizontal = false
+  forcedHorizontal = false,
+  laneOffset = 0
 ): { src: AttachPoint; tgt: AttachPoint } {
   const sCX = sx + sw / 2;
   const sCY = sy + sh / 2;
@@ -37,27 +46,25 @@ function computeAttachments(
   let tgtSide: Side;
 
   if (forcedHorizontal) {
-    // Cross-building cable: always exit/enter from the side walls so the
-    // orthogonal router emits a horizontal run at source Y, then drops/rises
-    // vertically to the target level — classic SLD cross-building routing.
     srcSide = dx > 0 ? 'right' : 'left';
     tgtSide = dx > 0 ? 'left' : 'right';
   } else if (adx > ady) {
-    // Primarily horizontal
     srcSide = dx > 0 ? 'right' : 'left';
     tgtSide = dx > 0 ? 'left' : 'right';
   } else {
-    // Primarily vertical (or equal) — standard SLD downward / upward flow
     srcSide = dy > 0 ? 'bottom' : 'top';
     tgtSide = dy > 0 ? 'top' : 'bottom';
   }
 
+  // Apply the lane offset perpendicular to the cable's dominant direction.
+  // Top/bottom walls: fans cables horizontally (laneOffset shifts X).
+  // Left/right walls: stacks cables vertically (laneOffset shifts Y).
   const wallPoint = (nx: number, ny: number, nw: number, nh: number, side: Side): AttachPoint => {
     switch (side) {
-      case 'left':   return { x: nx,          y: ny + nh / 2, side };
-      case 'right':  return { x: nx + nw,     y: ny + nh / 2, side };
-      case 'top':    return { x: nx + nw / 2, y: ny,          side };
-      case 'bottom': return { x: nx + nw / 2, y: ny + nh,     side };
+      case 'left':   return { x: nx,          y: ny + nh / 2 + laneOffset, side };
+      case 'right':  return { x: nx + nw,     y: ny + nh / 2 + laneOffset, side };
+      case 'top':    return { x: nx + nw / 2 + laneOffset, y: ny,          side };
+      case 'bottom': return { x: nx + nw / 2 + laneOffset, y: ny + nh,     side };
     }
   };
 
@@ -142,15 +149,30 @@ export function PowerCableEdge({
   const sourceNode = useInternalNode(source);
   const targetNode = useInternalNode(target);
 
-  const edgeData = data as unknown as TopologyEdge;
-  const cfg = STATUS_CONFIG[edgeData?.status ?? 'operational'];
-  const isMv = edgeData?.edgeType === 'mv';
-  const activeColor = isMv ? '#f472b6' : cfg.color;
-  const isOperational = edgeData?.status === 'operational';
-  const isFault = edgeData?.status === 'fault';
+  const edgeData = data as unknown as TopologyEdge & {
+    derivedStatus?: DerivedStatus | null;
+    parallelIndex?: number;
+    parallelTotal?: number;
+  };
+
+  const cfg          = STATUS_CONFIG[edgeData?.status ?? 'operational'];
+  const isMv         = edgeData?.edgeType === 'mv';
+  const isOperational   = edgeData?.status === 'operational';
+  const isFault         = edgeData?.status === 'fault';
   const isInvestigation = edgeData?.status === 'investigation';
 
-  // ── Compute smart attachment points ───────────────────────────────────────────────
+  const derivedStatus = edgeData?.derivedStatus ?? null;
+  const isDerivFault  = derivedStatus === 'derived-fault';
+  const isDerivInv    = derivedStatus === 'derived-investigation';
+
+  // ── Lane offset for parallel cables ────────────────────────────────────────────────
+  const parallelIndex = edgeData?.parallelIndex ?? 0;
+  const parallelTotal = edgeData?.parallelTotal ?? 1;
+  const laneOffset = parallelTotal > 1
+    ? (parallelIndex - (parallelTotal - 1) / 2) * LANE_SPACING
+    : 0;
+
+  // ── Compute smart attachment points ────────────────────────────────────────────────
   let edgePath: string;
   let labelX: number;
   let labelY: number;
@@ -167,30 +189,58 @@ export function PowerCableEdge({
     const { src, tgt } = computeAttachments(
       sp.x, sp.y, sw, sh,
       tp.x, tp.y, tw, th,
-      isCrossBuilding
+      isCrossBuilding,
+      laneOffset
     );
     const built = buildOrthogonalPath(src.x, src.y, src.side, tgt.x, tgt.y);
     edgePath = built.d;
     labelX = built.labelX;
     labelY = built.labelY;
   } else {
-    // Node measurements not yet available — straight line fallback
     edgePath = `M ${sourceX} ${sourceY} L ${targetX} ${targetY}`;
     labelX = (sourceX + targetX) / 2;
     labelY = (sourceY + targetY) / 2;
   }
 
-  // ── Visual styling ─────────────────────────────────────────────────────────────────
+  // ── Visual styling ──────────────────────────────────────────────────────────────────
+  // Priority: actual fault > derived-fault cascade > MV type > normal status
+  const activeColor =
+    isFault              ? '#ef4444'
+    : isDerivFault       ? '#f87171'
+    : isInvestigation    ? '#fbbf24'
+    : isDerivInv         ? '#fde68a'
+    : isMv               ? '#f472b6'
+    : cfg.color;
+
   const pathId = `flow-path-${id}`;
+
   const strokeColor = selected ? activeColor : `${activeColor}cc`;
-  const strokeWidth = selected ? 3 : isMv ? 2.5 : 2;
-  const dashArray = isFault || isInvestigation ? '6 3' : undefined;
-  const glowFilter = `drop-shadow(0 0 4px ${isMv ? 'rgba(244,114,182,0.4)' : cfg.glowColor})`;
-  const dashAnimation = isFault
-    ? 'dash-march 0.55s linear infinite'
-    : isInvestigation
-    ? 'dash-march-slow 1.2s linear infinite'
+  const strokeWidth =
+    selected                      ? 3
+    : isMv                        ? 2.5
+    : isFault || isDerivFault     ? 2.5
+    : 2;
+
+  // Actual fault: fast marching red dashes.
+  // Derived fault: slower marching lighter-red dashes (upstream cascade indicator).
+  // Investigation: slow amber dashes.
+  const dashArray =
+    isFault || isInvestigation ? '6 3'
+    : isDerivFault             ? '10 5'
     : undefined;
+
+  const dashAnimation =
+    isFault       ? 'dash-march 0.55s linear infinite'
+    : isDerivFault ? 'dash-march 1.4s linear infinite'
+    : isInvestigation ? 'dash-march-slow 1.2s linear infinite'
+    : undefined;
+
+  const glowFilter =
+    isFault || isDerivFault
+      ? `drop-shadow(0 0 6px rgba(239,68,68,0.65))`
+      : isInvestigation || isDerivInv
+        ? `drop-shadow(0 0 5px rgba(251,191,36,0.5))`
+        : `drop-shadow(0 0 4px ${isMv ? 'rgba(244,114,182,0.4)' : cfg.glowColor})`;
 
   return (
     <>
@@ -204,6 +254,12 @@ export function PowerCableEdge({
           style={{ filter: 'blur(4px)', opacity: 0.35 }} />
       )}
 
+      {/* Red glow halo for fault-cascade edges (even when not selected) */}
+      {(isFault || isDerivFault) && !selected && (
+        <path d={edgePath} stroke="#ef4444" strokeWidth={6} fill="none"
+          style={{ filter: 'blur(5px)', opacity: isDerivFault ? 0.2 : 0.35 }} />
+      )}
+
       {/* Main cable line */}
       <path
         id={pathId}
@@ -215,8 +271,8 @@ export function PowerCableEdge({
         style={{ filter: glowFilter, animation: dashAnimation }}
       />
 
-      {/* Animated power-flow dot on operational cables */}
-      {isOperational && (
+      {/* Animated power-flow dot — only on operational cables with no cascade */}
+      {isOperational && !isDerivFault && !isDerivInv && (
         <circle r="4" fill={activeColor}
           style={{ filter: `drop-shadow(0 0 5px ${activeColor})` }}>
           <animateMotion dur="2.4s" repeatCount="indefinite" rotate="auto">
@@ -225,7 +281,7 @@ export function PowerCableEdge({
         </circle>
       )}
 
-      {/* Cable label at bezier midpoint */}
+      {/* Cable label */}
       <EdgeLabelRenderer>
         <div
           style={{
@@ -242,7 +298,12 @@ export function PowerCableEdge({
               fontFamily: 'var(--font-jetbrains-mono)',
               background: selected ? 'rgba(10, 15, 26, 0.98)' : 'rgba(10, 15, 26, 0.82)',
               color: activeColor,
-              border: `1px solid ${selected ? activeColor : isMv ? 'rgba(244,114,182,0.40)' : cfg.borderColor}`,
+              border: `1px solid ${
+                selected                  ? activeColor
+                : isFault || isDerivFault ? 'rgba(239,68,68,0.50)'
+                : isMv                    ? 'rgba(244,114,182,0.40)'
+                : cfg.borderColor
+              }`,
               backdropFilter: 'blur(4px)',
               textShadow: selected ? `0 0 8px ${cfg.color}` : 'none',
               boxShadow: selected ? `0 0 8px ${cfg.glowColor}` : 'none',

@@ -126,28 +126,34 @@ export function DeviceNode({ data, selected }: NodeProps) {
     ? transformerVoltageLabel(nodeData.subsystem)
     : null;
 
-  // Derived status colours (softer than real faults)
+  // Derived status colours — derived-fault gets a stronger red so the cascade
+  // path stands out clearly even on dark backgrounds.
   const derivedColor = derivedStatus === 'derived-fault' ? '#f87171' : '#fbbf24';
-  const derivedAlpha = derivedStatus === 'derived-fault' ? '30' : '20';
 
   const animation =
     nodeData.status === 'fault'
       ? 'fault-pulse 1.6s ease-in-out infinite'
       : nodeData.status === 'investigation'
         ? 'investigation-pulse 3s ease-in-out infinite'
-        : 'none';
+        : derivedStatus === 'derived-fault'
+          ? 'investigation-pulse 2.2s ease-in-out infinite'
+          : 'none';
 
   const baseShadow = selected
     ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
-    : derivedStatus
-      ? `0 0 0 1.5px ${derivedColor}40, 0 0 10px ${derivedColor}20, 0 4px 16px rgba(0,0,0,0.5)`
-      : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
+    : derivedStatus === 'derived-fault'
+      ? `0 0 0 1.5px #f8717155, 0 0 18px rgba(248,113,113,0.30), 0 4px 16px rgba(0,0,0,0.5)`
+      : derivedStatus === 'derived-investigation'
+        ? `0 0 0 1.5px #fbbf2430, 0 0 10px rgba(251,191,36,0.15), 0 4px 16px rgba(0,0,0,0.5)`
+        : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
 
   const borderColor = selected
     ? cfg.color
-    : derivedStatus
-      ? `${derivedColor}${derivedAlpha}`
-      : cfg.borderColor;
+    : derivedStatus === 'derived-fault'
+      ? '#f8717155'
+      : derivedStatus === 'derived-investigation'
+        ? '#fbbf2430'
+        : cfg.borderColor;
 
   const circuitCount = (nodeData as unknown as { circuitCount?: number }).circuitCount;
   const showCircuitBadge =
