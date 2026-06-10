@@ -75,36 +75,32 @@ export const BUILDINGS: Record<BuildingId, BuildingConfig> = {
 };
 
 /**
- * Full site building list (logical order — used for dropdowns / filters).
- *   Utility is the central hub.
- *   Furnace buildings are production halls.
- *   Batch House + Cullet Tower are process peripherals.
- *   Warehouse is a future placeholder.
+ * Active building list (logical order — used for dropdowns / filters).
+ *
+ * HYPER-FOCUSED SCOPE (stakeholder pivot, June 2026): only the three core
+ * facility areas are active.  Furnace-20 and Warehouse are frozen — their
+ * BUILDINGS configs remain above (the BuildingId type requires all keys)
+ * but they are excluded from every order list, so they never render.
+ * The Cullet Tower is modelled as a subsystem INSIDE the Batch House block.
  */
 export const SITE_BUILDING_ORDER: BuildingId[] = [
   'utility',
   'furnace-10',
-  'furnace-20',
   'batch-house',
-  'cullet-tower',
-  'warehouse',
 ];
 
 /**
  * Physical left-to-right column order on the map canvas:
  *
- *   F10  |  Utility (centre)  |  F20  |  Batch House  |  Cullet Tower
- *  ←Left                                                      Right→
+ *   Furnace-10  |  Utility (centre)  |  Batch House + Cullet Tower
+ *  ←Left                                                     Right→
  *
- * F10 is the active production hall (Phase 1) — sits left of the Utility hub.
- * F20 is future scope (Phase 2) — reserved space to the right of Utility.
- * Batch House + Cullet Tower are process peripherals grouped on the far right.
- * Warehouse is NOT included in the canvas column order (no electrical data yet).
+ * F10 is the active production hall — left wing.
+ * Utility is the electrical spine — centre column.
+ * Batch House (with the Cullet Tower subsystem inside its block) — right wing.
  */
 export const MAP_COLUMN_ORDER: BuildingId[] = [
   'furnace-10',
   'utility',
-  'furnace-20',
   'batch-house',
-  'cullet-tower',
 ];

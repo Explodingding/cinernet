@@ -85,88 +85,22 @@ export const siteFeederEdges: TopologyEdgeInput[] = [
     ],
   },
 
-  // ── Utility Building → Furnace 20: TR2.1 → TR-DP2.1 ────────────────────────
-  {
-    id: 'LV-TR2-1-TO-DP2-1',
-    name: 'LV Feeder TR2.1 → TR-DP2.1 (Furnace 20)',
-    source: 'TR2-1',
-    target: 'TR-DP2-1',
-    edgeType: 'power',
-    status: 'operational',
-    specs: {
-      voltage: '400 V AC',
-      notes: 'LV output from TR2.1 (2500 kVA, Utility Building) to TR-DP2.1 PFC panel (Furnace 20).',
-    },
-    route: {
-      pathType: 'underground',
-      spansBuildings: true,
-      fromBuilding: 'utility',
-      toBuilding: 'furnace-20',
-    },
-    troubleshootingSteps: [
-      { id: 'tr21-dp21-1', text: 'Measure LV voltage at TR2.1 secondary terminals.' },
-      { id: 'tr21-dp21-2', text: 'Measure voltage at TR-DP2.1 incoming — 400 V ±5%.' },
-    ],
-  },
+  // Furnace 20 feeders (TR2.x → TR-DP2.x) are frozen with the Phase 2 scope —
+  // restore them when furnace-20.ts is re-added to SITE_INSTALLATIONS.
 
-  // ── Utility Building → Furnace 20: TR2.2 → TR-DP2.2 ────────────────────────
+  // ── Utility Building → Batch House: UT-MDP → DC-BH-01 ──────────────────────
   {
-    id: 'LV-TR2-2-TO-DP2-2',
-    name: 'LV Feeder TR2.2 → TR-DP2.2 (Furnace 20)',
-    source: 'TR2-2',
-    target: 'TR-DP2-2',
-    edgeType: 'power',
-    status: 'operational',
-    specs: {
-      voltage: '400 V AC',
-      notes: 'LV output from TR2.2 (2500 kVA) to TR-DP2.2 PFC panel (Furnace 20).',
-    },
-    route: {
-      pathType: 'underground',
-      spansBuildings: true,
-      fromBuilding: 'utility',
-      toBuilding: 'furnace-20',
-    },
-    troubleshootingSteps: [
-      { id: 'tr22-dp22-1', text: 'Measure voltage at TR2.2 secondary and TR-DP2.2 incoming.' },
-    ],
-  },
-
-  // ── Utility Building → Furnace 20: TR2.3 → TR-DP2.3 ────────────────────────
-  {
-    id: 'LV-TR2-3-TO-DP2-3',
-    name: 'LV Feeder TR2.3 → TR-DP2.3 (Furnace 20)',
-    source: 'TR2-3',
-    target: 'TR-DP2-3',
-    edgeType: 'power',
-    status: 'operational',
-    specs: {
-      voltage: '400 V AC',
-      notes: 'LV output from TR2.3 (2500 kVA) to TR-DP2.3 PFC panel (Furnace 20).',
-    },
-    route: {
-      pathType: 'underground',
-      spansBuildings: true,
-      fromBuilding: 'utility',
-      toBuilding: 'furnace-20',
-    },
-    troubleshootingSteps: [
-      { id: 'tr23-dp23-1', text: 'Measure voltage at TR2.3 secondary and TR-DP2.3 incoming.' },
-    ],
-  },
-
-  // ── Utility Building → Batch House: UT-MDP → BH-MDP ────────────────────────
-  {
-    id: 'LV-FEED-BH-MDP',
-    name: 'LV Feeder UT-MDP → BH-MDP (Batch House)',
+    id: 'LV-FEED-BH-DC01',
+    name: 'LV Feeder UT-MDP → DC-BH-01 (Batch House)',
     source: 'UT-MDP',
-    target: 'BH-MDP',
+    target: 'DC-BH-01',
     edgeType: 'power',
     status: 'operational',
     specs: {
       voltage: '400 V AC',
+      crossSection: '4×185 mm² Cu',
       installationType: 'Underground + cable tray',
-      notes: 'Utility building main distribution panel feeds Batch House main panel.',
+      notes: 'Utility main distribution panel (UT-MDP) feeds Batch House distribution cabinet DC-BH-01 — main incoming supply for batch hall + cullet tower subsystem.',
     },
     route: {
       pathType: 'underground',
@@ -175,7 +109,7 @@ export const siteFeederEdges: TopologyEdgeInput[] = [
       toBuilding: 'batch-house',
     },
     troubleshootingSteps: [
-      { id: 'feed-bh-1', text: 'Measure voltage at UT-MDP outgoing Q-BH and BH-MDP incoming terminals.' },
+      { id: 'feed-bh-1', text: 'Measure voltage at UT-MDP outgoing Q-BH and DC-BH-01 incoming terminals.' },
       { id: 'feed-bh-2', text: 'Check underground cable route — joint pit if voltage drop > 2 V.' },
     ],
   },
