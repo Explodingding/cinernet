@@ -1,4 +1,9 @@
 import type { SiteInstallation } from '@/types/topology';
+import {
+  mainHvPanelCells,
+  mainFeedTransformers,
+  buildMainPanelEdges,
+} from './main-hv-panel';
 
 /**
  * Utility Building — central electrical hub for the Lommel site.
@@ -8,364 +13,17 @@ import type { SiteInstallation } from '@/types/topology';
  *   SMT-5250  CNRBE-PMEP18-AB-XXX  Power Distribution System Riser Plan (400 V)
  *   LAY-5246  CNRBE-PMEP20-UB-000  Utility Building Ground Floor (0.00 level)
  *
- * Physical layout (ground floor, room UG03 / UG24–25):
- *   MAIN HV PANEL | F10 HV PANEL | F20 HV PANEL  (all in utility building per LAY-5246)
- *   TR-COMP.4 | TR1.2 | TR-COMP.1 | TR-COMP.2 | TR-COMP.3 | TR1.3 | TR-C | TR1.1
- *   TR-S | TR2.1 | TR2.3 | TR2.2
- *   Generator room UG25 / Sync room UG24
+ * Ground floor (0 m) — 26 kV MAIN PANEL cells 1–11 (UG03) with feeder transformers
+ * TR-01…TR-04 above the lineup; compressor bays and generator rooms UG24–25.
  */
 export const utilityInstallation: SiteInstallation = {
   id: 'utility',
   label: 'Utility Building',
   nodes: [
 
-    // ── Main HV Switchgear — 26 kV Utility Building basement ──────────────────
-    {
-      id: 'MAIN-MV-PANEL',
-      name: 'HV Main Switchgear (26 kV)',
-      assetType: 'hv-switchgear',
-      layer: 'hv-switchgear',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'hv',
-      layout: { building: 'utility', branchIndex: 0 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-basement-hv',
-        floor: 'Basement',
-        elevation: '−3 m',
-        area: 'Main substation room — basement level',
-        gridRef: '66-15-014a',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.MAIN_HV.STATUS', osapiensAssetId: 'AST-MAIN-MV' },
-      specs: {
-        voltage: '26 kV (future 30 kV)',
-        current: '1 250 A',
-        manufacturer: 'Siemens VCB-3AH5',
-        notes: 'Un:26kV Ur:30kV Ir:1250A Ik:25kA/3s. 3× incoming HV supplies from external Distribution Building (Track 1 + Track 2 twin). SICAM-Q100 energy analyser.',
-      },
-      troubleshootingSteps: [
-        { id: 'mmv-1', text: 'Check VCB status on incomer cubicles (P1/P2 indicators).' },
-        { id: 'mmv-2', text: 'Verify busbar voltage: 26–30 kV nominal.' },
-        { id: 'mmv-3', text: 'Confirm all three HV incomer supplies from Distribution Building are healthy before isolating one feeder.' },
-      ],
-      docs: [
-        {
-          id: 'doc-mmv-sld',
-          title: 'SLD — Main MV Switchgear Utility Building',
-          type: 'drawing',
-          url: '/cinernet/docs/SMT-5250.pdf',
-          author: 'P. Smith / Siemens',
-          date: '2025-11-14',
-          revision: 'Rev. 3',
-        },
-        {
-          id: 'doc-mmv-panel-loc',
-          title: 'Electrical Panel Locations — Utility Building',
-          type: 'drawing',
-          url: '/cinernet/docs/panel-locations.pdf',
-          author: 'Engineering dept.',
-          date: '2026-03-18',
-          revision: 'Model 5.5',
-        },
-        {
-          id: 'doc-mmv-comm',
-          title: 'Commissioning Record — Initial Energisation',
-          type: 'commissioning',
-          author: 'P. Smith',
-          date: '2026-04-10',
-          content: `MAIN MV PANEL — First Energisation Record
-Date: 10 April 2026
-Engineer: P. Smith (Siemens Service)
-Witnessed by: J. Kowalski (Cinernet)
-
-CHECKS PERFORMED:
-✓ Busbar continuity test — all three phases confirmed
-✓ Insulation resistance (phase-to-earth): L1 = 2 840 MΩ, L2 = 3 110 MΩ, L3 = 2 970 MΩ (all > 1 000 MΩ — pass)
-✓ VCB operating mechanism tested (5 close/open cycles each cubicle)
-✓ Protection relay settings uploaded and verified (SIPROTEC 7SJ85)
-✓ Earth fault protection tested at 10 % of rated current
-✓ Interlocking logic verified — no simultaneous close of main/tie breakers
-✓ SICAM-Q100 energy analyser commissioned and reading correctly
-
-ENERGISATION SEQUENCE:
-08:14 — MAIN SUPPLY-1 energised at 28.4 kV
-08:17 — Busbar voltage stable, all outgoing VCBs confirmed open
-08:22 — F10 feeder VCB closed; secondary voltage at TR1-1 confirmed
-08:35 — F20 feeder VCB closed; secondary voltage at TR2-1 confirmed
-08:41 — Commissioning complete, system handed over to operations
-
-STATUS: PASSED — panel ready for service`,
-        },
-      ],
-    },
-
-    // ── F10 HV Panel — 26 kV (physically in Utility Building) ──────────────────
-    {
-      id: 'F10-MV-PANEL',
-      name: 'Furnace 10 HV Switchgear (26 kV)',
-      assetType: 'hv-switchgear',
-      layer: 'hv-switchgear',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'hv',
-      layout: { building: 'utility', branchIndex: 1 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Mid power panels room UG03',
-        gridRef: '66-15-014d/e/f',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.F10_MV.STATUS', osapiensAssetId: 'AST-F10-MV' },
-      specs: {
-        voltage: '26 kV',
-        current: '1 250 A',
-        manufacturer: 'Siemens VCB-3AH5',
-        notes: 'Fed from MAIN MV PANEL via 2×3(1×240)+(1×240 spare) 26 kV cable 459 m. Outgoing feeders to TR1.1/1.2/1.3, TR-SPARE, TR-COMP-LV, TR-COMP-1/2, TR-BOOSTING 1.1–1.4, WAREHOUSE, RING 10-20.',
-      },
-      troubleshootingSteps: [
-        { id: 'f10mv-1', text: 'Check incoming feeder 66-15-014b-5 VCB status.' },
-        { id: 'f10mv-2', text: 'Verify busbar continuity — ring 10-20 tie breaker position.' },
-      ],
-    },
-
-    // ── F20 HV Panel — 26 kV (physically in Utility Building) ──────────────────
-    {
-      id: 'F20-MV-PANEL',
-      name: 'Furnace 20 HV Switchgear (26 kV)',
-      assetType: 'hv-switchgear',
-      layer: 'hv-switchgear',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'hv',
-      layout: { building: 'utility', branchIndex: 2 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Mid power panels room UG03',
-        gridRef: '66-15-014d/e/f (F20 section)',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.F20_MV.STATUS', osapiensAssetId: 'AST-F20-MV' },
-      specs: {
-        voltage: '26 kV',
-        current: '1 250 A',
-        manufacturer: 'Siemens VCB-3AH5',
-        notes: 'Fed from MAIN MV PANEL via 2×3(1×240)+(1×240 spare) 26 kV cable. Outgoing feeders to TR2.1/2.2/2.3, TR-DPS, TR-COMP-3/4, TR-BOOSTING 2.1–2.4, RING 20-10.',
-      },
-      troubleshootingSteps: [
-        { id: 'f20mv-1', text: 'Check incoming feeder 66-15-014b-6 VCB status.' },
-        { id: 'f20mv-2', text: 'Verify ring 20-10 tie breaker — normally open during single-feed operation.' },
-      ],
-    },
-
-    // ── Furnace 10 Transformers (2 500 kVA each, 35/0.4 kV) ────────────────────
-    {
-      id: 'TR1-1',
-      name: 'TR 1.1 — 2 500 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'lv-400v',
-      layout: { building: 'utility', branchIndex: 0 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG06',
-        gridRef: '66-15-020b-1',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.TR1_1.STATUS', osapiensAssetId: 'AST-TR1-1' },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '2 500 kVA',
-        notes: 'Cable from F10 MV Panel: 3(1×95)mm² 26 kV EXeCG, 134 m. LV output → TR-DP1.1 PFC panel (Furnace 10).',
-      },
-      troubleshootingSteps: [
-        { id: 'tr1-1-1', text: 'Check winding temperature — max 80 °C (thermistor).' },
-        { id: 'tr1-1-2', text: 'Measure LV output on 400 V busbar: 395–405 V.' },
-      ],
-      docs: [
-        {
-          id: 'doc-tr11-protocol',
-          title: 'Annual Maintenance Protocol — Power Transformer',
-          type: 'protocol',
-          author: 'Maintenance dept.',
-          date: '2026-04-15',
-          revision: 'Rev. 1',
-          content: `TR1-1 ANNUAL MAINTENANCE PROTOCOL
-Asset: 2 500 kVA 26 kV / 400 V oil-immersed transformer
-Frequency: Annual (April)
-Required qualifications: HV-authorised electrician
-
-PRE-WORK (de-energised, locked-out, earthed):
-1. Confirm LOTO: MV VCB open and locked, LV ACB open, earthing switches closed.
-2. Visually inspect oil level in conservator — refill if below MIN mark.
-3. Check for oil leaks at gaskets, bushings, drain valve — record any findings.
-4. Clean HV / LV bushings with dry cloth; inspect for tracking or cracks.
-5. Tighten HV cable lugs and LV busbar bolts (torque: HV 120 N·m, LV 80 N·m).
-6. Test Buchholz relay: hand-actuate float — alarm and trip relays must respond.
-7. Inspect silica-gel breather — replace if > 2/3 pink (saturated).
-8. Check oil temperature thermometer calibration (test at 20 °C reference).
-9. Measure insulation resistance (winding-to-earth and winding-to-winding) — min 1 000 MΩ.
-10. Perform turns-ratio test on all tap positions — deviation < 0.5%.
-
-POST-WORK:
-11. Remove all earthing, close guards, restore LOTO in reverse order.
-12. Re-energise at off-load tap changer position per operating schedule.
-13. Verify oil temperature stabilises within ±5 °C of ambient after 30 min.
-
-Sign-off required by: Maintenance Engineer + Shift Supervisor`,
-        },
-      ],
-    },
-    {
-      id: 'TR1-2',
-      name: 'TR 1.2 — 2 500 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'lv-400v',
-      layout: { building: 'utility', branchIndex: 1 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG07',
-        gridRef: '66-15-020b-2',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.TR1_2.STATUS', osapiensAssetId: 'AST-TR1-2' },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '2 500 kVA',
-        notes: 'Cable from F10 MV Panel: 3(1×95)mm² 26 kV EXeCG, 39 m. LV output → TR-DP1.2 PFC panel.',
-      },
-      troubleshootingSteps: [
-        { id: 'tr1-2-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr1-2-2', text: 'Measure LV output 400 V ±5%.' },
-      ],
-    },
-    {
-      id: 'TR1-3',
-      name: 'TR 1.3 — 2 500 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'lv-400v',
-      layout: { building: 'utility', branchIndex: 2 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG08',
-        gridRef: '66-15-020b-3',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.TR1_3.STATUS', osapiensAssetId: 'AST-TR1-3' },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '2 500 kVA',
-        notes: 'Cable from F10 MV Panel: 3(1×95)mm² 26 kV EXeCG, 28 m. LV output → TR-DP1.3 PFC panel.',
-      },
-      troubleshootingSteps: [
-        { id: 'tr1-3-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr1-3-2', text: 'Measure LV output 400 V ±5%.' },
-      ],
-    },
-
-    // ── Furnace 20 Transformers (2 500 kVA each, 35/0.4 kV) ────────────────────
-    {
-      id: 'TR2-1',
-      name: 'TR 2.1 — 2 500 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'lv-400v',
-      layout: { building: 'utility', branchIndex: 3 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG12',
-        gridRef: '66-15-020b-4',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.TR2_1.STATUS', osapiensAssetId: 'AST-TR2-1' },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '2 500 kVA',
-        notes: 'Cable from F20 MV Panel: 3(1×95)mm² 26 kV EXeCG, 128 m. LV output → TR-DP2.1 PFC panel (Furnace 20).',
-      },
-      troubleshootingSteps: [
-        { id: 'tr2-1-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr2-1-2', text: 'Measure LV output 400 V ±5%.' },
-      ],
-    },
-    {
-      id: 'TR2-2',
-      name: 'TR 2.2 — 2 500 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'lv-400v',
-      layout: { building: 'utility', branchIndex: 4 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG13',
-        gridRef: '66-15-020b-5',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.TR2_2.STATUS', osapiensAssetId: 'AST-TR2-2' },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '2 500 kVA',
-        notes: 'Cable from F20 MV Panel: 3(1×95)mm² 26 kV EXeCG. LV output → TR-DP2.2 PFC panel.',
-      },
-      troubleshootingSteps: [
-        { id: 'tr2-2-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr2-2-2', text: 'Measure LV output 400 V ±5%.' },
-      ],
-    },
-    {
-      id: 'TR2-3',
-      name: 'TR 2.3 — 2 500 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'lv-400v',
-      layout: { building: 'utility', branchIndex: 5 },
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG14',
-        gridRef: '66-15-020b-6',
-      },
-      externalRefs: { scadaTag: 'LOMMEL.TR2_3.STATUS', osapiensAssetId: 'AST-TR2-3' },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '2 500 kVA',
-        notes: 'Cable from F20 MV Panel: 3(1×95)mm² 26 kV EXeCG. LV output → TR-DP2.3 PFC panel.',
-      },
-      troubleshootingSteps: [
-        { id: 'tr2-3-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr2-3-2', text: 'Measure LV output 400 V ±5%.' },
-      ],
-    },
+    // ── 26 kV MAIN PANEL lineup (cells 1–11) + feeder transformers TR-01…04 ───
+    ...mainHvPanelCells,
+    ...mainFeedTransformers,
 
     // ── TR Spare + TR Compressor LV ─────────────────────────────────────────────
     {
@@ -374,7 +32,7 @@ Sign-off required by: Maintenance Engineer + Shift Supervisor`,
       assetType: 'transformer',
       layer: 'transformer',
       status: 'investigation',
-      displayTier: 1,
+      displayTier: 2,
       subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 6 },
       physicalLocation: {
@@ -389,7 +47,7 @@ Sign-off required by: Maintenance Engineer + Shift Supervisor`,
       specs: {
         voltage: '26 kV / 400 V',
         power: '3 150 kVA',
-        notes: 'Spare transformer — standby for TR1.x or TR2.x replacement. Cable from F10 MV Panel: 3(1×95)mm² 26 kV EXeCG, 21 m.',
+        notes: 'Spare transformer — standby for main feeder transformer replacement. Fed from MAIN PANEL Cell 11 tie position.',
       },
       troubleshootingSteps: [
         { id: 'tr-spare-1', text: 'Confirm spare transformer is on isolator before energisation.' },
@@ -445,7 +103,7 @@ Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
       assetType: 'transformer',
       layer: 'transformer',
       status: 'operational',
-      displayTier: 1,
+      displayTier: 2,
       subsystem: 'lv-400v',
       layout: { building: 'utility', branchIndex: 7 },
       physicalLocation: {
@@ -460,7 +118,7 @@ Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
       specs: {
         voltage: '26 kV / 400 V',
         power: '3 150 kVA',
-        notes: 'LV supply for turbo compressor auxiliaries and utility distribution. Cable from F10 MV Panel: 3(1×95)mm² 26 kV EXeCG, 50 m. LV output → TR-DPC PFC panel.',
+        notes: 'Legacy compressor auxiliary transformer — superseded by TR-02 utility feeder at Tier 1.',
       },
       troubleshootingSteps: [
         { id: 'tr-comp-lv-1', text: 'Check winding temperature — max 80 °C.' },
@@ -599,7 +257,7 @@ Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
       externalRefs: { scadaTag: 'LOMMEL.TR_DPC.STATUS', osapiensAssetId: 'AST-TR-DPC' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
-        notes: 'IP31, Form 4B TYPE6, PROCESS. PFC with 1500 kVAr harmonic filter. Fed from TR-COMP-LV (TR-C).',
+        notes: 'IP31, Form 4B TYPE6, PROCESS. PFC with 1500 kVAr harmonic filter. Fed from TR-02 (Utility feeder transformer).',
         manufacturer: 'TBC',
       },
       troubleshootingSteps: [
@@ -823,251 +481,108 @@ Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
 
   edges: [
 
-    // ── HV incoming from external Substation is in substation.ts (3 parallel cables) ──
+    // ── 26 kV MAIN PANEL busbar + feeder risers (cells 1–11 → TR-01…04) ────────
+    ...buildMainPanelEdges(),
 
-    // ── Main HV Panel → F10 HV Panel ────────────────────────────────────────────
+    // ── HV incoming from external Substation is in substation.ts ─────────────────
+
+    // ── TR-02 (Utility) → LV distribution chain ────────────────────────────────
     {
-      id: 'MV-MAIN-TO-F10',
-      name: 'MV Feeder Main → F10 MV Panel',
-      source: 'MAIN-MV-PANEL',
-      target: 'F10-MV-PANEL',
-      edgeType: 'hv',
+      id: 'LV-TR02-TO-UTMDP',
+      name: 'LV Feed TR-02 → UT-MDP',
+      source: 'TR-02',
+      target: 'UT-MDP',
+      edgeType: 'power',
       status: 'operational',
       specs: {
-        crossSection: '2×3(1×240)+(1×240 spare) mm² 26 kV EXeCG',
-        length: '459 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014b-5 → 66-15-014d-1. Dual cable run with spare core.',
+        voltage: '400 V',
+        notes: 'Main utility LV distribution — TR-02 secondary to UT-MDP incoming.',
       },
-      route: { pathType: 'underground', spansBuildings: false },
+      route: { pathType: 'internal', spansBuildings: false },
       troubleshootingSteps: [
-        { id: 'mv-f10-1', text: 'Check VCB 66-15-014b-5 position and lockout status.' },
+        { id: 'tr02-utmdp-1', text: 'Measure voltage at TR-02 LV busbar and UT-MDP incoming — 400 V ±5%.' },
       ],
     },
-
-    // ── Main MV Panel → F20 MV Panel ────────────────────────────────────────────
     {
-      id: 'MV-MAIN-TO-F20',
-      name: 'MV Feeder Main → F20 MV Panel',
-      source: 'MAIN-MV-PANEL',
-      target: 'F20-MV-PANEL',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '2×3(1×240)+(1×240 spare) mm² 26 kV EXeCG',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014b-6 → 66-15-014d-3.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-
-    // ── F10 MV Panel → TR1.1 / 1.2 / 1.3 ──────────────────────────────────────
-    {
-      id: 'MV-F10-TR1-1',
-      name: 'MV Cable F10 MV Panel → TR 1.1',
-      source: 'F10-MV-PANEL',
-      target: 'TR1-1',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '134 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-1 → 66-15-020b-1.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F10-TR1-2',
-      name: 'MV Cable F10 MV Panel → TR 1.2',
-      source: 'F10-MV-PANEL',
-      target: 'TR1-2',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '39 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-2 → 66-15-020b-2.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F10-TR1-3',
-      name: 'MV Cable F10 MV Panel → TR 1.3',
-      source: 'F10-MV-PANEL',
-      target: 'TR1-3',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '28 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-3 → 66-15-020b-3.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F10-TR-SPARE',
-      name: 'MV Cable F10 MV Panel → TR Spare',
-      source: 'F10-MV-PANEL',
-      target: 'TR-SPARE',
-      edgeType: 'hv',
-      status: 'investigation',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '21 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-4 → 66-15-020c-1. Normally isolated — spare transformer.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F10-COMP-LV',
-      name: 'MV Cable F10 MV Panel → TR Compressor LV',
-      source: 'F10-MV-PANEL',
-      target: 'TR-COMP-LV',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '50 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-7 → 66-15-020c-2.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-
-    // ── F20 MV Panel → TR2.1 / 2.2 / 2.3 ──────────────────────────────────────
-    {
-      id: 'MV-F20-TR2-1',
-      name: 'MV Cable F20 MV Panel → TR 2.1',
-      source: 'F20-MV-PANEL',
-      target: 'TR2-1',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '128 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-13 → 66-15-020b-4.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F20-TR2-2',
-      name: 'MV Cable F20 MV Panel → TR 2.2',
-      source: 'F20-MV-PANEL',
-      target: 'TR2-2',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-14 → 66-15-020b-5.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F20-TR2-3',
-      name: 'MV Cable F20 MV Panel → TR 2.3',
-      source: 'F20-MV-PANEL',
-      target: 'TR2-3',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-15 → 66-15-020b-6.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-
-    // ── Compressor transformer feeders (26 kV) ─────────────────────────────────
-    {
-      id: 'MV-F10-COMP1',
-      name: 'MV Cable F10 MV Panel → TR Compressor-1',
-      source: 'F10-MV-PANEL',
-      target: 'TR-COMP-1',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '32 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-5 → 66-15-020d-1.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F10-COMP2',
-      name: 'MV Cable F10 MV Panel → TR Compressor-2',
-      source: 'F10-MV-PANEL',
-      target: 'TR-COMP-2',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '31 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-6 → 66-15-020d-2.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F20-COMP3',
-      name: 'MV Cable F20 MV Panel → TR Compressor-3',
-      source: 'F20-MV-PANEL',
-      target: 'TR-COMP-3',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '36 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014f-16 → 66-15-020d-4.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-    {
-      id: 'MV-F20-COMP4',
-      name: 'MV Cable F20 MV Panel → TR Compressor-4',
-      source: 'F20-MV-PANEL',
-      target: 'TR-COMP-4',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        length: '22 m',
-        voltage: '26 kV',
-        notes: 'Reference 66-15-014e-3 → 66-15-020d-3.',
-      },
-      route: { pathType: 'underground', spansBuildings: false },
-      troubleshootingSteps: [],
-    },
-
-    // ── TR Compressor LV → TR-DPC ────────────────────────────────────────────────
-    {
-      id: 'LV-COMP-LV-TO-DPC',
-      name: 'LV Feed TR Compressor LV → TR-DPC',
-      source: 'TR-COMP-LV',
+      id: 'LV-TR02-TO-DPC',
+      name: 'LV Feed TR-02 → TR-DPC',
+      source: 'TR-02',
       target: 'TR-DPC',
       edgeType: 'power',
       status: 'operational',
-      specs: { voltage: '400 V', notes: 'TR-DPC PFC panel fed from TR Compressor LV (TR-C).' },
+      specs: {
+        voltage: '400 V',
+        notes: 'TR-DPC PFC panel fed from TR-02 utility feeder transformer.',
+      },
       route: { pathType: 'internal', spansBuildings: false },
+      troubleshootingSteps: [],
+    },
+
+    // ── Tier 2/3 legacy transformer bays (fed from panel tie cell) ───────────────
+    {
+      id: 'HV-CELL05-TO-COMP-LV',
+      name: '26 kV feeder Cell 5 → TR Compressor LV',
+      source: 'MAIN-HV-CELL-05',
+      target: 'TR-COMP-LV',
+      edgeType: 'hv',
+      status: 'operational',
+      specs: { voltage: '26 kV', notes: 'Legacy compressor LV transformer bay — Tier 2 detail.' },
+      route: { pathType: 'riser', spansBuildings: false },
+      troubleshootingSteps: [],
+    },
+    {
+      id: 'HV-CELL11-TO-TR-SPARE',
+      name: '26 kV feeder Cell 11 → TR Spare',
+      source: 'MAIN-HV-CELL-11',
+      target: 'TR-SPARE',
+      edgeType: 'hv',
+      status: 'investigation',
+      specs: { voltage: '26 kV', notes: 'Spare transformer bay — normally isolated.' },
+      route: { pathType: 'riser', spansBuildings: false },
+      troubleshootingSteps: [],
+    },
+    {
+      id: 'HV-CELL11-COMP1',
+      name: '26 kV feeder Cell 11 → TR Compressor-1',
+      source: 'MAIN-HV-CELL-11',
+      target: 'TR-COMP-1',
+      edgeType: 'hv',
+      status: 'operational',
+      specs: { voltage: '26 kV', notes: '6 kV compressor transformer — Tier 3 detail.' },
+      route: { pathType: 'riser', spansBuildings: false },
+      troubleshootingSteps: [],
+    },
+    {
+      id: 'HV-CELL11-COMP2',
+      name: '26 kV feeder Cell 11 → TR Compressor-2',
+      source: 'MAIN-HV-CELL-11',
+      target: 'TR-COMP-2',
+      edgeType: 'hv',
+      status: 'operational',
+      specs: { voltage: '26 kV', notes: '6 kV compressor transformer — Tier 3 detail.' },
+      route: { pathType: 'riser', spansBuildings: false },
+      troubleshootingSteps: [],
+    },
+    {
+      id: 'HV-CELL11-COMP3',
+      name: '26 kV feeder Cell 11 → TR Compressor-3',
+      source: 'MAIN-HV-CELL-11',
+      target: 'TR-COMP-3',
+      edgeType: 'hv',
+      status: 'operational',
+      specs: { voltage: '26 kV', notes: '6 kV compressor transformer — Tier 3 detail.' },
+      route: { pathType: 'riser', spansBuildings: false },
+      troubleshootingSteps: [],
+    },
+    {
+      id: 'HV-CELL11-COMP4',
+      name: '26 kV feeder Cell 11 → TR Compressor-4',
+      source: 'MAIN-HV-CELL-11',
+      target: 'TR-COMP-4',
+      edgeType: 'hv',
+      status: 'operational',
+      specs: { voltage: '26 kV', notes: '6 kV compressor transformer — Tier 3 detail.' },
+      route: { pathType: 'riser', spansBuildings: false },
       troubleshootingSteps: [],
     },
 

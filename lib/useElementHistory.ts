@@ -36,10 +36,10 @@ const DEMO_SEED: ChangeLogEntry[] = [
     author: 'M. Nowak',
     note: 'ABB service contacted (ticket #ABB-2026-0421). On-site visit scheduled 2026-06-04. Test report pending.',
   },
-  // MAIN-MV-PANEL
+  // MAIN-HV-CELL-01 (26 kV main panel incomer)
   {
     id: 'seed-mv-1',
-    elementId: 'MAIN-MV-PANEL',
+    elementId: 'MAIN-HV-CELL-01',
     timestamp: '2026-04-10T09:00:00Z',
     type: 'status-change',
     author: 'P. Smith',
@@ -48,7 +48,7 @@ const DEMO_SEED: ChangeLogEntry[] = [
   },
   {
     id: 'seed-mv-2',
-    elementId: 'MAIN-MV-PANEL',
+    elementId: 'MAIN-HV-CELL-01',
     timestamp: '2026-04-10T09:00:00Z',
     type: 'note-added',
     author: 'P. Smith',
@@ -56,16 +56,16 @@ const DEMO_SEED: ChangeLogEntry[] = [
   },
   {
     id: 'seed-mv-3',
-    elementId: 'MAIN-MV-PANEL',
+    elementId: 'MAIN-HV-CELL-01',
     timestamp: '2026-06-01T14:30:00Z',
     type: 'note-added',
     author: 'J. Kowalski',
     note: 'Annual visual inspection passed. Busbar connections retightened. No signs of arcing or overheating.',
   },
-  // TR1-1
+  // TR-01
   {
     id: 'seed-tr11-1',
-    elementId: 'TR1-1',
+    elementId: 'TR-01',
     timestamp: '2026-04-11T10:00:00Z',
     type: 'note-added',
     author: 'P. Smith',

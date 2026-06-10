@@ -6,8 +6,8 @@ import type { SiteInstallation } from '@/types/topology';
  * Operated by Fluvius / grid operator — outside Cinerglass operational scope.
  * Dual 26 kV feeders enter here and export via three parallel underground
  * cables to the Utility Building basement HV switchgear:
- *   Track 1 — 1× main incoming cable  (GRID-FEED-A → MAIN-MV-PANEL)
- *   Track 2 — 2× redundant cables     (GRID-FEED-B → MAIN-MV-PANEL, parallel pair)
+ *   Track 1 — 1× main incoming cable  (GRID-FEED-A → MAIN-HV-CELL-01)
+ *   Track 2 — 2× redundant cables     (GRID-FEED-B → CELL-02 / CELL-03, parallel pair)
  *
  * Nominal voltage: 26 kV (Belgian HV classification >25 kV; future upgrade to 30 kV).
  */
@@ -78,9 +78,9 @@ export const substationInstallation: SiteInstallation = {
     // Track 1 — single main incoming cable
     {
       id: 'HV-SUPPLY-MAIN',
-      name: 'HV Supply Main — Feeder A → Utility HV Switchgear',
+      name: 'HV Supply Main — Feeder A → MAIN PANEL Cell 1',
       source: 'GRID-FEED-A',
-      target: 'MAIN-MV-PANEL',
+      target: 'MAIN-HV-CELL-01',
       edgeType: 'hv',
       status: 'operational',
       specs: {
@@ -102,9 +102,9 @@ export const substationInstallation: SiteInstallation = {
     // Track 2 — redundant twin cables (parallel pair, same source→target)
     {
       id: 'HV-SUPPLY-BKUP-A',
-      name: 'HV Supply Backup A — Feeder B → Utility HV Switchgear',
+      name: 'HV Supply Backup A — Feeder B → MAIN PANEL Cell 2',
       source: 'GRID-FEED-B',
-      target: 'MAIN-MV-PANEL',
+      target: 'MAIN-HV-CELL-02',
       edgeType: 'hv',
       status: 'operational',
       specs: {
@@ -123,9 +123,9 @@ export const substationInstallation: SiteInstallation = {
     },
     {
       id: 'HV-SUPPLY-BKUP-B',
-      name: 'HV Supply Backup B — Feeder B → Utility HV Switchgear',
+      name: 'HV Supply Backup B — Feeder B → MAIN PANEL Cell 3',
       source: 'GRID-FEED-B',
-      target: 'MAIN-MV-PANEL',
+      target: 'MAIN-HV-CELL-03',
       edgeType: 'hv',
       status: 'operational',
       specs: {

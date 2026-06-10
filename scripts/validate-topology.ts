@@ -5,7 +5,7 @@
  *  1. No dangling edges (every source/target resolves to a defined node).
  *  2. Every node belongs to an active map column (MAP_COLUMN_ORDER).
  *  3. No orphan nodes (every non-feed node has at least one upstream edge).
- *  4. Fault cascade reach — a fault at MAIN-MV-PANEL must propagate
+ *  4. Fault cascade reach — a fault at MAIN-HV-CELL-01 must propagate
  *     cross-building into BOTH Furnace-10 loads AND Batch House / Cullet
  *     Tower loads via the BFS in lib/faultCascade.ts.
  *
@@ -61,26 +61,28 @@ if (orphans.length === 0) pass('no disconnected equipment outside the TB import 
 else for (const n of orphans) fail(`orphan node: ${n.id} (${n.name})`);
 
 // ── 4. Cross-building fault cascade reach ──────────────────────────────────────
-console.log('\n[4] Fault cascade reach from MAIN-MV-PANEL');
+console.log('\n[4] Fault cascade reach from MAIN-HV-CELL-01');
 const faultedNodes = topologyNodeInputs.map((n) => ({
   ...n,
   position: { x: 0, y: 0 },
-  status: n.id === 'MAIN-MV-PANEL' ? ('fault' as const) : ('operational' as const),
+  status: n.id === 'MAIN-HV-CELL-01' ? ('fault' as const) : ('operational' as const),
 })) as TopologyNode[];
 
 const derived = computeDerivedStatuses(faultedNodes, topologyEdges);
 
 const mustReach: Record<string, string> = {
-  'F10-MV-PANEL':   'Utility HV ring',
-  'TR1-1':          'Utility transformer',
-  'TR-DP1-1':       'Furnace-10 PFC panel (cross-building)',
-  'F1-MDP-1':       'Furnace-10 distribution cabinet',
-  'PUMP-F10-COOL-1':'Furnace-10 end load',
-  'UT-MDP':         'Utility LV distribution',
-  'DC-BH-01':       'Batch House cabinet (cross-building)',
-  'CT-DC-01':       'Cullet Tower sub-cabinet',
-  'CT-CRUSHER-1':   'Cullet Tower end load',
-  'BH-TB-SUMMARY':  'Batch House terminal boxes',
+  'MAIN-HV-CELL-04': 'Main panel F10 feeder cell',
+  'TR-01':           'Furnace 10 feeder transformer',
+  'TR-DP1-1':        'Furnace-10 PFC panel (cross-building)',
+  'F1-MDP-1':        'Furnace-10 distribution cabinet',
+  'PUMP-F10-COOL-1': 'Furnace-10 end load',
+  'TR-02':           'Utility feeder transformer',
+  'UT-MDP':          'Utility LV distribution',
+  'TR-03':           'Batch House feeder transformer',
+  'DC-BH-01':        'Batch House cabinet (cross-building)',
+  'CT-DC-01':        'Cullet Tower sub-cabinet',
+  'CT-CRUSHER-1':    'Cullet Tower end load',
+  'BH-TB-SUMMARY':   'Batch House terminal boxes',
 };
 
 for (const [id, label] of Object.entries(mustReach)) {
@@ -89,10 +91,14 @@ for (const [id, label] of Object.entries(mustReach)) {
 }
 console.log(`  …cascade reached ${derived.size} downstream elements in total`);
 
-// ── 5. HV supply path — Substation → Utility basement (3 parallel cables) ─────
+// ── 5. HV supply path — Substation → MAIN PANEL incomer cells ─────────────────
 console.log('\n[5] HV supply path from external Substation');
-const hvSupplyIds = ['HV-SUPPLY-MAIN', 'HV-SUPPLY-BKUP-A', 'HV-SUPPLY-BKUP-B'];
-const hvSupply = topologyEdges.filter((e) => hvSupplyIds.includes(e.id));
+const hvSupplyTargets: Record<string, string> = {
+  'HV-SUPPLY-MAIN':   'MAIN-HV-CELL-01',
+  'HV-SUPPLY-BKUP-A': 'MAIN-HV-CELL-02',
+  'HV-SUPPLY-BKUP-B': 'MAIN-HV-CELL-03',
+};
+const hvSupply = topologyEdges.filter((e) => e.id in hvSupplyTargets);
 if (hvSupply.length === 3) pass('3 HV supply edges defined (Track 1 + Track 2 twin)');
 else fail(`expected 3 HV supply edges, found ${hvSupply.length}`);
 
@@ -104,28 +110,46 @@ for (const e of hvSupply) {
   } else {
     fail(`${e.id} — missing spansBuildings route substation → utility`);
   }
-  if (e.target === 'MAIN-MV-PANEL') pass(`${e.id} — terminates at MAIN-MV-PANEL (Utility basement HV switchgear)`);
-  else fail(`${e.id} — expected target MAIN-MV-PANEL`);
+  const expected = hvSupplyTargets[e.id];
+  if (e.target === expected) pass(`${e.id} — terminates at ${expected}`);
+  else fail(`${e.id} — expected target ${expected}, got ${e.target}`);
 }
 
 const bkupPair = hvSupply.filter((e) => e.source === 'GRID-FEED-B');
-if (bkupPair.length === 2) pass('Track 2 — 2 parallel cables from GRID-FEED-B');
+if (bkupPair.length === 2) pass('Track 2 — 2 parallel cables from GRID-FEED-B to Cells 2 & 3');
 else fail(`Track 2 — expected 2 parallel cables from GRID-FEED-B, found ${bkupPair.length}`);
 
-// Verify parallel-lane separation after layout + assignParallelIndices
+// ── 6. Main panel lineup layout ───────────────────────────────────────────────
+console.log('\n[6] 26 kV MAIN PANEL lineup layout');
 const laidOut = layoutNodes(
   topologyNodeInputs,
   'overview',
   computeBuildingCols(topologyNodeInputs, topologyEdges),
   topologyEdges
 );
-const augmented = assignParallelIndices(topologyEdges, laidOut);
-const bkupAug = augmented.filter((e) => e.source === 'GRID-FEED-B' && e.target === 'MAIN-MV-PANEL');
-if (bkupAug.length === 2 && bkupAug[0].parallelBothEnds && bkupAug[0].totalParallel === 2) {
-  pass('GRID-FEED-B → MAIN-MV-PANEL twin cables get parallelBothEnds lane separation');
+const cellNodes = laidOut.filter((n) => n.id.startsWith('MAIN-HV-CELL-'));
+if (cellNodes.length === 11) pass('11 main panel cells positioned');
+else fail(`expected 11 main panel cells, found ${cellNodes.length}`);
+
+const cellYs = cellNodes.map((n) => n.position.y);
+const ySpread = Math.max(...cellYs) - Math.min(...cellYs);
+if (ySpread < 2) pass('Cells 1–11 aligned on a single horizontal row');
+else fail(`main panel cells not aligned (Y spread ${ySpread.toFixed(1)} px)`);
+
+const cell04 = laidOut.find((n) => n.id === 'MAIN-HV-CELL-04');
+const tr01 = laidOut.find((n) => n.id === 'TR-01');
+if (cell04 && tr01 && tr01.position.y < cell04.position.y) {
+  pass('TR-01 positioned above feeder Cell 4');
 } else {
-  fail('GRID-FEED-B → MAIN-MV-PANEL pair missing parallelBothEnds metadata');
+  fail('TR-01 not vertically above MAIN-HV-CELL-04');
 }
+
+const augmented = assignParallelIndices(topologyEdges, laidOut);
+const bkupAug = augmented.filter(
+  (e) => e.source === 'GRID-FEED-B' && (e.target === 'MAIN-HV-CELL-02' || e.target === 'MAIN-HV-CELL-03')
+);
+if (bkupAug.length === 2) pass('GRID-FEED-B twin incomers routed to Cells 2 & 3');
+else fail('GRID-FEED-B incomer pair incomplete');
 
 // ── Result ─────────────────────────────────────────────────────────────────────
 console.log(failures === 0

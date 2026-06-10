@@ -34,6 +34,18 @@ const LAYER_RANK: Record<TopologyLayer, number> = {
  */
 const ROW_SPACING = 200;
 
+/** 26 kV main switchgear lineup — 11 contiguous cells on Utility ground floor. */
+export const MAIN_HV_PANEL_LINEUP = {
+  group: 'main-hv-panel' as const,
+  cellCount: 11,
+  /** Horizontal gap between adjacent cells (px) — tight busbar row. */
+  cellSpacing: 118,
+  /** Distance from the bottom edge of the ground band to the cell row centre. */
+  bottomInset: 72,
+  /** Vertical lift of feeder transformers above the cell row (px). */
+  feederLift: 220,
+};
+
 /**
  * Which ranks appear within each floor band.
  * Used to centre the hierarchy inside the band.
@@ -66,6 +78,25 @@ function getLayerY(layer: TopologyLayer, bandId: FloorBandId): number {
   // (rank - midRank): high rank (loads) → positive offset → larger Y → lower in band.
   // Low rank (transformers) → negative offset → smaller Y → top of band.
   return band.yCenter + (rank - midRank) * ROW_SPACING;
+}
+
+/** Y centre for the 26 kV main panel cell row — bottom of the ground band. */
+function getMainPanelCellY(): number {
+  const band = FLOOR_BAND_MAP.ground;
+  const bandBottom = band.yCenter + band.height / 2;
+  return bandBottom - MAIN_HV_PANEL_LINEUP.bottomInset;
+}
+
+/** X centre for a main-panel cell by its 0-based lineup index. */
+function getMainPanelCellX(col: BuildingColConfig, lineupIndex: number): number {
+  const { cellCount, cellSpacing } = MAIN_HV_PANEL_LINEUP;
+  const totalWidth = (cellCount - 1) * cellSpacing;
+  const startX = col.xCenter - totalWidth / 2;
+  return startX + lineupIndex * cellSpacing;
+}
+
+function isMainPanelLineupNode(n: TopologyNodeInput): boolean {
+  return n.layout?.lineupGroup === MAIN_HV_PANEL_LINEUP.group;
 }
 
 // ─── Floor bands (coarse Y positioning by physical elevation) ─────────────────
@@ -310,6 +341,14 @@ export function computeBuildingCols(
         const treeWidth   = totalLeaves * LEAF_WIDTH + gapCount * SUBTREE_GAP;
 
         width = Math.max(treeWidth + BUILDING_PAD_X * 2, LEAF_WIDTH + BUILDING_PAD_X * 2);
+
+        // Main HV panel lineup needs a full 11-cell busbar row at ground level.
+        if (bid === 'utility' && bNodes.some((n) => isMainPanelLineupNode(n))) {
+          const lineupWidth =
+            (MAIN_HV_PANEL_LINEUP.cellCount - 1) * MAIN_HV_PANEL_LINEUP.cellSpacing +
+            LEAF_WIDTH;
+          width = Math.max(width, lineupWidth + BUILDING_PAD_X * 2);
+        }
       }
 
       const xCenter = xLeft + width / 2;
@@ -424,7 +463,9 @@ export function layoutNodes(
       const col = colMap[bid as BuildingId];
       if (!col) continue;
 
-      const bNodes   = physNodes.filter((n) => n.physicalLocation.building === bid);
+      const bNodes   = physNodes.filter(
+        (n) => n.physicalLocation.building === bid && !isMainPanelLineupNode(n)
+      );
       if (bNodes.length === 0) continue;
 
       const bNodeIds = new Set(bNodes.map((n) => n.id));
@@ -504,9 +545,32 @@ export function layoutNodes(
       };
     }
 
-    // ── Y position (always from layer × floor band) ──────────────────────────
     const bandId = getFloorBandId(parseElevationM(n.physicalLocation.elevation));
-    const y      = getLayerY(n.layer, bandId);
+
+    // ── 26 kV main panel lineup (fixed row at bottom of ground band) ─────────
+    if (isMainPanelLineupNode(n) && col) {
+      const cellY = getMainPanelCellY();
+      const lineupIndex = n.layout?.lineupIndex ?? 0;
+      if (n.layout?.feederRole === 'main-feed') {
+        return {
+          ...rest,
+          position: {
+            x: getMainPanelCellX(col, lineupIndex),
+            y: cellY - MAIN_HV_PANEL_LINEUP.feederLift,
+          },
+        };
+      }
+      return {
+        ...rest,
+        position: {
+          x: getMainPanelCellX(col, lineupIndex),
+          y: cellY,
+        },
+      };
+    }
+
+    // ── Y position (layer × floor band) ──────────────────────────────────────
+    const y = getLayerY(n.layer, bandId);
 
     // ── X position ─────────────────────────────────────────────────────────
     let x: number;

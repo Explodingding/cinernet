@@ -23,11 +23,11 @@ export interface AlphaPreset {
 
 export const ALPHA_PRESETS: AlphaPreset[] = [
   {
-    id: 'substation-fault',
-    label: 'HV Substation Fault',
-    description: 'F10 HV Panel → all 3 transformers → entire Furnace 10 supply chain goes dark',
+    id: 'main-panel-fault',
+    label: 'Main Panel Incomer Fault',
+    description: 'Cell 1 incomer fault → busbar cascade → TR-01/TR-02/TR-03 feeders affected',
     color: '#f97316',
-    nodeIds: ['F10-MV-PANEL'],
+    nodeIds: ['MAIN-HV-CELL-01'],
   },
   {
     id: 'hot-zone-fault',

@@ -68,6 +68,15 @@ export interface NodeLayout {
   building: BuildingId;
   /** Horizontal slot within a building branch (0 = centre / first) */
   branchIndex?: number;
+  /**
+   * Contiguous switchgear lineup — cells share a busbar row at the bottom of
+   * the ground-floor band (see `lib/siteLayout.ts` MAIN_HV_PANEL_LINEUP).
+   */
+  lineupGroup?: 'main-hv-panel';
+  /** 0-based horizontal slot within the lineup (Cell 1 = index 0). */
+  lineupIndex?: number;
+  /** Main feeder transformer aligned above its outgoing panel cell. */
+  feederRole?: 'main-feed';
 }
 
 export interface CableRoute {

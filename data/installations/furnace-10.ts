@@ -440,7 +440,7 @@ EMERGENCY:
 
     // ── Tier 3: Process loads (motors, fans, pumps) ──────────────────────────────
     // Fed from Tier 2 cabinets. Visible at activeTier === 3.
-    // These sit at the base of the cascade: a fault on F10-MV-PANEL reaches here
+    // These sit at the base of the cascade: a fault on MAIN-HV-CELL-04 / TR-01 reaches here
     // through TR1.x → TR-DP1.x → F1-MDP-x / F1-HOT-DP → these loads.
 
     {
