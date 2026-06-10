@@ -5,6 +5,7 @@ import type { EdgeProps } from '@xyflow/react';
 import type { TopologyEdge } from '@/types/topology';
 import type { DerivedStatus } from '@/lib/faultCascade';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
+import { CABLE_COLOR_MAP } from '@/lib/cableColors';
 
 /** Pixel gap between adjacent parallel cable lanes */
 const LANE_SPACING = 14;
@@ -157,6 +158,7 @@ export function PowerCableEdge({
   };
 
   const cfg          = STATUS_CONFIG[edgeData?.status ?? 'operational'];
+  const cable        = CABLE_COLOR_MAP[edgeData?.edgeType ?? 'power'];
   const isMv         = edgeData?.edgeType === 'mv';
   const isOperational   = edgeData?.status === 'operational';
   const isFault         = edgeData?.status === 'fault';
@@ -219,14 +221,16 @@ export function PowerCableEdge({
   }
 
   // ── Visual styling ──────────────────────────────────────────────────────────────────
-  // Priority: actual fault > derived-fault cascade > MV type > normal status
+  // Priority: actual fault > derived-fault cascade > investigation > derived-
+  // investigation > base cable-type color from the shared CABLE_COLOR_MAP.
+  // Healthy circuits render in their cable-type color so the canvas always
+  // matches the TopBar filter legend.
   const activeColor =
     isFault              ? '#ef4444'
     : isDerivFault       ? '#f87171'
     : isInvestigation    ? '#fbbf24'
     : isDerivInv         ? '#fde68a'
-    : isMv               ? '#f472b6'
-    : cfg.color;
+    : cable.color;
 
   const pathId = `flow-path-${id}`;
 
@@ -256,7 +260,7 @@ export function PowerCableEdge({
       ? `drop-shadow(0 0 6px rgba(239,68,68,0.65))`
       : isInvestigation || isDerivInv
         ? `drop-shadow(0 0 5px rgba(251,191,36,0.5))`
-        : `drop-shadow(0 0 4px ${isMv ? 'rgba(244,114,182,0.4)' : cfg.glowColor})`;
+        : `drop-shadow(0 0 4px ${cable.glowColor})`;
 
   return (
     <>
@@ -317,8 +321,8 @@ export function PowerCableEdge({
               border: `1px solid ${
                 selected                  ? activeColor
                 : isFault || isDerivFault ? 'rgba(239,68,68,0.50)'
-                : isMv                    ? 'rgba(244,114,182,0.40)'
-                : cfg.borderColor
+                : isInvestigation || isDerivInv ? cfg.borderColor
+                : cable.glowColor
               }`,
               backdropFilter: 'blur(4px)',
               textShadow: selected ? `0 0 8px ${cfg.color}` : 'none',

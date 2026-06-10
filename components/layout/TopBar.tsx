@@ -5,6 +5,7 @@ import type { TopologyNode, Status, EdgeType } from '@/types/topology';
 import type { BuildingFilter, DepthTier } from '@/lib/topologyFilters';
 import { BUILDINGS, SITE_BUILDING_ORDER } from '@/data/buildings';
 import { STATUS_CONFIG } from '@/lib/statusConfig';
+import { CABLE_COLOR_MAP } from '@/lib/cableColors';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -44,15 +45,9 @@ export interface KpiStats {
   fault: number;
 }
 
-/** Human-readable labels and icons for each cable/edge type */
-const EDGE_TYPE_META: Record<EdgeType, { label: string; shortLabel: string; color: string }> = {
-  mv:       { label: 'Medium Voltage',  shortLabel: 'MV',       color: '#f97316' },
-  power:    { label: 'LV Power',        shortLabel: 'Power',    color: '#34d399' },
-  plc:      { label: 'Control (PLC)',   shortLabel: 'PLC',      color: '#60a5fa' },
-  signal:   { label: 'Instrument',      shortLabel: 'Signal',   color: '#a78bfa' },
-  fieldbus: { label: 'Fieldbus',        shortLabel: 'Fieldbus', color: '#f0abfc' },
-  ethernet: { label: 'Network',         shortLabel: 'Network',  color: '#94a3b8' },
-};
+// Cable type labels + colors come from the shared CABLE_COLOR_MAP
+// (lib/cableColors.ts) — the same source PowerCableEdge uses for canvas
+// strokes, guaranteeing the legend always matches the rendered lines.
 
 const TIER_META: Record<DepthTier, { label: string; sub: string }> = {
   1: { label: '400V focus', sub: 'MV supply + 400V chain' },
@@ -901,7 +896,7 @@ function CableTypePanel({
         </span>
       </div>
       {types.map((type) => {
-        const meta = EDGE_TYPE_META[type];
+        const meta = CABLE_COLOR_MAP[type];
         const isVisible = visibleEdgeTypes.has(type);
         return (
           <button
