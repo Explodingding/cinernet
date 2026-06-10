@@ -18,9 +18,9 @@ export type DepthTier = 1 | 2 | 3;
  * Higher tiers accumulate lower-tier layers.
  */
 const TIER_LAYERS: Record<DepthTier, Set<TopologyNodeInput['layer']>> = {
-  1: new Set(['mv-feed', 'mv-switchgear', 'transformer', 'lv-panel']),
-  2: new Set(['mv-feed', 'mv-switchgear', 'transformer', 'lv-panel', 'cabinet']),
-  3: new Set(['mv-feed', 'mv-switchgear', 'transformer', 'lv-panel', 'cabinet', 'junction', 'load']),
+  1: new Set(['hv-feed', 'hv-switchgear', 'transformer', 'lv-panel']),
+  2: new Set(['hv-feed', 'hv-switchgear', 'transformer', 'lv-panel', 'cabinet']),
+  3: new Set(['hv-feed', 'hv-switchgear', 'transformer', 'lv-panel', 'cabinet', 'junction', 'load']),
 };
 
 function toLayoutScope(building: BuildingFilter): LayoutScope {

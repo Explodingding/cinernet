@@ -52,7 +52,7 @@ const DEMO_SEED: ChangeLogEntry[] = [
     timestamp: '2026-04-10T09:00:00Z',
     type: 'note-added',
     author: 'P. Smith',
-    note: 'Initial commissioning completed. All three outgoing feeders tested at 35 kV. Protection relays calibrated and function-tested.',
+    note: 'Initial commissioning completed. All three outgoing feeders tested at 26 kV. Protection relays calibrated and function-tested.',
   },
   {
     id: 'seed-mv-3',

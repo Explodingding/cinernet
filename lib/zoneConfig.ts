@@ -10,8 +10,16 @@ export interface ZoneConfig {
 }
 
 export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
-  'utility-basement-mv': {
-    label: 'Utility — Basement MV (−3 m)',
+  'substation-hv': {
+    label: 'Substation — HV (26 kV)',
+    shortLabel: 'SUB HV',
+    color: '#e879f9',
+    bgColor: 'rgba(232, 121, 249, 0.06)',
+    borderColor: 'rgba(232, 121, 249, 0.25)',
+    building: 'substation',
+  },
+  'utility-basement-hv': {
+    label: 'Utility — Basement HV (−3 m)',
     shortLabel: 'UTL B1',
     color: '#f472b6',
     bgColor: 'rgba(244, 114, 182, 0.06)',
@@ -85,8 +93,8 @@ export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
 };
 
 export const LAYER_LABELS: Record<TopologyLayer, string> = {
-  'mv-feed': 'MV Incoming',
-  'mv-switchgear': 'MV Switchgear Room',
+  'hv-feed': 'HV Incoming (26 kV)',
+  'hv-switchgear': 'HV Switchgear Room',
   transformer: 'Transformer',
   'lv-panel': 'LV Distribution Panel',
   cabinet: 'Distribution Cabinets',
@@ -100,8 +108,8 @@ export interface AssetConfig {
 }
 
 export const ASSET_CONFIG: Record<AssetType, AssetConfig> = {
-  'mv-feed': { label: 'MV Feed', shortLabel: 'MV' },
-  'mv-switchgear': { label: 'MV Switchgear', shortLabel: 'SW' },
+  'hv-feed': { label: 'HV Feed (26 kV)', shortLabel: 'HV' },
+  'hv-switchgear': { label: 'HV Switchgear', shortLabel: 'SW' },
   transformer: { label: 'Transformer', shortLabel: 'TR' },
   panel: { label: 'Distribution Panel', shortLabel: 'MDP' },
   cabinet: { label: 'Dist. Cabinet', shortLabel: 'DC' },

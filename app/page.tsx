@@ -4,7 +4,8 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status, EdgeType } from '@/types/topology';
-import { TopBar, DEMO_PRESETS } from '@/components/layout/TopBar';
+import { BUILDINGS } from '@/data/buildings';
+import { TopBar, ALPHA_PRESETS } from '@/components/layout/TopBar';
 import { DetailDrawer } from '@/components/detail/DetailDrawer';
 import { Toast } from '@/components/ui/Toast';
 import { getCascadeTargets } from '@/lib/troubleshooting';
@@ -254,12 +255,23 @@ export default function Dashboard() {
 
   const handleInjectPreset = useCallback(
     (nodeIds: string[]) => {
+      const blocked = nodeIds.filter((id) => {
+        const node = topologyNodeInputs.find((n) => n.id === id);
+        if (!node) return false;
+        if (node.allowFaultInjection === false) return true;
+        const building = BUILDINGS[node.physicalLocation.building];
+        return building?.allowFaultInjection === false;
+      });
+      if (blocked.length > 0) {
+        showToast(`Fault injection blocked on external asset: ${blocked.join(', ')}`);
+        return;
+      }
       setNodeStatuses((prev) => {
         const next = { ...prev };
         nodeIds.forEach((id) => { next[id] = 'fault'; });
         return next;
       });
-      const preset = DEMO_PRESETS.find((p) => p.nodeIds.some((id) => nodeIds.includes(id)));
+      const preset = ALPHA_PRESETS.find((p) => p.nodeIds.some((id) => nodeIds.includes(id)));
       showToast(`Fault injected: ${preset?.label ?? nodeIds.join(', ')} — cascade propagating…`);
     },
     [showToast]
@@ -273,6 +285,24 @@ export default function Dashboard() {
 
   const handleSimulateFault = useCallback(
     (id: string, type: 'node' | 'edge') => {
+      if (type === 'node') {
+        const node = topologyNodeInputs.find((n) => n.id === id);
+        if (node?.allowFaultInjection === false) {
+          showToast(`Fault injection blocked — ${node.name} is an external asset`);
+          return;
+        }
+        const building = node ? BUILDINGS[node.physicalLocation.building] : undefined;
+        if (building?.allowFaultInjection === false) {
+          showToast(`Fault injection blocked — ${building.label} is outside site control`);
+          return;
+        }
+      } else {
+        const edge = topologyEdges.find((e) => e.id === id);
+        if (edge?.route?.fromBuilding === 'substation') {
+          showToast('Fault injection blocked — external grid supply cables are read-only');
+          return;
+        }
+      }
       if (type === 'node') setNodeStatuses((p) => ({ ...p, [id]: 'fault' }));
       else setEdgeStatuses((p) => ({ ...p, [id]: 'fault' }));
       showToast(`Fault injected on ${id} — downstream cascade active`);

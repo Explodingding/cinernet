@@ -27,11 +27,11 @@ export interface CableColorConfig {
 }
 
 export const CABLE_COLOR_MAP: Record<EdgeType, CableColorConfig> = {
-  mv: {
-    color: '#f472b6',                      // magenta — 35 kV medium voltage
+  hv: {
+    color: '#f472b6',                      // magenta — 26 kV high voltage (Belgian HV >25 kV)
     glowColor: 'rgba(244, 114, 182, 0.40)',
-    label: 'Medium Voltage',
-    shortLabel: 'MV',
+    label: 'High Voltage (26 kV)',
+    shortLabel: 'HV',
   },
   power: {
     color: '#34d399',                      // green — 400 V LV power

@@ -9,11 +9,11 @@ import { CABLE_COLOR_MAP } from '@/lib/cableColors';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Panel = 'fault' | 'building' | 'status' | 'kpi' | 'cables' | 'demo' | null;
+type Panel = 'fault' | 'building' | 'status' | 'kpi' | 'cables' | 'alpha' | null;
 
-// ─── Demo preset definitions ───────────────────────────────────────────────────
+// ─── Alpha scenario presets (fault injection for training / rehearsal) ─────────
 
-export interface DemoPreset {
+export interface AlphaPreset {
   id: string;
   label: string;
   description: string;
@@ -21,11 +21,11 @@ export interface DemoPreset {
   nodeIds: string[];
 }
 
-export const DEMO_PRESETS: DemoPreset[] = [
+export const ALPHA_PRESETS: AlphaPreset[] = [
   {
     id: 'substation-fault',
-    label: 'MV Substation Fault',
-    description: 'F10 MV Panel → all 3 transformers → entire Furnace 10 supply chain goes dark',
+    label: 'HV Substation Fault',
+    description: 'F10 HV Panel → all 3 transformers → entire Furnace 10 supply chain goes dark',
     color: '#f97316',
     nodeIds: ['F10-MV-PANEL'],
   },
@@ -50,7 +50,7 @@ export interface KpiStats {
 // strokes, guaranteeing the legend always matches the rendered lines.
 
 const TIER_META: Record<DepthTier, { label: string; sub: string }> = {
-  1: { label: '400V focus', sub: 'MV supply + 400V chain' },
+  1: { label: '400V focus', sub: 'HV supply + 400V chain' },
   2: { label: 'Distribution', sub: '+ MDPs & cabinets' },
   3: { label: 'All systems', sub: '+ 6kV, generators, circuits' },
 };
@@ -68,11 +68,11 @@ interface TopBarProps {
   visibleEdgeTypes: Set<EdgeType>;
   usedEdgeTypes: Set<EdgeType>;
   onToggleEdgeType: (t: EdgeType) => void;
-  /** Inject a set of node IDs as 'fault' for live demo */
+  /** Inject a set of node IDs as 'fault' for alpha scenario rehearsal */
   onInjectPreset: (nodeIds: string[]) => void;
   /** Clear all injected status overrides */
   onResetAll: () => void;
-  /** True when any injections are active — adds a dot on the DEMO button */
+  /** True when any injections are active — adds a dot on the Alpha button */
   hasInjections: boolean;
 }
 
@@ -232,6 +232,16 @@ export function TopBar({
           >
             CINERNET
           </span>
+          <span
+            className="hidden sm:inline text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5 rounded ml-1.5"
+            style={{
+              color: '#a78bfa',
+              background: 'rgba(167, 139, 250, 0.12)',
+              border: '1px solid rgba(167, 139, 250, 0.35)',
+            }}
+          >
+            Alpha
+          </span>
           <span className="hidden lg:inline text-[9px] text-slate-600 tracking-wider ml-2">
             Lommel Glass
           </span>
@@ -298,38 +308,38 @@ export function TopBar({
         )}
       </div>
 
-      {/* ── Demo presets ── */}
+      {/* ── Alpha scenario presets ── */}
       <div className="relative shrink-0">
         <button
-          onClick={() => toggle('demo')}
+          onClick={() => toggle('alpha')}
           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-bold tracking-wider uppercase transition-all duration-150"
           style={{
             background:
-              openPanel === 'demo'
+              openPanel === 'alpha'
                 ? 'rgba(251,191,36,0.18)'
                 : hasInjections
                   ? 'rgba(251,191,36,0.1)'
                   : 'rgba(15,23,42,0.7)',
-            border: `1px solid ${openPanel === 'demo' || hasInjections ? 'rgba(251,191,36,0.5)' : 'rgba(255,255,255,0.08)'}`,
-            color: openPanel === 'demo' || hasInjections ? '#fbbf24' : '#64748b',
+            border: `1px solid ${openPanel === 'alpha' || hasInjections ? 'rgba(251,191,36,0.5)' : 'rgba(255,255,255,0.08)'}`,
+            color: openPanel === 'alpha' || hasInjections ? '#fbbf24' : '#64748b',
           }}
-          title="Demo fault injection presets"
+          title="Alpha fault scenario presets"
         >
           <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
             <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="currentColor" stroke="currentColor" strokeWidth="0.5" />
           </svg>
-          <span className="hidden sm:inline">Demo</span>
+          <span className="hidden sm:inline">Scenarios</span>
           {hasInjections && (
             <span
               className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"
               style={{ animation: 'live-pulse 1.4s ease-in-out infinite' }}
             />
           )}
-          <Chevron open={openPanel === 'demo'} />
+          <Chevron open={openPanel === 'alpha'} />
         </button>
 
-        {openPanel === 'demo' && (
-          <DemoPanel
+        {openPanel === 'alpha' && (
+          <AlphaPanel
             hasInjections={hasInjections}
             onInjectPreset={(nodeIds) => { onInjectPreset(nodeIds); close(); }}
             onResetAll={() => { onResetAll(); close(); }}
@@ -786,7 +796,7 @@ function KpiPanel({ stats }: { stats: KpiStats }) {
   );
 }
 
-function DemoPanel({
+function AlphaPanel({
   hasInjections,
   onInjectPreset,
   onResetAll,
@@ -802,13 +812,13 @@ function DemoPanel({
           <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="#fbbf24" stroke="#fbbf24" strokeWidth="0.5" />
         </svg>
         <span className="text-[9px] font-bold tracking-widest uppercase text-amber-400 flex-1">
-          Demo Fault Injection
+          Alpha — Fault Scenarios
         </span>
         <span className="text-[9px] text-slate-600">BFS cascade activated on inject</span>
       </div>
 
       <div className="p-3 flex flex-col gap-2">
-        {DEMO_PRESETS.map((preset) => (
+        {ALPHA_PRESETS.map((preset) => (
           <button
             key={preset.id}
             onClick={() => onInjectPreset(preset.nodeIds)}

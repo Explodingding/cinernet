@@ -19,7 +19,7 @@ interface DetailDrawerProps {
   onStatusChange: (id: string, type: 'node' | 'edge', newStatus: Status) => void;
   onMarkResolved: (id: string, type: 'node' | 'edge') => void;
   onIntegrationAction: (message: string) => void;
-  /** Inject this element as a fault for live demo */
+  /** Inject this element as a fault for alpha scenario rehearsal */
   onSimulateFault: (id: string, type: 'node' | 'edge') => void;
   /** History API for displaying and writing change-log entries */
   history: ElementHistoryApi;
@@ -31,7 +31,7 @@ const STATUS_ACTIONS: { status: Status; label: string }[] = [
   { status: 'fault', label: 'Report fault' },
 ];
 
-const INTEGRATION_TOAST = 'Demo mode — integration planned';
+const INTEGRATION_TOAST = 'Alpha — live integration planned';
 
 export function DetailDrawer({
   element,
@@ -48,6 +48,14 @@ export function DetailDrawer({
   >({});
   const [noteText, setNoteText] = useState('');
   const [noteAuthor, setNoteAuthor] = useState('Operator');
+
+  const faultInjectionBlocked =
+    element && elementType === 'node' && 'physicalLocation' in element
+      ? element.allowFaultInjection === false
+        || BUILDINGS[element.physicalLocation.building]?.allowFaultInjection === false
+      : element && elementType === 'edge' && 'route' in element
+        ? element.route?.fromBuilding === 'substation'
+        : false;
   const [showNoteForm, setShowNoteForm] = useState(false);
   const [expandedDocId, setExpandedDocId] = useState<string | null>(null);
 
@@ -193,7 +201,8 @@ export function DetailDrawer({
             </div>
 
             <div className="flex-1 overflow-y-auto min-h-0">
-              {/* ── Demo quick-action strip ── */}
+              {/* ── Alpha scenario controls ── */}
+              {!faultInjectionBlocked && (
               <div
                 className="mx-4 md:mx-5 mt-4 rounded-lg overflow-hidden"
                 style={{
@@ -206,7 +215,7 @@ export function DetailDrawer({
                     <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="#fbbf24" />
                   </svg>
                   <span className="text-[8px] font-bold tracking-widest uppercase text-amber-500/70">
-                    Demo Controls
+                    Alpha Controls
                   </span>
                 </div>
                 <div className="flex gap-2 p-2">
@@ -256,6 +265,18 @@ export function DetailDrawer({
                   </button>
                 </div>
               </div>
+              )}
+              {faultInjectionBlocked && (
+                <div
+                  className="mx-4 md:mx-5 mt-4 px-3 py-2.5 rounded-lg text-[10px] text-slate-400"
+                  style={{
+                    border: '1px solid rgba(148,163,184,0.15)',
+                    background: 'rgba(148,163,184,0.04)',
+                  }}
+                >
+                  External asset — fault simulation disabled (Fluvius grid interface).
+                </div>
+              )}
 
               {element.upstreamHint && element.status === 'fault' && (
                 <div

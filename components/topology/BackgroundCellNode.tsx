@@ -22,6 +22,7 @@ export interface BackgroundCellData {
 // Buildings with mezzanine nodes (F10, F20) show the label in 'elevated'.
 // Utility and others start at 'ground' — basement is visually at the BOTTOM.
 const BUILDING_TOP_BAND: Record<BuildingId, FloorBandId> = {
+  substation:     'basement',  // External grid interface at −3 m
   'furnace-10':   'elevated',  // F10 has mezzanine nodes at +5 m
   utility:        'ground',    // Utility's topmost occupied band is ground floor
   'furnace-20':   'elevated',  // F20 has elevated panels

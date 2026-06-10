@@ -15,8 +15,8 @@ import { MAP_COLUMN_ORDER } from '@/data/buildings';
 //  Rank 0 = most upstream (grid feed), rank 6 = most downstream (load).
 
 const LAYER_RANK: Record<TopologyLayer, number> = {
-  'mv-feed':       0,
-  'mv-switchgear': 1,
+  'hv-feed':       0,
+  'hv-switchgear': 1,
   'transformer':   2,
   'lv-panel':      3,
   'cabinet':       4,
@@ -29,7 +29,7 @@ const LAYER_RANK: Record<TopologyLayer, number> = {
  * Node cards are ≈120 px tall.  200 px row-spacing leaves ≈80 px of clear
  * canvas between adjacent hierarchy levels — enough for orthogonal cable runs.
  *
- * Must stay ≤ 200 px so that rank-1 (mv-switchgear) within the ground band
+ * Must stay ≤ 200 px so that rank-1 (hv-switchgear) within the ground band
  * does not visually overlap the elevated band above it.
  */
 const ROW_SPACING = 200;
@@ -40,8 +40,8 @@ const ROW_SPACING = 200;
  */
 const BAND_RANK_RANGE: Record<FloorBandId, { min: number; max: number }> = {
   elevated: { min: 4, max: 6 },  // cabinet + junction + load at +5 m
-  ground:   { min: 1, max: 6 },  // mv-switchgear → load at ground level
-  basement: { min: 0, max: 1 },  // mv-feed (top) → main mv-switchgear (below)
+  ground:   { min: 1, max: 6 },  // hv-switchgear → load at ground level
+  basement: { min: 0, max: 1 },  // hv-feed (top) → main hv-switchgear (below)
 };
 
 /** Y position of a node given its layer and the floor band it sits in.
@@ -52,7 +52,7 @@ const BAND_RANK_RANGE: Record<FloorBandId, { min: number; max: number }> = {
  *   • 'basement' band  → large Y   → BOTTOM of canvas  (−8 m floor)
  *
  * Within each band upstream equipment is placed ABOVE downstream:
- *   • Low rank (mv-switchgear=1) → smaller Y offset → TOP of its band
+ *   • Low rank (hv-switchgear=1) → smaller Y offset → TOP of its band
  *   • High rank (load=6)         → larger  Y offset → BOTTOM of its band
  *
  * Therefore power enters from the BOTTOM (basement), flows UP through the
@@ -383,7 +383,7 @@ function xCell(b: BuildingId, band: FloorBandId, layer: TopologyLayer): string {
  *     centre of its allocated horizontal range.  Children divide the range
  *     proportionally so parents are always centred over their children.
  *
- * The main power backbone (MV feed → switchgear) anchors at the building
+ * The main power backbone (HV feed → switchgear) anchors at the building
  * column centre-line and branches spread symmetrically left and right.
  *
  * ## Legacy layout (no `edges`)

@@ -6,7 +6,7 @@ import type { TopologyEdgeInput } from '@/types/topology';
  *
  * Source: SMT-5250 CNRBE-PMEP18-AB-XXX — Power Distribution System Riser Plan
  *
- * The 35 kV MV cables between panels are modelled inside utility.ts.
+ * The 26 kV HV cables between panels are modelled inside utility.ts.
  * These are the 400 V LV outgoing cables from the transformer secondary
  * terminals to the first distribution panel in each building.
  */

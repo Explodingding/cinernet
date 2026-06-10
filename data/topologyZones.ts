@@ -2,19 +2,19 @@ import type { TopologyZone } from '@/types/topology';
 
 export const topologyZones: TopologyZone[] = [
   {
-    id: 'band-mv-feed',
-    zone: 'utility-basement-mv',
-    label: 'Utility Building — 11 kV incoming',
-    layerLabel: 'MV Feed — Root',
+    id: 'band-hv-feed',
+    zone: 'substation-hv',
+    label: 'Distribution Building — 26 kV incoming',
+    layerLabel: 'HV Feed — Root',
     position: { x: -20, y: 800 },
     width: 1120,
     height: 110,
   },
   {
-    id: 'band-mv-sw',
-    zone: 'utility-basement-mv',
-    label: 'Utility — MV switchgear room (−3 m)',
-    layerLabel: 'MV Switchgear',
+    id: 'band-hv-sw',
+    zone: 'utility-basement-hv',
+    label: 'Utility — HV switchgear room (−3 m)',
+    layerLabel: 'HV Switchgear (26 kV)',
     position: { x: -20, y: 660 },
     width: 1120,
     height: 110,

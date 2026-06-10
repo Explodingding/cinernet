@@ -159,7 +159,7 @@ export function PowerCableEdge({
 
   const cfg          = STATUS_CONFIG[edgeData?.status ?? 'operational'];
   const cable        = CABLE_COLOR_MAP[edgeData?.edgeType ?? 'power'];
-  const isMv         = edgeData?.edgeType === 'mv';
+  const isHv         = edgeData?.edgeType === 'hv';
   const isOperational   = edgeData?.status === 'operational';
   const isFault         = edgeData?.status === 'fault';
   const isInvestigation = edgeData?.status === 'investigation';
@@ -237,7 +237,7 @@ export function PowerCableEdge({
   const strokeColor = selected ? activeColor : `${activeColor}cc`;
   const strokeWidth =
     selected                      ? 3
-    : isMv                        ? 2.5
+    : isHv                        ? 2.5
     : isFault || isDerivFault     ? 2.5
     : 2;
 

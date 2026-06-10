@@ -21,8 +21,8 @@ import type { SiteInstallation, TopologyEdgeInput, TopologyNodeInput } from '@/t
 export const EXAMPLE_NODE: TopologyNodeInput = {
   id: 'FILL-TAG', // e.g. DC-F10-01 — from site drawing / asset register
   name: 'FILL — readable name',
-  assetType: 'cabinet', // mv-feed | mv-switchgear | transformer | panel | cabinet | junction-box | motor
-  layer: 'cabinet', // mv-feed | mv-switchgear | transformer | lv-panel | cabinet | junction | load
+  assetType: 'cabinet', // hv-feed | hv-switchgear | transformer | panel | cabinet | junction-box | motor
+  layer: 'cabinet', // hv-feed | hv-switchgear | transformer | lv-panel | cabinet | junction | load
   status: 'operational', // operational | investigation | fault
   layout: {
     building: 'furnace-10', // utility | furnace-10 | batch-house

@@ -9,15 +9,28 @@ export interface BuildingConfig {
   color: string;
   bgColor: string;
   borderColor: string;
+  /** When false, demo fault injection is disabled for all nodes in this building */
+  allowFaultInjection?: boolean;
 }
 
 export const BUILDINGS: Record<BuildingId, BuildingConfig> = {
+  substation: {
+    id: 'substation',
+    label: 'Distribution Building — External',
+    shortLabel: 'SUB',
+    description: 'Fluvius grid interface — 26 kV dual-feeder incoming supply (external, read-only)',
+    role: 'External root power source — outside site operational control',
+    color: '#e879f9',
+    bgColor: 'rgba(232, 121, 249, 0.05)',
+    borderColor: 'rgba(232, 121, 249, 0.22)',
+    allowFaultInjection: false,
+  },
   utility: {
     id: 'utility',
     label: 'Utility Building',
     shortLabel: 'UTL',
-    description: 'Central electrical hub — 35 kV MV switchgear, transformers, main LV panels, 4× generators',
-    role: 'Site power hub — houses MAIN MV, F10 MV and F20 MV panels',
+    description: 'Central electrical hub — 26 kV HV switchgear, transformers, main LV panels, 4× generators',
+    role: 'Site power hub — MAIN HV, F10 HV and F20 HV panels',
     color: '#34d399',
     bgColor: 'rgba(52, 211, 153, 0.06)',
     borderColor: 'rgba(52, 211, 153, 0.25)',
@@ -84,6 +97,7 @@ export const BUILDINGS: Record<BuildingId, BuildingConfig> = {
  * The Cullet Tower is modelled as a subsystem INSIDE the Batch House block.
  */
 export const SITE_BUILDING_ORDER: BuildingId[] = [
+  'substation',
   'utility',
   'furnace-10',
   'batch-house',
@@ -92,14 +106,14 @@ export const SITE_BUILDING_ORDER: BuildingId[] = [
 /**
  * Physical left-to-right column order on the map canvas:
  *
- *   Furnace-10  |  Utility (centre)  |  Batch House + Cullet Tower
- *  ←Left                                                     Right→
+ *   Substation  |  Furnace-10  |  Utility  |  Batch House + Cullet Tower
+ *  ←External root                                              Right→
  *
- * F10 is the active production hall — left wing.
- * Utility is the electrical spine — centre column.
- * Batch House (with the Cullet Tower subsystem inside its block) — right wing.
+ * Substation is the external Fluvius grid interface (far left).
+ * Power flows Substation → Utility basement → site distribution wings.
  */
 export const MAP_COLUMN_ORDER: BuildingId[] = [
+  'substation',
   'furnace-10',
   'utility',
   'batch-house',

@@ -1,8 +1,8 @@
 import type { TerminalBoxDetail } from '@/types/terminalBox';
 
 export type AssetType =
-  | 'mv-feed'
-  | 'mv-switchgear'
+  | 'hv-feed'
+  | 'hv-switchgear'
   | 'transformer'
   | 'panel'
   | 'cabinet'
@@ -10,6 +10,7 @@ export type AssetType =
   | 'motor';
 
 export type BuildingId =
+  | 'substation'
   | 'utility'
   | 'furnace-10'
   | 'furnace-20'
@@ -18,8 +19,8 @@ export type BuildingId =
   | 'warehouse';
 
 export type TopologyLayer =
-  | 'mv-feed'
-  | 'mv-switchgear'
+  | 'hv-feed'
+  | 'hv-switchgear'
   | 'transformer'
   | 'lv-panel'
   | 'cabinet'
@@ -28,7 +29,8 @@ export type TopologyLayer =
 
 /** Visual zone stripe — maps to building + elevation band */
 export type LocationZone =
-  | 'utility-basement-mv'
+  | 'substation-hv'
+  | 'utility-basement-hv'
   | 'utility-ground'
   | 'furnace-10-ground'
   | 'furnace-10-elevated'
@@ -41,7 +43,7 @@ export type LocationZone =
 export type Status = 'operational' | 'investigation' | 'fault';
 
 export type EdgeType =
-  | 'mv'        // Medium-voltage power
+  | 'hv'        // High voltage (>25 kV) — Belgian classification; site nominal 26 kV
   | 'power'     // LV power cable
   | 'plc'       // PLC / control signal
   | 'signal'    // Analogue / digital instrument signal
@@ -140,8 +142,13 @@ export interface TopologyNodeInput {
   /** building-detail nodes (e.g. TB grid) hidden on full-site overview */
   mapScope?: 'site' | 'building-detail' | 'overview-only';
   /**
+   * When false, fault-injection UI is disabled (external / out-of-scope equipment).
+   * Defaults to true.
+   */
+  allowFaultInjection?: boolean;
+  /**
    * Minimum depth tier at which this node is shown.
-   * Tier 1 = site overview (MV lines, transformers, main panels)
+   * Tier 1 = site overview (HV lines, transformers, main panels)
    * Tier 2 = building detail (+ distribution cabinets, sub-panels)
    * Tier 3 = circuit detail (+ individual loads, motors, drives)
    * Defaults to 1 if omitted — no breaking change for existing nodes.
@@ -153,14 +160,14 @@ export interface TopologyNodeInput {
   /**
    * Electrical subsystem classification — drives accent colour and the voltage badge
    * on transformer cards.
-   *   mv        — 35 kV switchgear / MV feed (amber)
+   *   hv        — 26 kV HV switchgear / grid feed (magenta) — Belgian HV class
    *   lv-400v   — Standard 400 V supply chain (teal/green)  ← primary focus
    *   lv-6kv    — 6 kV compressor transformers (purple)
    *   lv-boost  — Electrode boosting transformers (violet)
    *   generator — Standby generator system (orange)
    * Nodes without this field fall back to the zone colour accent.
    */
-  subsystem?: 'mv' | 'lv-400v' | 'lv-6kv' | 'lv-boost' | 'generator';
+  subsystem?: 'hv' | 'lv-400v' | 'lv-6kv' | 'lv-boost' | 'generator';
   /** Pre-loaded documents attached to this device (drawings, protocols, etc.) */
   docs?: DocEntry[];
 }

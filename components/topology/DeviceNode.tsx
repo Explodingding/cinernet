@@ -16,13 +16,13 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
   };
 
   switch (type) {
-    case 'mv-feed':
+    case 'hv-feed':
       return (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill={color} fillOpacity={0.2} {...s} />
         </svg>
       );
-    case 'mv-switchgear':
+    case 'hv-switchgear':
       return (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <rect x="2" y="5" width="20" height="14" rx="2" {...s} />
@@ -84,7 +84,7 @@ function AssetIcon({ type, color }: { type: AssetType; color: string }) {
 
 // ─── Subsystem colour palette ─────────────────────────────────────────────────
 const SUBSYSTEM_ACCENT: Record<string, { color: string; label: string }> = {
-  mv:        { color: '#f59e0b', label: '35 kV' },
+  hv:        { color: '#f59e0b', label: '26 kV' },
   'lv-400v': { color: '#22d3ee', label: '400 V' },
   'lv-6kv':  { color: '#a78bfa', label: '6 kV' },
   'lv-boost':{ color: '#e879f9', label: 'Boost' },
@@ -94,9 +94,9 @@ const SUBSYSTEM_ACCENT: Record<string, { color: string; label: string }> = {
 /** Derive a short output-voltage label for transformer cards */
 function transformerVoltageLabel(subsystem?: string): string | null {
   if (!subsystem) return null;
-  if (subsystem === 'lv-400v') return '35 → 400 V';
-  if (subsystem === 'lv-6kv')  return '35 → 6 kV';
-  if (subsystem === 'lv-boost') return '35 → Boost';
+  if (subsystem === 'lv-400v') return '26 → 400 V';
+  if (subsystem === 'lv-6kv')  return '26 → 6 kV';
+  if (subsystem === 'lv-boost') return '26 → Boost';
   return null;
 }
 
@@ -116,8 +116,8 @@ export function DeviceNode({ data, selected }: NodeProps) {
   // Subsystem accent — overrides zone colour for left bar when present
   const subsysAccent = nodeData.subsystem
     ? (SUBSYSTEM_ACCENT[nodeData.subsystem] ?? null)
-    : nodeData.layer === 'mv-feed' || nodeData.layer === 'mv-switchgear'
-      ? SUBSYSTEM_ACCENT['mv']
+    : nodeData.layer === 'hv-feed' || nodeData.layer === 'hv-switchgear'
+      ? SUBSYSTEM_ACCENT['hv']
       : null;
   const accentColor = subsysAccent?.color ?? zoneCfg.color;
 

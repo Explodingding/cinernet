@@ -15,8 +15,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Cinernet — Lommel Power Flow Tree',
-  description: 'Industrial electrical troubleshooting — Substation Alpha, MV to LV tree view',
+  title: 'Cinernet α — Lommel Power Flow Tree',
+  description: 'Industrial electrical troubleshooting — 26 kV HV substation to LV tree view (alpha)',
 };
 
 export default function RootLayout({
