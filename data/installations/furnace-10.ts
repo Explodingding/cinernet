@@ -695,6 +695,22 @@ EMERGENCY:
       route: { pathType: 'cable-tray', spansBuildings: false },
       troubleshootingSteps: [],
     },
+    {
+      id: 'LV-MDP9-MDP9HOT',
+      name: 'LV Feed F1-MDP-9 → F1-MDP-9 (HOT)',
+      source: 'F1-MDP-9',
+      target: 'F1-MDP-9-HOT',
+      edgeType: 'power',
+      status: 'operational',
+      specs: {
+        voltage: '400 V',
+        notes: 'Hot zone main supply section fed from F1-MDP-9 busbar.',
+      },
+      route: { pathType: 'cable-tray', spansBuildings: false },
+      troubleshootingSteps: [
+        { id: 'mdp9-hot-1', text: 'Check outgoing MCCB Q-HOT in F1-MDP-9 — ON/OFF/TRIP.' },
+      ],
+    },
 
     // ── Tier 3 load connections ───────────────────────────────────────────────────
     {
@@ -764,6 +780,28 @@ EMERGENCY:
         { id: 'e-bch1-1', text: 'Check MCCB Q-BCH01 in F1-GEN-DP — tripped or open.' },
         { id: 'e-bch1-2', text: 'Check VFD input voltage at Sinamics terminals.' },
         { id: 'e-bch1-3', text: 'Inspect DC bus fuses inside the drive cabinet.' },
+      ],
+    },
+
+    // ── Tier 3 control circuit — PROFIBUS fieldbus runs parallel to the power
+    //    cable in the same tray (rendered as a separated parallel lane).
+    {
+      id: 'FB-GENDP-DRIVE1',
+      name: 'PROFIBUS F1-GEN-DP → Batch Charger Drive M10.BCH.01',
+      source: 'F1-GEN-DP',
+      target: 'DRIVE-F10-BATCH-1',
+      edgeType: 'fieldbus',
+      status: 'operational',
+      specs: {
+        crossSection: 'PROFIBUS DP — 1×2×0.64 mm² shielded twisted pair',
+        notes: 'VFD speed reference and status telegrams (PPO type 4). Runs in same tray as power circuit Q-BCH01.',
+        installationType: 'Cable tray — segregated control compartment',
+      },
+      route: { pathType: 'cable-tray', spansBuildings: false },
+      troubleshootingSteps: [
+        { id: 'fb-bch1-1', text: 'Check PROFIBUS bus termination — both end resistors ON.' },
+        { id: 'fb-bch1-2', text: 'Verify PLC master heartbeat — slave address 12 responding.' },
+        { id: 'fb-bch1-3', text: 'Inspect connector shield continuity at drive end.' },
       ],
     },
   ],

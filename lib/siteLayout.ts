@@ -9,7 +9,9 @@ import { MAP_COLUMN_ORDER } from '@/data/buildings';
 
 // ─── Electrical hierarchy (determines Y within each floor band) ───────────────
 //
-//  Power flows upward on screen: upstream = lower Y = bottom of band.
+//  Within each floor band, upstream equipment sits at the TOP of the band
+//  (smaller Y) and downstream equipment below it — power steps down through
+//  the band, then jumps up to the next band (basement → ground → elevated).
 //  Rank 0 = most upstream (grid feed), rank 6 = most downstream (load).
 
 const LAYER_RANK: Record<TopologyLayer, number> = {
@@ -39,7 +41,7 @@ const ROW_SPACING = 200;
 const BAND_RANK_RANGE: Record<FloorBandId, { min: number; max: number }> = {
   elevated: { min: 4, max: 6 },  // cabinet + junction + load at +5 m
   ground:   { min: 1, max: 6 },  // mv-switchgear → load at ground level
-  basement: { min: 0, max: 0 },  // mv-feed only (basement / substation)
+  basement: { min: 0, max: 1 },  // mv-feed (top) → main mv-switchgear (below)
 };
 
 /** Y position of a node given its layer and the floor band it sits in.
@@ -84,21 +86,22 @@ export interface FloorBandConfig {
 //     'basement'  yCenter 2100  → BOTTOM of canvas  (physically lowest, −8 m)
 //
 //   With ROW_SPACING = 200 and midRank offsets:
-//     • elevated band spans  ≈ y= 40 .. 440  (rank 4..6)
-//     • ground   band spans  ≈ y=700 ..1700  (rank 1..6)
-//     • basement band spans  ≈ y=2100        (rank 0 only)
+//     • elevated band spans  ≈ y=  40 ..  440  (rank 4..6)
+//     • ground   band spans  ≈ y= 700 .. 1700  (rank 1..6)
+//     • basement band spans  ≈ y=2050 .. 2250  (rank 0..1 — feed above switchgear)
 //
 //   Gaps between band node positions (not background stripes):
-//     elevated top (440) → ground top (700)  = 260 px gap ✓
-//     ground bottom (1700) → basement (2100) = 400 px gap ✓
+//     elevated bottom (440) → ground top (700)     = 260 px gap ✓
+//     ground bottom (1700+card) → basement (2050)  ≈ 230 px gap ✓
 //
-//   Power flows visually UPWARD: cable from basement (large Y) runs up
-//   to ground switchgear (medium Y) and continues up to elevated loads (small Y).
+//   Power flows visually UPWARD between bands: substation feed (basement,
+//   largest Y) drops into the main switchgear below it, then the feeder rises
+//   to ground switchgear/transformers and continues up to elevated loads.
 
 export const FLOOR_BANDS: FloorBandConfig[] = [
   { id: 'elevated', label: 'Level +5 m',   elevLabel: 'Mezzanine · +5 m', yCenter:  240, height:  440 },
   { id: 'ground',   label: 'Ground floor', elevLabel: 'Ground · 0 m',     yCenter: 1200, height: 1400 },
-  { id: 'basement', label: 'Basement',     elevLabel: 'Basement · −8 m',  yCenter: 2100, height:  300 },
+  { id: 'basement', label: 'Basement',     elevLabel: 'Basement · −3 m',  yCenter: 2150, height:  500 },
 ];
 
 export type FloorBandId = 'elevated' | 'ground' | 'basement';

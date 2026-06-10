@@ -33,8 +33,8 @@ export const utilityInstallation: SiteInstallation = {
         building: 'utility',
         zone: 'utility-basement-mv',
         floor: 'Basement',
-        elevation: '−8.59 m',
-        area: 'Distribution Building — Fluvius interface',
+        elevation: '−3 m',
+        area: 'Distribution Building — Fluvius interface (substation basement)',
         gridRef: 'DISTRIB-BLDG',
       },
       externalRefs: { scadaTag: 'LOMMEL.MV.DISTRIB_BLDG', osapiensAssetId: 'AST-DISTRIB-BLDG' },
@@ -61,10 +61,10 @@ export const utilityInstallation: SiteInstallation = {
       layout: { building: 'utility', branchIndex: 0 },
       physicalLocation: {
         building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Mid power panels room UG03',
+        zone: 'utility-basement-mv',
+        floor: 'Basement',
+        elevation: '−3 m',
+        area: 'Main substation room — basement level',
         gridRef: '66-15-014a',
       },
       externalRefs: { scadaTag: 'LOMMEL.MAIN_MV.STATUS', osapiensAssetId: 'AST-MAIN-MV' },
@@ -1129,6 +1129,41 @@ Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
       specs: { voltage: '400 V', notes: 'TR-DPC PFC panel fed from TR Compressor LV (TR-C).' },
       route: { pathType: 'internal', spansBuildings: false },
       troubleshootingSteps: [],
+    },
+
+    // ── Utility LV distribution chain: TR-DPC → UT-MDP → UT-UDP ─────────────────
+    {
+      id: 'LV-DPC-TO-UTMDP',
+      name: 'LV Feed TR-DPC → UT-MDP',
+      source: 'TR-DPC',
+      target: 'UT-MDP',
+      edgeType: 'power',
+      status: 'operational',
+      specs: {
+        voltage: '400 V',
+        notes: 'Utility main distribution panel fed from TR-DPC PFC busbar section.',
+      },
+      route: { pathType: 'internal', spansBuildings: false },
+      troubleshootingSteps: [
+        { id: 'dpc-utmdp-1', text: 'Check outgoing MCCB Q-MDP in TR-DPC — ON/OFF/TRIP.' },
+        { id: 'dpc-utmdp-2', text: 'Measure voltage at UT-MDP incoming terminals — 400 V ±5%.' },
+      ],
+    },
+    {
+      id: 'LV-UTMDP-TO-UTUDP',
+      name: 'LV Feed UT-MDP → UT-UDP (UPS)',
+      source: 'UT-MDP',
+      target: 'UT-UDP',
+      edgeType: 'power',
+      status: 'operational',
+      specs: {
+        voltage: '400 V',
+        notes: 'UPS distribution panel mains input — UPS rectifier fed from UT-MDP.',
+      },
+      route: { pathType: 'internal', spansBuildings: false },
+      troubleshootingSteps: [
+        { id: 'utmdp-udp-1', text: 'Check UPS input MCCB in UT-MDP and UPS rectifier status.' },
+      ],
     },
 
     // ── Generator system connections ─────────────────────────────────────────────
