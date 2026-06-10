@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CINERNET — TPM Alignment</title>
+<style>
+  @page {
+    size: A4;
+    margin: 12mm 14mm 16mm 14mm;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    color: #1a2332;
+    margin: 0;
+  }
+
+  /* ── Cover banner ─────────────────────────────────────────────── */
+  .cover {
+    background: linear-gradient(135deg, #0a0f1a 0%, #16243a 70%, #1b3a4d 100%);
+    color: #e2e8f0;
+    border-radius: 6px;
+    padding: 28px 32px 24px;
+    margin-bottom: 28px;
+    page-break-inside: avoid;
+  }
+  .cover .brand {
+    font-family: 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: 8pt;
+    letter-spacing: 4px;
+    color: #34d399;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .cover h1 {
+    font-size: 23pt;
+    font-weight: 650;
+    margin: 0 0 6px;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+  }
+  .cover .subtitle {
+    font-size: 10.5pt;
+    color: #94a3b8;
+    margin-bottom: 14px;
+  }
+  .cover .meta {
+    display: flex;
+    gap: 24px;
+    font-family: Consolas, monospace;
+    font-size: 7.5pt;
+    color: #64748b;
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+    padding-top: 10px;
+  }
+  .cover .meta b { color: #cbd5e1; font-weight: 600; }
+
+  /* ── Headings ─────────────────────────────────────────────────── */
+  h1, h2, h3, h4 { page-break-after: avoid; line-height: 1.25; }
+  .content > h1 { display: none; }   /* replaced by cover banner */
+  h2 {
+    font-size: 14pt;
+    font-weight: 650;
+    color: #0f2440;
+    margin: 26px 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 2.5px solid #34d399;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 650;
+    color: #16243a;
+    margin: 18px 0 8px;
+  }
+  h4 {
+    font-size: 10pt;
+    font-weight: 650;
+    color: #1b3a4d;
+    margin: 14px 0 6px;
+  }
+
+  p { margin: 6px 0 9px; }
+  strong { color: #0f2440; }
+  a { color: #0e7490; text-decoration: none; }
+  hr { border: none; border-top: 1px solid #d8dee7; margin: 18px 0; }
+  ul, ol { margin: 6px 0 10px; padding-left: 22px; }
+  li { margin: 3px 0; }
+
+  blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    border-left: 3.5px solid #34d399;
+    background: #f2faf7;
+    color: #2d4a42;
+    font-style: italic;
+    page-break-inside: avoid;
+  }
+  blockquote p { margin: 2px 0; }
+
+  /* ── Code ─────────────────────────────────────────────────────── */
+  code {
+    font-family: 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: 8pt;
+    background: #eef1f6;
+    border: 1px solid #dde3ec;
+    border-radius: 3px;
+    padding: 0.5px 4px;
+    color: #16243a;
+  }
+  pre {
+    background: #f5f7fa;
+    border: 1px solid #dde3ec;
+    border-left: 3.5px solid #16243a;
+    border-radius: 4px;
+    padding: 10px 14px;
+    overflow-x: hidden;
+    page-break-inside: avoid;
+    margin: 10px 0 12px;
+  }
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 7.6pt;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* ── Tables ───────────────────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px;
+    font-size: 8.6pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #16243a;
+    color: #e2e8f0;
+    font-weight: 600;
+    text-align: left;
+    padding: 6px 9px;
+    border: 1px solid #16243a;
+  }
+  td {
+    padding: 5px 9px;
+    border: 1px solid #cdd5e0;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f4f6fa; }
+
+  /* First table in the doc is the metadata block — style it lighter */
+  .content > table:first-of-type th { display: none; }
+  .content > table:first-of-type td:first-child {
+    font-weight: 600;
+    color: #16243a;
+    width: 110px;
+    background: #eef1f6;
+  }
+
+  .footer-note {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #d8dee7;
+    font-family: Consolas, monospace;
+    font-size: 7pt;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <div class="brand">CINERNET · Electrical Topology Platform</div>
+    <h1>TPM Alignment</h1>
+    <div class="subtitle">Total Productive Maintenance · Engineering Alignment Document</div>
+    <div class="meta">
+      <span><b>Site</b>&nbsp; Cinerglass Lommel</span>
+      <span><b>Date</b>&nbsp; 10 June 2026</span>
+      <span><b>Status</b>&nbsp; Living document</span>
+      <span><b>Repo</b>&nbsp; github.com/Explodingding/cinernet</span>
+    </div>
+  </div>
+  <div class="content">
+<h1>CINERNET × Total Productive Maintenance (TPM)</h1>
+<p><strong>Engineering Alignment Document — Cinerglass Lommel Plant</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Document</td>
+<td><code>docs/TPM_ALIGNMENT.md</code></td>
+</tr>
+<tr>
+<td>Audience</td>
+<td>Plant Engineering, Maintenance Management, Automation Engineering</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>Electrical distribution topology — Utility Building, Furnace 10, future wings</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Living document — updated alongside application releases</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>1. Executive Summary — An Engineering Tool for Slashing MTTR</h2>
+<p>CINERNET is a graph-based digital twin of the plant&#39;s electrical distribution
+network. Every transformer, MV switchgear panel, LV distribution board,
+field cabinet, and end load is modelled as a typed node; every power cable,
+control circuit, and signal run is modelled as a typed, directed edge. The
+result is a <strong>live, queryable single-line diagram (SLD)</strong> that replaces the
+static paper drawings (SMT-5250, SMT-5255, LAY-5246) currently used during
+fault response.</p>
+<h3>The MTTR problem</h3>
+<p>Mean Time To Repair decomposes into distinct phases, and in electrical
+troubleshooting the dominant cost is rarely the repair itself:</p>
+<pre><code>MTTR = T(detect) + T(diagnose) + T(locate) + T(repair) + T(verify)
+                   └────────────┬────────────┘
+            Historically 60–80 % of total downtime for
+            distribution faults: tracing the failure path
+            through paper schematics and physical walkdowns.
+</code></pre>
+<p>CINERNET attacks the diagnose and locate phases directly:</p>
+<ul>
+<li><strong>T(diagnose):</strong> the Fault Cascade engine (<code>lib/faultCascade.ts</code>) computes
+the complete set of downstream-affected equipment the instant a fault is
+registered — in milliseconds, at render time, with zero manual schematic
+tracing (see §5).</li>
+<li><strong>T(locate):</strong> every node carries a structured <code>physicalLocation</code> record
+(building, zone, floor, elevation, area, grid reference), so the technician
+knows not only <em>what</em> failed but <em>where it physically is</em> — basement −8 m,
+ground 0 m, or mezzanine +5 m — before leaving the control room.</li>
+<li><strong>T(verify):</strong> the same cascade map provides the re-energisation checklist
+in reverse: clear the root fault, and the derived statuses across the
+affected branch clear with it, confirming the full circuit is restored.</li>
+</ul>
+<h3>OEE linkage</h3>
+<p>In the OEE model (<code>Availability × Performance × Quality</code>), unplanned
+electrical downtime is a direct Availability loss. Every minute shaved off
+fault localisation is a minute returned to furnace operation — and for a
+continuous glass-melting process, where an uncontrolled power loss risks
+thermal damage to the furnace itself, fast and <em>correct</em> fault scoping is
+also a Quality and asset-protection mechanism, not merely a throughput one.</p>
+<hr>
+<h2>2. Pillar 1 — Autonomous Maintenance Support</h2>
+<blockquote>
+<p><em>TPM principle: operators perform first-line inspection and diagnosis on
+the equipment they run, reserving specialist engineering time for
+specialist problems.</em></p>
+</blockquote>
+<p>The barrier to autonomous maintenance in electrical systems has always been
+<strong>schematic literacy</strong>. A furnace operator can see that cooling fan CAF10.1
+has stopped — but determining <em>why</em> requires reading a riser diagram,
+understanding the panel naming convention, and knowing which upstream board
+feeds which field cabinet. That knowledge traditionally lives with one or
+two automation engineers.</p>
+<h3>The 3-Tier Progressive Disclosure system</h3>
+<p>CINERNET encodes that knowledge into the map itself, exposed through three
+depth tiers (<code>displayTier: 1 | 2 | 3</code> in <code>types/topology.ts</code>, driven by the
+<code>activeTier</code> selector in the top bar):</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Audience</th>
+<th>Visible equipment</th>
+<th>Question answered</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1 — Site overview</strong></td>
+<td>Operators, shift leaders, management</td>
+<td>MV feed, 35 kV switchgear, main transformers (TR1.1–TR1.3), primary LV/PFC panels</td>
+<td><em>&quot;Which building / main feed is affected?&quot;</em></td>
+</tr>
+<tr>
+<td><strong>2 — Building detail</strong></td>
+<td>Line technicians</td>
+<td>+ distribution cabinets, sub-panels (F1-MDP-1…9, F1-HOT-DP, …)</td>
+<td><em>&quot;Which board do I open, and what feeds it?&quot;</em></td>
+</tr>
+<tr>
+<td><strong>3 — Circuit detail</strong></td>
+<td>Electricians, automation engineers</td>
+<td>+ individual loads: cooling pumps, CAF fans, batch drives, junction boxes</td>
+<td><em>&quot;Which breaker, which cable, which motor?&quot;</em></td>
+</tr>
+</tbody></table>
+<p>The operational effect:</p>
+<ol>
+<li><strong>A floor operator at Tier 1</strong> sees instantly that the F10 wing is fed
+from TR1.1 via the cross-building tray run — without knowing what a PFC
+panel is. If the fault cascade shows the whole wing soft-red, the problem
+is upstream in the Utility Building and <em>no amount of local resetting
+will help</em>. That single insight prevents the most common autonomous-
+maintenance failure mode: operators power-cycling downstream equipment
+while the root cause sits two buildings away.</li>
+<li><strong>A line technician at Tier 2</strong> identifies the exact distribution cabinet
+in the chain and reads its <code>troubleshootingSteps</code> — a structured,
+per-device checklist (e.g. <em>&quot;Check main ACB Q0 (ON/OFF/TRIP) and PFC
+relay&quot;</em>, <em>&quot;Measure busbar voltage: 400 V ±5 %&quot;</em>) authored once by the
+responsible engineer and served to every technician thereafter.</li>
+<li><strong>Tier 3 remains available</strong> for the specialist, with terminal-box
+detail (<code>terminalBox</code> data imported from commissioning CSVs) down to
+individual terminals.</li>
+</ol>
+<p>Because the upstream/downstream relationships are <em>rendered</em> rather than
+<em>recalled</em>, the dependency knowledge of the automation engineer is
+democratised to every shift — which is precisely the staffing resilience
+TPM&#39;s autonomous maintenance pillar exists to create.</p>
+<h3>Physical-elevation layout as a training aid</h3>
+<p>The layout engine (<code>lib/siteLayout.ts</code>) maps physical elevation directly to
+screen position: mezzanine +5 m at the top of the canvas, ground 0 m in the
+middle, basement −8 m at the bottom, with power flowing visually upward from
+the substation. A technician who has used CINERNET for a week has
+internalised the plant&#39;s vertical power architecture — the map doubles as an
+onboarding and cross-training instrument.</p>
+<hr>
+<h2>3. Pillar 2 — Planned &amp; Preventive Maintenance</h2>
+<blockquote>
+<p><em>TPM principle: shift the maintenance mix from reactive to scheduled,
+condition-based work, planned around production windows.</em></p>
+</blockquote>
+<h3>What exists today</h3>
+<p>The <code>DetailDrawer</code> (right-hand panel, opened by tapping any node or edge)
+already provides the data substrate for planned maintenance:</p>
+<ul>
+<li><strong>Structured asset specifications</strong> — <code>DeviceSpecs</code> (voltage, current,
+power, protection class, manufacturer) and <code>CableSpecs</code> (cross-section,
+max load, length, installation type) per element.</li>
+<li><strong>Per-device documentation</strong> — <code>DocEntry</code> records linking commissioning
+drawings and test reports (SMT-5250 riser plan, LAY-5246 layout, panel
+location drawings) directly to the device card, served from
+<code>public/docs/</code>.</li>
+<li><strong>Change-log history</strong> — <code>useElementHistory</code> (<code>lib/useElementHistory.ts</code>)
+records status transitions and free-text engineering notes per element,
+with author and timestamp (e.g. the TR-SPARE insulation-resistance
+investigation, ABB service ticket #ABB-2026-0421). This is the seed of a
+proper maintenance ledger: every intervention leaves a trace <em>on the
+asset that received it</em>, not in a disconnected spreadsheet.</li>
+</ul>
+<h3>Design concept: Asset Health panel</h3>
+<p>The next evolution of the <code>DetailDrawer</code> is a dedicated <strong>Asset Health</strong>
+section for the maintenance-critical asset classes — transformers
+(TR1.1/1.2/1.3, TR-SPARE) and main LV/PFC panels — structured as follows:</p>
+<pre><code>┌─ ASSET HEALTH ────────────────────────────────────────────┐
+│  Health index        ● 87 / 100   (derived, see below)    │
+│                                                           │
+│  Thermal inspection                                       │
+│    Last thermographic survey      2026-03-14   PASS       │
+│    Next due                       2026-09-14   [86 days]  │
+│    Hotspot record   L2 busbar joint, ΔT 4.2 K (within tol)│
+│                                                           │
+│  Calibration &amp; protection                                 │
+│    Protection relay calibration   due 2026-11-01          │
+│    ACB Q0 trip-test               due 2026-08-15          │
+│    PFC capacitor bank inspection  due 2026-07-01  ⚠ 21 d  │
+│                                                           │
+│  Statutory                                                │
+│    Insulation resistance test     5-year cycle, 2028      │
+└───────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Implementation path (no schema upheaval required):</p>
+<ol>
+<li><strong>Schema extension</strong> — add an optional <code>maintenance</code> block to
+<code>TopologyNodeInput</code>:
+<code>{ inspections: InspectionRecord[]; nextDue: ISODate; healthIndex?: number }</code>.
+The existing rigid typing discipline (§6) guarantees that every entry is
+validated at compile time.</li>
+<li><strong>Visual surfacing</strong> — devices with an inspection due inside a
+configurable window (e.g. 30 days) receive a subtle badge on the map
+card, exactly as <code>circuitCount</code> badges render today. Overdue items
+escalate to the amber <code>investigation</code> status — reusing the existing
+status pipeline rather than inventing a parallel one.</li>
+<li><strong>Planning view</strong> — because every node carries <code>physicalLocation</code> and
+building membership, due-soon items can be grouped into geographic work
+packages (&quot;all thermal inspections in F10 electrical room, week 36&quot;),
+minimising production interruption — the heart of <em>planned</em> maintenance.</li>
+</ol>
+<h3>Why this matters for the TPM audit</h3>
+<p>TPM planned-maintenance maturity is assessed on traceability: <em>can you show,
+per asset, what was done, when, by whom, and what is scheduled next?</em>
+CINERNET answers all four from a single tap on the asset, with the change
+log providing the historical axis and the Asset Health panel the forward
+axis.</p>
+<hr>
+<h2>4. Pillar 3 (supporting) — Training &amp; Knowledge Capture</h2>
+<p>A brief but important note: the <code>troubleshootingSteps</code> arrays embedded in
+every node and edge constitute <strong>institutionalised expert knowledge</strong>. Each
+checklist is authored once by the engineer who knows the equipment best and
+is then available to every technician, on every shift, forever. When the
+expert retires or rotates, the checklist remains. This is TPM&#39;s training
+pillar implemented as data rather than as classroom sessions.</p>
+<hr>
+<h2>5. MTTR Reduction Mechanics — The Fault Cascade Engine</h2>
+<h3>How fault localisation works today (without CINERNET)</h3>
+<ol>
+<li>Alarm or operator report: &quot;fan stopped in F10 hot zone.&quot;</li>
+<li>Technician retrieves the riser plan (SMT-5250), traces from the load
+upward through F1-HOT-DP, TR-DP1.x, the cross-building tray, TR1.x,
+to the 35 kV switchgear.</li>
+<li>Physical walkdown of each candidate panel — basement, ground floor,
+mezzanine, two buildings.</li>
+<li>Scope of impact is discovered <em>incrementally</em>, panel by panel.</li>
+</ol>
+<p>Elapsed time before the first meaningful repair action: routinely
+30–90 minutes.</p>
+<h3>How it works with CINERNET</h3>
+<p>The cascade engine (<code>lib/faultCascade.ts</code>) implements a <strong>directed
+breadth-first search</strong> over the topology graph, following edges in the
+power-flow direction (source → target):</p>
+<pre><code class="language-typescript">// lib/faultCascade.ts
+export type DerivedStatuses = Map&lt;string, DerivedStatus&gt;;
+</code></pre>
+<p>Mechanics, and why each property matters operationally:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Implementation</th>
+<th>Operational impact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Instant scope</strong></td>
+<td>BFS from every <code>fault</code>/<code>investigation</code> node over a prebuilt adjacency list; O(V + E)</td>
+<td>The complete blast radius — every affected cabinet, cable, and load — is on screen the moment the fault is registered</td>
+</tr>
+<tr>
+<td><strong>Derived vs. confirmed</strong></td>
+<td>Downstream elements get <code>derived-fault</code> (soft red), distinct from the hard-red root</td>
+<td>The technician immediately distinguishes <em>the</em> failure from <em>consequences</em> of the failure — no wasted truck-rolls to healthy-but-dark equipment</td>
+</tr>
+<tr>
+<td><strong>Severity precedence</strong></td>
+<td><code>derived-fault</code> outranks <code>derived-investigation</code> when cascades overlap</td>
+<td>Multiple simultaneous events present a correct, merged picture instead of flickering ambiguity</td>
+</tr>
+<tr>
+<td><strong>Edge illumination</strong></td>
+<td>Every cable on the affected path renders bright red with animated dash-march (<code>PowerCableEdge.tsx</code>)</td>
+<td>The <em>route</em> of the failure is traceable by eye across buildings — the cross-building tray run from Utility to F10 lights up as a single continuous path</td>
+</tr>
+<tr>
+<td><strong>Computed, never stored</strong></td>
+<td>Derived statuses are calculated at render time and never written to the data model</td>
+<td>The map cannot drift out of sync with reality; clearing the root fault clears the entire cascade atomically</td>
+</tr>
+<tr>
+<td><strong>Rehearsable</strong></td>
+<td>Demo presets (&quot;MV Substation Fault&quot;, &quot;F10 Cabinet Fault&quot;) inject faults via UI state</td>
+<td>Fault-response drills can be run against the live model without touching real equipment — a TPM education tool in itself</td>
+</tr>
+</tbody></table>
+<p>The net effect on the MTTR decomposition: <strong>T(diagnose) and T(locate)
+collapse from tens of minutes to seconds</strong>, and T(verify) inherits a
+ready-made restoration checklist (the cascade, walked in reverse).</p>
+<hr>
+<h2>6. Software Poka-Yoke — Error-Proofing the Engineering Data</h2>
+<blockquote>
+<p><em>TPM / quality principle: design the process so the error cannot be made,
+rather than inspecting for it afterwards.</em></p>
+</blockquote>
+<p>A digital twin is only as trustworthy as its data. CINERNET applies
+poka-yoke at the <strong>data-entry and integration boundary</strong>, using the
+TypeScript compiler itself as the inspection gate. Bad topology data does
+not produce a wrong map — it produces a <strong>build failure</strong>, before deployment.</p>
+<h3>Gate 1 — Rigid domain schemas (<code>types/topology.ts</code>)</h3>
+<p>Every property that drives rendering, layout, or cascade logic is a closed
+union type, not a free string:</p>
+<ul>
+<li><code>AssetType</code> — exactly seven values (<code>mv-feed</code> … <code>motor</code>). A typo like
+<code>&quot;transfomer&quot;</code> is a compile error, not a silently unstyled node.</li>
+<li><code>TopologyLayer</code> — the seven-level electrical hierarchy that drives
+vertical placement. An invalid layer cannot enter the layout engine.</li>
+<li><code>BuildingId</code> / <code>LocationZone</code> — closed sets; assigning a node to a
+non-existent building is impossible.</li>
+<li><code>Status</code> — exactly <code>operational | investigation | fault</code>. The cascade
+algorithm can never encounter an unknown state.</li>
+<li><code>physicalLocation</code>, <code>specs</code>, <code>troubleshootingSteps</code> — <strong>required</strong>
+fields. A node cannot be added without location data and a
+troubleshooting checklist; the schema enforces the documentation
+standard that paper processes merely request.</li>
+</ul>
+<p>Cross-cutting effect: when a contractor or future integrator adds Furnace 20
+data, the compiler enforces the same completeness and vocabulary as the
+original dataset — consistency at scale without manual review of every
+entry.</p>
+<h3>Gate 2 — Centralised layout engine (<code>lib/siteLayout.ts</code>)</h3>
+<p>No node carries hand-typed canvas coordinates. Position is <strong>derived</strong> from
+declared physical facts:</p>
+<ul>
+<li><code>LAYER_RANK</code> maps the electrical hierarchy to vertical order within a
+floor band — a transformer <em>cannot</em> be drawn below the loads it feeds.</li>
+<li><code>FLOOR_BANDS</code> maps physical elevation to canvas Y — basement equipment
+<em>cannot</em> appear above ground-floor equipment.</li>
+<li>The two-pass tree-centering algorithm (leaf counting bottom-up, X
+assignment top-down) positions parents over their downstream subtrees
+automatically — branch symmetry is computed, not drawn.</li>
+</ul>
+<p>The classic CAD failure mode — a schematic that is <em>electrically</em> correct
+but <em>spatially</em> misleading because someone dragged a symbol — is
+structurally impossible. The only escape hatch, <code>positionOverride</code>, is an
+explicit, named, reviewable declaration rather than an invisible drag.</p>
+<h3>Gate 3 — Render-time derivation (no stored derived state)</h3>
+<p>Cascade statuses, parallel-lane indices, and tier visibility are all
+computed from source data at render time. There is no cached &quot;affected
+equipment list&quot; that can go stale — eliminating an entire category of
+wrong-information incidents that plague manually maintained fault boards.</p>
+<h3>Gate 4 — Controlled vocabulary for integration identifiers</h3>
+<p><code>externalRefs</code> (<code>scadaTag</code>, <code>osapiensAssetId</code>) gives every element typed,
+named slots for its SCADA and asset-management identities. Integration
+mapping errors surface as type errors at the boundary — see the companion
+document <code>SCALABILITY_ROADMAP.md</code> for the full integration lifecycle.</p>
+<hr>
+<h2>7. Summary — TPM Pillar Coverage Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>TPM pillar</th>
+<th>CINERNET mechanism</th>
+<th>Maturity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Autonomous maintenance</td>
+<td>3-tier disclosure, per-device checklists, physical-elevation map</td>
+<td><strong>Live</strong></td>
+</tr>
+<tr>
+<td>Planned / preventive maintenance</td>
+<td>Specs + docs + change-log per asset; Asset Health panel</td>
+<td>Live foundation, panel designed (§3)</td>
+</tr>
+<tr>
+<td>Quality maintenance / poka-yoke</td>
+<td>Closed-union schemas, derived layout, render-time computation</td>
+<td><strong>Live</strong></td>
+</tr>
+<tr>
+<td>Training &amp; knowledge capture</td>
+<td>Embedded troubleshooting steps, change-log notes, drill presets</td>
+<td><strong>Live</strong></td>
+</tr>
+<tr>
+<td>Focused improvement (Kobetsu Kaizen)</td>
+<td>Fault history per element → recurring-failure analysis</td>
+<td>Roadmap (requires telemetry, see <code>SCALABILITY_ROADMAP.md</code>)</td>
+</tr>
+<tr>
+<td>Early equipment management</td>
+<td>Schema-enforced data completeness for new installations (F20)</td>
+<td>Architecture ready</td>
+</tr>
+</tbody></table>
+<p>CINERNET is not a documentation viewer; it is the plant&#39;s electrical
+knowledge, made executable. Each TPM pillar above maps to a concrete,
+inspectable code path in the repository — which is exactly the standard of
+evidence an engineering organisation should demand from its tooling.</p>
+
+  </div>
+  <div class="footer-note">
+    <span>CINERNET — TPM Alignment</span>
+    <span>Generated 10 June 2026 · For internal engineering use</span>
+  </div>
+</body>
+</html>

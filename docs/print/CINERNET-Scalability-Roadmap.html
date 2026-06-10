@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CINERNET — Scalability Roadmap</title>
+<style>
+  @page {
+    size: A4;
+    margin: 12mm 14mm 16mm 14mm;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    color: #1a2332;
+    margin: 0;
+  }
+
+  /* ── Cover banner ─────────────────────────────────────────────── */
+  .cover {
+    background: linear-gradient(135deg, #0a0f1a 0%, #16243a 70%, #1b3a4d 100%);
+    color: #e2e8f0;
+    border-radius: 6px;
+    padding: 28px 32px 24px;
+    margin-bottom: 28px;
+    page-break-inside: avoid;
+  }
+  .cover .brand {
+    font-family: 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: 8pt;
+    letter-spacing: 4px;
+    color: #34d399;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .cover h1 {
+    font-size: 23pt;
+    font-weight: 650;
+    margin: 0 0 6px;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+  }
+  .cover .subtitle {
+    font-size: 10.5pt;
+    color: #94a3b8;
+    margin-bottom: 14px;
+  }
+  .cover .meta {
+    display: flex;
+    gap: 24px;
+    font-family: Consolas, monospace;
+    font-size: 7.5pt;
+    color: #64748b;
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+    padding-top: 10px;
+  }
+  .cover .meta b { color: #cbd5e1; font-weight: 600; }
+
+  /* ── Headings ─────────────────────────────────────────────────── */
+  h1, h2, h3, h4 { page-break-after: avoid; line-height: 1.25; }
+  .content > h1 { display: none; }   /* replaced by cover banner */
+  h2 {
+    font-size: 14pt;
+    font-weight: 650;
+    color: #0f2440;
+    margin: 26px 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 2.5px solid #34d399;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 650;
+    color: #16243a;
+    margin: 18px 0 8px;
+  }
+  h4 {
+    font-size: 10pt;
+    font-weight: 650;
+    color: #1b3a4d;
+    margin: 14px 0 6px;
+  }
+
+  p { margin: 6px 0 9px; }
+  strong { color: #0f2440; }
+  a { color: #0e7490; text-decoration: none; }
+  hr { border: none; border-top: 1px solid #d8dee7; margin: 18px 0; }
+  ul, ol { margin: 6px 0 10px; padding-left: 22px; }
+  li { margin: 3px 0; }
+
+  blockquote {
+    margin: 10px 0;
+    padding: 8px 16px;
+    border-left: 3.5px solid #34d399;
+    background: #f2faf7;
+    color: #2d4a42;
+    font-style: italic;
+    page-break-inside: avoid;
+  }
+  blockquote p { margin: 2px 0; }
+
+  /* ── Code ─────────────────────────────────────────────────────── */
+  code {
+    font-family: 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: 8pt;
+    background: #eef1f6;
+    border: 1px solid #dde3ec;
+    border-radius: 3px;
+    padding: 0.5px 4px;
+    color: #16243a;
+  }
+  pre {
+    background: #f5f7fa;
+    border: 1px solid #dde3ec;
+    border-left: 3.5px solid #16243a;
+    border-radius: 4px;
+    padding: 10px 14px;
+    overflow-x: hidden;
+    page-break-inside: avoid;
+    margin: 10px 0 12px;
+  }
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 7.6pt;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* ── Tables ───────────────────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px;
+    font-size: 8.6pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #16243a;
+    color: #e2e8f0;
+    font-weight: 600;
+    text-align: left;
+    padding: 6px 9px;
+    border: 1px solid #16243a;
+  }
+  td {
+    padding: 5px 9px;
+    border: 1px solid #cdd5e0;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f4f6fa; }
+
+  /* First table in the doc is the metadata block — style it lighter */
+  .content > table:first-of-type th { display: none; }
+  .content > table:first-of-type td:first-child {
+    font-weight: 600;
+    color: #16243a;
+    width: 110px;
+    background: #eef1f6;
+  }
+
+  .footer-note {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #d8dee7;
+    font-family: Consolas, monospace;
+    font-size: 7pt;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <div class="brand">CINERNET · Electrical Topology Platform</div>
+    <h1>Scalability Roadmap</h1>
+    <div class="subtitle">Production Architecture & Future Phases · Technical Blueprint</div>
+    <div class="meta">
+      <span><b>Site</b>&nbsp; Cinerglass Lommel</span>
+      <span><b>Date</b>&nbsp; 10 June 2026</span>
+      <span><b>Status</b>&nbsp; Living document</span>
+      <span><b>Repo</b>&nbsp; github.com/Explodingding/cinernet</span>
+    </div>
+  </div>
+  <div class="content">
+<h1>CINERNET Scalability Roadmap</h1>
+<p><strong>Technical Blueprint — Production Architecture &amp; Future Phases</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Document</td>
+<td><code>docs/SCALABILITY_ROADMAP.md</code></td>
+</tr>
+<tr>
+<td>Audience</td>
+<td>Automation Engineering, OT/IT Integration, Engineering Management</td>
+</tr>
+<tr>
+<td>Companion</td>
+<td><code>docs/TPM_ALIGNMENT.md</code> — maintenance-strategy alignment</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Living document — phases promoted as they are delivered</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>1. Single-Line Diagram Standards — Rendering Architecture</h2>
+<p>The credibility of an electrical engineering tool is decided in the first
+ten seconds an electrical engineer looks at it. CINERNET&#39;s rendering layer
+is therefore built to the same drawing conventions as EPLAN Electric P8 and
+AutoCAD Electrical output: <strong>strict orthogonal routing, deterministic
+parallel-conductor separation, and hierarchy-true vertical placement.</strong></p>
+<h3>1.1 Strict 90-degree orthogonal routing</h3>
+<p>All cable geometry is produced by a custom edge router
+(<code>components/topology/PowerCableEdge.tsx</code>) — Bezier curves are not used
+anywhere on the canvas. The router emits exclusively horizontal and
+vertical segments:</p>
+<table>
+<thead>
+<tr>
+<th>Exit condition</th>
+<th>Emitted path</th>
+<th>SLD analogue</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vertical exit (top/bottom wall)</td>
+<td>V → H → V via vertical midpoint</td>
+<td>Standard feeder drop between hierarchy rows</td>
+</tr>
+<tr>
+<td>Horizontal exit (left/right wall)</td>
+<td>H → V → H via horizontal midpoint</td>
+<td>Bus-bar tap / horizontal tray run</td>
+</tr>
+<tr>
+<td>Co-linear endpoints (ΔX or ΔY &lt; 1 px)</td>
+<td>Single straight segment</td>
+<td>Direct connection</td>
+</tr>
+</tbody></table>
+<p><strong>Wall selection is semantic, not cosmetic.</strong> The router inspects the
+relative positions of source and target nodes (via React Flow&#39;s
+<code>useInternalNode</code> internals — live measured geometry, not declared
+geometry) and chooses exit walls accordingly. Cross-building cables,
+flagged in the data model as <code>route.spansBuildings: true</code>, are <em>forced</em>
+into horizontal exits so that inter-building runs read as tray/bus-bar
+corridors at the source elevation before dropping to the target — exactly
+how a riser plan such as SMT-5250 draws them.</p>
+<p>Cable identification labels are placed at the midpoint of the <strong>longest
+segment</strong> of each run, mirroring the EPLAN convention of labelling the
+dominant corridor rather than a corner.</p>
+<h3>1.2 Parallel-conductor separation (<code>parallelIndex</code> tracking)</h3>
+<p>Real installations run multiple cables along shared corridors; a renderer
+that overlays them into a single stroke destroys traceability. CINERNET
+solves this with a <strong>deterministic two-tier pre-processing pass</strong>
+(<code>lib/parallelEdges.ts</code> — <code>assignParallelIndices()</code>), executed before edges
+reach the render layer:</p>
+<ol>
+<li><strong>Exact-pair groups</strong> (<code>source → target</code> duplicated): each cable
+receives <code>parallelIndex</code> / <code>totalParallel</code> / <code>parallelBothEnds: true</code>.
+The lateral offset is applied at <strong>both</strong> walls, keeping the conductors
+parallel for their entire run — the power + control pair pattern.</li>
+<li><strong>Fan-out groups</strong> (multiple cables leaving one node in the same
+compass direction): <code>parallelBothEnds: false</code>. The offset is applied at
+the <strong>source wall only</strong>, so cables splay from the panel like conductors
+leaving a terminal block, each arriving at its own target&#39;s natural
+centre.</li>
+</ol>
+<p>The offset itself is symmetric around the wall midpoint:</p>
+<pre><code>laneOffset = (parallelIndex − (totalParallel − 1) / 2) × 14 px
+</code></pre>
+<p>Five feeders leaving a distribution cabinet therefore exit at −28, −14, 0,
++14, +28 px — individually traceable by eye, with no random jitter and no
+frame-to-frame instability. The assignment is <strong>pure and deterministic</strong>:
+identical topology in, identical geometry out, every render. This is the
+property that distinguishes engineering drawing software from generic graph
+visualisation.</p>
+<h3>1.3 Hierarchy-true placement (layout engine contract)</h3>
+<p>The layout engine (<code>lib/siteLayout.ts</code>) guarantees two invariants that
+EPLAN users take for granted:</p>
+<ul>
+<li><strong>Vertical truth:</strong> screen Y is derived from physical elevation
+(mezzanine +5 m → top, ground 0 m → middle, basement −8 m → bottom) and,
+within each floor band, from the seven-rank electrical hierarchy
+(<code>LAYER_RANK</code>: mv-feed = 0 … load = 6). Power flows visually upward from
+the substation.</li>
+<li><strong>Branch symmetry:</strong> a two-pass tree algorithm (bottom-up leaf counting,
+top-down X assignment) centres every parent over the total width of its
+downstream subtree, splitting children symmetrically about the branch
+centre-line.</li>
+</ul>
+<p>No coordinate on the canvas is hand-authored. See
+<code>TPM_ALIGNMENT.md</code> §6 for why this is treated as a quality gate.</p>
+<hr>
+<h2>2. SCADA &amp; Industrial IoT Integration Lifecycle</h2>
+<h3>2.1 Foundation already in place: <code>externalRefs</code></h3>
+<p>Every node and edge in the model carries an optional, typed identity block:</p>
+<pre><code class="language-typescript">// types/topology.ts
+export interface ExternalRefs {
+  scadaTag?: string;
+  osapiensAssetId?: string;
+}
+</code></pre>
+<p>These are populated throughout the live dataset (e.g.
+<code>LOMMEL.TR_DP1_1.STATUS</code> / <code>AST-TR-DP1-1</code> on the F10 PFC panel). This is
+the <strong>join key architecture</strong>: CINERNET elements are addressable from the
+SCADA namespace and the osapiens asset-management namespace <em>today</em>, before
+any live connection exists. Integration is a wiring exercise, not a
+remodelling exercise.</p>
+<h3>2.2 Integration lifecycle — four phases</h3>
+<h4>Phase A — Static twin (current state)</h4>
+<p>Statuses are set by humans (fault injection UI, DetailDrawer controls) and
+distributed to all viewers through the render pipeline. The cascade engine,
+SLD renderer, and progressive disclosure are fully operational. This phase
+exists deliberately: it proves the visual and data architecture under
+demo and training load before a single PLC byte is consumed.</p>
+<h4>Phase B — Read-only telemetry overlay</h4>
+<p><strong>Transport blueprint.</strong> Two interchangeable northbound paths, selected per
+site-IT policy:</p>
+<pre><code>PLC / RTU / protection relays
+        │  (OPC UA / Modbus TCP — OT network)
+        ▼
+  Edge gateway (e.g. Kepware, Ignition, or a slim Node service)
+        │
+        ├── Path 1: MQTT broker (Sparkplug B topics)
+        │     spBv1.0/lommel/DDATA/utility/TR1-1
+        │            payload: { amps_l1, amps_l2, amps_l3,
+        │                       volts, temp_winding, ts }
+        │
+        └── Path 2: REST/WebSocket API layer
+              GET  /api/v1/telemetry?tags=LOMMEL.TR_DP1_1.*
+              WS   /api/v1/stream    (server push, ~1 Hz)
+        ▼
+  CINERNET telemetry adapter (browser/WebSocket client or SSE)
+        │   resolves topic/tag → element via externalRefs.scadaTag
+        ▼
+  TelemetryContext  →  DeviceNode / PowerCableEdge overlays
+</code></pre>
+<p><strong>Data contract.</strong> A single normalised reading shape, regardless of
+transport:</p>
+<pre><code class="language-typescript">interface TelemetryReading {
+  scadaTag: string;          // join key → externalRefs.scadaTag
+  metric: &#39;amperage&#39; | &#39;voltage&#39; | &#39;temperature&#39; | &#39;power-factor&#39;;
+  value: number;
+  unit: &#39;A&#39; | &#39;V&#39; | &#39;°C&#39; | &#39;—&#39;;
+  quality: &#39;good&#39; | &#39;stale&#39; | &#39;bad&#39;;   // OPC quality propagated, never hidden
+  timestamp: string;         // ISO 8601, source-clocked
+}
+</code></pre>
+<p><strong>Rendering rule.</strong> Telemetry is an <em>overlay</em>, architecturally identical to
+today&#39;s derived statuses: computed into render props, never written into
+the topology model. The poka-yoke guarantee (no stored derived state, no
+stale data presented as fresh — <code>quality: &#39;stale&#39;</code> renders greyed) is
+preserved through the integration.</p>
+<h4>Phase C — SPC boundaries on live channels</h4>
+<p>Each monitored channel gains Statistical Process Control limits, stored
+per element alongside the existing specs:</p>
+<pre><code class="language-typescript">interface SpcBoundary {
+  metric: TelemetryReading[&#39;metric&#39;];
+  target: number;          // process centre line (CL)
+  ucl: number;             // upper control limit  (e.g. CL + 3σ)
+  lcl: number;             // lower control limit
+  uclWarning?: number;     // optional 2σ pre-alarm band
+  basis: &#39;nameplate&#39; | &#39;commissioning-baseline&#39; | &#39;rolling-30d&#39;;
+}
+</code></pre>
+<p>The <code>DetailDrawer</code> gains a live strip-chart per channel with CL/UCL/LCL
+bands drawn in — turning every device card into a miniature control chart.
+Limits derive from three auditable bases: nameplate ratings (hard physics),
+commissioning baselines (the plant&#39;s own as-built normal), or rolling
+statistical windows (adaptive, seasonal-aware).</p>
+<h4>Phase D — Closed-loop work-order generation</h4>
+<p>SPC violations and cascade events post outbound to the CMMS / osapiens via
+<code>osapiensAssetId</code>, carrying the affected-equipment list computed by the
+cascade engine. The work order arrives pre-scoped — the planner sees not
+just &quot;TR1.1 winding temperature trending high&quot; but the full downstream
+inventory that a TR1.1 outage would take with it, enabling intelligent
+scheduling against production windows.</p>
+<h3>2.3 Why the graph makes integration cheap</h3>
+<p>A point-to-point SCADA HMI must be <em>drawn</em> for every screen. CINERNET&#39;s
+topology is <em>data</em>; a new telemetry channel is one <code>scadaTag</code> string on one
+element. The rendering, alarm propagation, parallel-lane routing, and tier
+filtering are inherited automatically. Integration effort scales with the
+number of <em>signals</em>, not the number of <em>screens</em> — the defining economic
+property of model-driven HMIs.</p>
+<hr>
+<h2>3. Predictive Maintenance Phase — From SPC Excursion to Planned Intervention</h2>
+<p>The status vocabulary was designed from day one with three levels —
+<code>operational | investigation | fault</code> — precisely so that predictive logic
+would have a <strong>soft tier</strong> to land in. The escalation ladder:</p>
+<pre><code>            value &lt; UCL-2σ          UCL-2σ … UCL              &gt; UCL                relay trip /
+                                                                                   confirmed failure
+  ┌──────────────┐        ┌──────────────────┐      ┌──────────────────┐      ┌──────────────┐
+  │ OPERATIONAL  │ ─────▶ │  watch (badge,   │ ───▶ │  INVESTIGATION   │ ───▶ │    FAULT     │
+  │   (green)    │        │  no cascade)     │      │  (amber, soft    │      │  (hard red,  │
+  └──────────────┘        └──────────────────┘      │  cascade)        │      │  hard cascade│
+                                                    └──────────────────┘      └──────────────┘
+                                                     maintenance plans          maintenance
+                                                     the intervention           reacts to it
+</code></pre>
+<p><strong>Mechanics of the amber cascade.</strong> When a channel crosses its UCL with
+sustained persistence (debounced — e.g. 3 consecutive readings or
+5 minutes, to reject transients), the element&#39;s status is raised to
+<code>investigation</code>. The existing BFS engine then propagates
+<code>derived-investigation</code> downstream — the same algorithm, the same
+rendering pipeline, already implemented and demo-proven. The map shows, in
+soft amber:</p>
+<ul>
+<li>the deviating asset (e.g. TR1.1, winding temperature trending through
+UCL),</li>
+<li>every downstream board and load that <em>would</em> be lost if it tripped —
+the would-be blast radius of the <em>not-yet-failure</em>.</li>
+</ul>
+<p><strong>The operational payoff is scheduling power.</strong> Maintenance sees the full
+consequence map while the equipment is still running, and can:</p>
+<ol>
+<li>order parts against the specific asset (manufacturer and ratings are on
+the card),</li>
+<li>bundle the intervention with other due work in the same physical area
+(location data per node — see <code>TPM_ALIGNMENT.md</code> §3),</li>
+<li>select the production window in which the downstream loss is cheapest,</li>
+<li>brief the crew with the cascade map as the isolation/restoration plan.</li>
+</ol>
+<p>The difference between the amber path and the red path is the difference
+between a <strong>planned 2-hour window</strong> and an <strong>unplanned multi-shift
+outage</strong> with thermal risk to the furnace. Severity precedence is already
+implemented: if a hard fault occurs elsewhere during an amber episode,
+<code>derived-fault</code> outranks <code>derived-investigation</code> on any shared equipment —
+the merged picture stays correct.</p>
+<p><strong>Beyond thresholds.</strong> Because Phase B archives telemetry with timestamps,
+later stages can replace static UCLs with trend-based estimators
+(rate-of-change alarms, remaining-useful-life regressions on thermal data).
+These slot into the same escalation ladder — they are alternative <em>triggers</em>
+for the same <code>investigation</code> state, requiring zero changes to the
+visualisation or cascade layers.</p>
+<hr>
+<h2>4. Multi-Wing Architecture Expansion</h2>
+<p>The site model (<code>data/buildings.ts</code>, <code>MAP_COLUMN_ORDER</code>, and the per-column
+allocation in <code>lib/siteLayout.ts</code>) was dimensioned for the full Lommel
+campus from the outset. Buildings are columns; the layout engine computes
+each column&#39;s width from its actual visible node tree, so wings grow
+without manual re-drafting.</p>
+<h3>4.1 Spatial allocation</h3>
+<pre><code> ┌─────────────┬─────────────────┬─────────────┬──────────────┬───────────┐
+ │ FURNACE 10  │     UTILITY     │  FURNACE 20 │ BATCH HOUSE  │ WAREHOUSE │
+ │  (active)   │ (centre spine)  │  (future)   │+CULLET TOWER │ (reserve) │
+ │             │                 │             │ (subsystem)  │           │
+ │  left wing  │ MV intake, TR   │ right wing  │  peripheral  │   rear    │
+ │             │ fleet, main LV  │ mirror      │  offset      │ abstract  │
+ └─────────────┴─────────────────┴─────────────┴──────────────┴───────────┘
+        ◀── cross-building tray runs (spansBuildings: true) ──▶
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Wing</th>
+<th>Status</th>
+<th>Architecture notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Utility</strong></td>
+<td><strong>Live, fully modelled</strong></td>
+<td>The electrical spine: MV feed (basement −8 m), 35 kV switchgear, transformer fleet TR1.1–TR1.3 + TR-SPARE, main LV panels. Centre column — every other wing attaches to it.</td>
+</tr>
+<tr>
+<td><strong>Furnace 10</strong></td>
+<td><strong>Live, fully modelled</strong></td>
+<td>PFC panels TR-DP1.1–1.3, distribution boards F1-MDP-1…9 plus zone boards (HOT/COLD/GEN/UO/MZ), Tier 3 loads (cooling pumps, CAF fans, batch drives). The reference implementation for every future wing.</td>
+</tr>
+<tr>
+<td><strong>Furnace 20</strong></td>
+<td>Reserved column, ID registered</td>
+<td>Designed as a <strong>structural mirror</strong> of F10: same <code>TopologyLayer</code> hierarchy, same zone vocabulary (<code>furnace-20-ground</code>, <code>furnace-20-elevated</code> already in <code>LocationZone</code>). Population is a data-entry exercise validated by the type system — no engine changes.</td>
+</tr>
+<tr>
+<td><strong>Batch House + Cullet Tower</strong></td>
+<td>Grouped subsystem, minimal nodes</td>
+<td>Modelled as one peripheral subsystem (material-handling loads: conveyors, crushers, elevators). Offset placement reflects their auxiliary electrical role.</td>
+</tr>
+<tr>
+<td><strong>Warehouse</strong></td>
+<td>Abstract placeholder</td>
+<td><code>BuildingId</code> and zone registered; column allocated. Activation requires only node/edge data.</td>
+</tr>
+</tbody></table>
+<h3>4.2 Why expansion is cheap — the contract list</h3>
+<p>Adding Furnace 20 (the largest future scope) requires exactly:</p>
+<ol>
+<li><strong>Data files</strong> — <code>data/installations/furnace-20.ts</code> following the F10
+pattern. The compiler enforces completeness (location, specs,
+troubleshooting steps are required fields).</li>
+<li><strong>Cross-building feeders</strong> — edges from Utility LV panels with
+<code>route.spansBuildings: true</code>; the orthogonal router and parallel-lane
+assigner handle the corridor geometry automatically.</li>
+<li><strong>Nothing else.</strong> Layout (tree-centred column sizing), tier filtering,
+cascade propagation, SLD routing, parallel separation, zone striping,
+and the DetailDrawer all operate on the new data without modification —
+each is driven by the schema, not by per-building code.</li>
+</ol>
+<p>The same contract applies to deepening existing wings (Tier 3 build-out of
+Batch House) and to the telemetry phases of §2: <strong>CINERNET scales by adding
+data, not by adding code.</strong> That property — enforced by the closed type
+system and the derived-everything rendering architecture — is the
+engineering case for treating this application as plant infrastructure
+rather than as a demo.</p>
+<hr>
+<h2>5. Phase Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Scope</th>
+<th>Engine changes required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A (now)</td>
+<td>Static twin: SLD rendering, cascade, tiers, fault drills, per-asset docs &amp; history</td>
+<td>—</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Read-only telemetry overlay (MQTT/Sparkplug B or REST/WS), <code>externalRefs</code> join</td>
+<td>Telemetry adapter + overlay context</td>
+</tr>
+<tr>
+<td>C</td>
+<td>SPC boundaries, live control-band charts in DetailDrawer</td>
+<td><code>SpcBoundary</code> schema + chart component</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Predictive amber cascades, CMMS work-order posting</td>
+<td>Threshold/debounce service; cascade &amp; UI unchanged</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Furnace 20 + Batch House Tier 3 + Warehouse activation</td>
+<td><strong>Data only</strong></td>
+</tr>
+</tbody></table>
+
+  </div>
+  <div class="footer-note">
+    <span>CINERNET — Scalability Roadmap</span>
+    <span>Generated 10 June 2026 · For internal engineering use</span>
+  </div>
+</body>
+</html>
