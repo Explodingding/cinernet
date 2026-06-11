@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { topologyNodeInputs, topologyEdges } from '@/data/mockTopology';
 import type { TopologyNode, TopologyEdge, Status, EdgeType } from '@/types/topology';
@@ -124,6 +124,38 @@ export default function Dashboard() {
       ),
     [buildingFilter, activeTier, visibleEdgeTypes, nodeStatuses, edgeStatuses]
   );
+
+  const visibleNodesRef = useRef(visibleNodes);
+  useEffect(() => {
+    visibleNodesRef.current = visibleNodes;
+  }, [visibleNodes]);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (
+        (e.key === 'e' || e.key === 'E') &&
+        !(e.target instanceof HTMLInputElement) &&
+        !(e.target instanceof HTMLTextAreaElement)
+      ) {
+        let csv = 'Object ID,X pos,Y pos\n';
+        for (const n of visibleNodesRef.current) {
+          csv += `${n.id},${Math.round(n.position.x)},${Math.round(n.position.y)}\n`;
+        }
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cinernet_positions.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        console.info('%c[Exported CSV to cinernet_positions.csv]', 'color: #34d399; font-weight: bold;');
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
 
   // Parallel-lane metadata injected once per topology change, before React Flow
   // receives the edges.  Each edge gets parallelIndex / totalParallel /
