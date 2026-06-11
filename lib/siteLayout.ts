@@ -615,7 +615,7 @@ export function layoutNodes(
   }
 
   // ── Position every node ────────────────────────────────────────────────────
-  return nodes.map((n): TopologyNode => {
+  const mappedNodes = nodes.map((n): TopologyNode => {
     // positionOverride always wins
     if (n.positionOverride) {
       const { layout: _l, positionOverride, mapScope: _m, ...rest } = n;
@@ -767,4 +767,30 @@ export function layoutNodes(
 
     return { ...rest, position: { x, y } };
   });
+
+  // ── Extra Rule: Collision Avoidance ─────────────────────────────────────────
+  // Prevent nodes from perfectly overlapping by applying a cascading offset
+  const placed: { x: number; y: number }[] = [];
+  const MIN_DIST = 20;
+
+  for (const n of mappedNodes) {
+    let overlap = true;
+    while (overlap) {
+      overlap = false;
+      for (const p of placed) {
+        const dx = Math.abs(n.position.x - p.x);
+        const dy = Math.abs(n.position.y - p.y);
+        if (dx < MIN_DIST && dy < MIN_DIST) {
+          // Shift down and right to reveal the hidden card
+          n.position.x += 40;
+          n.position.y += 40;
+          overlap = true;
+          break;
+        }
+      }
+    }
+    placed.push({ x: n.position.x, y: n.position.y });
+  }
+
+  return mappedNodes;
 }
