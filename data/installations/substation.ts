@@ -24,7 +24,7 @@ export const substationInstallation: SiteInstallation = {
       displayTier: 1,
       subsystem: 'hv',
       allowFaultInjection: false,
-      layout: { building: 'substation', branchIndex: 0 },
+      layout: { building: 'substation', branchIndex: 0, incomerPort: true },
       physicalLocation: {
         building: 'substation',
         zone: 'substation-hv',
@@ -53,7 +53,7 @@ export const substationInstallation: SiteInstallation = {
       displayTier: 1,
       subsystem: 'hv',
       allowFaultInjection: false,
-      layout: { building: 'substation', branchIndex: 1 },
+      layout: { building: 'substation', branchIndex: 1, incomerPort: true },
       physicalLocation: {
         building: 'substation',
         zone: 'substation-hv',

@@ -30,7 +30,7 @@ export const furnace10Installation: SiteInstallation = {
       status: 'operational',
       displayTier: 1,
       circuitCount: 12,
-      layout: { building: 'furnace-10', branchIndex: 0 },
+      layout: { building: 'furnace-10', branchIndex: 0, feederLanding: true },
       physicalLocation: {
         building: 'furnace-10',
         zone: 'furnace-10-ground',

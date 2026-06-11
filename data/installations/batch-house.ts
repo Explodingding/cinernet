@@ -25,7 +25,7 @@ export const batchHouseInstallation: SiteInstallation = {
       assetType: 'cabinet',
       layer: 'cabinet',
       status: 'operational',
-      layout: { building: 'batch-house', branchIndex: 0 },
+      layout: { building: 'batch-house', branchIndex: 0, feederLanding: true },
       physicalLocation: {
         building: 'batch-house',
         zone: 'batch-house-ground',

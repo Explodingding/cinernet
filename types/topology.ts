@@ -77,6 +77,15 @@ export interface NodeLayout {
   lineupIndex?: number;
   /** Main feeder transformer aligned above its outgoing panel cell. */
   feederRole?: 'main-feed';
+  /**
+   * Align X with a MAIN PANEL cell (0-based index) — used for LV panels and
+   * auxiliary transformers per SMT-5255 riser positions above the busbar row.
+   */
+  anchorLineupIndex?: number;
+  /** Substation grid feed — snap to the incomer corridor Y (MAIN PANEL row). */
+  incomerPort?: boolean;
+  /** Cross-building incoming panel — align Y with utility feeder transformers. */
+  feederLanding?: boolean;
 }
 
 export interface CableRoute {

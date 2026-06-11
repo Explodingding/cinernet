@@ -47,17 +47,17 @@ function cellNode(cellNumber: number, notes: string): TopologyNodeInput {
 export const mainHvPanelCells: TopologyNodeInput[] = Array.from({ length: CELL_COUNT }, (_, i) => {
   const n = i + 1;
   const roleNotes: Record<number, string> = {
-    1: 'Track 1 incomer — underground feeder A from Fluvius Distribution Building (GRID-FEED-A).',
-    2: 'Track 2 incomer A — redundant feeder B cable A from Distribution Building.',
-    3: 'Track 2 incomer B — redundant feeder B cable B (parallel pair with Cell 2).',
-    4: 'Outgoing feeder — 26 kV cable to TR 01 (Furnace 10 supply transformer).',
-    5: 'Bus section / metering cubicle between F10 and Utility feeder positions.',
-    6: 'Outgoing feeder — 26 kV cable to TR 02 (Utility building services transformer).',
+    1: 'MAIN SUPPLY-1 — Track 1 incomer from Fluvius Distribution Building (GRID-FEED-A).',
+    2: 'MAIN SUPPLY-2A — Track 2 redundant cable A from Distribution Building (GRID-FEED-B).',
+    3: 'MAIN SUPPLY-2B — Track 2 redundant cable B (parallel pair with Cell 2).',
+    4: 'FUR 10 — outgoing feeder cubicle to TR-01 / Furnace 10 supply.',
+    5: 'Bus section / metering between F10 and Utility feeder positions.',
+    6: 'Utility services feeder — outgoing to TR-02 (UT-MDP / TR-DPC).',
     7: 'Bus section between Utility and Batch House feeder positions.',
-    8: 'Outgoing feeder — 26 kV cable to TR 03 (Batch House supply transformer).',
-    9: 'Bus section between Batch House and Furnace 20 reserve feeder.',
-    10: 'Outgoing feeder — 26 kV cable to TR 04 (Furnace 20 — future scope, normally isolated).',
-    11: 'Bus end / tie cubicle — ring coupling to F10/F20 HV switchgear sections.',
+    8: 'Batch House feeder — outgoing to TR-03 (DC-BH-01 incoming).',
+    9: 'Bus section — Furnace 20 reserve feeder bay.',
+    10: 'FUR 20 — outgoing feeder cubicle to TR-04 (future scope, normally isolated).',
+    11: 'RING 10-20 — bus end / tie cubicle to F10 & F20 HV switchgear sections.',
   };
   return cellNode(n, roleNotes[n] ?? `Main panel cubicle ${n} on the 26 kV busbar.`);
 });

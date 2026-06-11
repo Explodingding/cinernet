@@ -38,12 +38,19 @@ const ROW_SPACING = 200;
 export const MAIN_HV_PANEL_LINEUP = {
   group: 'main-hv-panel' as const,
   cellCount: 11,
-  /** Horizontal gap between adjacent cells (px) — tight busbar row. */
-  cellSpacing: 118,
+  /** Horizontal gap between adjacent cells (px) — tight busbar row per SMT-5255. */
+  cellSpacing: 108,
   /** Distance from the bottom edge of the ground band to the cell row centre. */
-  bottomInset: 72,
+  bottomInset: 64,
   /** Vertical lift of feeder transformers above the cell row (px). */
-  feederLift: 220,
+  feederLift: 210,
+  /** Feeder cell indices (0-based) — wings align to these cubicles on the busbar. */
+  feederCells: {
+    furnace10: 3,   // Cell 4 — FUR 10 / TR-01
+    utility: 5,     // Cell 6 — TR-02
+    batchHouse: 7,  // Cell 8 — TR-03
+    furnace20: 9,   // Cell 10 — TR-04 (future)
+  } as const,
 };
 
 /**
@@ -81,18 +88,45 @@ function getLayerY(layer: TopologyLayer, bandId: FloorBandId): number {
 }
 
 /** Y centre for the 26 kV main panel cell row — bottom of the ground band. */
-function getMainPanelCellY(): number {
+export function getMainPanelCellY(): number {
   const band = FLOOR_BAND_MAP.ground;
   const bandBottom = band.yCenter + band.height / 2;
   return bandBottom - MAIN_HV_PANEL_LINEUP.bottomInset;
 }
 
-/** X centre for a main-panel cell by its 0-based lineup index. */
+/**
+ * X centre for a main-panel cell.
+ * SMT-5255: busbar runs left → right with incomers on the west (left) end.
+ * The lineup is left-aligned inside the Utility column so Cell 1 sits near the
+ * Substation / F10 wing and Cell 8+ faces the Batch House column.
+ */
 function getMainPanelCellX(col: BuildingColConfig, lineupIndex: number): number {
-  const { cellCount, cellSpacing } = MAIN_HV_PANEL_LINEUP;
-  const totalWidth = (cellCount - 1) * cellSpacing;
-  const startX = col.xCenter - totalWidth / 2;
-  return startX + lineupIndex * cellSpacing;
+  const { cellSpacing } = MAIN_HV_PANEL_LINEUP;
+  const lineupLeft =
+    col.xCenter -
+    col.width / 2 +
+    BUILDING_PAD_X +
+    LEAF_WIDTH / 2;
+  return lineupLeft + lineupIndex * cellSpacing;
+}
+
+/** Upper ground-band equipment row — keeps LV panels clear of the busbar strip. */
+function getUtilityEquipmentY(layer: TopologyLayer, stackIndex = 0): number {
+  const bandTop = FLOOR_BAND_MAP.ground.yCenter - FLOOR_BAND_MAP.ground.height / 2;
+  const lineupCeiling =
+    getMainPanelCellY() - MAIN_HV_PANEL_LINEUP.feederLift - 120 - stackIndex * 36;
+  const rank = LAYER_RANK[layer];
+  const { min, max } = BAND_RANK_RANGE.ground;
+  const t = (rank - min) / (max - min);
+  const band = bandTop + 80;
+  return band + t * (lineupCeiling - band);
+}
+
+function isSubstationIncomer(n: TopologyNodeInput): boolean {
+  return (
+    n.physicalLocation.building === 'substation' &&
+    n.layer === 'hv-feed'
+  );
 }
 
 function isMainPanelLineupNode(n: TopologyNodeInput): boolean {
@@ -321,7 +355,7 @@ export function computeBuildingCols(
     const { adj, radj }     = buildBuildingAdjacency(nodeMap, edges);
 
     let xLeft = 0;
-    return MAP_COLUMN_ORDER.map((bid) => {
+    const cols = MAP_COLUMN_ORDER.map((bid) => {
       const bNodes = physNodes.filter((n) => n.physicalLocation.building === bid);
 
       let width: number;
@@ -355,6 +389,7 @@ export function computeBuildingCols(
       xLeft += width + BUILDING_GAP;
       return { id: bid as BuildingId, xCenter, width };
     });
+    return refineFeederColumnAnchors(cols);
   }
 
   // ── Legacy branchIndex-based widths (no edges provided) ───────────────────
@@ -373,6 +408,66 @@ export function computeBuildingCols(
     xLeft += width + BUILDING_GAP;
     return { id: bid as BuildingId, xCenter, width };
   });
+}
+
+/**
+ * Nudge F10 / Batch House columns so their feeder cables land near the correct
+ * MAIN PANEL cubicles (SMT-5255 riser alignment).
+ */
+function refineFeederColumnAnchors(cols: BuildingColConfig[]): BuildingColConfig[] {
+  const updated = cols.map((c) => ({ ...c }));
+  const utilIdx = updated.findIndex((c) => c.id === 'utility');
+  const f10Idx  = updated.findIndex((c) => c.id === 'furnace-10');
+  const bhIdx   = updated.findIndex((c) => c.id === 'batch-house');
+  if (utilIdx < 0) return updated;
+
+  const util = updated[utilIdx];
+  const f10CellX = getMainPanelCellX(util, MAIN_HV_PANEL_LINEUP.feederCells.furnace10);
+  const bhCellX  = getMainPanelCellX(util, MAIN_HV_PANEL_LINEUP.feederCells.batchHouse);
+
+  // Furnace-10: sit just west of the Cell 4 feeder riser
+  if (f10Idx >= 0 && f10Idx < utilIdx) {
+    const f10 = updated[f10Idx];
+    const targetCenter = f10CellX - BUILDING_GAP * 0.6 - f10.width / 2;
+    const minCenter =
+      f10Idx > 0
+        ? updated[f10Idx - 1].xCenter +
+          updated[f10Idx - 1].width / 2 +
+          BUILDING_GAP +
+          f10.width / 2
+        : f10.width / 2 + BUILDING_PAD_X;
+    const f10Center = Math.max(minCenter, targetCenter);
+    const delta = f10Center - f10.xCenter;
+    if (Math.abs(delta) > 2) {
+      for (let i = 0; i <= f10Idx; i++) {
+        updated[i] = { ...updated[i], xCenter: updated[i].xCenter + delta };
+      }
+      const f10Right = updated[f10Idx].xCenter + updated[f10Idx].width / 2;
+      const utilShift = f10Right + BUILDING_GAP + util.width / 2 - updated[utilIdx].xCenter;
+      for (let i = utilIdx; i < updated.length; i++) {
+        updated[i] = { ...updated[i], xCenter: updated[i].xCenter + utilShift };
+      }
+    }
+  }
+
+  // Batch House: sit east of the Cell 8 feeder riser
+  if (bhIdx > utilIdx) {
+    const utilNow = updated[utilIdx];
+    const bhCellXNow = getMainPanelCellX(utilNow, MAIN_HV_PANEL_LINEUP.feederCells.batchHouse);
+    const bh = updated[bhIdx];
+    const targetCenter = bhCellXNow + BUILDING_GAP * 0.6 + bh.width / 2;
+    const utilRight = utilNow.xCenter + utilNow.width / 2;
+    const minCenter = utilRight + BUILDING_GAP + bh.width / 2;
+    const bhCenter = Math.max(minCenter, targetCenter);
+    const delta = bhCenter - bh.xCenter;
+    if (delta > 2) {
+      for (let i = bhIdx; i < updated.length; i++) {
+        updated[i] = { ...updated[i], xCenter: updated[i].xCenter + delta };
+      }
+    }
+  }
+
+  return updated;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -464,7 +559,14 @@ export function layoutNodes(
       if (!col) continue;
 
       const bNodes   = physNodes.filter(
-        (n) => n.physicalLocation.building === bid && !isMainPanelLineupNode(n)
+        (n) =>
+          n.physicalLocation.building === bid &&
+          !isMainPanelLineupNode(n) &&
+          !isSubstationIncomer(n) &&
+          !(
+            bid === 'utility' &&
+            getFloorBandId(parseElevationM(n.physicalLocation.elevation)) === 'ground'
+          )
       );
       if (bNodes.length === 0) continue;
 
@@ -547,6 +649,32 @@ export function layoutNodes(
 
     const bandId = getFloorBandId(parseElevationM(n.physicalLocation.elevation));
 
+    // ── Substation incomer ports — align with MAIN PANEL busbar row (SMT-5255) ─
+    if (isSubstationIncomer(n) || n.layout?.incomerPort) {
+      return {
+        ...rest,
+        position: {
+          x:
+            col.xCenter -
+            col.width / 2 +
+            BUILDING_PAD_X +
+            (n.layout?.branchIndex ?? 0) * NODE_SLOT_SPACING,
+          y: getMainPanelCellY(),
+        },
+      };
+    }
+
+    // ── Wing incoming panels — same riser height as utility feeder transformers ─
+    if (n.layout?.feederLanding) {
+      return {
+        ...rest,
+        position: {
+          x: col.xCenter,
+          y: getMainPanelCellY() - MAIN_HV_PANEL_LINEUP.feederLift,
+        },
+      };
+    }
+
     // ── 26 kV main panel lineup (fixed row at bottom of ground band) ─────────
     if (isMainPanelLineupNode(n) && col) {
       const cellY = getMainPanelCellY();
@@ -565,6 +693,33 @@ export function layoutNodes(
         position: {
           x: getMainPanelCellX(col, lineupIndex),
           y: cellY,
+        },
+      };
+    }
+
+    // ── Utility ground equipment — riser zone above the busbar strip ─────────
+    if (n.physicalLocation.building === 'utility' && bandId === 'ground') {
+      const utilCol = colMap.utility ?? col;
+      let x: number;
+      if (n.layout?.anchorLineupIndex !== undefined) {
+        x = getMainPanelCellX(utilCol, n.layout.anchorLineupIndex);
+      } else if (treeX?.has(n.id)) {
+        x = treeX.get(n.id)!;
+      } else if (n.layout?.branchIndex !== undefined) {
+        x =
+          col.xCenter -
+          col.width / 2 +
+          BUILDING_PAD_X +
+          n.layout.branchIndex * NODE_SLOT_SPACING;
+      } else {
+        x = col.xCenter;
+      }
+      const stack = n.layout?.branchIndex ?? 0;
+      return {
+        ...rest,
+        position: {
+          x,
+          y: getUtilityEquipmentY(n.layer, Math.floor(stack / 4)),
         },
       };
     }

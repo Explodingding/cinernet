@@ -144,6 +144,35 @@ if (cell04 && tr01 && tr01.position.y < cell04.position.y) {
   fail('TR-01 not vertically above MAIN-HV-CELL-04');
 }
 
+const gridA = laidOut.find((n) => n.id === 'GRID-FEED-A');
+const cell01 = laidOut.find((n) => n.id === 'MAIN-HV-CELL-01');
+if (gridA && cell01 && Math.abs(gridA.position.y - cell01.position.y) < 4) {
+  pass('Substation GRID-FEED-A aligned with MAIN-HV-CELL-01 incomer row');
+} else {
+  fail(`Substation incomer Y misaligned (Δy=${gridA && cell01 ? Math.abs(gridA.position.y - cell01.position.y).toFixed(1) : 'n/a'} px)`);
+}
+
+const trDp = laidOut.find((n) => n.id === 'TR-DP1-1');
+if (tr01 && trDp && Math.abs(tr01.position.y - trDp.position.y) < 4) {
+  pass('TR-DP1-1 feeder landing aligned with TR-01 riser height');
+} else {
+  fail('TR-DP1-1 not aligned with TR-01 for cross-building LV feeder');
+}
+
+const dcBh = laidOut.find((n) => n.id === 'DC-BH-01');
+const tr03 = laidOut.find((n) => n.id === 'TR-03');
+if (tr03 && dcBh && Math.abs(tr03.position.y - dcBh.position.y) < 4) {
+  pass('DC-BH-01 feeder landing aligned with TR-03 riser height');
+} else {
+  fail('DC-BH-01 not aligned with TR-03 for cross-building LV feeder');
+}
+
+if (cell04 && trDp && trDp.position.x < cell04.position.x) {
+  pass('Furnace-10 incoming panel sits west of Cell 4 feeder cubicle');
+} else {
+  fail('F10 feeder landing not west of MAIN-HV-CELL-04');
+}
+
 const augmented = assignParallelIndices(topologyEdges, laidOut);
 const bkupAug = augmented.filter(
   (e) => e.source === 'GRID-FEED-B' && (e.target === 'MAIN-HV-CELL-02' || e.target === 'MAIN-HV-CELL-03')
