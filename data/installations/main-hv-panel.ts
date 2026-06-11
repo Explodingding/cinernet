@@ -26,10 +26,6 @@ function cellNode(cellNumber: number, notes: string): TopologyNodeInput {
       area: `26 kV MAIN PANEL — cubicle ${cellNumber} (UG03 switchgear lineup)`,
       gridRef: `66-15-014a-${cellNumber}`,
     },
-    externalRefs: {
-      scadaTag: `LOMMEL.MAIN_HV.CELL_${padded}.STATUS`,
-      osapiensAssetId: `AST-MAIN-HV-CELL-${padded}`,
-    },
     specs: {
       voltage: '26 kV (future 30 kV)',
       current: '1 250 A',
@@ -67,7 +63,7 @@ function feederTransformer(
   name: string,
   lineupIndex: number,
   specs: TopologyNodeInput['specs'],
-  opts: Pick<TopologyNodeInput, 'displayTier' | 'externalRefs' | 'troubleshootingSteps' | 'docs'> &
+  opts: Pick<TopologyNodeInput, 'displayTier' | 'troubleshootingSteps' | 'docs'> &
     Partial<Pick<TopologyNodeInput, 'status'>>
 ): TopologyNodeInput {
   return {
@@ -92,7 +88,6 @@ function feederTransformer(
       area: 'Transformer bay — above 26 kV MAIN PANEL feeder cell',
       gridRef: id,
     },
-    externalRefs: opts.externalRefs,
     specs,
     troubleshootingSteps: opts.troubleshootingSteps,
     docs: opts.docs,
@@ -110,7 +105,6 @@ export const mainFeedTransformers: TopologyNodeInput[] = [
       notes: 'Fed from MAIN PANEL Cell 4. LV output → TR-DP1.1 PFC panel (Furnace 10).',
     },
     {
-      externalRefs: { scadaTag: 'LOMMEL.TR01.STATUS', osapiensAssetId: 'AST-TR-01' },
       troubleshootingSteps: [
         { id: 'tr01-1', text: 'Check winding temperature — max 80 °C (thermistor).' },
         { id: 'tr01-2', text: 'Measure LV output: 395–405 V before energising F10 PFC panel.' },
@@ -127,7 +121,6 @@ export const mainFeedTransformers: TopologyNodeInput[] = [
       notes: 'Fed from MAIN PANEL Cell 6. LV output → UT-MDP and TR-DPC utility distribution.',
     },
     {
-      externalRefs: { scadaTag: 'LOMMEL.TR02.STATUS', osapiensAssetId: 'AST-TR-02' },
       troubleshootingSteps: [
         { id: 'tr02-1', text: 'Check winding temperature — max 80 °C.' },
         { id: 'tr02-2', text: 'Verify LV feeds to UT-MDP and TR-DPC — 400 V ±5%.' },
@@ -144,7 +137,6 @@ export const mainFeedTransformers: TopologyNodeInput[] = [
       notes: 'Fed from MAIN PANEL Cell 8. LV output → DC-BH-01 (Batch House main incoming).',
     },
     {
-      externalRefs: { scadaTag: 'LOMMEL.TR03.STATUS', osapiensAssetId: 'AST-TR-03' },
       troubleshootingSteps: [
         { id: 'tr03-1', text: 'Check winding temperature — max 80 °C.' },
         { id: 'tr03-2', text: 'Measure LV at DC-BH-01 incoming — 400 V ±5%.' },
@@ -163,7 +155,6 @@ export const mainFeedTransformers: TopologyNodeInput[] = [
     {
       displayTier: 3,
       status: 'investigation',
-      externalRefs: { scadaTag: 'LOMMEL.TR04.STATUS', osapiensAssetId: 'AST-TR-04' },
       troubleshootingSteps: [
         { id: 'tr04-1', text: 'Future scope — do not energise until F20 commissioning plan approved.' },
       ],

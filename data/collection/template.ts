@@ -43,10 +43,6 @@ export const EXAMPLE_NODE: TopologyNodeInput = {
     manufacturer: 'FILL',
     location: 'FILL — free text',
   },
-  externalRefs: {
-    scadaTag: 'FILL.SCADATAG', // optional
-    osapiensAssetId: 'FILL-OSAP', // optional
-  },
   troubleshootingSteps: [
     { id: 'step-1', text: 'FILL — first check for technician' },
   ],
@@ -93,6 +89,4 @@ export const EXAMPLE_INSTALLATION: SiteInstallation = {
  * □ Downstream devices (what it feeds)
  * □ Cable tag, length, cross-section (if known)
  * □ Breaker / fuse to check first (for troubleshooting steps)
- * □ SCADA tag (if available)
- * □ osapiens asset ID (if available)
  */

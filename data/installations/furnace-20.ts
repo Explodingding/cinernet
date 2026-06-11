@@ -39,7 +39,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 electrical room',
         gridRef: 'TR-DP2.1',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DP2_1.STATUS', osapiensAssetId: 'AST-TR-DP2-1' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC with 1 500 kVAr harmonic filter. Fed from TR2.1 (Utility Building, 2 500 kVA).',
@@ -68,7 +67,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 electrical room',
         gridRef: 'TR-DP2.2',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DP2_2.STATUS', osapiensAssetId: 'AST-TR-DP2-2' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR2.2 (Utility Building).',
@@ -95,7 +93,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 electrical room',
         gridRef: 'TR-DP2.3',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DP2_3.STATUS', osapiensAssetId: 'AST-TR-DP2-3' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR2.3 (Utility Building).',
@@ -122,7 +119,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 electrical room — spare position',
         gridRef: 'TR-DPS',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DPS.STATUS', osapiensAssetId: 'AST-TR-DPS' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. Spare PFC panel — fed from TR-DPS transformer. Normally isolated.',
@@ -151,7 +147,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — electrical room ground floor',
         gridRef: 'F2-MDP-1',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F2_MDP1.STATUS', osapiensAssetId: 'AST-F2-MDP-1' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS.',
@@ -178,7 +173,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — main electrical room',
         gridRef: 'F2-MDP-9',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F2_MDP9.STATUS', osapiensAssetId: 'AST-F2-MDP-9' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B, PROCESS.',
@@ -204,7 +198,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 hot zone',
         gridRef: 'F2-HOT-DP',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F2_HOT_DP.STATUS', osapiensAssetId: 'AST-F2-HOT-DP' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B, PROCESS.',
@@ -231,7 +224,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — generator feed section',
         gridRef: 'F2-GEN-DP',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F2_GEN_DP.STATUS', osapiensAssetId: 'AST-F2-GEN-DP' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B, PROCESS. Generator-backed critical loads.',
@@ -258,7 +250,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — hot zone elevated level',
         gridRef: 'HOT-20',
       },
-      externalRefs: { scadaTag: 'LOMMEL.HOT20.STATUS', osapiensAssetId: 'AST-HOT-20' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS.',
@@ -285,7 +276,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — field services',
         gridRef: 'FH20',
       },
-      externalRefs: { scadaTag: 'LOMMEL.FH20.STATUS', osapiensAssetId: 'AST-FH20' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS.',
@@ -313,7 +303,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — SIPAC row',
         gridRef: 'SIPAC-11',
       },
-      externalRefs: { scadaTag: 'LOMMEL.SIPAC11.STATUS', osapiensAssetId: 'AST-SIPAC-11' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. Process interface cabinet — SCADA I/O and field instrumentation.',
@@ -339,7 +328,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — SIPAC row',
         gridRef: 'SIPAC-12',
       },
-      externalRefs: { scadaTag: 'LOMMEL.SIPAC12.STATUS', osapiensAssetId: 'AST-SIPAC-12' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS.',
@@ -364,7 +352,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — SIPAC row (Phase 2)',
         gridRef: 'SIPAC-21',
       },
-      externalRefs: { scadaTag: 'LOMMEL.SIPAC21.STATUS', osapiensAssetId: 'AST-SIPAC-21' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. HOLD — Admin building design ongoing per SMT-5250.',
@@ -390,7 +377,6 @@ export const furnace20Installation: SiteInstallation = {
         area: 'Furnace 20 — SIPAC row (Phase 2)',
         gridRef: 'SIPAC-22',
       },
-      externalRefs: { scadaTag: 'LOMMEL.SIPAC22.STATUS' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. HOLD — Admin building design ongoing.',

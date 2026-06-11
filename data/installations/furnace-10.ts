@@ -39,7 +39,6 @@ export const furnace10Installation: SiteInstallation = {
         area: 'Furnace 10 electrical room',
         gridRef: 'TR-DP1.1',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DP1_1.STATUS', osapiensAssetId: 'AST-TR-DP1-1' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC with 1 500 kVAr harmonic filter. Fed from TR1.1 (Utility Building, 2 500 kVA).',
@@ -109,7 +108,6 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         area: 'Furnace 10 electrical room',
         gridRef: 'TR-DP1.2',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DP1_2.STATUS', osapiensAssetId: 'AST-TR-DP1-2' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR1.2 (Utility Building).',
@@ -136,7 +134,6 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         area: 'Furnace 10 electrical room',
         gridRef: 'TR-DP1.3',
       },
-      externalRefs: { scadaTag: 'LOMMEL.TR_DP1_3.STATUS', osapiensAssetId: 'AST-TR-DP1-3' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR1.3 (Utility Building).',
@@ -165,7 +162,6 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         area: 'Furnace 10 — electrical room ground floor',
         gridRef: 'F1-MDP-1',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F1_MDP1.STATUS', osapiensAssetId: 'AST-F1-MDP-1' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. General distribution panel for Furnace 10 ground floor.',
@@ -240,7 +236,6 @@ EMERGENCY:
         area: 'Furnace 10 — main electrical room',
         gridRef: 'F1-MDP-9',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F1_MDP9.STATUS', osapiensAssetId: 'AST-F1-MDP-9' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B, PROCESS. Higher form factor — larger distribution section.',
@@ -267,7 +262,6 @@ EMERGENCY:
         area: 'Furnace 10 hot zone',
         gridRef: 'F1-HOT-DP',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F1_HOT_DP.STATUS', osapiensAssetId: 'AST-F1-HOT-DP' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B, PROCESS. Hot zone feeder distribution.',
@@ -294,7 +288,6 @@ EMERGENCY:
         area: 'Furnace 10 — generator feed section',
         gridRef: 'F1-GEN-DP',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F1_GEN_DP.STATUS', osapiensAssetId: 'AST-F1-GEN-DP' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 4B, PROCESS. Generator-backed distribution for furnace critical loads.',
@@ -321,7 +314,6 @@ EMERGENCY:
         area: 'Furnace 10 — UPS room',
         gridRef: 'F1-GEN-UP',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F1_GEN_UP.STATUS', osapiensAssetId: 'AST-F1-GEN-UP' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. UPS-backed panel for Furnace 10 instrumentation and control.',
@@ -348,7 +340,6 @@ EMERGENCY:
         area: 'Furnace 10 — hot zone elevated level',
         gridRef: 'HOT-10',
       },
-      externalRefs: { scadaTag: 'LOMMEL.HOT10.STATUS', osapiensAssetId: 'AST-HOT-10' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. Hot zone distribution at +5.135 m level.',
@@ -375,7 +366,6 @@ EMERGENCY:
         area: 'Furnace 10 — mechanical hot zone',
         gridRef: 'MHO-10',
       },
-      externalRefs: { scadaTag: 'LOMMEL.MHO10.STATUS', osapiensAssetId: 'AST-MHO-10' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS. Mechanical services hot zone distribution.',
@@ -401,7 +391,6 @@ EMERGENCY:
         area: 'Furnace 10 — field services',
         gridRef: 'FH10',
       },
-      externalRefs: { scadaTag: 'LOMMEL.FH10.STATUS', osapiensAssetId: 'AST-FH10' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP31, Form 2B, PROCESS.',
@@ -427,7 +416,6 @@ EMERGENCY:
         area: 'Furnace 10 — hot zone main supply',
         gridRef: 'F1-MDP-9-HOT',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F1_MDP9_HOT.STATUS' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         notes: 'IP55, Form 2B, PROCESS — weatherproof rating for hot zone environment.',
@@ -459,7 +447,6 @@ EMERGENCY:
         area: 'Furnace 10 — cooling water pump room',
         gridRef: 'P10.01',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F10.P1001.STATUS', osapiensAssetId: 'AST-P10-01' },
       specs: {
         voltage: '400 V',
         power: '22 kW',
@@ -491,7 +478,6 @@ EMERGENCY:
         area: 'Furnace 10 — cooling water pump room',
         gridRef: 'P10.02',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F10.P1002.STATUS', osapiensAssetId: 'AST-P10-02' },
       specs: {
         voltage: '400 V',
         power: '22 kW',
@@ -522,7 +508,6 @@ EMERGENCY:
         area: 'Furnace 10 — hot zone mezzanine, cooling air supply',
         gridRef: 'CAF10.01',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F10.CAF1001.STATUS', osapiensAssetId: 'AST-CAF10-01' },
       specs: {
         voltage: '400 V',
         power: '11 kW',
@@ -554,7 +539,6 @@ EMERGENCY:
         area: 'Furnace 10 — hot zone mezzanine, cooling air exhaust',
         gridRef: 'CAF10.02',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F10.CAF1002.STATUS', osapiensAssetId: 'AST-CAF10-02' },
       specs: {
         voltage: '400 V',
         power: '11 kW',
@@ -584,7 +568,6 @@ EMERGENCY:
         area: 'Furnace 10 — batch charging end wall',
         gridRef: 'M10.BCH.01',
       },
-      externalRefs: { scadaTag: 'LOMMEL.F10.BCH01.STATUS', osapiensAssetId: 'AST-BCH10-01' },
       specs: {
         voltage: '400 V',
         power: '30 kW',

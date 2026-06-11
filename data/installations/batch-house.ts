@@ -34,7 +34,6 @@ export const batchHouseInstallation: SiteInstallation = {
         area: 'Batch hall — main LV feed',
         gridRef: 'BH-DC-01',
       },
-      externalRefs: { osapiensAssetId: 'AST-BH-DC-01' },
       specs: { voltage: '400V AC', current: '250 A', manufacturer: 'Rittal' },
       troubleshootingSteps: [
         { id: 'dcbh1', text: 'Check breaker Q1 (ON).' },
@@ -85,7 +84,6 @@ export const batchHouseInstallation: SiteInstallation = {
         area: 'Cullet Tower — ground level switchroom',
         gridRef: 'CT-DC-01',
       },
-      externalRefs: { scadaTag: 'LOMMEL.CT_DC01.STATUS', osapiensAssetId: 'AST-CT-DC-01' },
       specs: {
         voltage: '400 V / 230 V 50 Hz',
         current: '160 A',
@@ -113,7 +111,6 @@ export const batchHouseInstallation: SiteInstallation = {
         area: 'Cullet Tower — crusher level',
         gridRef: 'CR-CT-01',
       },
-      externalRefs: { scadaTag: 'LOMMEL.CT.CR01.STATUS', osapiensAssetId: 'AST-CT-CR-01' },
       specs: {
         voltage: '400 V',
         power: '45 kW',
@@ -144,7 +141,6 @@ export const batchHouseInstallation: SiteInstallation = {
         area: 'Cullet Tower — return conveyor gallery',
         gridRef: 'CV-CT-01',
       },
-      externalRefs: { scadaTag: 'LOMMEL.CT.CV01.STATUS', osapiensAssetId: 'AST-CT-CV-01' },
       specs: {
         voltage: '400 V',
         power: '7.5 kW',

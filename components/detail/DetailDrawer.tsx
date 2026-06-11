@@ -559,41 +559,7 @@ export function DetailDrawer({
               </Section>
             </div>
 
-            <div
-              className="px-4 md:px-5 py-4 shrink-0"
-              style={{
-                borderTop: '1px solid rgba(255,255,255,0.06)',
-                background: 'rgba(10, 15, 26, 0.5)',
-              }}
-            >
-              <div className="text-[9px] font-bold tracking-widest uppercase text-slate-600 mb-2">
-                Integration layer
-              </div>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <button
-                  onClick={() => onIntegrationAction(INTEGRATION_TOAST)}
-                  className="flex-1 min-h-[48px] px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors active:bg-slate-700/50"
-                  style={{
-                    background: 'rgba(30, 41, 59, 0.6)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    color: '#94a3b8',
-                  }}
-                >
-                  Sync from SCADA
-                </button>
-                <button
-                  onClick={() => onIntegrationAction(INTEGRATION_TOAST)}
-                  className="flex-1 min-h-[48px] px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors active:bg-slate-700/50"
-                  style={{
-                    background: 'rgba(30, 41, 59, 0.6)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    color: '#94a3b8',
-                  }}
-                >
-                  Close in osapiens
-                </button>
-              </div>
-            </div>
+
           </motion.div>
         </>
       )}

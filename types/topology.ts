@@ -50,11 +50,6 @@ export type EdgeType =
   | 'fieldbus'  // Profibus, PROFINET, EtherCAT, etc.
   | 'ethernet'; // Network / supervisory
 
-export interface ExternalRefs {
-  scadaTag?: string;
-  osapiensAssetId?: string;
-}
-
 export interface PhysicalLocation {
   building: BuildingId;
   zone: LocationZone;
@@ -153,7 +148,6 @@ export interface TopologyNodeInput {
   physicalLocation: PhysicalLocation;
   layout: NodeLayout;
   troubleshootingSteps: TroubleshootingStep[];
-  externalRefs?: ExternalRefs;
   upstreamHint?: string;
   /** Populated from CSV import — internal terminals & commissioning items */
   terminalBox?: TerminalBoxDetail;
@@ -204,7 +198,6 @@ export interface TopologyEdgeInput {
   specs: CableSpecs;
   troubleshootingSteps: TroubleshootingStep[];
   route?: CableRoute;
-  externalRefs?: ExternalRefs;
   upstreamHint?: string;
   /**
    * Injected at render-time by `assignParallelIndices` — never set in data files.

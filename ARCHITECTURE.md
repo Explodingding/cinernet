@@ -50,17 +50,6 @@ Only types present in the loaded dataset appear in the TopBar dropdown.
 
 `lib/faultCascade.ts → computeDerivedStatuses()` runs on every render. It does a directed BFS downstream from any `fault` or `investigation` node, following edges source→target (power-flow direction). Result is a `Map<nodeId, 'derived-fault' | 'derived-investigation'>` that is overlaid on the node card as a softer indicator — never stored in data.
 
-### 5. SCADA / OSAPIENS integration (extension point, not built)
-
-Every node already carries:
-```typescript
-externalRefs: {
-  scadaTag: 'LOMMEL.TR01.STATUS',
-  osapiensAssetId: 'AST-TR-01',
-}
-```
-When the integration is built, it will overlay live status at render time using the same pattern as fault cascade.
-
 ---
 
 ## Data files

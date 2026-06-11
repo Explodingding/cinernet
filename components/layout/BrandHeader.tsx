@@ -95,20 +95,7 @@ export function BrandHeader() {
 
       {/* Right: Integration badge + clock */}
       <div className="flex items-center gap-3 md:gap-5 shrink-0">
-        <div
-          className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-semibold tracking-wider uppercase"
-          style={{
-            background: 'rgba(52, 211, 153, 0.06)',
-            border: '1px solid rgba(52, 211, 153, 0.25)',
-            color: '#94a3b8',
-          }}
-        >
-          <span style={{ color: '#64748b' }}>SCADA</span>
-          <span className="text-slate-600">·</span>
-          <span style={{ color: '#64748b' }}>osapiens</span>
-          <span className="text-slate-600">·</span>
-          <span style={{ color: '#34d399' }}>Cinernet</span>
-        </div>
+
 
         <div
           className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase"

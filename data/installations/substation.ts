@@ -33,7 +33,6 @@ export const substationInstallation: SiteInstallation = {
         area: 'Distribution Building — Fluvius interface cubicle A',
         gridRef: 'H05/H06',
       },
-      externalRefs: { scadaTag: 'FLUVIUS.FEED_A.STATUS' },
       specs: {
         voltage: '26 kV (future 30 kV)',
         notes: 'Primary grid intake — EAXECWB 3×1×630/26 kV, 5.5 km from Fluvius substation. External asset — no internal fault simulation.',
@@ -62,7 +61,6 @@ export const substationInstallation: SiteInstallation = {
         area: 'Distribution Building — Fluvius interface cubicle B',
         gridRef: 'H07/H08',
       },
-      externalRefs: { scadaTag: 'FLUVIUS.FEED_B.STATUS' },
       specs: {
         voltage: '26 kV (future 30 kV)',
         notes: 'Redundant grid intake — spare core included. Feeds Track 2 twin cables to Utility basement.',
