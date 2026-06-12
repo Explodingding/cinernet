@@ -26,9 +26,10 @@ const BUILDING_TOP_BAND: Record<BuildingId, FloorBandId> = {
   'furnace-10':   'elevated',  // F10 has mezzanine nodes at +5 m
   utility:        'ground',    // Utility's topmost occupied band is ground floor
   'furnace-20':   'elevated',  // F20 has elevated panels
-  'batch-house':  'ground',
+  'batch-house':  'ground',    // Batch house is process-heavy but starts at ground
   'cullet-tower': 'ground',
   warehouse:      'ground',
+  'distribution-building': 'ground',
 };
 
 /**

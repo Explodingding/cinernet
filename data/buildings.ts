@@ -85,6 +85,16 @@ export const BUILDINGS: Record<BuildingId, BuildingConfig> = {
     bgColor: 'rgba(100, 116, 139, 0.03)',
     borderColor: 'rgba(100, 116, 139, 0.1)',
   },
+  'distribution-building': {
+    id: 'distribution-building',
+    label: 'Distribution Building',
+    shortLabel: 'DSB',
+    description: 'Distribution Building added from layout mapping',
+    role: 'Distribution',
+    color: '#475569',
+    bgColor: 'rgba(71, 85, 105, 0.06)',
+    borderColor: 'rgba(71, 85, 105, 0.25)',
+  },
 };
 
 /**
