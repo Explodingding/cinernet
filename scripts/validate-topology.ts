@@ -52,7 +52,7 @@ const sourceIds = new Set(topologyEdges.map((e) => e.source));
 const orphans = topologyNodeInputs.filter(
   (n) =>
     n.layer !== 'hv-feed' &&            // grid intake has no upstream by definition
-    n.layout?.building !== undefined &&
+    n.physicalLocation.building !== undefined &&
     !fedIds.has(n.id) &&
     !sourceIds.has(n.id) &&             // generators feed INTO the grid (source-only is OK)
     n.mapScope !== 'building-detail'    // TB grid nodes link via summary
