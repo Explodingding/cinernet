@@ -13,10 +13,9 @@ function cellNode(cellNumber: number, notes: string): TopologyNodeInput {
     status: 'operational',
     displayTier: 1,
     subsystem: 'hv',
-    layout: {
-      building: 'utility',
-      lineupGroup: 'main-hv-panel',
-      lineupIndex: cellNumber - 1,
+    position: {
+      x: 100 + (cellNumber * 80),
+      y: 300,
     },
     physicalLocation: {
       building: 'utility',
@@ -74,11 +73,9 @@ function feederTransformer(
     status: opts.status ?? 'operational',
     displayTier: opts.displayTier ?? 1,
     subsystem: 'lv-400v',
-    layout: {
-      building: 'utility',
-      lineupGroup: 'main-hv-panel',
-      lineupIndex,
-      feederRole: 'main-feed',
+    position: {
+      x: 100 + ((lineupIndex + 1) * 80),
+      y: 200,
     },
     physicalLocation: {
       building: 'utility',
