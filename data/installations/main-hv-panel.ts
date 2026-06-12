@@ -15,7 +15,7 @@ function cellNode(cellNumber: number, notes: string): TopologyNodeInput {
     subsystem: 'hv',
     position: {
       x: 100 + (cellNumber * 80),
-      y: 300,
+      y: 2500,
     },
     physicalLocation: {
       building: 'utility',
@@ -75,7 +75,7 @@ function feederTransformer(
     subsystem: 'lv-400v',
     position: {
       x: 100 + ((lineupIndex + 1) * 80),
-      y: 200,
+      y: 2000,
     },
     physicalLocation: {
       building: 'utility',
