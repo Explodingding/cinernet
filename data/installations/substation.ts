@@ -17,6 +17,7 @@ export const substationInstallation: SiteInstallation = {
   nodes: [
     {
       id: 'GRID-FEED-A',
+    position: { x: 0, y: 0 },
       name: 'Fluvius Grid Feeder A (H05/H06)',
       assetType: 'hv-feed',
       layer: 'hv-feed',
@@ -24,7 +25,6 @@ export const substationInstallation: SiteInstallation = {
       displayTier: 1,
       subsystem: 'hv',
       allowFaultInjection: false,
-      layout: { building: 'substation', branchIndex: 0, incomerPort: true },
       physicalLocation: {
         building: 'substation',
         zone: 'substation-hv',
@@ -39,12 +39,15 @@ export const substationInstallation: SiteInstallation = {
         manufacturer: 'Schneider Electric GHA 40.5-31-12',
       },
       troubleshootingSteps: [
-        { id: 'gfa-1', text: 'Contact Fluvius grid operator for upstream outage — do not operate external switchgear.' },
-        { id: 'gfa-2', text: 'Verify SICAM-Q100 energy quality at grid interface (read-only).' },
+        { id: 'gfa-1',
+    position: { x: 0, y: 0 }, text: 'Contact Fluvius grid operator for upstream outage — do not operate external switchgear.' },
+        { id: 'gfa-2',
+    position: { x: 0, y: 0 }, text: 'Verify SICAM-Q100 energy quality at grid interface (read-only).' },
       ],
     },
     {
       id: 'GRID-FEED-B',
+    position: { x: 0, y: 0 },
       name: 'Fluvius Grid Feeder B (H07/H08)',
       assetType: 'hv-feed',
       layer: 'hv-feed',
@@ -52,7 +55,6 @@ export const substationInstallation: SiteInstallation = {
       displayTier: 1,
       subsystem: 'hv',
       allowFaultInjection: false,
-      layout: { building: 'substation', branchIndex: 1, incomerPort: true },
       physicalLocation: {
         building: 'substation',
         zone: 'substation-hv',
@@ -67,7 +69,8 @@ export const substationInstallation: SiteInstallation = {
         manufacturer: 'Schneider Electric GHA 40.5-31-12',
       },
       troubleshootingSteps: [
-        { id: 'gfb-1', text: 'Contact Fluvius for upstream status before isolating redundant path.' },
+        { id: 'gfb-1',
+    position: { x: 0, y: 0 }, text: 'Contact Fluvius for upstream status before isolating redundant path.' },
       ],
     },
   ],

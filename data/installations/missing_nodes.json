@@ -1,0 +1,3174 @@
+[
+  {
+    "id": "TR-DP",
+    "name": "TR-DP 1.2 PFC WITH HARMONIC FILTER 1500kVAr",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y1-5.5-LVR"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Low voltage room",
+      "gridRef": "Y1"
+    },
+    "position": {
+      "x": 425,
+      "y": 775.0
+    }
+  },
+  {
+    "id": "UT-COMP4-1",
+    "name": "4 BAR COMPRESSOR UT-COMP4-1 264 kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y2-0.0-CPH"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Compressorhal",
+      "gridRef": "Y2"
+    },
+    "position": {
+      "x": 2700,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "UT-DRY4-1",
+    "name": "4 BAR DRYER  UT-DRY4-1 58.5kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y2-0.0-CPH"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Compressorhal",
+      "gridRef": "Y2"
+    },
+    "position": {
+      "x": 2745,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "TR-DP1",
+    "name": "TR-DP1 PFC WITH HARMONIC FILTER 1500kVAr",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y1-5.5-LVR"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Low voltage room",
+      "gridRef": "Y1"
+    },
+    "position": {
+      "x": 290,
+      "y": 865.0
+    }
+  },
+  {
+    "id": "UT-COMP7-1",
+    "name": "7 BAR COMPRESSOR UT-COMP7-1 ZT355VSD+ 2X354,3A",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y3-0.0-CPH"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Compressorhal",
+      "gridRef": "Y3"
+    },
+    "position": {
+      "x": 2790,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "7",
+    "name": "7 BAR COMPRESSOR UT_COMP7-2 ZT355VSD+ 2X354.4A",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y3-0.0-CPH"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Compressorhal",
+      "gridRef": "Y3"
+    },
+    "position": {
+      "x": 2835,
+      "y": 1110.0
+    }
+  },
+  {
+    "id": "SAFETY",
+    "name": "SAFETY PANEL 400V/230V",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y1-0.0-STR"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Safety Transformer Room",
+      "gridRef": "Y1"
+    },
+    "position": {
+      "x": 5950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "PANEL-4",
+    "name": "UTILITY EMERGENCY LIFT PANEL-4 UT-LP4",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y1-0.0-CRR"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "CRR",
+      "gridRef": "Y1"
+    },
+    "position": {
+      "x": 6200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "UT-FMCC",
+    "name": "UTILITY Smoke exhaust fan 4x15kW (UT-FMCC)",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y1-5.5-LVR"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Low voltage room",
+      "gridRef": "Y1"
+    },
+    "position": {
+      "x": 470,
+      "y": 745.0
+    }
+  },
+  {
+    "id": "F1-OC-UDP",
+    "name": "F1-OC-UDP (OVEN COMMAND) 92.80kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y1-9.0-BFC"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Batch & Furnace Control Room",
+      "gridRef": "Y1"
+    },
+    "position": {
+      "x": 10200,
+      "y": 750.0
+    }
+  },
+  {
+    "id": "UT-MCC",
+    "name": "UT-MCC.2 607.04kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-Y3-5.5-FSS"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "FSS",
+      "gridRef": "Y3"
+    },
+    "position": {
+      "x": 11200,
+      "y": 925.0
+    }
+  },
+  {
+    "id": "UT-UP",
+    "name": "UT-UP 41,80kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "UTB-A2-0.0-UTW"
+    },
+    "physicalLocation": {
+      "building": "utility",
+      "zone": "utility-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "UTW",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 7200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-MDP-2",
+    "name": "F1-MDP-2 400V/230V",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 495,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F1-MDP-3",
+    "name": "F1-MDP-3 400V/230V",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-COLD-DP",
+    "name": "F1-COLD-DP 400V/230V",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-CRA"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Cullet Return Area",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 1450,
+      "y": 925.0
+    }
+  },
+  {
+    "id": "F1-MDP-4",
+    "name": "F1-MDP-4 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1245,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F1-MDP-7",
+    "name": "F1-MDP-7 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-VPR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Vacu\u00fcm Panel Room",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1700,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "FUR",
+    "name": "FUR 10 CHIMNEY FILTRATION SYSTEM 814kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-0.0-CFS"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Chimney Filtration System"
+    },
+    "position": {
+      "x": 2450,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "ACH-01",
+    "name": "CHILLER 2 ACH-01 237.8kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-0.0-CFS"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Chimney Filtration System"
+    },
+    "position": {
+      "x": 2540,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "FOREHEART",
+    "name": "FOREHEART TRANSFORMER DISTRIBUTION PANEL 4.4 20kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FH4"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Foreheart 4",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1175,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "THROAT",
+    "name": "THROAT BOOST PANEL |TRANSFORMER| 20kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3450,
+      "y": 750.0
+    }
+  },
+  {
+    "id": "STIRRER",
+    "name": "STIRRER  PANEL DISTRIBUTION BOARD - 8 1.18kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FH4"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Foreheart 4",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1265,
+      "y": 540.0
+    }
+  },
+  {
+    "id": "OVEN-1",
+    "name": "HEATING OVEN-1 59,4kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FNC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "FNC",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3700,
+      "y": 750.0
+    }
+  },
+  {
+    "id": "OVEN-2",
+    "name": "HEATING OVEN-2 59,4kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FNC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "FNC",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3745,
+      "y": 720.0
+    }
+  },
+  {
+    "id": "OVEN-3",
+    "name": "HEATING OVEN-3 59,4kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FNC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "FNC",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3790,
+      "y": 690.0
+    }
+  },
+  {
+    "id": "OVEN-4",
+    "name": "HEATING OVEN-4 59,4kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FNC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "FNC",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3835,
+      "y": 660.0
+    }
+  },
+  {
+    "id": "SIPAC-13",
+    "name": "SIPAC-13",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4040,
+      "y": 865.0
+    }
+  },
+  {
+    "id": "SIPAC-14",
+    "name": "SIPAC-14",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4085,
+      "y": 835.0
+    }
+  },
+  {
+    "id": "F10-VAC-01",
+    "name": "VACUM COMPRESOR F10-VAC-01 91.9kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-VCC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Vacu\u00fcm Corner",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 4200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F10-",
+    "name": "F10- OTHER OUTLETS PANEL",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A4-0.0-RPL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "RPL",
+      "gridRef": "A4"
+    },
+    "position": {
+      "x": 4450,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F10-VAC-02",
+    "name": "VACUM COMPRESOR F10-VAC-02 91.9kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-VCC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Vacu\u00fcm Corner",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 4245,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F10-VAC-03",
+    "name": "VACUM COMPRESOR F10-VAC-03 91.9kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-VCC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Vacu\u00fcm Corner",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 4290,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "TIMON-10-1",
+    "name": "TIMON-10-1 CONVEYOR 15kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A4-9.0-SWP"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "SWP",
+      "gridRef": "A4"
+    },
+    "position": {
+      "x": 4790,
+      "y": 690.0
+    }
+  },
+  {
+    "id": "F10-VAC-04",
+    "name": "VACUM COMPRESOR F10-VAC-04 91.9kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-VCC"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Vacu\u00fcm Corner",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 4335,
+      "y": 1110.0
+    }
+  },
+  {
+    "id": "TIMON-10-2",
+    "name": "TIMON-10-2 CONVEYOR 15kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A4-9.0-SWP"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "SWP",
+      "gridRef": "A4"
+    },
+    "position": {
+      "x": 4835,
+      "y": 660.0
+    }
+  },
+  {
+    "id": "F10-ECF-14-1",
+    "name": "EMOC COOLING FAN F10-ECF-14-1 110kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 4950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F10-ECF-14-2",
+    "name": "EMOC COOLING FAN F10-ECF-14-2 110kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 4995,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F10-CCF-13",
+    "name": "CONVEYOR COOLING FAN F10-CCF-13 55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5040,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "F10-CCF-13-14",
+    "name": "CONVEYOR COOLING FAN F10-CCF-13-14 55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5085,
+      "y": 1110.0
+    }
+  },
+  {
+    "id": "F10-CCF-14-1",
+    "name": "CONVEYOR COOLING FAN F10-CCF-14-1 55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5130,
+      "y": 1080.0
+    }
+  },
+  {
+    "id": "F10-VCF-13-2",
+    "name": "VERTFLOW COOLING FAN F10-VCF-13-2",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5175,
+      "y": 1050.0
+    }
+  },
+  {
+    "id": "CONVEYOR",
+    "name": "CONVEYOR FEEDER 111kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 5840,
+      "y": -510.0
+    }
+  },
+  {
+    "id": "F10-VCF-13-1",
+    "name": "VERTFLOW COOLING FAN F10-VCF-13-1",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5220,
+      "y": 1020.0
+    }
+  },
+  {
+    "id": "EMMETI",
+    "name": "EMMETI PAL12 47kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 5885,
+      "y": -540.0
+    }
+  },
+  {
+    "id": "F10-ECF-13-2",
+    "name": "EMOC COOLING FAN F10-ECF-13-2",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5265,
+      "y": 990.0
+    }
+  },
+  {
+    "id": "MCAL-14",
+    "name": "MCAL-14.2 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4085,
+      "y": 660.0
+    }
+  },
+  {
+    "id": "F10-ECF-12-1",
+    "name": "EMOC COOLING FAN F10-ECF-12-1 110kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F10-ECF-12-2",
+    "name": "EMOC COOLING FAN F10-ECF-12-2 110kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5245,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "MULTI-14",
+    "name": "MULTI-14.2 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4175,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "F10-CCF-11",
+    "name": "CONVEYOR COOLING FAN F10-CCF-11 55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5290,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "F10-CCF-11-12",
+    "name": "CONVEYOR COOLING FAN F10-CCF-11-12 55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5335,
+      "y": 1110.0
+    }
+  },
+  {
+    "id": "MX4-4-14",
+    "name": "MX4-4-14.4 8.2kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4355,
+      "y": 480.0
+    }
+  },
+  {
+    "id": "F10-CCF-12-1",
+    "name": "CONVEYOR COOLING FAN F10-CCF-12-1 55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5380,
+      "y": 1080.0
+    }
+  },
+  {
+    "id": "F10-VCF-11-2",
+    "name": "VERTFLOW COOLING FAN F10-VCF-11-2",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5425,
+      "y": 1050.0
+    }
+  },
+  {
+    "id": "F10-VCF-11-1",
+    "name": "VERTFLOW COOLING FAN F10-VCF-11-1",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5470,
+      "y": 1020.0
+    }
+  },
+  {
+    "id": "F10-ECF-11-2",
+    "name": "EMOC COOLING FAN F10-ECF-11-2 110kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FRR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 5515,
+      "y": 990.0
+    }
+  },
+  {
+    "id": "CVCD-14",
+    "name": "CVCD-14.2 2.46kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4445,
+      "y": 420.0
+    }
+  },
+  {
+    "id": "RS",
+    "name": "RS AC 0.01 kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6380,
+      "y": -870.0
+    }
+  },
+  {
+    "id": "PAL",
+    "name": "PAL AC0.01kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6425,
+      "y": -900.0
+    }
+  },
+  {
+    "id": "F1-MDP-8",
+    "name": "F1-MDP-8 400V/230V",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-UPS"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "UPS Room",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 745,
+      "y": 895.0
+    }
+  },
+  {
+    "id": "MCAL_13.1",
+    "name": "MCAL_13.1 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4670,
+      "y": 270.0
+    }
+  },
+  {
+    "id": "F1-MZ-DP",
+    "name": "F1-MZ-DP 400V/230V",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-UPS"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "UPS Room",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 790,
+      "y": 865.0
+    }
+  },
+  {
+    "id": "MCAL-13",
+    "name": "MCAL-13.2 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4715,
+      "y": 240.0
+    }
+  },
+  {
+    "id": "HOT10",
+    "name": "HOT10 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-UPS"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "UPS Room",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 835,
+      "y": 835.0
+    }
+  },
+  {
+    "id": "MULTI-13",
+    "name": "MULTI-13.1 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6020,
+      "y": -630.0
+    }
+  },
+  {
+    "id": "F1-UO-DP",
+    "name": "F1-UO-DP 400V230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 540,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "MX4-4-13",
+    "name": "MX4-4-13.4 8.2kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 4985,
+      "y": 60.0
+    }
+  },
+  {
+    "id": "F1-MCC",
+    "name": "F1-MCC.1",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3450,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "CVCD-13",
+    "name": "CVCD-13.2 2.46kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 5075,
+      "y": 0.0
+    }
+  },
+  {
+    "id": "MCAL_12.1",
+    "name": "MCAL_12.1 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 5930,
+      "y": -570.0
+    }
+  },
+  {
+    "id": "F1-DPG",
+    "name": "F1-DPG.7 13.09kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A3-0.0-RPL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "RPL",
+      "gridRef": "A3"
+    },
+    "position": {
+      "x": 4540,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "MCAL-12",
+    "name": "MCAL-12.2 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 5975,
+      "y": -600.0
+    }
+  },
+  {
+    "id": "MULTI-12",
+    "name": "MULTI-12.2 3.69kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6065,
+      "y": -660.0
+    }
+  },
+  {
+    "id": "MX4-4-12",
+    "name": "MX4-4-12.4 8.2kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6245,
+      "y": -780.0
+    }
+  },
+  {
+    "id": "UT-DP",
+    "name": "UT-DP 75.11kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-UTW"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "UTW",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 7200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "MS-DP",
+    "name": "MS-DP 2.77kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-MTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "MTR",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 7450,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-ADP",
+    "name": "F1-ADP 9.18kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-HSE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "HSE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 7700,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "CVCD-12",
+    "name": "CVCD-12.2 2.46kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6335,
+      "y": -840.0
+    }
+  },
+  {
+    "id": "PW-DP",
+    "name": "PW-DP 12.32kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A4-0.0-PEL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "PEL",
+      "gridRef": "A4"
+    },
+    "position": {
+      "x": 7950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-MCC2",
+    "name": "F1-MCC2 20.61kw",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-LTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "LTR",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 8200,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-MCC3",
+    "name": "F1-MCC3 20.61kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-RTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "RTR",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 8450,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-MCC4",
+    "name": "F1-MCC4 38.55kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-UTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "UTR",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 5745,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F1-DPG1",
+    "name": "F1-DPG1 101.54kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Right",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 585,
+      "y": 1110.0
+    }
+  },
+  {
+    "id": "F1-DPG2",
+    "name": "F1-DPG2 58.12kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1290,
+      "y": 1140.0
+    }
+  },
+  {
+    "id": "F1-FP",
+    "name": "F1-FP 0.72kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FCR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "FCR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 8700,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "F1-DP2",
+    "name": "F1-DP2.8 6.12kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A3-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A3"
+    },
+    "position": {
+      "x": 6695,
+      "y": -1080.0
+    }
+  },
+  {
+    "id": "F1-DP1",
+    "name": "F1-DP1.6 27.15kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-CRA"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Cullet Return Area",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 1540,
+      "y": 865.0
+    }
+  },
+  {
+    "id": "FCP10.1",
+    "name": "FCP10.1 15kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-BMR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Botero Machine Room",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 9040,
+      "y": 865.0
+    }
+  },
+  {
+    "id": "F1-MCC5",
+    "name": "F1-MCC5 6.10kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6740,
+      "y": -1110.0
+    }
+  },
+  {
+    "id": "FCP10.2",
+    "name": "FCP10.2 15kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-BMR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Botero Machine Room",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 9085,
+      "y": 835.0
+    }
+  },
+  {
+    "id": "F1-MCC6",
+    "name": "F1-MCC6 4.70kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6785,
+      "y": -1140.0
+    }
+  },
+  {
+    "id": "RFP10.1",
+    "name": "RFP10.1 9.10kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-RFR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "RFR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 9450,
+      "y": 925.0
+    }
+  },
+  {
+    "id": "RA-MCC",
+    "name": "RA-MCC 7.90kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A4-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A4"
+    },
+    "position": {
+      "x": 6830,
+      "y": -1170.0
+    }
+  },
+  {
+    "id": "RFP10.2",
+    "name": "RFP10.2 9.10kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-RFL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "RFL",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 9700,
+      "y": 925.0
+    }
+  },
+  {
+    "id": "RA-DP",
+    "name": "RA-DP 9.35kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A4-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A4"
+    },
+    "position": {
+      "x": 6875,
+      "y": -1200.0
+    }
+  },
+  {
+    "id": "LAHTI-MCC",
+    "name": "F10 CULLET BUILDING LAHTI-MCC.07 201.61kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-LCR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "LCR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10495,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "TC10.1",
+    "name": "TC10.1 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FPF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Panel Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10700,
+      "y": 750.0
+    }
+  },
+  {
+    "id": "TC10.2",
+    "name": "TC10.2 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FPF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Panel Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10745,
+      "y": 720.0
+    }
+  },
+  {
+    "id": "F1-HP-1",
+    "name": "F1-HP-1 (F10-PDC700-1) 90kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-BTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "BTR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10950,
+      "y": 925.0
+    }
+  },
+  {
+    "id": "CAF10.1",
+    "name": "CAF10.1 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FPF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Panel Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10790,
+      "y": 690.0
+    }
+  },
+  {
+    "id": "F1-HP-2",
+    "name": "F1-HP-2 (F10-PDC700-1) 90kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-BTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "BTR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10995,
+      "y": 895.0
+    }
+  },
+  {
+    "id": "CAF10.2",
+    "name": "CAF10.2 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FPF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Panel Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10835,
+      "y": 660.0
+    }
+  },
+  {
+    "id": "F1-HP-3",
+    "name": "F1-HP-3 (F10-PDC700-3) 90kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-BTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "BTR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11040,
+      "y": 865.0
+    }
+  },
+  {
+    "id": "WE&FH10.1",
+    "name": "WE&FH10.1 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3495,
+      "y": 720.0
+    }
+  },
+  {
+    "id": "F1-HP-4",
+    "name": "F1-HP-4 (F10-PDC700-4) 90kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-5.5-BTR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "BTR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11085,
+      "y": 835.0
+    }
+  },
+  {
+    "id": "WE&FH10.2",
+    "name": "WE&FH10.2 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3540,
+      "y": 690.0
+    }
+  },
+  {
+    "id": "WE&FH10.3",
+    "name": "WE&FH10.3 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3585,
+      "y": 660.0
+    }
+  },
+  {
+    "id": "WE&FH10.4",
+    "name": "WE&FH10.4 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3630,
+      "y": 630.0
+    }
+  },
+  {
+    "id": "F1-FU-MCC",
+    "name": "F1-FU-MCC 150kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FCR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "FCR",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 8745,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F1-COLD-UDP",
+    "name": "F1-COLD-UDP 43.60kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-CRA"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "Cullet Return Area",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 1585,
+      "y": 835.0
+    }
+  },
+  {
+    "id": "F1-UPG",
+    "name": "F1-UPG.2 4.20kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-0.0-FPL"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Fan Panel Room Left",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 1335,
+      "y": 1110.0
+    }
+  },
+  {
+    "id": "F1-UP1",
+    "name": "F1-UP1.1 9.20kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-5.5-UPS"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+5.5m)",
+      "elevation": "5.5 m",
+      "area": "UPS Room",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 925,
+      "y": 775.0
+    }
+  },
+  {
+    "id": "F1-UP2",
+    "name": "F1-UP2.3 5.10kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-9.0-COE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "COE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 6920,
+      "y": -1230.0
+    }
+  },
+  {
+    "id": "F1-MDP-5",
+    "name": "F1-MDP-5 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FPF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Panel Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10880,
+      "y": 630.0
+    }
+  },
+  {
+    "id": "F1-MDP-6",
+    "name": "F1-MDP-6 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FPF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Panel Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 10925,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "TC10,1",
+    "name": "TC10,1 Throat(underfurnace) Coolig Fan 75kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11450,
+      "y": 750.0
+    }
+  },
+  {
+    "id": "TC10,2",
+    "name": "TC10,2 Throat(underfurnace) Coolig Fan 75kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11495,
+      "y": 720.0
+    }
+  },
+  {
+    "id": "CAF10,1",
+    "name": "CAF10,1 COMBUSTION AIR FAN 45kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11540,
+      "y": 690.0
+    }
+  },
+  {
+    "id": "CAF10,2",
+    "name": "CAF10,2 COMBUSTION AIR FAN 45kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11585,
+      "y": 660.0
+    }
+  },
+  {
+    "id": "WE&FH10,1",
+    "name": "WE&FH10,1 Working end & Forehearth fan LEFT 37kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3675,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "WE&FH10,2",
+    "name": "WE&FH10,2 Working end & Forehearth fan LEFT 37kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3720,
+      "y": 570.0
+    }
+  },
+  {
+    "id": "WE&FH10,3",
+    "name": "WE&FH10,3 Working end & Forehearth fan RIGHT 37kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3765,
+      "y": 540.0
+    }
+  },
+  {
+    "id": "WE&FH10,4",
+    "name": "WE&FH10,4 Working end & Forehearth fan RIGHT 37kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FUR"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 3810,
+      "y": 510.0
+    }
+  },
+  {
+    "id": "F1-AUP",
+    "name": "F1-AUP 2,25kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A2-0.0-HSE"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "HSE",
+      "gridRef": "A2"
+    },
+    "position": {
+      "x": 7745,
+      "y": 1170.0
+    }
+  },
+  {
+    "id": "F10-BCF-2",
+    "name": "F10-BCF-2 Left Fluxline Cooling Fan 150kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11630,
+      "y": 630.0
+    }
+  },
+  {
+    "id": "F10-BCF-4",
+    "name": "F10-BCF-4 Right Fluxline Cooling Fan 150kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11675,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "F10-SCF-2",
+    "name": "F10-SCF-2 Skewback Cooling Fan 45kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11720,
+      "y": 570.0
+    }
+  },
+  {
+    "id": "F10-BCF-1",
+    "name": "F10-BCF-1 RIGHT Fluxline Cooling Fan 150kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11810,
+      "y": 510.0
+    }
+  },
+  {
+    "id": "F10-SCF-1",
+    "name": "F10-SCF-1 Skewback Cooling Fan 45kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "F10-A1-9.0-FRF"
+    },
+    "physicalLocation": {
+      "building": "furnace-10",
+      "zone": "furnace-10-elevated",
+      "floor": "Elevated (+9.0m)",
+      "elevation": "9.0 m",
+      "area": "Fan Room Furnace",
+      "gridRef": "A1"
+    },
+    "position": {
+      "x": 11855,
+      "y": 480.0
+    }
+  },
+  {
+    "id": "AD-MDP",
+    "name": "HOLD building designe is ongoing  AD-MDP 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "ADB-?"
+    },
+    "physicalLocation": {
+      "building": "unknown",
+      "zone": "unknown-ground",
+      "floor": "Ground Floor",
+      "elevation": "? m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "LPG-DP",
+    "name": "LPG BUILDING LPG-DP 5,45kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "LPG-0.0"
+    },
+    "physicalLocation": {
+      "building": "unknown",
+      "zone": "unknown-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "PG-DP",
+    "name": "PEDESTRIAN GUARD PG-DP&UP 8,77kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "GUH-3.7"
+    },
+    "physicalLocation": {
+      "building": "unknown",
+      "zone": "unknown-elevated",
+      "floor": "Elevated (+3.7m)",
+      "elevation": "3.7 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1015.0
+    }
+  },
+  {
+    "id": "TG-DP",
+    "name": "TRUCK GUARD TG-DP&UP1 23,34kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "TRG-?"
+    },
+    "physicalLocation": {
+      "building": "unknown",
+      "zone": "unknown-ground",
+      "floor": "Ground Floor",
+      "elevation": "? m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "RPL",
+    "name": "RPL",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "Re-Paletizer"
+    },
+    "physicalLocation": {
+      "building": "unknown",
+      "zone": "unknown-ground",
+      "floor": "Ground Floor",
+      "elevation": "Paletizer m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "DB-DP",
+    "name": "DISTRIBUTION BUILDING DB-DP&UP 6.19kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "DSB-0.0"
+    },
+    "physicalLocation": {
+      "building": "distribution-building",
+      "zone": "distribution-building-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "BH-MDP",
+    "name": "BH-MDP 400V-230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-0.0-GPR"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "Ground Level Panel Room"
+    },
+    "position": {
+      "x": 5450,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "BH-UDP",
+    "name": "BH-UDP 400V/230V 50Hz",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-12.0-CPC"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+12.0m)",
+      "elevation": "12.0 m",
+      "area": "CPC"
+    },
+    "position": {
+      "x": 9950,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "BH-DP1",
+    "name": "BH-DP1 18.43kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-0.0"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-ground",
+      "floor": "Ground Floor",
+      "elevation": "0.0 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 1200.0
+    }
+  },
+  {
+    "id": "BH-DP2",
+    "name": "BH-DP2 18.99kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-5.1"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+5.1m)",
+      "elevation": "5.1 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 945.0
+    }
+  },
+  {
+    "id": "BH-DP3",
+    "name": "BH-DP3 7.08kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-12.0"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+12.0m)",
+      "elevation": "12.0 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 600.0
+    }
+  },
+  {
+    "id": "BH-DP4",
+    "name": "BH-DP4 23.76kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-17.5"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+17.5m)",
+      "elevation": "17.5 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 325.0
+    }
+  },
+  {
+    "id": "BH-DP5",
+    "name": "BH-DP5 1.36kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-22.8"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+22.8m)",
+      "elevation": "22.8 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": 60.0
+    }
+  },
+  {
+    "id": "BH-DP6",
+    "name": "BH-DP6 1.36kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-27.8"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+27.8m)",
+      "elevation": "27.8 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": -190.0
+    }
+  },
+  {
+    "id": "BH-DP7",
+    "name": "BH-DP7 46.62kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-32.5"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+32.5m)",
+      "elevation": "32.5 m",
+      "area": "UNKNOWN"
+    },
+    "position": {
+      "x": 1950,
+      "y": -425.0
+    }
+  },
+  {
+    "id": "LAHTI",
+    "name": "LAHTI MCC05 82kW",
+    "assetType": "panel",
+    "layer": "lv-panel",
+    "status": "operational",
+    "specs": {
+      "location": "BAH-12.0-CPC"
+    },
+    "physicalLocation": {
+      "building": "batch-house",
+      "zone": "batch-house-elevated",
+      "floor": "Elevated (+12.0m)",
+      "elevation": "12.0 m",
+      "area": "CPC"
+    },
+    "position": {
+      "x": 10175,
+      "y": 450.0
+    }
+  }
+]

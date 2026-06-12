@@ -38,7 +38,7 @@ interface TopologyMapProps {
   statusFilter: Status | 'all';
   derivedStatuses: DerivedStatuses;
   buildingCols: BuildingColConfig[];
-  /** When true nodes are draggable; drag-stop logs positionOverride snippet to console */
+  /** When true nodes are draggable; drag-stop logs position snippet to console */
   layoutMode?: boolean;
 }
 
@@ -148,19 +148,19 @@ export function TopologyMap({
 
   /**
    * Layout Mode helper: when a node is dropped, log a ready-to-paste
-   * positionOverride snippet so you can persist the position in the data file.
+   * position snippet so you can persist the position in the data file.
    */
   const onNodeDragStop: OnNodeDrag = useCallback(
     (_event, node: Node) => {
       if (!layoutMode || node.id.startsWith('__bg-')) return;
       const x = Math.round(node.position.x);
       const y = Math.round(node.position.y);
-      console.info(
-        `%c[Layout] ${node.id}  →  positionOverride: { x: ${x}, y: ${y} }`,
-        'color: #fbbf24;'
+      console.log(
+        `%c[Layout] ${node.id}     position: { x: ${x}, y: ${y} }`,
+        'color: #0ea5e9; font-weight: bold; font-size: 11px;'
       );
-      console.info(
-        `  // In your installation .ts file, add to the node definition:\n  positionOverride: { x: ${x}, y: ${y} },`
+      console.log(
+        `  // In your installation .ts file, add to the node definition:\n  position: { x: ${x}, y: ${y} },`
       );
     },
     [layoutMode]

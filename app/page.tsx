@@ -77,7 +77,7 @@ export default function Dashboard() {
           const next = !prev;
           console.info(
             next
-              ? '%c[Layout Mode ON]  Drag any node, then copy the positionOverride from the console.'
+              ? '%c[Layout Mode ON]  Drag any node, then copy the position from the console.'
               : '%c[Layout Mode OFF]',
             'color: #fbbf24; font-weight: bold;'
           );

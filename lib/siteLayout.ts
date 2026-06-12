@@ -4,6 +4,7 @@ import type {
   TopologyNodeInput,
   TopologyNode,
   TopologyEdgeInput,
+  TopologyEdge,
 } from '@/types/topology';
 import { MAP_COLUMN_ORDER } from '@/data/buildings';
 

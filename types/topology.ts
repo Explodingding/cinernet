@@ -146,7 +146,6 @@ export interface TopologyNodeInput {
   status: Status;
   specs: DeviceSpecs;
   physicalLocation: PhysicalLocation;
-  layout: NodeLayout;
   troubleshootingSteps: TroubleshootingStep[];
   upstreamHint?: string;
   /** Populated from CSV import — internal terminals & commissioning items */
@@ -168,7 +167,7 @@ export interface TopologyNodeInput {
   displayTier?: 1 | 2 | 3;
   /** Shown as a badge on panel/cabinet cards when downstream circuits are not yet individually modelled */
   circuitCount?: number;
-  positionOverride?: { x: number; y: number };
+  position: { x: number; y: number };
   /**
    * Electrical subsystem classification — drives accent colour and the voltage badge
    * on transformer cards.
@@ -184,9 +183,7 @@ export interface TopologyNodeInput {
   docs?: DocEntry[];
 }
 
-export interface TopologyNode extends Omit<TopologyNodeInput, 'layout' | 'positionOverride'> {
-  position: { x: number; y: number };
-}
+export interface TopologyNode extends TopologyNodeInput {}
 
 export interface TopologyEdgeInput {
   id: string;
