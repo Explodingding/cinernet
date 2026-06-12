@@ -75,7 +75,8 @@ export function DetailDrawer({
 
   const isEdge = element ? isTopologyEdge(element) : false;
   const cfg = element ? STATUS_CONFIG[element.status] : null;
-  const stepCount = element?.troubleshootingSteps.length ?? 0;
+  const steps = element?.troubleshootingSteps || [];
+  const stepCount = steps.length;
   const allStepsChecked =
     stepCount > 0 && checkedSteps.size === stepCount;
   const canMarkResolved =
@@ -376,11 +377,11 @@ export function DetailDrawer({
               </Section>
 
               <Section title="Diagnostic checklist" icon="✓">
-                {element.troubleshootingSteps.length === 0 ? (
-                  <p className="text-xs text-slate-500 italic">No diagnostic steps defined.</p>
+                {steps.length === 0 ? (
+                  <div className="text-slate-500 italic text-[11px] py-1">No predefined troubleshooting steps.</div>
                 ) : (
                   <div className="flex flex-col gap-2">
-                    {element.troubleshootingSteps.map((step, idx) => {
+                    {steps.map((step, idx) => {
                       const done = checkedSteps.has(step.id);
                       return (
                         <button
@@ -433,12 +434,12 @@ export function DetailDrawer({
                   </div>
                 )}
 
-                {element.troubleshootingSteps.length > 0 && (
+                {steps.length > 0 && (
                   <div className="mt-3">
                     <div className="flex justify-between text-[10px] text-slate-500 mb-1">
                       <span>Diagnostic progress</span>
                       <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#34d399' }}>
-                        {checkedSteps.size}/{element.troubleshootingSteps.length}
+                        {checkedSteps.size}/{steps.length}
                       </span>
                     </div>
                     <div
@@ -448,7 +449,7 @@ export function DetailDrawer({
                       <div
                         className="h-full rounded-full transition-all duration-500"
                         style={{
-                          width: `${(checkedSteps.size / element.troubleshootingSteps.length) * 100}%`,
+                          width: `${(checkedSteps.size / steps.length) * 100}%`,
                           background: 'linear-gradient(90deg, #34d399, #10b981)',
                           boxShadow: '0 0 8px rgba(52, 211, 153, 0.5)',
                         }}
