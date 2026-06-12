@@ -93,7 +93,7 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
     },
     {
       id: 'TR-DP1-2',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1580 },
       name: 'TR-DP1.2 — PFC Panel (1 500 kVAr)',
       assetType: 'panel',
       layer: 'lv-panel',
@@ -119,7 +119,7 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
     },
     {
       id: 'TR-DP1-3',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1620 },
       name: 'TR-DP1.3 — PFC Panel (1 500 kVAr)',
       assetType: 'panel',
       layer: 'lv-panel',
@@ -147,7 +147,7 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
     // ── Tier 2: Main Distribution Panels (F1-MDP) ────────────────────────────────
     {
       id: 'F1-MDP-1',
-    position: { x: 450, y: 1200.0 },
+    position: { x: 450, y: 1540 },
       name: 'F1-MDP-1 — Main Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -221,7 +221,7 @@ EMERGENCY:
     },
     {
       id: 'F1-MDP-9',
-    position: { x: 700, y: 925.0 },
+    position: { x: 700, y: 1040 },
       name: 'F1-MDP-9 — Main Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -247,7 +247,7 @@ EMERGENCY:
     },
     {
       id: 'F1-HOT-DP',
-    position: { x: 950, y: 750.0 },
+    position: { x: 950, y: 1040 },
       name: 'F1-HOT-DP — Hot Zone Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -273,7 +273,7 @@ EMERGENCY:
     },
     {
       id: 'F1-GEN-DP',
-    position: { x: 5700, y: 1200.0 },
+    position: { x: 5700, y: 1040 },
       name: 'F1-GEN-DP — Generator Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -299,7 +299,7 @@ EMERGENCY:
     },
     {
       id: 'F1-GEN-UP',
-    position: { x: 5790, y: 1140.0 },
+    position: { x: 5790, y: 1040 },
       name: 'F1-GEN-UP — UPS Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -325,7 +325,7 @@ EMERGENCY:
     },
     {
       id: 'HOT-10',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1280 },
       name: 'HOT-10 — Hot Zone Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -351,7 +351,7 @@ EMERGENCY:
     },
     {
       id: 'MHO-10',
-    position: { x: 995, y: 720.0 },
+    position: { x: 995, y: 1040 },
       name: 'MHO-10 — Mechanical Hot Zone Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -376,7 +376,7 @@ EMERGENCY:
     },
     {
       id: 'FH10',
-    position: { x: 2200, y: 750.0 },
+    position: { x: 2200, y: 1040 },
       name: 'FH10 — Field Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -401,7 +401,7 @@ EMERGENCY:
     },
     {
       id: 'F1-MDP-9-HOT',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1320 },
       name: 'F1-MDP-9 (HOT) — HOT-10 Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -433,7 +433,7 @@ EMERGENCY:
 
     {
       id: 'PUMP-F10-COOL-1',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1360 },
       name: 'Furnace Cooling Water Pump — P10.01',
       assetType: 'motor',
       layer: 'load',
@@ -464,7 +464,7 @@ EMERGENCY:
     },
     {
       id: 'PUMP-F10-COOL-2',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 740 },
       name: 'Furnace Cooling Water Pump — P10.02 (Standby)',
       assetType: 'motor',
       layer: 'load',
@@ -494,7 +494,7 @@ EMERGENCY:
     },
     {
       id: 'CAF10-1',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 780 },
       name: 'Furnace Cooling Air Fan — CAF10.01',
       assetType: 'motor',
       layer: 'load',
@@ -525,7 +525,7 @@ EMERGENCY:
     },
     {
       id: 'CAF10-2',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 820 },
       name: 'Furnace Cooling Air Fan — CAF10.02',
       assetType: 'motor',
       layer: 'load',
@@ -554,7 +554,7 @@ EMERGENCY:
     },
     {
       id: 'DRIVE-F10-BATCH-1',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 860 },
       name: 'Batch Charger Drive Motor — M10.BCH.01',
       assetType: 'motor',
       layer: 'load',
@@ -602,7 +602,7 @@ EMERGENCY:
       area: 'Fan Panel Room Right',
       gridRef: 'A1',
     },
-    position: { x: 495, y: 1170.0 },
+    position: { x: 495, y: 540 },
   },
   {
     id: 'F1-MDP-3',
@@ -621,7 +621,7 @@ EMERGENCY:
       area: 'Fan Panel Room Left',
       gridRef: 'A1',
     },
-    position: { x: 1200, y: 1200 },
+    position: { x: 1200, y: 1540 },
   },
   {
     id: 'F1-COLD-DP',
@@ -640,7 +640,7 @@ EMERGENCY:
       area: 'Cullet Return Area',
       gridRef: 'A2',
     },
-    position: { x: 1450, y: 925 },
+    position: { x: 1450, y: 1540 },
   },
   {
     id: 'F1-MDP-4',
@@ -659,7 +659,7 @@ EMERGENCY:
       area: 'Fan Panel Room Left',
       gridRef: 'A1',
     },
-    position: { x: 1245, y: 1170 },
+    position: { x: 1245, y: 1540 },
   },
   {
     id: 'F1-MDP-7',
@@ -678,7 +678,7 @@ EMERGENCY:
       area: 'Vacuüm Panel Room',
       gridRef: 'A1',
     },
-    position: { x: 1700, y: 1200 },
+    position: { x: 1700, y: 1540 },
   },
   {
     id: 'FUR',
@@ -696,7 +696,7 @@ EMERGENCY:
       elevation: '0.0 m',
       area: 'Chimney Filtration System',
     },
-    position: { x: 2450, y: 1200 },
+    position: { x: 2450, y: 1540 },
   },
   {
     id: 'ACH-01',
@@ -714,7 +714,7 @@ EMERGENCY:
       elevation: '0.0 m',
       area: 'Chimney Filtration System',
     },
-    position: { x: 2540, y: 1140 },
+    position: { x: 2540, y: 1540 },
   },
   {
     id: 'FOREHEART',
@@ -733,7 +733,7 @@ EMERGENCY:
       area: 'Foreheart 4',
       gridRef: 'A1',
     },
-    position: { x: 1175, y: 600 },
+    position: { x: 1175, y: 1540 },
   },
   {
     id: 'THROAT',
@@ -752,7 +752,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3369, y: 722 },
+    position: { x: 3369, y: 1540 },
   },
   {
     id: 'STIRRER',
@@ -771,7 +771,7 @@ EMERGENCY:
       area: 'Foreheart 4',
       gridRef: 'A1',
     },
-    position: { x: 1265, y: 540 },
+    position: { x: 1265, y: 1540 },
   },
   {
     id: 'OVEN-1',
@@ -790,7 +790,7 @@ EMERGENCY:
       area: 'FNC',
       gridRef: 'A1',
     },
-    position: { x: 3700, y: 750 },
+    position: { x: 3700, y: 1540 },
   },
   {
     id: 'OVEN-2',
@@ -809,7 +809,7 @@ EMERGENCY:
       area: 'FNC',
       gridRef: 'A1',
     },
-    position: { x: 3745, y: 720 },
+    position: { x: 3745, y: 1540 },
   },
   {
     id: 'OVEN-3',
@@ -828,7 +828,7 @@ EMERGENCY:
       area: 'FNC',
       gridRef: 'A1',
     },
-    position: { x: 3790, y: 690 },
+    position: { x: 3790, y: 1540 },
   },
   {
     id: 'OVEN-4',
@@ -847,7 +847,7 @@ EMERGENCY:
       area: 'FNC',
       gridRef: 'A1',
     },
-    position: { x: 3835, y: 660 },
+    position: { x: 3835, y: 1540 },
   },
   {
     id: 'SIPAC-13',
@@ -866,7 +866,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4040, y: 865 },
+    position: { x: 4040, y: 1540 },
   },
   {
     id: 'SIPAC-14',
@@ -885,7 +885,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4085, y: 835 },
+    position: { x: 4085, y: 1580 },
   },
   {
     id: 'F10-VAC-01',
@@ -904,7 +904,7 @@ EMERGENCY:
       area: 'Vacuüm Corner',
       gridRef: 'A1',
     },
-    position: { x: 4200, y: 1200 },
+    position: { x: 4200, y: 1540 },
   },
   {
     id: 'F10-',
@@ -923,7 +923,7 @@ EMERGENCY:
       area: 'RPL',
       gridRef: 'A4',
     },
-    position: { x: 4450, y: 1200 },
+    position: { x: 4450, y: 1540 },
   },
   {
     id: 'F10-VAC-02',
@@ -942,7 +942,7 @@ EMERGENCY:
       area: 'Vacuüm Corner',
       gridRef: 'A1',
     },
-    position: { x: 4245, y: 1170 },
+    position: { x: 4245, y: 1540 },
   },
   {
     id: 'F10-VAC-03',
@@ -961,7 +961,7 @@ EMERGENCY:
       area: 'Vacuüm Corner',
       gridRef: 'A1',
     },
-    position: { x: 4290, y: 1140 },
+    position: { x: 4290, y: 1540 },
   },
   {
     id: 'TIMON-10-1',
@@ -980,7 +980,7 @@ EMERGENCY:
       area: 'SWP',
       gridRef: 'A4',
     },
-    position: { x: 4790, y: 690 },
+    position: { x: 4790, y: 1540 },
   },
   {
     id: 'F10-VAC-04',
@@ -999,7 +999,7 @@ EMERGENCY:
       area: 'Vacuüm Corner',
       gridRef: 'A1',
     },
-    position: { x: 4335, y: 1110 },
+    position: { x: 4335, y: 1540 },
   },
   {
     id: 'TIMON-10-2',
@@ -1018,7 +1018,7 @@ EMERGENCY:
       area: 'SWP',
       gridRef: 'A4',
     },
-    position: { x: 4835, y: 660 },
+    position: { x: 4835, y: 1540 },
   },
   {
     id: 'F10-ECF-14-1',
@@ -1037,7 +1037,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 4950, y: 1200 },
+    position: { x: 4950, y: 1540 },
   },
   {
     id: 'F10-ECF-14-2',
@@ -1056,7 +1056,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 4995, y: 1170 },
+    position: { x: 4995, y: 1540 },
   },
   {
     id: 'F10-CCF-13',
@@ -1075,7 +1075,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 5040, y: 1140 },
+    position: { x: 5040, y: 1540 },
   },
   {
     id: 'F10-CCF-13-14',
@@ -1094,7 +1094,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 5085, y: 1110 },
+    position: { x: 5085, y: 1540 },
   },
   {
     id: 'F10-CCF-14-1',
@@ -1113,7 +1113,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 5130, y: 1080 },
+    position: { x: 5130, y: 1540 },
   },
   {
     id: 'F10-VCF-13-2',
@@ -1132,7 +1132,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 5175, y: 1050 },
+    position: { x: 5175, y: 1540 },
   },
   {
     id: 'CONVEYOR',
@@ -1151,7 +1151,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 5840, y: -510 },
+    position: { x: 5840, y: 1540 },
   },
   {
     id: 'F10-VCF-13-1',
@@ -1170,7 +1170,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 5220, y: 1020 },
+    position: { x: 5220, y: 1540 },
   },
   {
     id: 'EMMETI',
@@ -1189,7 +1189,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 5885, y: -540 },
+    position: { x: 5885, y: 1540 },
   },
   {
     id: 'F10-ECF-13-2',
@@ -1208,7 +1208,7 @@ EMERGENCY:
       area: 'Fan Room Left',
       gridRef: 'A1',
     },
-    position: { x: 5265, y: 990 },
+    position: { x: 5265, y: 1540 },
   },
   {
     id: 'MCAL-14',
@@ -1227,7 +1227,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4085, y: 660 },
+    position: { x: 4085, y: 1620 },
   },
   {
     id: 'F10-ECF-12-1',
@@ -1246,7 +1246,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5200, y: 1200 },
+    position: { x: 5200, y: 1540 },
   },
   {
     id: 'F10-ECF-12-2',
@@ -1265,7 +1265,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5245, y: 1170 },
+    position: { x: 5245, y: 1540 },
   },
   {
     id: 'MULTI-14',
@@ -1284,7 +1284,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4175, y: 600 },
+    position: { x: 4175, y: 1540 },
   },
   {
     id: 'F10-CCF-11',
@@ -1303,7 +1303,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5290, y: 1140 },
+    position: { x: 5290, y: 1540 },
   },
   {
     id: 'F10-CCF-11-12',
@@ -1322,7 +1322,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5335, y: 1110 },
+    position: { x: 5335, y: 1540 },
   },
   {
     id: 'MX4-4-14',
@@ -1341,7 +1341,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4355, y: 480 },
+    position: { x: 4355, y: 1540 },
   },
   {
     id: 'F10-CCF-12-1',
@@ -1360,7 +1360,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5380, y: 1080 },
+    position: { x: 5380, y: 1540 },
   },
   {
     id: 'F10-VCF-11-2',
@@ -1379,7 +1379,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5425, y: 1050 },
+    position: { x: 5425, y: 1540 },
   },
   {
     id: 'F10-VCF-11-1',
@@ -1398,7 +1398,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5470, y: 1020 },
+    position: { x: 5470, y: 1540 },
   },
   {
     id: 'F10-ECF-11-2',
@@ -1417,7 +1417,7 @@ EMERGENCY:
       area: 'Fan Room Right',
       gridRef: 'A1',
     },
-    position: { x: 5515, y: 990 },
+    position: { x: 5515, y: 1540 },
   },
   {
     id: 'CVCD-14',
@@ -1436,7 +1436,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4445, y: 420 },
+    position: { x: 4445, y: 1540 },
   },
   {
     id: 'RS',
@@ -1455,7 +1455,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6380, y: -870 },
+    position: { x: 6380, y: 1540 },
   },
   {
     id: 'PAL',
@@ -1474,7 +1474,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6425, y: -900 },
+    position: { x: 6425, y: 1540 },
   },
   {
     id: 'F1-MDP-8',
@@ -1493,7 +1493,7 @@ EMERGENCY:
       area: 'UPS Room',
       gridRef: 'A2',
     },
-    position: { x: 745, y: 895 },
+    position: { x: 745, y: 1540 },
   },
   {
     id: 'MCAL_13.1',
@@ -1512,7 +1512,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4670, y: 270 },
+    position: { x: 4670, y: 1540 },
   },
   {
     id: 'F1-MZ-DP',
@@ -1531,7 +1531,7 @@ EMERGENCY:
       area: 'UPS Room',
       gridRef: 'A2',
     },
-    position: { x: 790, y: 865 },
+    position: { x: 790, y: 1540 },
   },
   {
     id: 'MCAL-13',
@@ -1550,7 +1550,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4715, y: 240 },
+    position: { x: 4715, y: 1540 },
   },
   {
     id: 'HOT10',
@@ -1569,7 +1569,7 @@ EMERGENCY:
       area: 'UPS Room',
       gridRef: 'A2',
     },
-    position: { x: 835, y: 835 },
+    position: { x: 835, y: 1540 },
   },
   {
     id: 'MULTI-13',
@@ -1588,7 +1588,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6020, y: -630 },
+    position: { x: 6020, y: 1540 },
   },
   {
     id: 'F1-UO-DP',
@@ -1607,7 +1607,7 @@ EMERGENCY:
       area: 'Fan Panel Room Right',
       gridRef: 'A1',
     },
-    position: { x: 540, y: 1140 },
+    position: { x: 540, y: 1540 },
   },
   {
     id: 'MX4-4-13',
@@ -1626,7 +1626,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 4985, y: 60 },
+    position: { x: 4985, y: 1540 },
   },
   {
     id: 'F1-MCC',
@@ -1645,7 +1645,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3450, y: 1200 },
+    position: { x: 3450, y: 1540 },
   },
   {
     id: 'CVCD-13',
@@ -1664,7 +1664,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 5216, y: -5 },
+    position: { x: 5216, y: 1540 },
   },
   {
     id: 'MCAL_12.1',
@@ -1683,7 +1683,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 5930, y: -570 },
+    position: { x: 5930, y: 1540 },
   },
   {
     id: 'F1-DPG',
@@ -1702,7 +1702,7 @@ EMERGENCY:
       area: 'RPL',
       gridRef: 'A3',
     },
-    position: { x: 4540, y: 1140 },
+    position: { x: 4540, y: 1540 },
   },
   {
     id: 'MCAL-12',
@@ -1721,7 +1721,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 5975, y: -600 },
+    position: { x: 5975, y: 1540 },
   },
   {
     id: 'MULTI-12',
@@ -1740,7 +1740,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6065, y: -660 },
+    position: { x: 6065, y: 1540 },
   },
   {
     id: 'MX4-4-12',
@@ -1759,7 +1759,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6245, y: -780 },
+    position: { x: 6245, y: 1540 },
   },
   {
     id: 'UT-DP',
@@ -1778,7 +1778,7 @@ EMERGENCY:
       area: 'UTW',
       gridRef: 'A2',
     },
-    position: { x: 7200, y: 1200 },
+    position: { x: 7200, y: 1540 },
   },
   {
     id: 'MS-DP',
@@ -1797,7 +1797,7 @@ EMERGENCY:
       area: 'MTR',
       gridRef: 'A2',
     },
-    position: { x: 7450, y: 1200 },
+    position: { x: 7450, y: 1540 },
   },
   {
     id: 'F1-ADP',
@@ -1816,7 +1816,7 @@ EMERGENCY:
       area: 'HSE',
       gridRef: 'A2',
     },
-    position: { x: 7700, y: 1200 },
+    position: { x: 7700, y: 1540 },
   },
   {
     id: 'CVCD-12',
@@ -1835,7 +1835,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6335, y: -840 },
+    position: { x: 6335, y: 1540 },
   },
   {
     id: 'PW-DP',
@@ -1854,7 +1854,7 @@ EMERGENCY:
       area: 'PEL',
       gridRef: 'A4',
     },
-    position: { x: 7950, y: 1200 },
+    position: { x: 7950, y: 1540 },
   },
   {
     id: 'F1-MCC2',
@@ -1873,7 +1873,7 @@ EMERGENCY:
       area: 'LTR',
       gridRef: 'A2',
     },
-    position: { x: 8200, y: 1200 },
+    position: { x: 8200, y: 1540 },
   },
   {
     id: 'F1-MCC3',
@@ -1892,7 +1892,7 @@ EMERGENCY:
       area: 'RTR',
       gridRef: 'A2',
     },
-    position: { x: 8450, y: 1200 },
+    position: { x: 8450, y: 1540 },
   },
   {
     id: 'F1-MCC4',
@@ -1911,7 +1911,7 @@ EMERGENCY:
       area: 'UTR',
       gridRef: 'A2',
     },
-    position: { x: 5745, y: 1170 },
+    position: { x: 5745, y: 1540 },
   },
   {
     id: 'F1-DPG1',
@@ -1930,7 +1930,7 @@ EMERGENCY:
       area: 'Fan Panel Room Right',
       gridRef: 'A1',
     },
-    position: { x: 585, y: 1110 },
+    position: { x: 585, y: 1540 },
   },
   {
     id: 'F1-DPG2',
@@ -1949,7 +1949,7 @@ EMERGENCY:
       area: 'Fan Panel Room Left',
       gridRef: 'A1',
     },
-    position: { x: 1290, y: 1140 },
+    position: { x: 1290, y: 1540 },
   },
   {
     id: 'F1-FP',
@@ -1968,7 +1968,7 @@ EMERGENCY:
       area: 'FCR',
       gridRef: 'A1',
     },
-    position: { x: 8700, y: 1200 },
+    position: { x: 8700, y: 1540 },
   },
   {
     id: 'F1-DP2',
@@ -1987,7 +1987,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A3',
     },
-    position: { x: 6695, y: -1080 },
+    position: { x: 6695, y: 1540 },
   },
   {
     id: 'F1-DP1',
@@ -2006,7 +2006,7 @@ EMERGENCY:
       area: 'Cullet Return Area',
       gridRef: 'A2',
     },
-    position: { x: 1540, y: 865 },
+    position: { x: 1540, y: 1540 },
   },
   {
     id: 'FCP10.1',
@@ -2025,7 +2025,7 @@ EMERGENCY:
       area: 'Botero Machine Room',
       gridRef: 'A1',
     },
-    position: { x: 9040, y: 865 },
+    position: { x: 9040, y: 1540 },
   },
   {
     id: 'F1-MCC5',
@@ -2044,7 +2044,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6740, y: -1110 },
+    position: { x: 6740, y: 1540 },
   },
   {
     id: 'FCP10.2',
@@ -2063,7 +2063,7 @@ EMERGENCY:
       area: 'Botero Machine Room',
       gridRef: 'A1',
     },
-    position: { x: 9085, y: 835 },
+    position: { x: 9085, y: 1540 },
   },
   {
     id: 'F1-MCC6',
@@ -2082,7 +2082,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6785, y: -1140 },
+    position: { x: 6785, y: 1540 },
   },
   {
     id: 'RFP10.1',
@@ -2101,7 +2101,7 @@ EMERGENCY:
       area: 'RFR',
       gridRef: 'A1',
     },
-    position: { x: 9450, y: 925 },
+    position: { x: 9450, y: 1540 },
   },
   {
     id: 'RA-MCC',
@@ -2120,7 +2120,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A4',
     },
-    position: { x: 6830, y: -1170 },
+    position: { x: 6830, y: 1540 },
   },
   {
     id: 'RFP10.2',
@@ -2139,7 +2139,7 @@ EMERGENCY:
       area: 'RFL',
       gridRef: 'A1',
     },
-    position: { x: 9700, y: 925 },
+    position: { x: 9700, y: 1540 },
   },
   {
     id: 'RA-DP',
@@ -2158,7 +2158,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A4',
     },
-    position: { x: 6875, y: -1200 },
+    position: { x: 6875, y: 1540 },
   },
   {
     id: 'LAHTI-MCC',
@@ -2177,7 +2177,7 @@ EMERGENCY:
       area: 'LCR',
       gridRef: 'A1',
     },
-    position: { x: 10495, y: 1170 },
+    position: { x: 10495, y: 1540 },
   },
   {
     id: 'TC10.1',
@@ -2196,7 +2196,7 @@ EMERGENCY:
       area: 'Fan Panel Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 10700, y: 750 },
+    position: { x: 10700, y: 1540 },
   },
   {
     id: 'TC10.2',
@@ -2215,7 +2215,7 @@ EMERGENCY:
       area: 'Fan Panel Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 10745, y: 720 },
+    position: { x: 10745, y: 1540 },
   },
   {
     id: 'F1-HP-1',
@@ -2234,7 +2234,7 @@ EMERGENCY:
       area: 'BTR',
       gridRef: 'A1',
     },
-    position: { x: 10950, y: 925 },
+    position: { x: 10950, y: 1540 },
   },
   {
     id: 'CAF10.1',
@@ -2253,7 +2253,7 @@ EMERGENCY:
       area: 'Fan Panel Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 10790, y: 690 },
+    position: { x: 10790, y: 1540 },
   },
   {
     id: 'F1-HP-2',
@@ -2272,7 +2272,7 @@ EMERGENCY:
       area: 'BTR',
       gridRef: 'A1',
     },
-    position: { x: 10995, y: 895 },
+    position: { x: 10995, y: 1540 },
   },
   {
     id: 'CAF10.2',
@@ -2291,7 +2291,7 @@ EMERGENCY:
       area: 'Fan Panel Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 10835, y: 660 },
+    position: { x: 10835, y: 1540 },
   },
   {
     id: 'F1-HP-3',
@@ -2310,7 +2310,7 @@ EMERGENCY:
       area: 'BTR',
       gridRef: 'A1',
     },
-    position: { x: 11040, y: 865 },
+    position: { x: 11040, y: 1540 },
   },
   {
     id: 'WE&FH10.1',
@@ -2329,7 +2329,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3495, y: 720 },
+    position: { x: 3495, y: 1540 },
   },
   {
     id: 'F1-HP-4',
@@ -2348,7 +2348,7 @@ EMERGENCY:
       area: 'BTR',
       gridRef: 'A1',
     },
-    position: { x: 11085, y: 835 },
+    position: { x: 11085, y: 1540 },
   },
   {
     id: 'WE&FH10.2',
@@ -2367,7 +2367,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3540, y: 690 },
+    position: { x: 3540, y: 1540 },
   },
   {
     id: 'WE&FH10.3',
@@ -2386,7 +2386,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3585, y: 660 },
+    position: { x: 3585, y: 1540 },
   },
   {
     id: 'WE&FH10.4',
@@ -2405,7 +2405,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3630, y: 630 },
+    position: { x: 3630, y: 1540 },
   },
   {
     id: 'F1-FU-MCC',
@@ -2424,7 +2424,7 @@ EMERGENCY:
       area: 'FCR',
       gridRef: 'A1',
     },
-    position: { x: 8745, y: 1170 },
+    position: { x: 8745, y: 1540 },
   },
   {
     id: 'F1-COLD-UDP',
@@ -2443,7 +2443,7 @@ EMERGENCY:
       area: 'Cullet Return Area',
       gridRef: 'A2',
     },
-    position: { x: 1585, y: 835 },
+    position: { x: 1585, y: 1540 },
   },
   {
     id: 'F1-UPG',
@@ -2462,7 +2462,7 @@ EMERGENCY:
       area: 'Fan Panel Room Left',
       gridRef: 'A1',
     },
-    position: { x: 1335, y: 1110 },
+    position: { x: 1335, y: 1540 },
   },
   {
     id: 'F1-UP1',
@@ -2481,7 +2481,7 @@ EMERGENCY:
       area: 'UPS Room',
       gridRef: 'A2',
     },
-    position: { x: 925, y: 775 },
+    position: { x: 925, y: 1540 },
   },
   {
     id: 'F1-UP2',
@@ -2500,7 +2500,7 @@ EMERGENCY:
       area: 'COE',
       gridRef: 'A2',
     },
-    position: { x: 6920, y: -1230 },
+    position: { x: 6920, y: 1540 },
   },
   {
     id: 'F1-MDP-5',
@@ -2519,7 +2519,7 @@ EMERGENCY:
       area: 'Fan Panel Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 10880, y: 630 },
+    position: { x: 10880, y: 1540 },
   },
   {
     id: 'F1-MDP-6',
@@ -2538,7 +2538,7 @@ EMERGENCY:
       area: 'Fan Panel Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 10925, y: 600 },
+    position: { x: 10925, y: 1540 },
   },
   {
     id: 'TC10,1',
@@ -2557,7 +2557,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11450, y: 750.0 },
+    position: { x: 11450, y: 1540 },
   },
   {
     id: 'TC10,2',
@@ -2576,7 +2576,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11495, y: 720.0 },
+    position: { x: 11495, y: 1540 },
   },
   {
     id: 'CAF10,1',
@@ -2595,7 +2595,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11540, y: 690.0 },
+    position: { x: 11540, y: 1540 },
   },
   {
     id: 'CAF10,2',
@@ -2614,7 +2614,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11585, y: 660.0 },
+    position: { x: 11585, y: 1540 },
   },
   {
     id: 'WE&FH10,1',
@@ -2633,7 +2633,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3675, y: 600.0 },
+    position: { x: 3675, y: 1540 },
   },
   {
     id: 'WE&FH10,2',
@@ -2652,7 +2652,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3720, y: 570.0 },
+    position: { x: 3720, y: 1540 },
   },
   {
     id: 'WE&FH10,3',
@@ -2671,7 +2671,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3765, y: 540.0 },
+    position: { x: 3765, y: 1540 },
   },
   {
     id: 'WE&FH10,4',
@@ -2690,7 +2690,7 @@ EMERGENCY:
       area: 'Furnace',
       gridRef: 'A1',
     },
-    position: { x: 3810, y: 510.0 },
+    position: { x: 3810, y: 1540 },
   },
   {
     id: 'F1-AUP',
@@ -2709,7 +2709,7 @@ EMERGENCY:
       area: 'HSE',
       gridRef: 'A2',
     },
-    position: { x: 7745, y: 1170 },
+    position: { x: 7745, y: 1540 },
   },
   {
     id: 'F10-BCF-2',
@@ -2728,7 +2728,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11630, y: 630 },
+    position: { x: 11630, y: 1540 },
   },
   {
     id: 'F10-BCF-4',
@@ -2747,7 +2747,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11675, y: 600 },
+    position: { x: 11675, y: 1540 },
   },
   {
     id: 'F10-SCF-2',
@@ -2766,7 +2766,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11720, y: 570 },
+    position: { x: 11720, y: 1540 },
   },
   {
     id: 'F10-BCF-1',
@@ -2785,7 +2785,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11810, y: 510 },
+    position: { x: 11810, y: 1540 },
   },
   {
     id: 'F10-SCF-1',
@@ -2804,7 +2804,7 @@ EMERGENCY:
       area: 'Fan Room Furnace',
       gridRef: 'A1',
     },
-    position: { x: 11855, y: 480 },
+    position: { x: 11855, y: 1540 },
   },
 ],
 

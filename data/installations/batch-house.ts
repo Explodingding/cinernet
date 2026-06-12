@@ -42,7 +42,7 @@ export const batchHouseInstallation: SiteInstallation = {
     },
     {
       id: 'BH-TB-SUMMARY',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1080 },
       name: '20 terminal boxes',
       assetType: 'junction-box',
       layer: 'junction',
@@ -69,7 +69,7 @@ export const batchHouseInstallation: SiteInstallation = {
     // ── Cullet Tower subsystem (inside the Batch House block) ────────────────
     {
       id: 'CT-DC-01',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1040 },
       name: 'Cullet Tower Distribution Cabinet',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -97,7 +97,7 @@ export const batchHouseInstallation: SiteInstallation = {
     },
     {
       id: 'CT-CRUSHER-1',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1120 },
       name: 'Cullet Crusher — CR-CT-01',
       assetType: 'motor',
       layer: 'load',
@@ -127,7 +127,7 @@ export const batchHouseInstallation: SiteInstallation = {
     },
     {
       id: 'CT-CONV-1',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 540 },
       name: 'Cullet Return Conveyor — CV-CT-01',
       assetType: 'motor',
       layer: 'load',
@@ -172,7 +172,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '0.0 m',
       area: 'Ground Level Panel Room',
     },
-    position: { x: 5450, y: 1200.0 },
+    position: { x: 5450, y: 540 },
   },
   {
     id: 'BH-UDP',
@@ -190,7 +190,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '12.0 m',
       area: 'CPC',
     },
-    position: { x: 9950, y: 600 },
+    position: { x: 9950, y: 1540 },
   },
   {
     id: 'BH-DP1',
@@ -208,7 +208,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '0.0 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 1200 },
+    position: { x: 1950, y: 1780 },
   },
   {
     id: 'BH-DP2',
@@ -226,7 +226,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '5.1 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 945 },
+    position: { x: 1950, y: 1820 },
   },
   {
     id: 'BH-DP3',
@@ -244,7 +244,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '12.0 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 600 },
+    position: { x: 1950, y: 1860 },
   },
   {
     id: 'BH-DP4',
@@ -262,7 +262,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '17.5 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 325 },
+    position: { x: 1950, y: 1900 },
   },
   {
     id: 'BH-DP5',
@@ -280,7 +280,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '22.8 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 60 },
+    position: { x: 1950, y: 1940 },
   },
   {
     id: 'BH-DP6',
@@ -298,7 +298,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '27.8 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: -190 },
+    position: { x: 1950, y: 1980 },
   },
   {
     id: 'BH-DP7',
@@ -316,7 +316,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '32.5 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: -425 },
+    position: { x: 1950, y: 2020 },
   },
   {
     id: 'LAHTI',
@@ -334,7 +334,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '12.0 m',
       area: 'CPC',
     },
-    position: { x: 10175, y: 450 },
+    position: { x: 10175, y: 1540 },
   },
 ],
   edges: [

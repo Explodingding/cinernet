@@ -52,7 +52,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'TR-DP2-2',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1820 },
       name: 'TR-DP2.2 — PFC Panel (1 500 kVAr)',
       assetType: 'panel',
       layer: 'lv-panel',
@@ -78,7 +78,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'TR-DP2-3',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1860 },
       name: 'TR-DP2.3 — PFC Panel (1 500 kVAr)',
       assetType: 'panel',
       layer: 'lv-panel',
@@ -104,7 +104,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'TR-DPS',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1900 },
       name: 'TR-DPS — Spare PFC Panel (1 500 kVAr)',
       assetType: 'panel',
       layer: 'lv-panel',
@@ -132,7 +132,7 @@ export const furnace20Installation: SiteInstallation = {
     // ── Tier 2: Main Distribution Panels (F2-MDP) ────────────────────────────────
     {
       id: 'F2-MDP-1',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1940 },
       name: 'F2-MDP-1 — Main Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -158,7 +158,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'F2-MDP-9',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1680 },
       name: 'F2-MDP-9 — Main Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -183,7 +183,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'F2-HOT-DP',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1720 },
       name: 'F2-HOT-DP — Hot Zone Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -209,7 +209,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'F2-GEN-DP',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1760 },
       name: 'F2-GEN-DP — Generator Distribution Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -235,7 +235,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'HOT-20',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1800 },
       name: 'HOT-20 — Hot Zone Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -261,7 +261,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'FH20',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1840 },
       name: 'FH20 — Field Panel',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -289,7 +289,7 @@ export const furnace20Installation: SiteInstallation = {
     // SIPAC-11 to SIPAC-14 = Furnace 20, set 1; SIPAC-21 to SIPAC-24 = set 2
     {
       id: 'SIPAC-11',
-    position: { x: 3950, y: 925.0 },
+    position: { x: 3950, y: 1040 },
       name: 'SIPAC-11 — Process Interface Cabinet',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -314,7 +314,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'SIPAC-12',
-    position: { x: 3995, y: 895.0 },
+    position: { x: 3995, y: 1040 },
       name: 'SIPAC-12 — Process Interface Cabinet',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -338,7 +338,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'SIPAC-21',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1880 },
       name: 'SIPAC-21 — Process Interface Cabinet',
       assetType: 'cabinet',
       layer: 'cabinet',
@@ -363,7 +363,7 @@ export const furnace20Installation: SiteInstallation = {
     },
     {
       id: 'SIPAC-22',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 1920 },
       name: 'SIPAC-22 — Process Interface Cabinet',
       assetType: 'cabinet',
       layer: 'cabinet',

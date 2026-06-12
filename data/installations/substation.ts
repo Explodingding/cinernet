@@ -45,7 +45,7 @@ export const substationInstallation: SiteInstallation = {
     },
     {
       id: 'GRID-FEED-B',
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 2840 },
       name: 'Fluvius Grid Feeder B (H07/H08)',
       assetType: 'hv-feed',
       layer: 'hv-feed',
