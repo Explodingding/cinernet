@@ -1,4 +1,14 @@
-import type {
+import os
+
+site_layout_path = r'C:\Users\lukasz.klimowski\Documents\cinernet\lib\siteLayout.ts'
+
+with open(site_layout_path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# We want to keep everything from the imports down to the FLOOR_BANDS map.
+# Then replace computeBuildingCols and layoutNodes.
+
+NEW_CONTENT = """import type {
   BuildingId,
   TopologyLayer,
   TopologyNodeInput,
@@ -31,9 +41,9 @@ export interface FloorBandConfig {
 }
 
 export const FLOOR_BANDS: FloorBandConfig[] = [
-  { id: 'elevated', label: 'Level +5 m',   elevLabel: 'Mezzanine \u00b7 +5 m', yCenter:  240, height:  440 },
-  { id: 'ground',   label: 'Ground floor', elevLabel: 'Ground \u00b7 0 m',     yCenter: 1200, height: 1400 },
-  { id: 'basement', label: 'Basement',     elevLabel: 'Basement \u00b7 −3 m',  yCenter: 2150, height:  500 },
+  { id: 'elevated', label: 'Level +5 m',   elevLabel: 'Mezzanine \\u00b7 +5 m', yCenter:  240, height:  440 },
+  { id: 'ground',   label: 'Ground floor', elevLabel: 'Ground \\u00b7 0 m',     yCenter: 1200, height: 1400 },
+  { id: 'basement', label: 'Basement',     elevLabel: 'Basement \\u00b7 \u22123 m',  yCenter: 2150, height:  500 },
 ];
 
 export type FloorBandId = 'elevated' | 'ground' | 'basement';
@@ -50,9 +60,9 @@ export interface BuildingColConfig {
 
 export function parseElevationM(str: string): number {
   const cleaned = str
-    .replace('−', '-')
-    .replace(/\s*m\s*$/i, '')
-    .replace(/^\+/, '');
+    .replace('\u2212', '-')
+    .replace(/\\s*m\\s*$/i, '')
+    .replace(/^\\+/, '');
   return parseFloat(cleaned) || 0;
 }
 
@@ -103,3 +113,7 @@ export function layoutNodes(
     return rest as TopologyNode;
   });
 }
+"""
+
+with open(site_layout_path, 'w', encoding='utf-8') as f:
+    f.write(NEW_CONTENT)
