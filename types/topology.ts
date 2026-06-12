@@ -146,7 +146,7 @@ export interface TopologyNodeInput {
   status: Status;
   specs: DeviceSpecs;
   physicalLocation: PhysicalLocation;
-  troubleshootingSteps: TroubleshootingStep[];
+  troubleshootingSteps?: TroubleshootingStep[];
   upstreamHint?: string;
   /** Populated from CSV import — internal terminals & commissioning items */
   terminalBox?: TerminalBoxDetail;
