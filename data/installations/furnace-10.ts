@@ -45,17 +45,13 @@ export const furnace10Installation: SiteInstallation = {
         manufacturer: 'TBC',
       },
       troubleshootingSteps: [
-        { id: 'trdp11-1',
-    position: { x: 0, y: 0 }, text: 'Check main ACB Q0 (ON/OFF/TRIP) and PFC relay — reactive compensation active.' },
-        { id: 'trdp11-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage: 400 V ±5%.' },
-        { id: 'trdp11-3',
-    position: { x: 0, y: 0 }, text: 'If PFC capacitor trip — check cooling and capacitor fuses.' },
+        { id: 'trdp11-1', text: 'Check main ACB Q0 (ON/OFF/TRIP) and PFC relay — reactive compensation active.' },
+        { id: 'trdp11-2', text: 'Measure busbar voltage: 400 V ±5%.' },
+        { id: 'trdp11-3', text: 'If PFC capacitor trip — check cooling and capacitor fuses.' },
       ],
       docs: [
         {
           id: 'doc-trdp11-sld',
-    position: { x: 0, y: 0 },
           title: 'SLD — Furnace 10 LV Distribution (TR-DP1.x)',
           type: 'drawing',
           url: '/cinernet/docs/SMT-5255.pdf',
@@ -65,7 +61,6 @@ export const furnace10Installation: SiteInstallation = {
         },
         {
           id: 'doc-trdp11-comm',
-    position: { x: 0, y: 0 },
           title: 'Commissioning Record — TR-DP1.1 First Energisation',
           type: 'commissioning',
           author: 'M. Nowak',
@@ -118,10 +113,8 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR1.2 (Utility Building).',
       },
       troubleshootingSteps: [
-        { id: 'trdp12-1',
-    position: { x: 0, y: 0 }, text: 'Check main ACB Q0 and PFC relay.' },
-        { id: 'trdp12-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage: 400 V ±5%.' },
+        { id: 'trdp12-1', text: 'Check main ACB Q0 and PFC relay.' },
+        { id: 'trdp12-2', text: 'Measure busbar voltage: 400 V ±5%.' },
       ],
     },
     {
@@ -146,10 +139,8 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR1.3 (Utility Building).',
       },
       troubleshootingSteps: [
-        { id: 'trdp13-1',
-    position: { x: 0, y: 0 }, text: 'Check main ACB Q0 and PFC relay.' },
-        { id: 'trdp13-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage: 400 V ±5%.' },
+        { id: 'trdp13-1', text: 'Check main ACB Q0 and PFC relay.' },
+        { id: 'trdp13-2', text: 'Measure busbar voltage: 400 V ±5%.' },
       ],
     },
 
@@ -176,15 +167,12 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         notes: 'IP31, Form 2B, PROCESS. General distribution panel for Furnace 10 ground floor.',
       },
       troubleshootingSteps: [
-        { id: 'f1mdp1-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'f1mdp1-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage L1-L2-L3.' },
+        { id: 'f1mdp1-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'f1mdp1-2', text: 'Measure busbar voltage L1-L2-L3.' },
       ],
       docs: [
         {
           id: 'doc-f1mdp1-layout',
-    position: { x: 0, y: 0 },
           title: 'Furnace 10 — Panel Location Drawing',
           type: 'drawing',
           url: '/cinernet/docs/LAY-5246.pdf',
@@ -194,7 +182,6 @@ STATUS: PASSED — panel handed over to operations 11 April 2026`,
         },
         {
           id: 'doc-f1mdp1-op',
-    position: { x: 0, y: 0 },
           title: 'Operating Instructions — F1-MDP Distribution Panels',
           type: 'protocol',
           author: 'Maintenance dept.',
@@ -254,10 +241,8 @@ EMERGENCY:
         notes: 'IP31, Form 4B, PROCESS. Higher form factor — larger distribution section.',
       },
       troubleshootingSteps: [
-        { id: 'f1mdp9-1',
-    position: { x: 0, y: 0 }, text: 'Check ACB Q0 — ON/OFF/TRIP.' },
-        { id: 'f1mdp9-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage L1-L2-L3.' },
+        { id: 'f1mdp9-1', text: 'Check ACB Q0 — ON/OFF/TRIP.' },
+        { id: 'f1mdp9-2', text: 'Measure busbar voltage L1-L2-L3.' },
       ],
     },
     {
@@ -282,10 +267,8 @@ EMERGENCY:
         notes: 'IP31, Form 4B, PROCESS. Hot zone feeder distribution.',
       },
       troubleshootingSteps: [
-        { id: 'f1hot-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'f1hot-2',
-    position: { x: 0, y: 0 }, text: 'Verify hot zone equipment isolation before working near furnace.' },
+        { id: 'f1hot-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'f1hot-2', text: 'Verify hot zone equipment isolation before working near furnace.' },
       ],
     },
     {
@@ -310,10 +293,8 @@ EMERGENCY:
         notes: 'IP31, Form 4B, PROCESS. Generator-backed distribution for furnace critical loads.',
       },
       troubleshootingSteps: [
-        { id: 'f1gendp-1',
-    position: { x: 0, y: 0 }, text: 'Check ATS status — confirm mains or generator source active.' },
-        { id: 'f1gendp-2',
-    position: { x: 0, y: 0 }, text: 'Check ACB Q0 — ON/OFF/TRIP.' },
+        { id: 'f1gendp-1', text: 'Check ATS status — confirm mains or generator source active.' },
+        { id: 'f1gendp-2', text: 'Check ACB Q0 — ON/OFF/TRIP.' },
       ],
     },
     {
@@ -338,10 +319,8 @@ EMERGENCY:
         notes: 'IP31, Form 2B, PROCESS. UPS-backed panel for Furnace 10 instrumentation and control.',
       },
       troubleshootingSteps: [
-        { id: 'f1genup-1',
-    position: { x: 0, y: 0 }, text: 'Check UPS bypass position — on-line or bypass mode.' },
-        { id: 'f1genup-2',
-    position: { x: 0, y: 0 }, text: 'Verify UPS battery health — minimum autonomy 15 min.' },
+        { id: 'f1genup-1', text: 'Check UPS bypass position — on-line or bypass mode.' },
+        { id: 'f1genup-2', text: 'Verify UPS battery health — minimum autonomy 15 min.' },
       ],
     },
     {
@@ -366,10 +345,8 @@ EMERGENCY:
         notes: 'IP31, Form 2B, PROCESS. Hot zone distribution at +5.135 m level.',
       },
       troubleshootingSteps: [
-        { id: 'hot10-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'hot10-2',
-    position: { x: 0, y: 0 }, text: 'Use heat-rated PPE when working near furnace at elevated level.' },
+        { id: 'hot10-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'hot10-2', text: 'Use heat-rated PPE when working near furnace at elevated level.' },
       ],
     },
     {
@@ -394,8 +371,7 @@ EMERGENCY:
         notes: 'IP31, Form 2B, PROCESS. Mechanical services hot zone distribution.',
       },
       troubleshootingSteps: [
-        { id: 'mho10-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'mho10-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
       ],
     },
     {
@@ -420,8 +396,7 @@ EMERGENCY:
         notes: 'IP31, Form 2B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'fh10-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'fh10-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
       ],
     },
     {
@@ -446,10 +421,8 @@ EMERGENCY:
         notes: 'IP55, Form 2B, PROCESS — weatherproof rating for hot zone environment.',
       },
       troubleshootingSteps: [
-        { id: 'f1mdp9hot-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'f1mdp9hot-2',
-    position: { x: 0, y: 0 }, text: 'Verify IP55 enclosure seal — condensation risk in hot zone.' },
+        { id: 'f1mdp9hot-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'f1mdp9hot-2', text: 'Verify IP55 enclosure seal — condensation risk in hot zone.' },
       ],
     },
 
@@ -483,14 +456,10 @@ EMERGENCY:
         notes: 'Furnace primary cooling circuit pump. Duty/standby pair (P10.01/P10.02).',
       },
       troubleshootingSteps: [
-        { id: 'p1001-1',
-    position: { x: 0, y: 0 }, text: 'Check starter/VFD status — FAULT LED or HMI alarm code.' },
-        { id: 'p1001-2',
-    position: { x: 0, y: 0 }, text: 'Verify cooling water flow: minimum 12 m³/h at 3 bar.' },
-        { id: 'p1001-3',
-    position: { x: 0, y: 0 }, text: 'Check motor thermistor — resistance < 1 kΩ (OK), > 3 kΩ (overtemp).' },
-        { id: 'p1001-4',
-    position: { x: 0, y: 0 }, text: 'If no power: trace upstream to F1-MDP-1 → TR-DP1.1 → TR 1.1 → F10 MV Panel.' },
+        { id: 'p1001-1', text: 'Check starter/VFD status — FAULT LED or HMI alarm code.' },
+        { id: 'p1001-2', text: 'Verify cooling water flow: minimum 12 m³/h at 3 bar.' },
+        { id: 'p1001-3', text: 'Check motor thermistor — resistance < 1 kΩ (OK), > 3 kΩ (overtemp).' },
+        { id: 'p1001-4', text: 'If no power: trace upstream to F1-MDP-1 → TR-DP1.1 → TR 1.1 → F10 MV Panel.' },
       ],
     },
     {
@@ -518,12 +487,9 @@ EMERGENCY:
         notes: 'Standby cooling pump — automatic switchover on P10.01 failure.',
       },
       troubleshootingSteps: [
-        { id: 'p1002-1',
-    position: { x: 0, y: 0 }, text: 'Verify ATS (auto-transfer) relay — standby mode active.' },
-        { id: 'p1002-2',
-    position: { x: 0, y: 0 }, text: 'Check motor thermistor and manual isolator position.' },
-        { id: 'p1002-3',
-    position: { x: 0, y: 0 }, text: 'If both pumps off: cooling circuit fault — escalate to process engineer.' },
+        { id: 'p1002-1', text: 'Verify ATS (auto-transfer) relay — standby mode active.' },
+        { id: 'p1002-2', text: 'Check motor thermistor and manual isolator position.' },
+        { id: 'p1002-3', text: 'If both pumps off: cooling circuit fault — escalate to process engineer.' },
       ],
     },
     {
@@ -551,14 +517,10 @@ EMERGENCY:
         notes: 'Primary crown cooling air fan. Interlocked with furnace temperature — stops at ΔT < 30 °C.',
       },
       troubleshootingSteps: [
-        { id: 'caf1001-1',
-    position: { x: 0, y: 0 }, text: 'Check HOT-10 cabinet outgoing breaker — tripped or open.' },
-        { id: 'caf1001-2',
-    position: { x: 0, y: 0 }, text: 'Verify interlock relay — confirm furnace temp above start threshold.' },
-        { id: 'caf1001-3',
-    position: { x: 0, y: 0 }, text: 'Check VFD speed reference signal (4–20 mA loop from DCS).' },
-        { id: 'caf1001-4',
-    position: { x: 0, y: 0 }, text: 'If no power: check HOT-10 → F1-HOT-DP → TR-DP1.3 → TR 1.3 → F10 MV Panel.' },
+        { id: 'caf1001-1', text: 'Check HOT-10 cabinet outgoing breaker — tripped or open.' },
+        { id: 'caf1001-2', text: 'Verify interlock relay — confirm furnace temp above start threshold.' },
+        { id: 'caf1001-3', text: 'Check VFD speed reference signal (4–20 mA loop from DCS).' },
+        { id: 'caf1001-4', text: 'If no power: check HOT-10 → F1-HOT-DP → TR-DP1.3 → TR 1.3 → F10 MV Panel.' },
       ],
     },
     {
@@ -586,10 +548,8 @@ EMERGENCY:
         notes: 'Secondary crown cooling air fan — exhaust side.',
       },
       troubleshootingSteps: [
-        { id: 'caf1002-1',
-    position: { x: 0, y: 0 }, text: 'Check HOT-10 cabinet outgoing breaker for CAF10.02 circuit.' },
-        { id: 'caf1002-2',
-    position: { x: 0, y: 0 }, text: 'Inspect fan blades for obstruction — high vibration = blade damage.' },
+        { id: 'caf1002-1', text: 'Check HOT-10 cabinet outgoing breaker for CAF10.02 circuit.' },
+        { id: 'caf1002-2', text: 'Inspect fan blades for obstruction — high vibration = blade damage.' },
       ],
     },
     {
@@ -617,16 +577,11 @@ EMERGENCY:
         notes: 'Batch charger pusher drive — VFD controlled via PROFIBUS. Critical: loss of batch feed stops furnace.',
       },
       troubleshootingSteps: [
-        { id: 'bch01-1',
-    position: { x: 0, y: 0 }, text: 'Check Sinamics VFD fault code on drive display.' },
-        { id: 'bch01-2',
-    position: { x: 0, y: 0 }, text: 'Verify PROFIBUS communication — PLC heartbeat signal.' },
-        { id: 'bch01-3',
-    position: { x: 0, y: 0 }, text: 'Check motor encoder — loss of feedback causes F0007 fault.' },
-        { id: 'bch01-4',
-    position: { x: 0, y: 0 }, text: 'If no power: check F1-GEN-DP outgoing breaker Q-BCH01.' },
-        { id: 'bch01-5',
-    position: { x: 0, y: 0 }, text: 'CRITICAL: Notify process supervisor immediately — batch gap > 15 min risks furnace temperature drop.' },
+        { id: 'bch01-1', text: 'Check Sinamics VFD fault code on drive display.' },
+        { id: 'bch01-2', text: 'Verify PROFIBUS communication — PLC heartbeat signal.' },
+        { id: 'bch01-3', text: 'Check motor encoder — loss of feedback causes F0007 fault.' },
+        { id: 'bch01-4', text: 'If no power: check F1-GEN-DP outgoing breaker Q-BCH01.' },
+        { id: 'bch01-5', text: 'CRITICAL: Notify process supervisor immediately — batch gap > 15 min risks furnace temperature drop.' },
       ],
     },
   

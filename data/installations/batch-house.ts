@@ -36,10 +36,8 @@ export const batchHouseInstallation: SiteInstallation = {
       },
       specs: { voltage: '400V AC', current: '250 A', manufacturer: 'Rittal' },
       troubleshootingSteps: [
-        { id: 'dcbh1',
-    position: { x: 0, y: 0 }, text: 'Check breaker Q1 (ON).' },
-        { id: 'dcbh2',
-    position: { x: 0, y: 0 }, text: 'Measure output bus: 400 V ±2%.' },
+        { id: 'dcbh1', text: 'Check breaker Q1 (ON).' },
+        { id: 'dcbh2', text: 'Measure output bus: 400 V ±2%.' },
       ],
     },
     {
@@ -64,7 +62,6 @@ export const batchHouseInstallation: SiteInstallation = {
       troubleshootingSteps: [
         {
           id: 'bh-tb-hint',
-    position: { x: 0, y: 0 },
           text: 'Use the Batch House filter above to view individual terminal boxes.',
         },
       ],
@@ -94,10 +91,8 @@ export const batchHouseInstallation: SiteInstallation = {
         notes: 'IP54 — dusty environment (cullet handling). Sub-distribution fed from DC-BH-01.',
       },
       troubleshootingSteps: [
-        { id: 'ctdc-1',
-    position: { x: 0, y: 0 }, text: 'Check incoming MCCB from DC-BH-01 — ON/OFF/TRIP.' },
-        { id: 'ctdc-2',
-    position: { x: 0, y: 0 }, text: 'Inspect cabinet filters — cullet dust ingress blocks ventilation.' },
+        { id: 'ctdc-1', text: 'Check incoming MCCB from DC-BH-01 — ON/OFF/TRIP.' },
+        { id: 'ctdc-2', text: 'Inspect cabinet filters — cullet dust ingress blocks ventilation.' },
       ],
     },
     {
@@ -125,12 +120,9 @@ export const batchHouseInstallation: SiteInstallation = {
         notes: 'Cullet crusher main drive — soft-start. High inertia load; check start sequence on trip.',
       },
       troubleshootingSteps: [
-        { id: 'ctcr-1',
-    position: { x: 0, y: 0 }, text: 'Check soft-starter fault LED and thermal overload relay.' },
-        { id: 'ctcr-2',
-    position: { x: 0, y: 0 }, text: 'Inspect crusher jaw for jammed oversize cullet before restart.' },
-        { id: 'ctcr-3',
-    position: { x: 0, y: 0 }, text: 'If no power: trace CT-DC-01 → DC-BH-01 → UT-MDP (Utility).' },
+        { id: 'ctcr-1', text: 'Check soft-starter fault LED and thermal overload relay.' },
+        { id: 'ctcr-2', text: 'Inspect crusher jaw for jammed oversize cullet before restart.' },
+        { id: 'ctcr-3', text: 'If no power: trace CT-DC-01 → DC-BH-01 → UT-MDP (Utility).' },
       ],
     },
     {
@@ -158,10 +150,8 @@ export const batchHouseInstallation: SiteInstallation = {
         notes: 'Belt conveyor returning crushed cullet to the batch mixing line.',
       },
       troubleshootingSteps: [
-        { id: 'ctcv-1',
-    position: { x: 0, y: 0 }, text: 'Check belt-drift and pull-cord safety switches — both must be reset.' },
-        { id: 'ctcv-2',
-    position: { x: 0, y: 0 }, text: 'Verify gearbox motor MCCB in CT-DC-01.' },
+        { id: 'ctcv-1', text: 'Check belt-drift and pull-cord safety switches — both must be reset.' },
+        { id: 'ctcv-2', text: 'Verify gearbox motor MCCB in CT-DC-01.' },
       ],
     },
     ...importedNodes,

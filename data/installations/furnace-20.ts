@@ -45,12 +45,9 @@ export const furnace20Installation: SiteInstallation = {
         manufacturer: 'TBC',
       },
       troubleshootingSteps: [
-        { id: 'trdp21-1',
-    position: { x: 0, y: 0 }, text: 'Check main ACB Q0 and PFC relay — reactive compensation active.' },
-        { id: 'trdp21-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage: 400 V ±5%.' },
-        { id: 'trdp21-3',
-    position: { x: 0, y: 0 }, text: 'If PFC capacitor trip — check cooling and capacitor fuses.' },
+        { id: 'trdp21-1', text: 'Check main ACB Q0 and PFC relay — reactive compensation active.' },
+        { id: 'trdp21-2', text: 'Measure busbar voltage: 400 V ±5%.' },
+        { id: 'trdp21-3', text: 'If PFC capacitor trip — check cooling and capacitor fuses.' },
       ],
     },
     {
@@ -75,10 +72,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR2.2 (Utility Building).',
       },
       troubleshootingSteps: [
-        { id: 'trdp22-1',
-    position: { x: 0, y: 0 }, text: 'Check main ACB Q0 and PFC relay.' },
-        { id: 'trdp22-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage: 400 V ±5%.' },
+        { id: 'trdp22-1', text: 'Check main ACB Q0 and PFC relay.' },
+        { id: 'trdp22-2', text: 'Measure busbar voltage: 400 V ±5%.' },
       ],
     },
     {
@@ -103,10 +98,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 4B TYPE6, PROCESS. PFC 1 500 kVAr. Fed from TR2.3 (Utility Building).',
       },
       troubleshootingSteps: [
-        { id: 'trdp23-1',
-    position: { x: 0, y: 0 }, text: 'Check main ACB Q0 and PFC relay.' },
-        { id: 'trdp23-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage: 400 V ±5%.' },
+        { id: 'trdp23-1', text: 'Check main ACB Q0 and PFC relay.' },
+        { id: 'trdp23-2', text: 'Measure busbar voltage: 400 V ±5%.' },
       ],
     },
     {
@@ -131,10 +124,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 4B TYPE6, PROCESS. Spare PFC panel — fed from TR-DPS transformer. Normally isolated.',
       },
       troubleshootingSteps: [
-        { id: 'trdps-1',
-    position: { x: 0, y: 0 }, text: 'Spare panel — confirm isolation before any work.' },
-        { id: 'trdps-2',
-    position: { x: 0, y: 0 }, text: 'Check incoming isolator is OPEN — MV supply available but LV disconnected.' },
+        { id: 'trdps-1', text: 'Spare panel — confirm isolation before any work.' },
+        { id: 'trdps-2', text: 'Check incoming isolator is OPEN — MV supply available but LV disconnected.' },
       ],
     },
 
@@ -161,10 +152,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'f2mdp1-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'f2mdp1-2',
-    position: { x: 0, y: 0 }, text: 'Measure busbar voltage L1-L2-L3.' },
+        { id: 'f2mdp1-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'f2mdp1-2', text: 'Measure busbar voltage L1-L2-L3.' },
       ],
     },
     {
@@ -189,8 +178,7 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 4B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'f2mdp9-1',
-    position: { x: 0, y: 0 }, text: 'Check ACB Q0 — ON/OFF/TRIP.' },
+        { id: 'f2mdp9-1', text: 'Check ACB Q0 — ON/OFF/TRIP.' },
       ],
     },
     {
@@ -215,10 +203,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 4B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'f2hot-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'f2hot-2',
-    position: { x: 0, y: 0 }, text: 'Use heat-rated PPE when working near furnace.' },
+        { id: 'f2hot-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'f2hot-2', text: 'Use heat-rated PPE when working near furnace.' },
       ],
     },
     {
@@ -243,10 +229,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 4B, PROCESS. Generator-backed critical loads.',
       },
       troubleshootingSteps: [
-        { id: 'f2gendp-1',
-    position: { x: 0, y: 0 }, text: 'Check ATS status — mains or generator source active.' },
-        { id: 'f2gendp-2',
-    position: { x: 0, y: 0 }, text: 'Check ACB Q0 — ON/OFF/TRIP.' },
+        { id: 'f2gendp-1', text: 'Check ATS status — mains or generator source active.' },
+        { id: 'f2gendp-2', text: 'Check ACB Q0 — ON/OFF/TRIP.' },
       ],
     },
     {
@@ -271,10 +255,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'hot20-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
-        { id: 'hot20-2',
-    position: { x: 0, y: 0 }, text: 'Use heat-rated PPE when working at elevated level near furnace.' },
+        { id: 'hot20-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'hot20-2', text: 'Use heat-rated PPE when working at elevated level near furnace.' },
       ],
     },
     {
@@ -299,8 +281,7 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'fh20-1',
-    position: { x: 0, y: 0 }, text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
+        { id: 'fh20-1', text: 'Check MCCB Q0 — ON/OFF/TRIP.' },
       ],
     },
 
@@ -327,10 +308,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS. Process interface cabinet — SCADA I/O and field instrumentation.',
       },
       troubleshootingSteps: [
-        { id: 'sipac11-1',
-    position: { x: 0, y: 0 }, text: 'Check incoming MCB — ON/OFF/TRIP.' },
-        { id: 'sipac11-2',
-    position: { x: 0, y: 0 }, text: 'Verify SCADA comms — Profibus/PROFINET link healthy.' },
+        { id: 'sipac11-1', text: 'Check incoming MCB — ON/OFF/TRIP.' },
+        { id: 'sipac11-2', text: 'Verify SCADA comms — Profibus/PROFINET link healthy.' },
       ],
     },
     {
@@ -354,8 +333,7 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS.',
       },
       troubleshootingSteps: [
-        { id: 'sipac12-1',
-    position: { x: 0, y: 0 }, text: 'Check incoming MCB — ON/OFF/TRIP.' },
+        { id: 'sipac12-1', text: 'Check incoming MCB — ON/OFF/TRIP.' },
       ],
     },
     {
@@ -379,10 +357,8 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS. HOLD — Admin building design ongoing per SMT-5250.',
       },
       troubleshootingSteps: [
-        { id: 'sipac21-1',
-    position: { x: 0, y: 0 }, text: 'Status: HOLD — Admin building design still ongoing.' },
-        { id: 'sipac21-2',
-    position: { x: 0, y: 0 }, text: 'Do not energise until design confirmation received.' },
+        { id: 'sipac21-1', text: 'Status: HOLD — Admin building design still ongoing.' },
+        { id: 'sipac21-2', text: 'Do not energise until design confirmation received.' },
       ],
     },
     {
@@ -406,8 +382,7 @@ export const furnace20Installation: SiteInstallation = {
         notes: 'IP31, Form 2B, PROCESS. HOLD — Admin building design ongoing.',
       },
       troubleshootingSteps: [
-        { id: 'sipac22-1',
-    position: { x: 0, y: 0 }, text: 'Status: HOLD — do not energise.' },
+        { id: 'sipac22-1', text: 'Status: HOLD — do not energise.' },
       ],
     },
   ],

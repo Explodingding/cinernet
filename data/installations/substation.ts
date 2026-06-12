@@ -39,10 +39,8 @@ export const substationInstallation: SiteInstallation = {
         manufacturer: 'Schneider Electric GHA 40.5-31-12',
       },
       troubleshootingSteps: [
-        { id: 'gfa-1',
-    position: { x: 0, y: 0 }, text: 'Contact Fluvius grid operator for upstream outage — do not operate external switchgear.' },
-        { id: 'gfa-2',
-    position: { x: 0, y: 0 }, text: 'Verify SICAM-Q100 energy quality at grid interface (read-only).' },
+        { id: 'gfa-1', text: 'Contact Fluvius grid operator for upstream outage — do not operate external switchgear.' },
+        { id: 'gfa-2', text: 'Verify SICAM-Q100 energy quality at grid interface (read-only).' },
       ],
     },
     {
@@ -69,8 +67,7 @@ export const substationInstallation: SiteInstallation = {
         manufacturer: 'Schneider Electric GHA 40.5-31-12',
       },
       troubleshootingSteps: [
-        { id: 'gfb-1',
-    position: { x: 0, y: 0 }, text: 'Contact Fluvius for upstream status before isolating redundant path.' },
+        { id: 'gfb-1', text: 'Contact Fluvius for upstream status before isolating redundant path.' },
       ],
     },
   ],
