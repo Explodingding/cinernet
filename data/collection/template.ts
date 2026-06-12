@@ -24,9 +24,9 @@ export const EXAMPLE_NODE: TopologyNodeInput = {
   assetType: 'cabinet', // hv-feed | hv-switchgear | transformer | panel | cabinet | junction-box | motor
   layer: 'cabinet', // hv-feed | hv-switchgear | transformer | lv-panel | cabinet | junction | load
   status: 'operational', // operational | investigation | fault
-  layout: {
-    building: 'furnace-10', // utility | furnace-10 | batch-house
-    branchIndex: 0, // 0 = first column, 1 = second, etc.
+  position: {
+    x: 100,
+    y: 100
   },
   physicalLocation: {
     building: 'furnace-10',
