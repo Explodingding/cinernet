@@ -74,6 +74,14 @@ export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
     borderColor: 'rgba(192, 132, 252, 0.35)',
     building: 'batch-house',
   },
+  'batch-house-elevated': {
+    label: 'Batch House — Elevated',
+    shortLabel: 'BH +E',
+    color: '#d8b4fe',
+    bgColor: 'rgba(216, 180, 254, 0.09)',
+    borderColor: 'rgba(216, 180, 254, 0.35)',
+    building: 'batch-house',
+  },
   'cullet-tower-ground': {
     label: 'Cullet Tower — Ground Floor',
     shortLabel: 'CT G',
@@ -89,6 +97,14 @@ export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
     bgColor: 'rgba(100, 116, 139, 0.06)',
     borderColor: 'rgba(100, 116, 139, 0.2)',
     building: 'warehouse',
+  },
+  'distribution-building-ground': {
+    label: 'Distribution Building — Ground',
+    shortLabel: 'DSB G',
+    color: '#475569',
+    bgColor: 'rgba(71, 85, 105, 0.09)',
+    borderColor: 'rgba(71, 85, 105, 0.35)',
+    building: 'distribution-building',
   },
 };
 

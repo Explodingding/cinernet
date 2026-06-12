@@ -16,7 +16,8 @@ export type BuildingId =
   | 'furnace-20'
   | 'batch-house'
   | 'cullet-tower'
-  | 'warehouse';
+  | 'warehouse'
+  | 'distribution-building';
 
 export type TopologyLayer =
   | 'hv-feed'
@@ -37,8 +38,10 @@ export type LocationZone =
   | 'furnace-20-ground'
   | 'furnace-20-elevated'
   | 'batch-house-ground'
+  | 'batch-house-elevated'
   | 'cullet-tower-ground'
-  | 'warehouse-ground';
+  | 'warehouse-ground'
+  | 'distribution-building-ground';
 
 export type Status = 'operational' | 'investigation' | 'fault';
 
