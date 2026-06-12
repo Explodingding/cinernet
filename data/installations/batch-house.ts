@@ -190,7 +190,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '12.0 m',
       area: 'CPC',
     },
-    position: { x: 9950, y: 600.0 },
+    position: { x: 9950, y: 600 },
   },
   {
     id: 'BH-DP1',
@@ -208,7 +208,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '0.0 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 1200.0 },
+    position: { x: 1950, y: 1200 },
   },
   {
     id: 'BH-DP2',
@@ -226,7 +226,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '5.1 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 945.0 },
+    position: { x: 1950, y: 945 },
   },
   {
     id: 'BH-DP3',
@@ -244,7 +244,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '12.0 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 600.0 },
+    position: { x: 1950, y: 600 },
   },
   {
     id: 'BH-DP4',
@@ -262,7 +262,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '17.5 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 325.0 },
+    position: { x: 1950, y: 325 },
   },
   {
     id: 'BH-DP5',
@@ -280,7 +280,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '22.8 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: 60.0 },
+    position: { x: 1950, y: 60 },
   },
   {
     id: 'BH-DP6',
@@ -298,7 +298,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '27.8 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: -190.0 },
+    position: { x: 1950, y: -190 },
   },
   {
     id: 'BH-DP7',
@@ -316,7 +316,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '32.5 m',
       area: 'UNKNOWN',
     },
-    position: { x: 1950, y: -425.0 },
+    position: { x: 1950, y: -425 },
   },
   {
     id: 'LAHTI',
@@ -334,7 +334,7 @@ export const batchHouseInstallation: SiteInstallation = {
       elevation: '12.0 m',
       area: 'CPC',
     },
-    position: { x: 10175, y: 450.0 },
+    position: { x: 10175, y: 450 },
   },
 ],
   edges: [
