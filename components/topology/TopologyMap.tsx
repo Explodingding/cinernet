@@ -185,7 +185,7 @@ export function TopologyMap({
         zoomOnPinch
         minZoom={0.12}
         maxZoom={2}
-        colorMode="dark"
+        colorMode="light"
         proOptions={{ hideAttribution: true }}
         style={{ background: 'transparent' }}
       >
@@ -193,8 +193,8 @@ export function TopologyMap({
           variant={BackgroundVariant.Dots}
           gap={28}
           size={1}
-          color="#1e293b"
-          style={{ opacity: 0.4 }}
+          color="#cbd5e1"
+          style={{ opacity: 0.8 }}
         />
         <Controls showInteractive={false} />
       </ReactFlow>
