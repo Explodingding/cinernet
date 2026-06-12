@@ -34,31 +34,31 @@ export const CABLE_COLOR_MAP: Record<EdgeType, CableColorConfig> = {
     shortLabel: 'HV',
   },
   power: {
-    color: '#34d399',                      // green — 400 V LV power
+    color: '#059669',                      // green — 400 V LV power
     glowColor: 'rgba(52, 211, 153, 0.35)',
     label: 'LV Power',
     shortLabel: 'Power',
   },
   plc: {
-    color: '#60a5fa',                      // blue — PLC / control
+    color: '#2563eb',                      // blue — PLC / control
     glowColor: 'rgba(96, 165, 250, 0.40)',
     label: 'Control (PLC)',
     shortLabel: 'PLC',
   },
   signal: {
-    color: '#a78bfa',                      // violet — instrument signal
+    color: '#7c3aed',                      // violet — instrument signal
     glowColor: 'rgba(167, 139, 250, 0.40)',
     label: 'Instrument',
     shortLabel: 'Signal',
   },
   fieldbus: {
-    color: '#f0abfc',                      // pink — PROFIBUS / PROFINET
+    color: '#c026d3',                      // pink — PROFIBUS / PROFINET
     glowColor: 'rgba(240, 171, 252, 0.40)',
     label: 'Fieldbus',
     shortLabel: 'Fieldbus',
   },
   ethernet: {
-    color: '#2dd4bf',                      // teal — network / supervisory
+    color: '#0d9488',                      // teal — network / supervisory
     glowColor: 'rgba(45, 212, 191, 0.40)',
     label: 'Network',
     shortLabel: 'Network',

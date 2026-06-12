@@ -109,7 +109,7 @@ export function DetailDrawer({
             transition={{ type: 'spring', stiffness: 380, damping: 38 }}
             className="absolute right-0 top-0 bottom-0 z-30 flex flex-col overflow-hidden w-full max-w-md md:w-[420px]"
             style={{
-              background: 'rgba(8, 13, 22, 0.97)',
+              background: '#ffffff',
               borderLeft: `1px solid ${cfg?.borderColor ?? '#334155'}`,
               boxShadow: `-4px 0 40px rgba(0,0,0,0.6), -1px 0 0 rgba(255,255,255,0.03)`,
               backdropFilter: 'blur(12px)',
@@ -132,8 +132,8 @@ export function DetailDrawer({
                         className="text-[9px] font-bold tracking-widest uppercase px-1.5 py-0.5 rounded"
                         style={{
                           background: 'rgba(255,255,255,0.05)',
-                          color: '#64748b',
-                          border: '1px solid rgba(255,255,255,0.06)',
+                          color: '#94a3b8',
+                          border: '1px solid rgba(0,0,0,0.06)',
                         }}
                       >
                         {isEdge
@@ -164,18 +164,18 @@ export function DetailDrawer({
                       {element.id}
                     </div>
 
-                    <div className="text-sm font-medium text-slate-300">{element.name}</div>
+                    <div className="text-sm font-medium text-slate-700">{element.name}</div>
 
                     {isEdge && (
                       <div className="flex items-center gap-1.5 mt-1.5 text-[10px] text-slate-500">
-                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#64748b' }}>
+                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#94a3b8' }}>
                           {(element as TopologyEdge).source}
                         </span>
                         <svg width="16" height="8" viewBox="0 0 16 8">
                           <line x1="0" y1="4" x2="12" y2="4" stroke="#475569" strokeWidth="1.5" />
                           <path d="M10 1 L13 4 L10 7" stroke="#475569" strokeWidth="1.5" fill="none" strokeLinecap="round" />
                         </svg>
-                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#64748b' }}>
+                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#94a3b8' }}>
                           {(element as TopologyEdge).target}
                         </span>
                       </div>
@@ -188,8 +188,8 @@ export function DetailDrawer({
                     className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shrink-0 transition-colors active:bg-red-500/10"
                     style={{
                       background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      color: '#64748b',
+                      border: '1px solid rgba(0,0,0,0.08)',
+                      color: '#94a3b8',
                     }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -582,11 +582,11 @@ function TerminalBoxSection({ detail }: { detail: TerminalBoxDetail }) {
               background: PLC_ITEM_GROUPS.includes(group as typeof PLC_ITEM_GROUPS[number])
                 ? 'rgba(56, 189, 248, 0.06)'
                 : 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid rgba(0,0,0,0.06)',
             }}
           >
             <span className="font-bold uppercase text-slate-500">{group}</span>
-            <span className="ml-2 font-mono text-slate-300">{count}</span>
+            <span className="ml-2 font-mono text-slate-700">{count}</span>
           </div>
         ))}
       </div>
@@ -633,7 +633,7 @@ const DOC_TYPE_META: Record<DocType, { icon: string; label: string; color: strin
   protocol:      { icon: '✓', label: 'Protocol',      color: '#34d399' },
   commissioning: { icon: '⚡', label: 'Commissioning', color: '#a78bfa' },
   'fault-report':{ icon: '⚠', label: 'Fault report',  color: '#f87171' },
-  datasheet:     { icon: '≡', label: 'Datasheet',     color: '#94a3b8' },
+  datasheet:     { icon: '≡', label: 'Datasheet',     color: '#64748b' },
   note:          { icon: '✎', label: 'Note',          color: '#fbbf24' },
 };
 
@@ -717,10 +717,10 @@ function DocsAndHistory({
             onChange={(e) => onNoteTextChange(e.target.value)}
             placeholder="Type your note…"
             rows={3}
-            className="w-full text-xs text-slate-200 resize-none rounded-md px-2.5 py-2 mb-2 focus:outline-none"
+            className="w-full text-xs text-slate-800 resize-none rounded-md px-2.5 py-2 mb-2 focus:outline-none"
             style={{
               background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              border: '1px solid rgba(0,0,0,0.08)',
               fontFamily: 'inherit',
             }}
           />
@@ -728,10 +728,10 @@ function DocsAndHistory({
             value={noteAuthor}
             onChange={(e) => onNoteAuthorChange(e.target.value)}
             placeholder="Your name"
-            className="w-full text-xs text-slate-300 rounded-md px-2.5 py-1.5 mb-2 focus:outline-none"
+            className="w-full text-xs text-slate-700 rounded-md px-2.5 py-1.5 mb-2 focus:outline-none"
             style={{
               background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              border: '1px solid rgba(0,0,0,0.08)',
             }}
           />
           <div className="flex gap-2">
@@ -741,7 +741,7 @@ function DocsAndHistory({
               className="flex-1 min-h-[36px] rounded-md text-xs font-bold transition-all"
               style={{
                 background: noteText.trim() ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.03)',
-                border: noteText.trim() ? '1px solid rgba(251,191,36,0.4)' : '1px solid rgba(255,255,255,0.06)',
+                border: noteText.trim() ? '1px solid rgba(251,191,36,0.4)' : '1px solid rgba(0,0,0,0.06)',
                 color: noteText.trim() ? '#fbbf24' : '#475569',
                 cursor: noteText.trim() ? 'pointer' : 'not-allowed',
               }}
@@ -753,7 +753,7 @@ function DocsAndHistory({
               className="px-4 min-h-[36px] rounded-md text-xs text-slate-500 transition-colors"
               style={{
                 background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid rgba(0,0,0,0.06)',
               }}
             >
               Cancel
@@ -766,8 +766,8 @@ function DocsAndHistory({
           className="w-full min-h-[40px] rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors mt-1"
           style={{
             background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.07)',
-            color: '#64748b',
+            border: '1px solid rgba(0,0,0,0.07)',
+            color: '#94a3b8',
           }}
         >
           <span style={{ fontSize: 14 }}>+</span>
@@ -793,7 +793,7 @@ function DocumentCard({
       className="rounded-lg overflow-hidden"
       style={{
         background: 'rgba(255,255,255,0.03)',
-        border: `1px solid rgba(255,255,255,0.07)`,
+        border: `1px solid rgba(0,0,0,0.07)`,
       }}
     >
       {/* Header row */}
@@ -805,7 +805,7 @@ function DocumentCard({
           {meta.icon}
         </span>
         <div className="flex-1 min-w-0">
-          <div className="text-xs font-semibold text-slate-200 truncate">{doc.title}</div>
+          <div className="text-xs font-semibold text-slate-800 truncate">{doc.title}</div>
           <div className="flex items-center gap-2 mt-0.5">
             <span className="text-[9px] uppercase tracking-wider font-bold" style={{ color: meta.color }}>
               {meta.label}
@@ -815,8 +815,8 @@ function DocumentCard({
                 className="text-[9px] px-1 rounded"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
-                  color: '#64748b',
-                  border: '1px solid rgba(255,255,255,0.08)',
+                  color: '#94a3b8',
+                  border: '1px solid rgba(0,0,0,0.08)',
                 }}
               >
                 {doc.revision}
@@ -849,7 +849,7 @@ function DocumentCard({
               className="flex items-center justify-center w-6 h-6 rounded text-slate-500 transition-colors"
               style={{
                 background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.07)',
+                border: '1px solid rgba(0,0,0,0.07)',
                 transform: expanded ? 'rotate(180deg)' : 'none',
                 transition: 'transform 0.2s',
               }}
@@ -865,9 +865,9 @@ function DocumentCard({
       {/* Expandable content */}
       {doc.content && expanded && (
         <div
-          className="px-3 pb-3 text-xs text-slate-300 leading-relaxed whitespace-pre-wrap"
+          className="px-3 pb-3 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap"
           style={{
-            borderTop: '1px solid rgba(255,255,255,0.05)',
+            borderTop: '1px solid rgba(0,0,0,0.05)',
             paddingTop: 10,
           }}
         >
@@ -910,7 +910,7 @@ function HistoryEntryRow({ entry }: { entry: ChangeLogEntry }) {
         {entry.type === 'status-change' && entry.fromStatus && entry.toStatus && (
           <div className="flex items-center gap-1.5 mt-0.5">
             <StatusChip status={entry.fromStatus} />
-            <span style={{ color: '#475569', fontSize: 9 }}>→</span>
+            <span style={{ color: '#64748b', fontSize: 9 }}>→</span>
             <StatusChip status={entry.toStatus} />
           </div>
         )}
@@ -919,7 +919,7 @@ function HistoryEntryRow({ entry }: { entry: ChangeLogEntry }) {
           <p
             className="text-[11px] leading-relaxed mt-0.5"
             style={{
-              color: '#94a3b8',
+              color: '#64748b',
               borderLeft: '2px solid rgba(251,191,36,0.3)',
               paddingLeft: 8,
             }}
@@ -958,7 +958,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="px-4 md:px-5 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+    <div className="px-4 md:px-5 py-4" style={{ borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
       <div className="flex items-center gap-2 mb-3">
         <span className="text-[11px] text-slate-600">{icon}</span>
         <h3 className="text-[11px] font-bold tracking-widest uppercase text-slate-400">{title}</h3>
@@ -975,7 +975,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
         {label}
       </div>
       <div
-        className="text-xs font-medium text-slate-200 truncate"
+        className="text-xs font-medium text-slate-800 truncate"
         style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
       >
         {value}

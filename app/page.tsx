@@ -28,7 +28,7 @@ function MapLoading() {
       <div className="flex flex-col items-center gap-4">
         <div
           className="w-10 h-10 rounded-full border-2 animate-spin"
-          style={{ borderColor: '#34d399', borderTopColor: 'transparent' }}
+          style={{ borderColor: '#059669', borderTopColor: 'transparent' }}
         />
         <span
           className="text-sm text-slate-500 tracking-wider"

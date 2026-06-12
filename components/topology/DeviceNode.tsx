@@ -140,12 +140,12 @@ export function DeviceNode({ data, selected }: NodeProps) {
           : 'none';
 
   const baseShadow = selected
-    ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
+    ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 2px 10px rgba(0,0,0,0.12)`
     : derivedStatus === 'derived-fault'
-      ? `0 0 0 1.5px #f8717155, 0 0 18px rgba(248,113,113,0.30), 0 4px 16px rgba(0,0,0,0.5)`
+      ? `0 0 0 1.5px #f8717155, 0 0 18px rgba(248,113,113,0.30), 0 2px 8px rgba(0,0,0,0.1)`
       : derivedStatus === 'derived-investigation'
-        ? `0 0 0 1.5px #fbbf2430, 0 0 10px rgba(251,191,36,0.15), 0 4px 16px rgba(0,0,0,0.5)`
-        : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
+        ? `0 0 0 1.5px #fbbf2430, 0 0 10px rgba(251,191,36,0.15), 0 2px 8px rgba(0,0,0,0.1)`
+        : `0 0 8px ${cfg.glowColor}30, 0 2px 8px rgba(0,0,0,0.1)`;
 
   const borderColor = selected
     ? cfg.color
@@ -185,11 +185,10 @@ export function DeviceNode({ data, selected }: NodeProps) {
       <div
         className="flex-1 rounded-r-[10px] overflow-hidden"
         style={{
-          background: 'rgba(10, 15, 26, 0.96)',
+          background: '#ffffff',
           border: `1.5px solid ${borderColor}`,
           borderLeft: 'none',
           boxShadow: baseShadow,
-          backdropFilter: 'blur(8px)',
         }}
       >
         <div
@@ -228,7 +227,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
           </div>
 
           {!compact && (
-            <div className="text-[10px] font-medium text-slate-200 leading-snug mb-1.5 line-clamp-2">
+            <div className="text-[10px] font-medium text-slate-700 leading-snug mb-1.5 line-clamp-2">
               {nodeData.name}
             </div>
           )}
@@ -282,9 +281,9 @@ export function DeviceNode({ data, selected }: NodeProps) {
             <div
               className="inline-flex items-center gap-1 mt-1.5 px-1.5 py-0.5 rounded text-[8px] font-bold tracking-wider"
               style={{
-                background: 'rgba(148,163,184,0.07)',
-                border: '1px solid rgba(148,163,184,0.15)',
-                color: '#64748b',
+                background: 'rgba(100,116,139,0.08)',
+                border: '1px solid rgba(100,116,139,0.2)',
+                color: '#475569',
               }}
             >
               <svg width="8" height="8" viewBox="0 0 24 24" fill="none">

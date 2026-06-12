@@ -14,8 +14,8 @@ export function ZoneLegend({ buildingFilter }: ZoneLegendProps) {
     <div
       className="absolute left-3 bottom-3 z-10 pointer-events-none max-w-[240px]"
       style={{
-        background: 'rgba(10, 15, 26, 0.92)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: '#ffffff',
+        border: '1px solid #e2e8f0',
         borderRadius: 10,
         backdropFilter: 'blur(8px)',
         boxShadow: '0 4px 24px rgba(0,0,0,0.4)',

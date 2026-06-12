@@ -71,8 +71,8 @@ export function BackgroundCellNode({ data }: NodeProps) {
   const band = FLOOR_BANDS.find((b) => b.id === floorBandId)!;
 
   const isBasement = floorBandId === 'basement';
-  const bgOpacity = isBasement ? 0.07 : 0.04;
-  const borderOpacity = isBasement ? 0.18 : 0.12;
+  const bgOpacity = isBasement ? 0.10 : 0.06;
+  const borderOpacity = isBasement ? 0.25 : 0.18;
 
   return (
     <div
@@ -96,7 +96,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
             left: '50%',
             transform: 'translateX(-50%)',
             whiteSpace: 'nowrap',
-            background: 'rgba(10, 15, 26, 0.88)',
+            background: 'rgba(255,255,255,0.92)',
             border: `1px solid ${building.borderColor}`,
             borderRadius: 20,
             padding: '3px 10px',
@@ -130,7 +130,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
               fontWeight: 700,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: 'rgba(148,163,184,0.7)',
+              color: 'rgba(71,85,105,0.85)',
             }}
           >
             {band.label}
@@ -138,7 +138,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
           <div
             style={{
               fontSize: 8,
-              color: 'rgba(100,116,139,0.6)',
+              color: 'rgba(100,116,139,0.75)',
               marginTop: 2,
             }}
           >
@@ -155,7 +155,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
           bottom: 0,
           right: 0,
           width: 1,
-          background: `linear-gradient(to bottom, transparent, rgba(${hexToRgb(building.color)}, 0.2), transparent)`,
+          background: `linear-gradient(to bottom, transparent, rgba(${hexToRgb(building.color)}, 0.3), transparent)`,
           borderRadius: 1,
         }}
       />

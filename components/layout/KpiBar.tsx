@@ -18,10 +18,10 @@ function KpiCard({ label, value, accentColor, sublabel }: KpiCardProps) {
     <div
       className="flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-2.5 rounded-lg flex-1 min-w-0"
       style={{
-        background: 'rgba(15, 23, 42, 0.7)',
-        border: `1px solid rgba(255,255,255,0.06)`,
+        background: '#ffffff',
+        border: `1px solid #e2e8f0`,
         borderLeft: `3px solid ${accentColor}`,
-        boxShadow: `0 0 12px rgba(0,0,0,0.3), inset 0 0 20px rgba(0,0,0,0.1)`,
+        boxShadow: `0 1px 4px rgba(0,0,0,0.07)`,
       }}
     >
       <div
@@ -29,17 +29,17 @@ function KpiCard({ label, value, accentColor, sublabel }: KpiCardProps) {
         style={{
           fontFamily: 'var(--font-jetbrains-mono)',
           color: accentColor,
-          textShadow: `0 0 16px ${accentColor}50`,
+          
         }}
       >
         {value}
       </div>
       <div className="min-w-0">
-        <div className="text-[11px] md:text-xs font-semibold text-slate-300 leading-tight truncate">
+        <div className="text-[11px] md:text-xs font-semibold text-slate-600 leading-tight truncate">
           {label}
         </div>
         {sublabel && (
-          <div className="text-[9px] md:text-[10px] text-slate-500 mt-0.5 truncate">{sublabel}</div>
+          <div className="text-[9px] md:text-[10px] text-slate-400 mt-0.5 truncate">{sublabel}</div>
         )}
       </div>
     </div>
@@ -59,8 +59,8 @@ export function KpiBar({ nodes, edges }: KpiBarProps) {
     <div
       className="flex items-center gap-2 md:gap-3 px-3 md:px-5 py-2 shrink-0 overflow-x-auto"
       style={{
-        background: 'rgba(15, 23, 42, 0.5)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        background: '#f1f5f9',
+        borderBottom: '1px solid #e2e8f0',
       }}
     >
       <KpiCard

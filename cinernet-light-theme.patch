@@ -1,0 +1,1200 @@
+diff --git a/app/globals.css b/app/globals.css
+index 19627bd..3192d76 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -5,17 +5,17 @@
+   --font-mono: var(--font-jetbrains-mono);
+ }
+ 
+-/* ── Force dark mode always ── */
++/* ── Light mode — high contrast for low-light environments ── */
+ :root {
+-  color-scheme: dark;
++  color-scheme: light;
+ }
+ 
+ html,
+ body {
+   height: 100%;
+   overflow: hidden;
+-  background: #0a0f1a;
+-  color: #e2e8f0;
++  background: #f8fafc;
++  color: #0f172a;
+ }
+ 
+ body {
+@@ -28,14 +28,14 @@ body {
+   height: 5px;
+ }
+ ::-webkit-scrollbar-track {
+-  background: #0f172a;
++  background: #f1f5f9;
+ }
+ ::-webkit-scrollbar-thumb {
+-  background: #334155;
++  background: #cbd5e1;
+   border-radius: 4px;
+ }
+ ::-webkit-scrollbar-thumb:hover {
+-  background: #475569;
++  background: #94a3b8;
+ }
+ 
+ /* ── Status animations ── */
+@@ -43,38 +43,38 @@ body {
+ @keyframes fault-pulse {
+   0%, 100% {
+     box-shadow:
+-      0 0 6px rgba(248, 113, 113, 0.45),
+-      0 0 18px rgba(248, 113, 113, 0.12),
+-      0 2px 12px rgba(0, 0, 0, 0.6);
++      0 0 6px rgba(220, 38, 38, 0.35),
++      0 0 18px rgba(220, 38, 38, 0.1),
++      0 2px 12px rgba(0, 0, 0, 0.12);
+   }
+   50% {
+     box-shadow:
+-      0 0 14px rgba(248, 113, 113, 0.8),
+-      0 0 36px rgba(248, 113, 113, 0.3),
+-      0 2px 12px rgba(0, 0, 0, 0.6);
++      0 0 14px rgba(220, 38, 38, 0.7),
++      0 0 36px rgba(220, 38, 38, 0.22),
++      0 2px 12px rgba(0, 0, 0, 0.12);
+   }
+ }
+ 
+ @keyframes investigation-pulse {
+   0%, 100% {
+     box-shadow:
+-      0 0 6px rgba(251, 191, 36, 0.3),
+-      0 0 14px rgba(251, 191, 36, 0.08),
+-      0 2px 12px rgba(0, 0, 0, 0.6);
++      0 0 6px rgba(217, 119, 6, 0.25),
++      0 0 14px rgba(217, 119, 6, 0.06),
++      0 2px 12px rgba(0, 0, 0, 0.1);
+   }
+   50% {
+     box-shadow:
+-      0 0 12px rgba(251, 191, 36, 0.55),
+-      0 0 28px rgba(251, 191, 36, 0.18),
+-      0 2px 12px rgba(0, 0, 0, 0.6);
++      0 0 12px rgba(217, 119, 6, 0.45),
++      0 0 28px rgba(217, 119, 6, 0.14),
++      0 2px 12px rgba(0, 0, 0, 0.1);
+   }
+ }
+ 
+ @keyframes operational-glow {
+   0%, 100% {
+     box-shadow:
+-      0 0 6px rgba(52, 211, 153, 0.25),
+-      0 2px 12px rgba(0, 0, 0, 0.5);
++      0 0 6px rgba(5, 150, 105, 0.2),
++      0 2px 12px rgba(0, 0, 0, 0.08);
+   }
+ }
+ 
+@@ -94,7 +94,7 @@ body {
+ /* Alert blink */
+ @keyframes alert-blink {
+   0%, 100% { opacity: 1; }
+-  50% { opacity: 0.6; }
++  50% { opacity: 0.65; }
+ }
+ 
+ /* Live indicator */
+@@ -142,17 +142,18 @@ body {
+ }
+ 
+ .react-flow__controls-button {
+-  background: #1e293b !important;
+-  border: 1px solid #334155 !important;
+-  color: #94a3b8 !important;
++  background: #ffffff !important;
++  border: 1px solid #e2e8f0 !important;
++  color: #475569 !important;
+   border-radius: 6px !important;
+   width: 28px !important;
+   height: 28px !important;
++  box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+ }
+ 
+ .react-flow__controls-button:hover {
+-  background: #293548 !important;
+-  color: #e2e8f0 !important;
++  background: #f1f5f9 !important;
++  color: #0f172a !important;
+ }
+ 
+ .react-flow__controls-button svg {
+@@ -164,7 +165,8 @@ body {
+ .react-flow__minimap {
+   border-radius: 8px !important;
+   overflow: hidden;
+-  border: 1px solid #334155 !important;
++  border: 1px solid #e2e8f0 !important;
++  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+ }
+ 
+ .react-flow__edge-interaction {
+diff --git a/app/layout.tsx b/app/layout.tsx
+index 06145b2..e5ccfe3 100644
+--- a/app/layout.tsx
++++ b/app/layout.tsx
+@@ -27,9 +27,9 @@ export default function RootLayout({
+   return (
+     <html
+       lang="en"
+-      className={`${inter.variable} ${jetbrainsMono.variable} h-full dark`}
++      className={`${inter.variable} ${jetbrainsMono.variable} h-full`}
+     >
+-      <body className="h-full overflow-hidden bg-[#0a0f1a] text-slate-200 antialiased">
++      <body className="h-full overflow-hidden bg-slate-50 text-slate-900 antialiased">
+         {children}
+       </body>
+     </html>
+diff --git a/app/page.tsx b/app/page.tsx
+index 834eea5..f24605e 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -28,7 +28,7 @@ function MapLoading() {
+       <div className="flex flex-col items-center gap-4">
+         <div
+           className="w-10 h-10 rounded-full border-2 animate-spin"
+-          style={{ borderColor: '#34d399', borderTopColor: 'transparent' }}
++          style={{ borderColor: '#059669', borderTopColor: 'transparent' }}
+         />
+         <span
+           className="text-sm text-slate-500 tracking-wider"
+diff --git a/components/detail/DetailDrawer.tsx b/components/detail/DetailDrawer.tsx
+index 6de3ace..4045242 100644
+--- a/components/detail/DetailDrawer.tsx
++++ b/components/detail/DetailDrawer.tsx
+@@ -109,7 +109,7 @@ export function DetailDrawer({
+             transition={{ type: 'spring', stiffness: 380, damping: 38 }}
+             className="absolute right-0 top-0 bottom-0 z-30 flex flex-col overflow-hidden w-full max-w-md md:w-[420px]"
+             style={{
+-              background: 'rgba(8, 13, 22, 0.97)',
++              background: '#ffffff',
+               borderLeft: `1px solid ${cfg?.borderColor ?? '#334155'}`,
+               boxShadow: `-4px 0 40px rgba(0,0,0,0.6), -1px 0 0 rgba(255,255,255,0.03)`,
+               backdropFilter: 'blur(12px)',
+@@ -132,8 +132,8 @@ export function DetailDrawer({
+                         className="text-[9px] font-bold tracking-widest uppercase px-1.5 py-0.5 rounded"
+                         style={{
+                           background: 'rgba(255,255,255,0.05)',
+-                          color: '#64748b',
+-                          border: '1px solid rgba(255,255,255,0.06)',
++                          color: '#94a3b8',
++                          border: '1px solid rgba(0,0,0,0.06)',
+                         }}
+                       >
+                         {isEdge
+@@ -164,18 +164,18 @@ export function DetailDrawer({
+                       {element.id}
+                     </div>
+ 
+-                    <div className="text-sm font-medium text-slate-300">{element.name}</div>
++                    <div className="text-sm font-medium text-slate-700">{element.name}</div>
+ 
+                     {isEdge && (
+                       <div className="flex items-center gap-1.5 mt-1.5 text-[10px] text-slate-500">
+-                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#64748b' }}>
++                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#94a3b8' }}>
+                           {(element as TopologyEdge).source}
+                         </span>
+                         <svg width="16" height="8" viewBox="0 0 16 8">
+                           <line x1="0" y1="4" x2="12" y2="4" stroke="#475569" strokeWidth="1.5" />
+                           <path d="M10 1 L13 4 L10 7" stroke="#475569" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                         </svg>
+-                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#64748b' }}>
++                        <span style={{ fontFamily: 'var(--font-jetbrains-mono)', color: '#94a3b8' }}>
+                           {(element as TopologyEdge).target}
+                         </span>
+                       </div>
+@@ -188,8 +188,8 @@ export function DetailDrawer({
+                     className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg shrink-0 transition-colors active:bg-red-500/10"
+                     style={{
+                       background: 'rgba(255,255,255,0.04)',
+-                      border: '1px solid rgba(255,255,255,0.08)',
+-                      color: '#64748b',
++                      border: '1px solid rgba(0,0,0,0.08)',
++                      color: '#94a3b8',
+                     }}
+                   >
+                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+@@ -582,11 +582,11 @@ function TerminalBoxSection({ detail }: { detail: TerminalBoxDetail }) {
+               background: PLC_ITEM_GROUPS.includes(group as typeof PLC_ITEM_GROUPS[number])
+                 ? 'rgba(56, 189, 248, 0.06)'
+                 : 'rgba(255,255,255,0.03)',
+-              border: '1px solid rgba(255,255,255,0.06)',
++              border: '1px solid rgba(0,0,0,0.06)',
+             }}
+           >
+             <span className="font-bold uppercase text-slate-500">{group}</span>
+-            <span className="ml-2 font-mono text-slate-300">{count}</span>
++            <span className="ml-2 font-mono text-slate-700">{count}</span>
+           </div>
+         ))}
+       </div>
+@@ -633,7 +633,7 @@ const DOC_TYPE_META: Record<DocType, { icon: string; label: string; color: strin
+   protocol:      { icon: '✓', label: 'Protocol',      color: '#34d399' },
+   commissioning: { icon: '⚡', label: 'Commissioning', color: '#a78bfa' },
+   'fault-report':{ icon: '⚠', label: 'Fault report',  color: '#f87171' },
+-  datasheet:     { icon: '≡', label: 'Datasheet',     color: '#94a3b8' },
++  datasheet:     { icon: '≡', label: 'Datasheet',     color: '#64748b' },
+   note:          { icon: '✎', label: 'Note',          color: '#fbbf24' },
+ };
+ 
+@@ -717,10 +717,10 @@ function DocsAndHistory({
+             onChange={(e) => onNoteTextChange(e.target.value)}
+             placeholder="Type your note…"
+             rows={3}
+-            className="w-full text-xs text-slate-200 resize-none rounded-md px-2.5 py-2 mb-2 focus:outline-none"
++            className="w-full text-xs text-slate-800 resize-none rounded-md px-2.5 py-2 mb-2 focus:outline-none"
+             style={{
+               background: 'rgba(255,255,255,0.04)',
+-              border: '1px solid rgba(255,255,255,0.08)',
++              border: '1px solid rgba(0,0,0,0.08)',
+               fontFamily: 'inherit',
+             }}
+           />
+@@ -728,10 +728,10 @@ function DocsAndHistory({
+             value={noteAuthor}
+             onChange={(e) => onNoteAuthorChange(e.target.value)}
+             placeholder="Your name"
+-            className="w-full text-xs text-slate-300 rounded-md px-2.5 py-1.5 mb-2 focus:outline-none"
++            className="w-full text-xs text-slate-700 rounded-md px-2.5 py-1.5 mb-2 focus:outline-none"
+             style={{
+               background: 'rgba(255,255,255,0.04)',
+-              border: '1px solid rgba(255,255,255,0.08)',
++              border: '1px solid rgba(0,0,0,0.08)',
+             }}
+           />
+           <div className="flex gap-2">
+@@ -741,7 +741,7 @@ function DocsAndHistory({
+               className="flex-1 min-h-[36px] rounded-md text-xs font-bold transition-all"
+               style={{
+                 background: noteText.trim() ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.03)',
+-                border: noteText.trim() ? '1px solid rgba(251,191,36,0.4)' : '1px solid rgba(255,255,255,0.06)',
++                border: noteText.trim() ? '1px solid rgba(251,191,36,0.4)' : '1px solid rgba(0,0,0,0.06)',
+                 color: noteText.trim() ? '#fbbf24' : '#475569',
+                 cursor: noteText.trim() ? 'pointer' : 'not-allowed',
+               }}
+@@ -753,7 +753,7 @@ function DocsAndHistory({
+               className="px-4 min-h-[36px] rounded-md text-xs text-slate-500 transition-colors"
+               style={{
+                 background: 'rgba(255,255,255,0.03)',
+-                border: '1px solid rgba(255,255,255,0.06)',
++                border: '1px solid rgba(0,0,0,0.06)',
+               }}
+             >
+               Cancel
+@@ -766,8 +766,8 @@ function DocsAndHistory({
+           className="w-full min-h-[40px] rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors mt-1"
+           style={{
+             background: 'rgba(255,255,255,0.03)',
+-            border: '1px solid rgba(255,255,255,0.07)',
+-            color: '#64748b',
++            border: '1px solid rgba(0,0,0,0.07)',
++            color: '#94a3b8',
+           }}
+         >
+           <span style={{ fontSize: 14 }}>+</span>
+@@ -793,7 +793,7 @@ function DocumentCard({
+       className="rounded-lg overflow-hidden"
+       style={{
+         background: 'rgba(255,255,255,0.03)',
+-        border: `1px solid rgba(255,255,255,0.07)`,
++        border: `1px solid rgba(0,0,0,0.07)`,
+       }}
+     >
+       {/* Header row */}
+@@ -805,7 +805,7 @@ function DocumentCard({
+           {meta.icon}
+         </span>
+         <div className="flex-1 min-w-0">
+-          <div className="text-xs font-semibold text-slate-200 truncate">{doc.title}</div>
++          <div className="text-xs font-semibold text-slate-800 truncate">{doc.title}</div>
+           <div className="flex items-center gap-2 mt-0.5">
+             <span className="text-[9px] uppercase tracking-wider font-bold" style={{ color: meta.color }}>
+               {meta.label}
+@@ -815,8 +815,8 @@ function DocumentCard({
+                 className="text-[9px] px-1 rounded"
+                 style={{
+                   background: 'rgba(255,255,255,0.06)',
+-                  color: '#64748b',
+-                  border: '1px solid rgba(255,255,255,0.08)',
++                  color: '#94a3b8',
++                  border: '1px solid rgba(0,0,0,0.08)',
+                 }}
+               >
+                 {doc.revision}
+@@ -849,7 +849,7 @@ function DocumentCard({
+               className="flex items-center justify-center w-6 h-6 rounded text-slate-500 transition-colors"
+               style={{
+                 background: 'rgba(255,255,255,0.04)',
+-                border: '1px solid rgba(255,255,255,0.07)',
++                border: '1px solid rgba(0,0,0,0.07)',
+                 transform: expanded ? 'rotate(180deg)' : 'none',
+                 transition: 'transform 0.2s',
+               }}
+@@ -865,9 +865,9 @@ function DocumentCard({
+       {/* Expandable content */}
+       {doc.content && expanded && (
+         <div
+-          className="px-3 pb-3 text-xs text-slate-300 leading-relaxed whitespace-pre-wrap"
++          className="px-3 pb-3 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap"
+           style={{
+-            borderTop: '1px solid rgba(255,255,255,0.05)',
++            borderTop: '1px solid rgba(0,0,0,0.05)',
+             paddingTop: 10,
+           }}
+         >
+@@ -910,7 +910,7 @@ function HistoryEntryRow({ entry }: { entry: ChangeLogEntry }) {
+         {entry.type === 'status-change' && entry.fromStatus && entry.toStatus && (
+           <div className="flex items-center gap-1.5 mt-0.5">
+             <StatusChip status={entry.fromStatus} />
+-            <span style={{ color: '#475569', fontSize: 9 }}>→</span>
++            <span style={{ color: '#64748b', fontSize: 9 }}>→</span>
+             <StatusChip status={entry.toStatus} />
+           </div>
+         )}
+@@ -919,7 +919,7 @@ function HistoryEntryRow({ entry }: { entry: ChangeLogEntry }) {
+           <p
+             className="text-[11px] leading-relaxed mt-0.5"
+             style={{
+-              color: '#94a3b8',
++              color: '#64748b',
+               borderLeft: '2px solid rgba(251,191,36,0.3)',
+               paddingLeft: 8,
+             }}
+@@ -958,7 +958,7 @@ function Section({
+   children: React.ReactNode;
+ }) {
+   return (
+-    <div className="px-4 md:px-5 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
++    <div className="px-4 md:px-5 py-4" style={{ borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
+       <div className="flex items-center gap-2 mb-3">
+         <span className="text-[11px] text-slate-600">{icon}</span>
+         <h3 className="text-[11px] font-bold tracking-widest uppercase text-slate-400">{title}</h3>
+@@ -975,7 +975,7 @@ function SpecRow({ label, value }: { label: string; value: string }) {
+         {label}
+       </div>
+       <div
+-        className="text-xs font-medium text-slate-200 truncate"
++        className="text-xs font-medium text-slate-800 truncate"
+         style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
+       >
+         {value}
+diff --git a/components/layout/AlertBanner.tsx b/components/layout/AlertBanner.tsx
+index 8f1dace..1778df5 100644
+--- a/components/layout/AlertBanner.tsx
++++ b/components/layout/AlertBanner.tsx
+@@ -15,8 +15,8 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
+       className="flex items-center gap-3 px-3 md:px-5 py-2 shrink-0 cursor-pointer group min-h-[44px]"
+       style={{
+         background:
+-          'linear-gradient(90deg, rgba(127, 29, 29, 0.5) 0%, rgba(153, 27, 27, 0.3) 50%, rgba(127, 29, 29, 0.2) 100%)',
+-        borderBottom: '1px solid rgba(248, 113, 113, 0.35)',
++          'linear-gradient(90deg, rgba(254,226,226,0.95) 0%, rgba(254,202,202,0.85) 50%, rgba(254,226,226,0.9) 100%)',
++        borderBottom: '1px solid rgba(220,38,38,0.3)',
+       }}
+       onClick={() => onNodeClick(primary.id)}
+       role="button"
+@@ -47,25 +47,25 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
+       <div className="flex items-center gap-2 min-w-0 flex-1">
+         <span
+           className="text-xs font-bold tracking-wider uppercase shrink-0"
+-          style={{ color: '#f87171', fontFamily: 'var(--font-jetbrains-mono)' }}
++          style={{ color: '#dc2626', fontFamily: 'var(--font-jetbrains-mono)' }}
+         >
+           ACTIVE FAULT
+         </span>
+-        <span className="text-xs text-red-200/70 shrink-0">—</span>
++        <span className="text-xs text-red-600/70 shrink-0">—</span>
+         <span
+           className="text-xs font-bold shrink-0"
+-          style={{ color: '#fca5a5', fontFamily: 'var(--font-jetbrains-mono)' }}
++          style={{ color: '#b91c1c', fontFamily: 'var(--font-jetbrains-mono)' }}
+         >
+           {primary.id}
+         </span>
+-        <span className="text-xs text-red-200/60 truncate">{primary.name}</span>
++        <span className="text-xs text-red-700/60 truncate">{primary.name}</span>
+ 
+         {faultNodes.length > 1 && (
+           <span
+             className="text-[10px] px-1.5 py-0.5 rounded-full shrink-0"
+             style={{
+               background: 'rgba(248, 113, 113, 0.2)',
+-              color: '#f87171',
++              color: '#dc2626',
+               border: '1px solid rgba(248, 113, 113, 0.3)',
+             }}
+           >
+@@ -76,7 +76,7 @@ export function AlertBanner({ faultNodes, onNodeClick }: AlertBannerProps) {
+ 
+       <div
+         className="flex items-center gap-1.5 text-xs font-semibold shrink-0"
+-        style={{ color: '#fca5a5' }}
++        style={{ color: '#991b1b' }}
+       >
+         <span className="hidden sm:inline">Go to fault</span>
+         <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+diff --git a/components/layout/KpiBar.tsx b/components/layout/KpiBar.tsx
+index 6b39053..95a604c 100644
+--- a/components/layout/KpiBar.tsx
++++ b/components/layout/KpiBar.tsx
+@@ -18,10 +18,10 @@ function KpiCard({ label, value, accentColor, sublabel }: KpiCardProps) {
+     <div
+       className="flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-2.5 rounded-lg flex-1 min-w-0"
+       style={{
+-        background: 'rgba(15, 23, 42, 0.7)',
+-        border: `1px solid rgba(255,255,255,0.06)`,
++        background: '#ffffff',
++        border: `1px solid #e2e8f0`,
+         borderLeft: `3px solid ${accentColor}`,
+-        boxShadow: `0 0 12px rgba(0,0,0,0.3), inset 0 0 20px rgba(0,0,0,0.1)`,
++        boxShadow: `0 1px 4px rgba(0,0,0,0.07)`,
+       }}
+     >
+       <div
+@@ -29,17 +29,17 @@ function KpiCard({ label, value, accentColor, sublabel }: KpiCardProps) {
+         style={{
+           fontFamily: 'var(--font-jetbrains-mono)',
+           color: accentColor,
+-          textShadow: `0 0 16px ${accentColor}50`,
++          
+         }}
+       >
+         {value}
+       </div>
+       <div className="min-w-0">
+-        <div className="text-[11px] md:text-xs font-semibold text-slate-300 leading-tight truncate">
++        <div className="text-[11px] md:text-xs font-semibold text-slate-600 leading-tight truncate">
+           {label}
+         </div>
+         {sublabel && (
+-          <div className="text-[9px] md:text-[10px] text-slate-500 mt-0.5 truncate">{sublabel}</div>
++          <div className="text-[9px] md:text-[10px] text-slate-400 mt-0.5 truncate">{sublabel}</div>
+         )}
+       </div>
+     </div>
+@@ -59,8 +59,8 @@ export function KpiBar({ nodes, edges }: KpiBarProps) {
+     <div
+       className="flex items-center gap-2 md:gap-3 px-3 md:px-5 py-2 shrink-0 overflow-x-auto"
+       style={{
+-        background: 'rgba(15, 23, 42, 0.5)',
+-        borderBottom: '1px solid rgba(255,255,255,0.05)',
++        background: '#f1f5f9',
++        borderBottom: '1px solid #e2e8f0',
+       }}
+     >
+       <KpiCard
+diff --git a/components/layout/TopBar.tsx b/components/layout/TopBar.tsx
+index 727737c..27c3a70 100644
+--- a/components/layout/TopBar.tsx
++++ b/components/layout/TopBar.tsx
+@@ -82,11 +82,11 @@ const PANEL: React.CSSProperties = {
+   position: 'absolute',
+   top: 'calc(100% + 6px)',
+   zIndex: 50,
+-  background: 'rgba(8, 13, 22, 0.97)',
+-  border: '1px solid rgba(255,255,255,0.1)',
++  background: 'rgba(255,255,255,0.98)',
++  border: '1px solid rgba(0,0,0,0.1)',
+   borderRadius: 12,
+   backdropFilter: 'blur(20px)',
+-  boxShadow: '0 20px 60px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4)',
++  boxShadow: '0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08)',
+   overflow: 'hidden',
+   animation: 'panel-slide-down 0.14s ease-out',
+ };
+@@ -97,7 +97,7 @@ function Divider() {
+   return (
+     <div
+       className="h-5 w-px shrink-0"
+-      style={{ background: 'rgba(255,255,255,0.07)' }}
++      style={{ background: 'rgba(0,0,0,0.1)' }}
+     />
+   );
+ }
+@@ -196,9 +196,9 @@ export function TopBar({
+       ref={ref}
+       className="relative flex items-center h-12 px-3 md:px-5 gap-2 shrink-0"
+       style={{
+-        background: 'linear-gradient(135deg, #0a0f1a 0%, #111827 100%)',
+-        borderBottom: '1px solid rgba(52, 211, 153, 0.2)',
+-        boxShadow: '0 2px 20px rgba(0,0,0,0.5)',
++        background: '#ffffff',
++        borderBottom: '1px solid #e2e8f0',
++        boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+         zIndex: 20,
+       }}
+     >
+@@ -207,9 +207,9 @@ export function TopBar({
+         <div
+           className="w-6 h-6 rounded-md flex items-center justify-center"
+           style={{
+-            background: 'linear-gradient(135deg, rgba(52,211,153,0.18) 0%, rgba(52,211,153,0.06) 100%)',
+-            border: '1px solid rgba(52,211,153,0.4)',
+-            boxShadow: '0 0 10px rgba(52,211,153,0.15)',
++            background: 'rgba(5,150,105,0.08)',
++            border: '1px solid rgba(5,150,105,0.3)',
++            boxShadow: 'none',
+           }}
+         >
+           <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+@@ -226,8 +226,8 @@ export function TopBar({
+             className="text-[12px] font-bold tracking-[0.2em] uppercase"
+             style={{
+               fontFamily: 'var(--font-jetbrains-mono)',
+-              color: '#34d399',
+-              textShadow: '0 0 10px rgba(52,211,153,0.35)',
++              color: '#059669',
++              textShadow: 'none',
+             }}
+           >
+             CINERNET
+@@ -242,7 +242,7 @@ export function TopBar({
+           >
+             Alpha
+           </span>
+-          <span className="hidden lg:inline text-[9px] text-slate-600 tracking-wider ml-2">
++          <span className="hidden lg:inline text-[9px] text-slate-400 tracking-wider ml-2">
+             Lommel Glass
+           </span>
+         </div>
+@@ -258,8 +258,8 @@ export function TopBar({
+           style={{
+             background: hasFaults
+               ? openPanel === 'fault'
+-                ? 'rgba(248,113,113,0.22)'
+-                : 'rgba(248,113,113,0.1)'
++                ? 'rgba(220,38,38,0.12)'
++                : 'rgba(220,38,38,0.06)'
+               : 'rgba(52,211,153,0.07)',
+             border: hasFaults
+               ? '1px solid rgba(248,113,113,0.45)'
+@@ -316,12 +316,12 @@ export function TopBar({
+           style={{
+             background:
+               openPanel === 'alpha'
+-                ? 'rgba(251,191,36,0.18)'
++                ? 'rgba(217,119,6,0.12)'
+                 : hasInjections
+-                  ? 'rgba(251,191,36,0.1)'
+-                  : 'rgba(15,23,42,0.7)',
+-            border: `1px solid ${openPanel === 'alpha' || hasInjections ? 'rgba(251,191,36,0.5)' : 'rgba(255,255,255,0.08)'}`,
+-            color: openPanel === 'alpha' || hasInjections ? '#fbbf24' : '#64748b',
++                  ? 'rgba(217,119,6,0.08)'
++                  : 'rgba(241,245,249,0.9)',
++            border: `1px solid ${openPanel === 'alpha' || hasInjections ? 'rgba(217,119,6,0.45)' : 'rgba(0,0,0,0.1)'}`,
++            color: openPanel === 'alpha' || hasInjections ? '#b45309' : '#64748b',
+           }}
+           title="Alpha fault scenario presets"
+         >
+@@ -353,7 +353,7 @@ export function TopBar({
+       {/* ── Depth tier selector ── */}
+       <div
+         className="flex items-center gap-px rounded-lg overflow-hidden shrink-0"
+-        style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(15,23,42,0.7)' }}
++        style={{ border: '1px solid #e2e8f0', background: '#f8fafc' }}
+       >
+         {([1, 2, 3] as DepthTier[]).map((tier) => {
+           const isActive = activeTier === tier;
+@@ -364,17 +364,17 @@ export function TopBar({
+               title={`${TIER_META[tier].label} — ${TIER_META[tier].sub}`}
+               className="flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-bold tracking-wider transition-all duration-150"
+               style={{
+-                background: isActive ? 'rgba(52,211,153,0.15)' : 'transparent',
+-                color: isActive ? '#34d399' : '#475569',
+-                borderRight: tier < 3 ? '1px solid rgba(255,255,255,0.05)' : 'none',
++                background: isActive ? 'rgba(5,150,105,0.1)' : 'transparent',
++                color: isActive ? '#059669' : '#64748b',
++                borderRight: tier < 3 ? '1px solid #e2e8f0' : 'none',
+               }}
+             >
+               <span
+                 className="w-3.5 h-3.5 rounded-sm flex items-center justify-center text-[7px] font-black"
+                 style={{
+-                  background: isActive ? 'rgba(52,211,153,0.25)' : 'rgba(255,255,255,0.04)',
+-                  border: `1px solid ${isActive ? 'rgba(52,211,153,0.5)' : 'rgba(255,255,255,0.06)'}`,
+-                  color: isActive ? '#34d399' : '#475569',
++                  background: isActive ? 'rgba(5,150,105,0.15)' : 'rgba(0,0,0,0.04)',
++                  border: `1px solid ${isActive ? 'rgba(5,150,105,0.4)' : 'rgba(0,0,0,0.08)'}`,
++                  color: isActive ? '#059669' : '#64748b',
+                 }}
+               >
+                 {tier}
+@@ -391,9 +391,9 @@ export function TopBar({
+           onClick={() => toggle('cables')}
+           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-semibold transition-all duration-150"
+           style={{
+-            background: openPanel === 'cables' ? 'rgba(148,163,184,0.12)' : 'rgba(15,23,42,0.7)',
+-            border: `1px solid ${openPanel === 'cables' ? '#64748b' : 'rgba(255,255,255,0.08)'}`,
+-            color: openPanel === 'cables' ? '#94a3b8' : '#475569',
++            background: openPanel === 'cables' ? 'rgba(100,116,139,0.1)' : '#f8fafc',
++            border: `1px solid ${openPanel === 'cables' ? '#94a3b8' : '#e2e8f0'}`,
++            color: openPanel === 'cables' ? '#475569' : '#64748b',
+           }}
+           title="Cable type visibility"
+         >
+@@ -427,9 +427,9 @@ export function TopBar({
+           style={{
+             background:
+               openPanel === 'building'
+-                ? `rgba(${hexRgb(bldColor)},0.15)`
+-                : 'rgba(15,23,42,0.7)',
+-            border: `1px solid ${openPanel === 'building' ? bldColor : 'rgba(255,255,255,0.08)'}`,
++                ? `rgba(${hexRgb(bldColor)},0.1)`
++                : '#f8fafc',
++            border: `1px solid ${openPanel === 'building' ? bldColor : '#e2e8f0'}`,
+             color: openPanel === 'building' ? bldColor : '#64748b',
+           }}
+           title="Filter by building"
+@@ -461,9 +461,9 @@ export function TopBar({
+           style={{
+             background:
+               openPanel === 'status'
+-                ? `rgba(${hexRgb(stsColor)},0.12)`
+-                : 'rgba(15,23,42,0.7)',
+-            border: `1px solid ${openPanel === 'status' ? stsColor : 'rgba(255,255,255,0.08)'}`,
++                ? `rgba(${hexRgb(stsColor)},0.1)`
++                : '#f8fafc',
++            border: `1px solid ${openPanel === 'status' ? stsColor : '#e2e8f0'}`,
+             color: openPanel === 'status' ? stsColor : '#64748b',
+           }}
+           title="Filter by status"
+@@ -493,9 +493,9 @@ export function TopBar({
+           onClick={() => toggle('kpi')}
+           className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
+           style={{
+-            background: openPanel === 'kpi' ? 'rgba(100,116,139,0.18)' : 'rgba(15,23,42,0.7)',
+-            border: `1px solid ${openPanel === 'kpi' ? '#64748b' : 'rgba(255,255,255,0.07)'}`,
+-            color: openPanel === 'kpi' ? '#94a3b8' : '#475569',
++            background: openPanel === 'kpi' ? 'rgba(100,116,139,0.1)' : '#f8fafc',
++            border: `1px solid ${openPanel === 'kpi' ? '#94a3b8' : '#e2e8f0'}`,
++            color: openPanel === 'kpi' ? '#475569' : '#64748b',
+           }}
+           title="System statistics"
+         >
+@@ -515,9 +515,9 @@ export function TopBar({
+       <div
+         className="flex items-center gap-1 px-2 py-1 rounded-full text-[8px] font-bold tracking-widest uppercase shrink-0"
+         style={{
+-          background: 'rgba(239,68,68,0.08)',
+-          border: '1px solid rgba(239,68,68,0.28)',
+-          color: '#f87171',
++          background: 'rgba(220,38,38,0.07)',
++          border: '1px solid rgba(220,38,38,0.25)',
++          color: '#dc2626',
+         }}
+       >
+         <span
+@@ -532,7 +532,7 @@ export function TopBar({
+         className="text-sm font-bold tabular-nums shrink-0 hidden md:block"
+         style={{
+           fontFamily: 'var(--font-jetbrains-mono)',
+-          color: '#94a3b8',
++          color: '#475569',
+           minWidth: 58,
+         }}
+       >
+@@ -555,7 +555,7 @@ function FaultPanel({
+ }) {
+   return (
+     <div style={{ ...PANEL, left: 0, minWidth: 320, maxWidth: 420 }}>
+-      <div className="px-4 py-2.5 flex items-center gap-2 border-b border-white/[0.06]">
++      <div className="px-4 py-2.5 flex items-center gap-2 border-b border-black/[0.06]">
+         <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+           <path
+             d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+@@ -585,7 +585,7 @@ function FaultPanel({
+             <button
+               key={node.id}
+               onClick={() => onNodeClick(node.id)}
+-              className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-white/[0.04] transition-colors group"
++              className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-slate-50 transition-colors group"
+               style={{
+                 borderBottom:
+                   i < faultNodes.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+@@ -607,8 +607,8 @@ function FaultPanel({
+                 >
+                   {node.id}
+                 </div>
+-                <div className="text-[10px] text-slate-400 truncate mt-0.5">{node.name}</div>
+-                <div className="text-[9px] text-slate-600 mt-0.5">
++                <div className="text-[10px] text-slate-500 truncate mt-0.5">{node.name}</div>
++                <div className="text-[9px] text-slate-400 mt-0.5">
+                   {node.physicalLocation.floor} · {node.physicalLocation.elevation}
+                 </div>
+               </div>
+@@ -654,7 +654,7 @@ function BuildingPanel({
+ 
+   return (
+     <div style={{ ...PANEL, right: 0, minWidth: 260 }}>
+-      <div className="px-3 py-2 border-b border-white/[0.06]">
++      <div className="px-3 py-2 border-b border-black/[0.08]">
+         <span className="text-[9px] font-bold tracking-widest uppercase text-slate-600">
+           Building
+         </span>
+@@ -665,8 +665,8 @@ function BuildingPanel({
+           <button
+             key={opt.id}
+             onClick={() => onChange(opt.id)}
+-            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
+-            style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
++            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-slate-50"
++            style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}
+           >
+             <span
+               className="w-2 h-2 rounded-full shrink-0"
+@@ -678,11 +678,11 @@ function BuildingPanel({
+             <div className="flex-1 min-w-0">
+               <div
+                 className="text-[11px] font-semibold"
+-                style={{ color: isActive ? opt.color : '#64748b' }}
++                style={{ color: isActive ? opt.color : '#334155' }}
+               >
+                 {opt.label}
+               </div>
+-              <div className="text-[9px] text-slate-700 truncate">{opt.sub}</div>
++              <div className="text-[9px] text-slate-400 truncate">{opt.sub}</div>
+             </div>
+             {isActive && (
+               <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+@@ -717,7 +717,7 @@ function StatusPanel({
+ 
+   return (
+     <div style={{ ...PANEL, right: 0, minWidth: 190 }}>
+-      <div className="px-3 py-2 border-b border-white/[0.06]">
++      <div className="px-3 py-2 border-b border-black/[0.08]">
+         <span className="text-[9px] font-bold tracking-widest uppercase text-slate-600">Status</span>
+       </div>
+       {options.map((opt) => {
+@@ -726,8 +726,8 @@ function StatusPanel({
+           <button
+             key={opt.id}
+             onClick={() => onChange(opt.id)}
+-            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
+-            style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
++            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-slate-50"
++            style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}
+           >
+             <span
+               className="w-2 h-2 rounded-full shrink-0"
+@@ -735,7 +735,7 @@ function StatusPanel({
+             />
+             <span
+               className="text-[11px] font-semibold flex-1"
+-              style={{ color: isActive ? opt.color : '#64748b' }}
++              style={{ color: isActive ? opt.color : '#334155' }}
+             >
+               {opt.label}
+             </span>
+@@ -766,7 +766,7 @@ function KpiPanel({ stats }: { stats: KpiStats }) {
+ 
+   return (
+     <div style={{ ...PANEL, right: 0, minWidth: 260 }}>
+-      <div className="px-3 py-2 border-b border-white/[0.06]">
++      <div className="px-3 py-2 border-b border-black/[0.08]">
+         <span className="text-[9px] font-bold tracking-widest uppercase text-slate-600">
+           System overview
+         </span>
+@@ -777,7 +777,7 @@ function KpiPanel({ stats }: { stats: KpiStats }) {
+             key={s.label}
+             className="flex flex-col gap-0.5 px-3 py-2 rounded-lg"
+             style={{
+-              background: 'rgba(15,23,42,0.8)',
++              background: '#f8fafc',
+               border: `1px solid rgba(${hexRgb(s.color)},0.12)`,
+               borderLeft: `3px solid ${s.color}`,
+             }}
+@@ -788,7 +788,7 @@ function KpiPanel({ stats }: { stats: KpiStats }) {
+             >
+               {s.value}
+             </span>
+-            <span className="text-[9px] text-slate-600">{s.label}</span>
++            <span className="text-[9px] text-slate-500">{s.label}</span>
+           </div>
+         ))}
+       </div>
+@@ -807,14 +807,14 @@ function AlphaPanel({
+ }) {
+   return (
+     <div style={{ ...PANEL, left: 0, minWidth: 340 }}>
+-      <div className="px-4 py-2.5 flex items-center gap-2 border-b border-white/[0.06]">
++      <div className="px-4 py-2.5 flex items-center gap-2 border-b border-black/[0.06]">
+         <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+           <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="#fbbf24" stroke="#fbbf24" strokeWidth="0.5" />
+         </svg>
+         <span className="text-[9px] font-bold tracking-widest uppercase text-amber-400 flex-1">
+           Alpha — Fault Scenarios
+         </span>
+-        <span className="text-[9px] text-slate-600">BFS cascade activated on inject</span>
++        <span className="text-[9px] text-slate-500">BFS cascade activated on inject</span>
+       </div>
+ 
+       <div className="p-3 flex flex-col gap-2">
+@@ -873,7 +873,7 @@ function AlphaPanel({
+             border: hasInjections
+               ? '1px solid rgba(52,211,153,0.35)'
+               : '1px solid rgba(255,255,255,0.06)',
+-            color: hasInjections ? '#34d399' : '#334155',
++            color: hasInjections ? '#059669' : '#94a3b8',
+             cursor: hasInjections ? 'pointer' : 'not-allowed',
+           }}
+         >
+@@ -900,7 +900,7 @@ function CableTypePanel({
+   const types = Array.from(usedEdgeTypes);
+   return (
+     <div style={{ ...PANEL, right: 0, minWidth: 220 }}>
+-      <div className="px-3 py-2 border-b border-white/[0.06]">
++      <div className="px-3 py-2 border-b border-black/[0.08]">
+         <span className="text-[9px] font-bold tracking-widest uppercase text-slate-600">
+           Cable types
+         </span>
+@@ -912,8 +912,8 @@ function CableTypePanel({
+           <button
+             key={type}
+             onClick={() => onToggle(type)}
+-            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
+-            style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}
++            className="w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-slate-50"
++            style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}
+           >
+             <span
+               className="w-2.5 h-1 rounded-full shrink-0"
+@@ -921,15 +921,15 @@ function CableTypePanel({
+             />
+             <span
+               className="text-[11px] font-semibold flex-1"
+-              style={{ color: isVisible ? meta.color : '#334155' }}
++              style={{ color: isVisible ? meta.color : '#64748b' }}
+             >
+               {meta.label}
+             </span>
+             <span
+               className="text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider"
+               style={{
+-                background: isVisible ? `rgba(${hexRgb(meta.color)},0.12)` : 'rgba(255,255,255,0.03)',
+-                color: isVisible ? meta.color : '#334155',
++                background: isVisible ? `rgba(${hexRgb(meta.color)},0.1)` : 'rgba(0,0,0,0.03)',
++                color: isVisible ? meta.color : '#64748b',
+                 border: `1px solid ${isVisible ? `rgba(${hexRgb(meta.color)},0.25)` : 'rgba(255,255,255,0.04)'}`,
+               }}
+             >
+diff --git a/components/topology/BackgroundCellNode.tsx b/components/topology/BackgroundCellNode.tsx
+index 3db352e..edab352 100644
+--- a/components/topology/BackgroundCellNode.tsx
++++ b/components/topology/BackgroundCellNode.tsx
+@@ -71,8 +71,8 @@ export function BackgroundCellNode({ data }: NodeProps) {
+   const band = FLOOR_BANDS.find((b) => b.id === floorBandId)!;
+ 
+   const isBasement = floorBandId === 'basement';
+-  const bgOpacity = isBasement ? 0.07 : 0.04;
+-  const borderOpacity = isBasement ? 0.18 : 0.12;
++  const bgOpacity = isBasement ? 0.10 : 0.06;
++  const borderOpacity = isBasement ? 0.25 : 0.18;
+ 
+   return (
+     <div
+@@ -96,7 +96,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
+             left: '50%',
+             transform: 'translateX(-50%)',
+             whiteSpace: 'nowrap',
+-            background: 'rgba(10, 15, 26, 0.88)',
++            background: 'rgba(255,255,255,0.92)',
+             border: `1px solid ${building.borderColor}`,
+             borderRadius: 20,
+             padding: '3px 10px',
+@@ -130,7 +130,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
+               fontWeight: 700,
+               letterSpacing: '0.08em',
+               textTransform: 'uppercase',
+-              color: 'rgba(148,163,184,0.7)',
++              color: 'rgba(71,85,105,0.85)',
+             }}
+           >
+             {band.label}
+@@ -138,7 +138,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
+           <div
+             style={{
+               fontSize: 8,
+-              color: 'rgba(100,116,139,0.6)',
++              color: 'rgba(100,116,139,0.75)',
+               marginTop: 2,
+             }}
+           >
+@@ -155,7 +155,7 @@ export function BackgroundCellNode({ data }: NodeProps) {
+           bottom: 0,
+           right: 0,
+           width: 1,
+-          background: `linear-gradient(to bottom, transparent, rgba(${hexToRgb(building.color)}, 0.2), transparent)`,
++          background: `linear-gradient(to bottom, transparent, rgba(${hexToRgb(building.color)}, 0.3), transparent)`,
+           borderRadius: 1,
+         }}
+       />
+diff --git a/components/topology/DeviceNode.tsx b/components/topology/DeviceNode.tsx
+index e990835..ae24fd4 100644
+--- a/components/topology/DeviceNode.tsx
++++ b/components/topology/DeviceNode.tsx
+@@ -140,12 +140,12 @@ export function DeviceNode({ data, selected }: NodeProps) {
+           : 'none';
+ 
+   const baseShadow = selected
+-    ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 4px 20px rgba(0,0,0,0.6)`
++    ? `0 0 0 2px ${cfg.color}60, 0 0 22px ${cfg.glowColor}, 0 2px 10px rgba(0,0,0,0.12)`
+     : derivedStatus === 'derived-fault'
+-      ? `0 0 0 1.5px #f8717155, 0 0 18px rgba(248,113,113,0.30), 0 4px 16px rgba(0,0,0,0.5)`
++      ? `0 0 0 1.5px #f8717155, 0 0 18px rgba(248,113,113,0.30), 0 2px 8px rgba(0,0,0,0.1)`
+       : derivedStatus === 'derived-investigation'
+-        ? `0 0 0 1.5px #fbbf2430, 0 0 10px rgba(251,191,36,0.15), 0 4px 16px rgba(0,0,0,0.5)`
+-        : `0 0 8px ${cfg.glowColor}30, 0 4px 16px rgba(0,0,0,0.5)`;
++        ? `0 0 0 1.5px #fbbf2430, 0 0 10px rgba(251,191,36,0.15), 0 2px 8px rgba(0,0,0,0.1)`
++        : `0 0 8px ${cfg.glowColor}30, 0 2px 8px rgba(0,0,0,0.1)`;
+ 
+   const borderColor = selected
+     ? cfg.color
+@@ -185,11 +185,10 @@ export function DeviceNode({ data, selected }: NodeProps) {
+       <div
+         className="flex-1 rounded-r-[10px] overflow-hidden"
+         style={{
+-          background: 'rgba(10, 15, 26, 0.96)',
++          background: '#ffffff',
+           border: `1.5px solid ${borderColor}`,
+           borderLeft: 'none',
+           boxShadow: baseShadow,
+-          backdropFilter: 'blur(8px)',
+         }}
+       >
+         <div
+@@ -228,7 +227,7 @@ export function DeviceNode({ data, selected }: NodeProps) {
+           </div>
+ 
+           {!compact && (
+-            <div className="text-[10px] font-medium text-slate-200 leading-snug mb-1.5 line-clamp-2">
++            <div className="text-[10px] font-medium text-slate-700 leading-snug mb-1.5 line-clamp-2">
+               {nodeData.name}
+             </div>
+           )}
+@@ -282,9 +281,9 @@ export function DeviceNode({ data, selected }: NodeProps) {
+             <div
+               className="inline-flex items-center gap-1 mt-1.5 px-1.5 py-0.5 rounded text-[8px] font-bold tracking-wider"
+               style={{
+-                background: 'rgba(148,163,184,0.07)',
+-                border: '1px solid rgba(148,163,184,0.15)',
+-                color: '#64748b',
++                background: 'rgba(100,116,139,0.08)',
++                border: '1px solid rgba(100,116,139,0.2)',
++                color: '#475569',
+               }}
+             >
+               <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+diff --git a/components/topology/ZoneLegend.tsx b/components/topology/ZoneLegend.tsx
+index 8588038..d22d912 100644
+--- a/components/topology/ZoneLegend.tsx
++++ b/components/topology/ZoneLegend.tsx
+@@ -14,8 +14,8 @@ export function ZoneLegend({ buildingFilter }: ZoneLegendProps) {
+     <div
+       className="absolute left-3 bottom-3 z-10 pointer-events-none max-w-[240px]"
+       style={{
+-        background: 'rgba(10, 15, 26, 0.92)',
+-        border: '1px solid rgba(255,255,255,0.08)',
++        background: '#ffffff',
++        border: '1px solid #e2e8f0',
+         borderRadius: 10,
+         backdropFilter: 'blur(8px)',
+         boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+diff --git a/lib/cableColors.ts b/lib/cableColors.ts
+index c9c802e..4c4b012 100644
+--- a/lib/cableColors.ts
++++ b/lib/cableColors.ts
+@@ -34,31 +34,31 @@ export const CABLE_COLOR_MAP: Record<EdgeType, CableColorConfig> = {
+     shortLabel: 'HV',
+   },
+   power: {
+-    color: '#34d399',                      // green — 400 V LV power
++    color: '#059669',                      // green — 400 V LV power
+     glowColor: 'rgba(52, 211, 153, 0.35)',
+     label: 'LV Power',
+     shortLabel: 'Power',
+   },
+   plc: {
+-    color: '#60a5fa',                      // blue — PLC / control
++    color: '#2563eb',                      // blue — PLC / control
+     glowColor: 'rgba(96, 165, 250, 0.40)',
+     label: 'Control (PLC)',
+     shortLabel: 'PLC',
+   },
+   signal: {
+-    color: '#a78bfa',                      // violet — instrument signal
++    color: '#7c3aed',                      // violet — instrument signal
+     glowColor: 'rgba(167, 139, 250, 0.40)',
+     label: 'Instrument',
+     shortLabel: 'Signal',
+   },
+   fieldbus: {
+-    color: '#f0abfc',                      // pink — PROFIBUS / PROFINET
++    color: '#c026d3',                      // pink — PROFIBUS / PROFINET
+     glowColor: 'rgba(240, 171, 252, 0.40)',
+     label: 'Fieldbus',
+     shortLabel: 'Fieldbus',
+   },
+   ethernet: {
+-    color: '#2dd4bf',                      // teal — network / supervisory
++    color: '#0d9488',                      // teal — network / supervisory
+     glowColor: 'rgba(45, 212, 191, 0.40)',
+     label: 'Network',
+     shortLabel: 'Network',
+diff --git a/lib/statusConfig.ts b/lib/statusConfig.ts
+index 24ac117..45590e0 100644
+--- a/lib/statusConfig.ts
++++ b/lib/statusConfig.ts
+@@ -11,26 +11,26 @@ export interface StatusConfig {
+ 
+ export const STATUS_CONFIG: Record<Status, StatusConfig> = {
+   operational: {
+-    color: '#34d399',
+-    bgColor: 'rgba(52, 211, 153, 0.08)',
+-    borderColor: 'rgba(52, 211, 153, 0.45)',
+-    glowColor: 'rgba(52, 211, 153, 0.35)',
++    color: '#059669',
++    bgColor: 'rgba(5, 150, 105, 0.08)',
++    borderColor: 'rgba(5, 150, 105, 0.4)',
++    glowColor: 'rgba(5, 150, 105, 0.25)',
+     label: 'Operational',
+     edgeStyle: 'solid',
+   },
+   investigation: {
+-    color: '#fbbf24',
+-    bgColor: 'rgba(251, 191, 36, 0.08)',
+-    borderColor: 'rgba(251, 191, 36, 0.45)',
+-    glowColor: 'rgba(251, 191, 36, 0.28)',
++    color: '#d97706',
++    bgColor: 'rgba(217, 119, 6, 0.08)',
++    borderColor: 'rgba(217, 119, 6, 0.4)',
++    glowColor: 'rgba(217, 119, 6, 0.2)',
+     label: 'Under Investigation',
+     edgeStyle: 'dashed',
+   },
+   fault: {
+-    color: '#f87171',
+-    bgColor: 'rgba(248, 113, 113, 0.08)',
+-    borderColor: 'rgba(248, 113, 113, 0.55)',
+-    glowColor: 'rgba(248, 113, 113, 0.4)',
++    color: '#dc2626',
++    bgColor: 'rgba(220, 38, 38, 0.07)',
++    borderColor: 'rgba(220, 38, 38, 0.45)',
++    glowColor: 'rgba(220, 38, 38, 0.25)',
+     label: 'Fault',
+     edgeStyle: 'dashed',
+   },
+diff --git a/lib/zoneConfig.ts b/lib/zoneConfig.ts
+index a834fe6..773eefa 100644
+--- a/lib/zoneConfig.ts
++++ b/lib/zoneConfig.ts
+@@ -14,80 +14,80 @@ export const ZONE_CONFIG: Record<LocationZone, ZoneConfig> = {
+     label: 'Substation — HV (26 kV)',
+     shortLabel: 'SUB HV',
+     color: '#e879f9',
+-    bgColor: 'rgba(232, 121, 249, 0.06)',
+-    borderColor: 'rgba(232, 121, 249, 0.25)',
++    bgColor: 'rgba(232, 121, 249, 0.09)',
++    borderColor: 'rgba(232, 121, 249, 0.35)',
+     building: 'substation',
+   },
+   'utility-basement-hv': {
+     label: 'Utility — Basement HV (−3 m)',
+     shortLabel: 'UTL B1',
+     color: '#f472b6',
+-    bgColor: 'rgba(244, 114, 182, 0.06)',
+-    borderColor: 'rgba(244, 114, 182, 0.25)',
++    bgColor: 'rgba(244, 114, 182, 0.09)',
++    borderColor: 'rgba(244, 114, 182, 0.35)',
+     building: 'utility',
+   },
+   'utility-ground': {
+     label: 'Utility — Ground Level',
+     shortLabel: 'UTL G',
+     color: '#34d399',
+-    bgColor: 'rgba(52, 211, 153, 0.06)',
+-    borderColor: 'rgba(52, 211, 153, 0.25)',
++    bgColor: 'rgba(52, 211, 153, 0.09)',
++    borderColor: 'rgba(52, 211, 153, 0.35)',
+     building: 'utility',
+   },
+   'furnace-10-ground': {
+     label: 'Furnace 10 — Ground Floor',
+     shortLabel: 'F10 G',
+     color: '#818cf8',
+-    bgColor: 'rgba(129, 140, 248, 0.06)',
+-    borderColor: 'rgba(129, 140, 248, 0.25)',
++    bgColor: 'rgba(129, 140, 248, 0.09)',
++    borderColor: 'rgba(129, 140, 248, 0.35)',
+     building: 'furnace-10',
+   },
+   'furnace-10-elevated': {
+     label: 'Furnace 10 — Elevated (+5 m)',
+     shortLabel: 'F10 +5',
+     color: '#38bdf8',
+-    bgColor: 'rgba(56, 189, 248, 0.06)',
+-    borderColor: 'rgba(56, 189, 248, 0.25)',
++    bgColor: 'rgba(56, 189, 248, 0.09)',
++    borderColor: 'rgba(56, 189, 248, 0.35)',
+     building: 'furnace-10',
+   },
+   'furnace-20-ground': {
+     label: 'Furnace 20 — Ground Floor',
+     shortLabel: 'F20 G',
+     color: '#f59e0b',
+-    bgColor: 'rgba(245, 158, 11, 0.06)',
+-    borderColor: 'rgba(245, 158, 11, 0.25)',
++    bgColor: 'rgba(245, 158, 11, 0.09)',
++    borderColor: 'rgba(245, 158, 11, 0.35)',
+     building: 'furnace-20',
+   },
+   'furnace-20-elevated': {
+     label: 'Furnace 20 — Elevated (+5 m)',
+     shortLabel: 'F20 +5',
+     color: '#fbbf24',
+-    bgColor: 'rgba(251, 191, 36, 0.06)',
+-    borderColor: 'rgba(251, 191, 36, 0.25)',
++    bgColor: 'rgba(251, 191, 36, 0.09)',
++    borderColor: 'rgba(251, 191, 36, 0.35)',
+     building: 'furnace-20',
+   },
+   'batch-house-ground': {
+     label: 'Batch House — Ground Floor',
+     shortLabel: 'BH G',
+     color: '#c084fc',
+-    bgColor: 'rgba(192, 132, 252, 0.06)',
+-    borderColor: 'rgba(192, 132, 252, 0.25)',
++    bgColor: 'rgba(192, 132, 252, 0.09)',
++    borderColor: 'rgba(192, 132, 252, 0.35)',
+     building: 'batch-house',
+   },
+   'cullet-tower-ground': {
+     label: 'Cullet Tower — Ground Floor',
+     shortLabel: 'CT G',
+     color: '#94a3b8',
+-    bgColor: 'rgba(148, 163, 184, 0.04)',
+-    borderColor: 'rgba(148, 163, 184, 0.15)',
++    bgColor: 'rgba(148, 163, 184, 0.07)',
++    borderColor: 'rgba(148, 163, 184, 0.25)',
+     building: 'cullet-tower',
+   },
+   'warehouse-ground': {
+     label: 'Warehouse — Ground Floor',
+     shortLabel: 'WH G',
+     color: '#64748b',
+-    bgColor: 'rgba(100, 116, 139, 0.03)',
+-    borderColor: 'rgba(100, 116, 139, 0.1)',
++    bgColor: 'rgba(100, 116, 139, 0.06)',
++    borderColor: 'rgba(100, 116, 139, 0.2)',
+     building: 'warehouse',
+   },
+ };
