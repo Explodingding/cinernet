@@ -1,0 +1,3243 @@
+{
+  "summary": {
+    "total_inserts": 340,
+    "total_texts": 9,
+    "block_names": [
+      "3150kVA-IP31 - 3150kVA-IP31-2970754-0_00 Level YK",
+      "A$C04c2d687",
+      "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "Battery Rack - Battery Rack-2998567-5_50 Level Panels",
+      "CNRBE-CD-UB-ZZZ-MOD-9410_30_rvt-1-01_Level 4_20m GK",
+      "DATA RACK CABINET - 42U _600x600mm_-3771002-5_50 Level Panels",
+      "DATA RACK CABINET - 42U _600x600mm_-3771004-5_50 Level Panels",
+      "DATA RACK CABINET - 42U _800x1000mm_-3000102-5_50 Level Panels",
+      "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level",
+      "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level Copy 2",
+      "DATA RACK CABINET - 42U _800x800mm_-2085598-5_50 Level Panels",
+      "DATA RACK CABINET - 42U _800x800mm_-3752095-0_00 Level Copy 2",
+      "DATA RACK CABINET - 42U _800x800mm_-3752570-0_00 Level Copy 2",
+      "DATA RACK CABINET - 42U _800x800mm_-V405-5_50 Level Panels",
+      "DATA RACK CABINET - 42U _800x800mm_-V406-5_50 Level Panels",
+      "Electrical Base - Electrical Base-1351272-01_Level 4_20m GK",
+      "Electrical Base - Electrical Base-1351412-01_Level 4_20m GK",
+      "Electrical Base - Electrical Base-1351580-01_Level 4_20m GK",
+      "Electrical Base - Electrical Base-1351645-01_Level 4_20m GK",
+      "Electrical Base - Electrical Base-2764490-0_00 Level",
+      "Electrical Base - Electrical Base-2766061-0_00 Level",
+      "Electrical Base - Electrical Base-2791171-0_00 Level",
+      "Electrical Base - Electrical Base-3314735-0_00 Level",
+      "Electrical Base - Electrical Base-3314817-0_00 Level",
+      "Electrical Base - Electrical Base-3491985-0_00 Level",
+      "Electrical Base - Electrical Base-3492387-0_00 Level",
+      "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2976259-0_00 Level YK",
+      "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2977741-0_00 Level YK",
+      "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2983999-0_00 Level YK",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_630A_Wall-mounted - 21 mod_ - 1080-2978143-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_630A_Wall-mounted - 24 mod_ - 1230-1514847-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-1647551-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-1808017-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2976589-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-5_50 Level Panels",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977532-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-5_50 Level Panels",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2984810-5_50 Level Panels",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2992925-5_50 Level Panels",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-3301188-0_00 Level",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952137-01_Level 4_20m GK",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952157-01_Level 4_20m GK",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952179-01_Level 4_20m GK",
+      "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 600 - Front connections-1041318-01_Level 4_20m GK",
+      "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 1000x800x2200-2993606-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 400x500x2200-2925419-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 400x600x2200-2925424-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 400x800x2200-2934271-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 600x400x2200-2925422-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 600x403x2100-2925427-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 600x800x2200-2994658-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 700x650x2200-2925412-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 800x407x2208-2925433-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 800x407x2208-V11-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925434-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-1892747-01_Level 4_20m GK",
+      "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-2994867-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x500x2200-3295777-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x600x2200-1514722-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1200x500x2200-3324326-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 600x500x2200-3295743-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 600x600x2200-1514720-0_00 Level",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296111-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296284-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x500x2200-1633904-9_00 Level",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-1514718-0_00 Level",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-1514718-5_50 Level Panels",
+      "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-2802514-5_50 Level Panels",
+      "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058771-5_50 Level Panels",
+      "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059079-5_50 Level Panels",
+      "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059264-5_50 Level Panels",
+      "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059335-5_50 Level Panels",
+      "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "P251112 - P251112-2698162-0_00 Level",
+      "P251148 - P251148-2695598-0_00 Level",
+      "VERTIV-60K - VERTIV-60K-3175362-5_50 Level Panels",
+      "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-2076513-0_00 Level",
+      "apm500kw_1sb - Standard-2093230-5_50 Level Panels",
+      "apm500kw_1sb - Standard-V10-5_50 Level Panels",
+      "apm500kw_1sb - Standard-V2-5_50 Level Panels",
+      "apm500kw_1sb - Standard-V4-5_50 Level Panels",
+      "apm500kw_1sb - Standard-V6-5_50 Level Panels",
+      "apm500kw_1sb - Standard-V8-5_50 Level Panels"
+    ],
+    "layers": [
+      "E-ELEC-EQPM",
+      "E-DATA",
+      "E-PANO",
+      "E-ELEC-FIXT"
+    ]
+  },
+  "inserts": [
+    {
+      "block": "3150kVA-IP31 - 3150kVA-IP31-2970754-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3519629.61,
+      "y": -72995.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "3150kVA-IP31 - 3150kVA-IP31-2970754-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3514069.61,
+      "y": -72995.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2976259-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3507476.61,
+      "y": -70100.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2977741-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3507476.61,
+      "y": -71300.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2977741-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3507476.61,
+      "y": -72500.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_MV Switchgear_Siemens - WxDxH 1200x2700x2400-2983999-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3507476.61,
+      "y": -73700.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3466056.88,
+      "y": -148739.7,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3466056.88,
+      "y": -149339.7,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3466056.88,
+      "y": -149939.7,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3362718.16,
+      "y": -142849.79,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3362718.16,
+      "y": -143449.79,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level YK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3362718.16,
+      "y": -144049.79,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "A$C04c2d687",
+      "layer": "E-ELEC-EQPM",
+      "x": 3272007.01,
+      "y": 184914.71,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x500x2200-1633904-9_00 Level",
+      "layer": "E-ELEC-FIXT",
+      "x": 3150152.02,
+      "y": -816963.28,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x500x2200-1633904-9_00 Level",
+      "layer": "E-ELEC-FIXT",
+      "x": 3150152.02,
+      "y": -816163.28,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "CNRBE-CD-UB-ZZZ-MOD-9410_30_rvt-1-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3140701.17,
+      "y": -563834.97,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952179-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3157590.86,
+      "y": -485897.33,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952137-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3161428.68,
+      "y": -487384.64,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 600 - Front connections-1041318-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3267065.78,
+      "y": -467278.14,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952157-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3159180.68,
+      "y": -487384.64,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351272-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3157810.86,
+      "y": -485897.33,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351412-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3158580.68,
+      "y": -487165.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351272-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3159180.68,
+      "y": -487165.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351580-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3160628.68,
+      "y": -487165.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351645-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3161428.68,
+      "y": -487165.0,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-1892747-01_Level 4_20m GK",
+      "layer": "E-PANO",
+      "x": 3159898.36,
+      "y": -150281.14,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-1892747-01_Level 4_20m GK",
+      "layer": "E-PANO",
+      "x": 3159098.36,
+      "y": -150281.14,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-1892747-01_Level 4_20m GK",
+      "layer": "E-PANO",
+      "x": 3158298.36,
+      "y": -150281.14,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-1514718-0_00 Level",
+      "layer": "E-ELEC-FIXT",
+      "x": 3148753.0,
+      "y": -219140.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 600x600x2200-1514720-0_00 Level",
+      "layer": "E-ELEC-FIXT",
+      "x": 3148753.0,
+      "y": -219940.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-1514718-0_00 Level",
+      "layer": "E-ELEC-FIXT",
+      "x": 3149328.07,
+      "y": -229599.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 600x600x2200-1514720-0_00 Level",
+      "layer": "E-ELEC-FIXT",
+      "x": 3149328.07,
+      "y": -230399.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-1647551-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3170021.07,
+      "y": -190938.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "P251148 - P251148-2695598-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3156627.05,
+      "y": -222638.62,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "P251148 - P251148-2695598-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3162207.02,
+      "y": -222638.62,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "P251112 - P251112-2698162-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3180107.04,
+      "y": -226178.87,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "P251112 - P251112-2698162-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3186502.04,
+      "y": -227703.9,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283902.06,
+      "y": -198223.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283902.06,
+      "y": -196623.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283902.06,
+      "y": -197623.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x400x2200-2925422-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283902.06,
+      "y": -199573.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3186097.07,
+      "y": -186302.95,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3186097.07,
+      "y": -185702.95,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3186097.07,
+      "y": -184702.95,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-2766061-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3185847.07,
+      "y": -186302.95,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3176207.07,
+      "y": -225113.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3176207.07,
+      "y": -225713.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3176207.07,
+      "y": -226713.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 400x600x2200-2925424-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232247.02,
+      "y": -172387.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-2791171-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232547.02,
+      "y": -172387.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232247.02,
+      "y": -172787.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232247.02,
+      "y": -173387.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -184940.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -183940.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -182940.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -181940.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -180940.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -179940.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3190507.06,
+      "y": -178089.13,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189507.06,
+      "y": -178089.13,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3187547.06,
+      "y": -180843.92,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3187547.06,
+      "y": -181443.92,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-2764490-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3187797.06,
+      "y": -180843.92,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189297.06,
+      "y": -183443.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189297.06,
+      "y": -182843.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-2766061-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189047.06,
+      "y": -183443.92,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189297.06,
+      "y": -181843.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -228713.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -227713.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -224616.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -223616.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -222616.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -221616.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -220616.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x1000x2200-2945788-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3191107.06,
+      "y": -219616.88,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189578.79,
+      "y": -221368.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3188978.79,
+      "y": -221368.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-2764490-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189578.79,
+      "y": -221618.85,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3187978.79,
+      "y": -223118.85,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3188578.79,
+      "y": -223118.85,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-2764490-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3187978.79,
+      "y": -222868.85,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 400x500x2200-2925419-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283902.06,
+      "y": -198623.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242348.07,
+      "y": -227034.9,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-1808017-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3282088.07,
+      "y": -214479.94,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-3301188-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3185597.08,
+      "y": -220464.93,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_630A_Wall-mounted - 24 mod_ - 1230-1514847-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3254692.07,
+      "y": -178888.93,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3254692.07,
+      "y": -178888.93,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3254692.07,
+      "y": -178288.93,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_630A_Wall-mounted - 24 mod_ - 1230-1514847-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3255497.09,
+      "y": -231008.99,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3255497.09,
+      "y": -231008.99,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3255497.09,
+      "y": -230408.99,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977532-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241064.22,
+      "y": -183648.86,
+      "z": 0.0,
+      "rotation": 180.04,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3341938.02,
+      "y": -234578.78,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2976589-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3185920.95,
+      "y": -177488.53,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3281726.58,
+      "y": -226573.87,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-1808017-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3319607.07,
+      "y": -145909.59,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level",
+      "layer": "E-DATA",
+      "x": 3193232.08,
+      "y": -228578.92,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level",
+      "layer": "E-DATA",
+      "x": 3320246.65,
+      "y": -196473.69,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level",
+      "layer": "E-DATA",
+      "x": 3355517.05,
+      "y": -196473.78,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3345176.07,
+      "y": -171118.91,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_630A_Wall-mounted - 21 mod_ - 1080-2978143-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3151007.07,
+      "y": -198784.29,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-2076513-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3151007.07,
+      "y": -198784.29,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3188817.07,
+      "y": -218264.93,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3188268.95,
+      "y": -177488.53,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3306088.07,
+      "y": -210673.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977532-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283122.07,
+      "y": -181597.95,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283122.07,
+      "y": -182445.95,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283266.58,
+      "y": -226573.87,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3226857.02,
+      "y": -173002.91,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_630A_Wall-mounted - 24 mod_ - 1230-1514847-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3308201.94,
+      "y": -194873.89,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3308201.94,
+      "y": -194873.89,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "_ Electrical_Switchgear_Schneider-Electric_PrismaSeT-G_Wall-mounted_Enclosure - _ PrismaSeT-G_Wall_Enclosure-1514855-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3308801.94,
+      "y": -194873.89,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level",
+      "layer": "E-DATA",
+      "x": 3143403.07,
+      "y": -171668.82,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3352076.07,
+      "y": -170578.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3314735-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3305488.07,
+      "y": -210453.91,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3314817-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3280688.07,
+      "y": -214259.94,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3314735-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3281488.07,
+      "y": -214259.94,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3314735-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3281726.58,
+      "y": -226793.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3314735-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3282326.58,
+      "y": -226793.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3314735-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3283266.58,
+      "y": -226793.87,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3491985-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3188268.95,
+      "y": -177708.53,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-3492387-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3185920.95,
+      "y": -177708.53,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3162729.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3161929.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3161129.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3160329.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3159529.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3158729.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3157929.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3157129.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3156329.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3155529.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3154729.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3153929.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3153129.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3150029.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3149229.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3148429.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3147629.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3146829.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-0_00 Level",
+      "layer": "E-ELEC-EQPM",
+      "x": 3146029.54,
+      "y": -172668.91,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level Copy 2",
+      "layer": "E-DATA",
+      "x": 3278820.86,
+      "y": -194183.9,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-3752095-0_00 Level Copy 2",
+      "layer": "E-DATA",
+      "x": 3281220.86,
+      "y": -194183.9,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level Copy 2",
+      "layer": "E-DATA",
+      "x": 3278020.86,
+      "y": -194183.9,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-3752570-0_00 Level Copy 2",
+      "layer": "E-DATA",
+      "x": 3280420.86,
+      "y": -194183.9,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-0_00 Level",
+      "layer": "E-DATA",
+      "x": 3320473.65,
+      "y": -143433.69,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3245702.1,
+      "y": -524579.29,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3245702.1,
+      "y": -525179.29,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2992925-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3284476.06,
+      "y": -500224.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3225457.04,
+      "y": -514940.59,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2977472-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3225457.04,
+      "y": -548856.07,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2984810-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3247325.71,
+      "y": -516429.29,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3248423.71,
+      "y": -516429.29,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2978670-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3226931.06,
+      "y": -552464.53,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-V405-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3315676.83,
+      "y": -562844.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-V406-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3317736.83,
+      "y": -506324.28,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-2992925-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3282767.23,
+      "y": -546815.3,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _600x600mm_-3771002-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3251412.03,
+      "y": -533978.87,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _600x600mm_-3771004-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3251412.03,
+      "y": -534578.87,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3231227.21,
+      "y": -533474.62,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3231227.21,
+      "y": -534274.62,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x800mm_-2085598-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3231227.21,
+      "y": -543708.99,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241077.27,
+      "y": -539582.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-2802514-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3224857.17,
+      "y": -513816.59,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-2802514-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3192897.03,
+      "y": -505255.4,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-1514718-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3224857.03,
+      "y": -552859.59,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x600x2200-2802514-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3200107.17,
+      "y": -556950.58,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-2093230-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242104.52,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-V2-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241504.52,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-V4-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242704.52,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-V6-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3248804.52,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-V8-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3249404.52,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-V10-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250004.52,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241077.27,
+      "y": -541057.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241077.27,
+      "y": -542532.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242632.27,
+      "y": -539582.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242632.27,
+      "y": -541057.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242632.27,
+      "y": -542532.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3248587.27,
+      "y": -538849.26,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3248587.27,
+      "y": -540324.26,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3248587.27,
+      "y": -541799.26,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241077.27,
+      "y": -544007.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250142.27,
+      "y": -538849.26,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250142.27,
+      "y": -540324.26,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250142.27,
+      "y": -541799.26,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242632.27,
+      "y": -544007.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3244187.27,
+      "y": -539582.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3244187.27,
+      "y": -541057.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3244187.27,
+      "y": -542532.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3244187.27,
+      "y": -544007.92,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 700x650x2200-2925412-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3189767.06,
+      "y": -533544.3,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x403x2100-2925427-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228140.41,
+      "y": -551474.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -549474.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -550474.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -547074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -548074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -545774.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -545174.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -544274.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -543674.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x403x2100-2925427-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228140.41,
+      "y": -541274.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -539274.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -540274.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -536874.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -537874.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -535574.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -534974.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -534074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -533474.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x403x2100-2925427-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228140.41,
+      "y": -531074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -529074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -530074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -526674.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -527674.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -525374.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -524774.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -523874.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -523274.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x403x2100-2925427-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228140.41,
+      "y": -520874.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -518874.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -519874.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -516474.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x405x2208-2925429-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228142.41,
+      "y": -517474.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -515174.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -513674.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x408x2208-2925431-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3228145.41,
+      "y": -513074.1,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x407x2208-2925433-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3230737.21,
+      "y": -546674.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x407x2208-V11-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3230737.21,
+      "y": -536474.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x407x2208-2925433-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3230737.21,
+      "y": -526274.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x407x2208-2925433-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3230737.21,
+      "y": -517274.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925434-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3230737.21,
+      "y": -535674.3,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -548834.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -549434.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -537834.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -538434.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -526834.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -527434.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -515924.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 500x210x531-2925436-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3232937.06,
+      "y": -516524.1,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -531334.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -530534.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -529734.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -528934.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -528134.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -527334.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -526534.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -525734.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -524934.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -524134.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -523334.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -522734.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -521734.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -520734.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242073.72,
+      "y": -519734.17,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -524534.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -525134.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -525734.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -526334.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -527134.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x600x2200-2925420-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -527934.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -528734.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -529334.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -530334.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -519434.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -522034.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -521034.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x500x2200-2925418-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3250062.04,
+      "y": -520034.17,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x500x2200-2925413-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3520446.8,
+      "y": -404659.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3519846.8,
+      "y": -404659.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3517446.8,
+      "y": -404659.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3518246.8,
+      "y": -404659.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x500x2200-2925416-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3519046.8,
+      "y": -404659.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x1000mm_-3000102-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3509916.8,
+      "y": -404409.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "DATA RACK CABINET - 42U _800x1000mm_-3000102-5_50 Level Panels",
+      "layer": "E-DATA",
+      "x": 3511716.8,
+      "y": -404409.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "apm500kw_1sb - Standard-2093230-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3243306.27,
+      "y": -536043.85,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058771-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -513974.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -512474.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -515474.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -517874.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059079-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -520274.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059264-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3231144.21,
+      "y": -518074.1,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059264-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3231144.21,
+      "y": -527074.1,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059264-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3231144.21,
+      "y": -537274.1,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059335-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3231337.21,
+      "y": -536474.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059264-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3231144.21,
+      "y": -547474.1,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -524174.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -522674.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -525674.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -528074.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059079-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -530474.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -534374.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -532874.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -535874.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -538274.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059079-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -540674.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -544574.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-V12-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -543074.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -546074.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3058954-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -548474.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Elektrik Baza 80x80 - Elektrik Baza 80x80-3059079-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3227737.41,
+      "y": -550874.1,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 400x800x2200-2934271-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3516046.8,
+      "y": -404759.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3513446.8,
+      "y": -404559.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3511926.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3510326.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x600x2200-2935806-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3510926.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x800x2200-2993606-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3519326.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x800x2200-2993606-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3514526.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x800x2200-2993606-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3513526.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-2994867-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3515526.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-2994867-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3516326.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x800x2200-2994658-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3517126.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-2994867-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3517726.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 800x800x2200-2994867-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3518526.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3249382.27,
+      "y": -546249.26,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3249382.27,
+      "y": -544774.26,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3249382.27,
+      "y": -543299.26,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3241416.39,
+      "y": -546372.98,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3242891.39,
+      "y": -546372.98,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3244366.39,
+      "y": -546372.98,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2094392-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3245841.39,
+      "y": -546372.98,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 1000x800x2200-2993606-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3520326.88,
+      "y": -400397.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Battery Rack - Battery Rack-2998567-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3507906.88,
+      "y": -399883.11,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "VERTIV-60K - VERTIV-60K-3175362-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3507546.88,
+      "y": -399381.61,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens - WxDxH 600x600x2200-2925425-5_50 Level Panels",
+      "layer": "E-ELEC-EQPM",
+      "x": 3514646.8,
+      "y": -404559.41,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x600x2200-1514722-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3250486.79,
+      "y": -517329.21,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x600x2200-1514722-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3249486.79,
+      "y": -517329.21,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296111-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3278196.85,
+      "y": -515539.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296284-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3278196.85,
+      "y": -520914.32,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x500x2200-3295777-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3281162.05,
+      "y": -515539.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 600x500x2200-3295743-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3282362.05,
+      "y": -515539.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x500x2200-3295777-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3280162.05,
+      "y": -515539.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 600x500x2200-3295743-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3281762.05,
+      "y": -515539.3,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1000x500x2200-3295777-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3283702.06,
+      "y": -518539.62,
+      "z": 0.0,
+      "rotation": 90.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 1200x500x2200-3324326-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3268062.06,
+      "y": -500429.3,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296111-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3278196.85,
+      "y": -542754.28,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296111-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3278196.85,
+      "y": -542753.95,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Siemens_S8_single_front_hss_top_pfc - WxDxH 800x400x2000-3296284-5_50 Level Panels",
+      "layer": "E-ELEC-FIXT",
+      "x": 3278196.85,
+      "y": -548128.97,
+      "z": 0.0,
+      "rotation": 180.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical_Switchgear_Schneider-Electric_PrismaSeT-P_4000A - Depth _ 400 - Front connections-952137-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3175195.47,
+      "y": -480808.94,
+      "z": 0.0,
+      "rotation": 0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351580-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3174395.47,
+      "y": -480589.3,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    },
+    {
+      "block": "Electrical Base - Electrical Base-1351645-01_Level 4_20m GK",
+      "layer": "E-ELEC-EQPM",
+      "x": 3175195.47,
+      "y": -480589.3,
+      "z": 0.0,
+      "rotation": 270.0,
+      "attributes": {}
+    }
+  ],
+  "texts": [
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "UT-PLC-1",
+      "x": 3158313.5,
+      "y": -150605.35
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "UT-PLC-2",
+      "x": 3184861.5,
+      "y": -480125.35
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "GENSET SYNC. SYSTEM PANEL ",
+      "x": 3157819.61,
+      "y": -484449.83
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "FUR-10",
+      "x": 3158052.61,
+      "y": -484449.83
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "4 Cubic",
+      "x": 3158317.61,
+      "y": -484442.83
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "GENSET SYNC. SYSTEM PANEL ",
+      "x": 3157436.0,
+      "y": -474608.0
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "FUR-20",
+      "x": 3157669.0,
+      "y": -474608.0
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "2 Cubic",
+      "x": 3157946.0,
+      "y": -474659.0
+    },
+    {
+      "type": "TEXT",
+      "layer": "E-PANO",
+      "text": "2 Cubic",
+      "x": 3183783.0,
+      "y": -480089.0
+    }
+  ]
+}

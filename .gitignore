@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Source CAD drawings — extract panel positions with scripts/extract_panels.py
+*.dxf
