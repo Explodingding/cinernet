@@ -21,36 +21,36 @@ export const utilityInstallation: SiteInstallation = {
   label: 'Utility Building',
   nodes: [
 
-    // ── 26 kV MAIN PANEL lineup (cells 1–11) + feeder transformers TR-01…04 ───
-    ...mainHvPanelCells,
-    ...mainFeedTransformers,
+//     // ── 26 kV MAIN PANEL lineup (cells 1–11) + feeder transformers TR-01…04 ───
+    // ...mainHvPanelCells,
+    // ...mainFeedTransformers,
 
-    // ── TR Spare + TR Compressor LV ─────────────────────────────────────────────
-    {
-      id: 'TR-SPARE',
-    position: { x: 0, y: 0 },
-      name: 'TR Spare — 3 150 kVA',
-      assetType: 'transformer',
-      layer: 'transformer',
-      status: 'investigation',
-      displayTier: 2,
-      subsystem: 'lv-400v',
-      physicalLocation: {
-        building: 'utility',
-        zone: 'utility-ground',
-        floor: 'Ground',
-        elevation: '0 m',
-        area: 'Transformer bay UG09 (TR-S)',
-        gridRef: '66-15-020c-1',
-      },
-      specs: {
-        voltage: '26 kV / 400 V',
-        power: '3 150 kVA',
-        notes: 'Spare transformer — standby for main feeder transformer replacement. Fed from MAIN PANEL Cell 11 tie position.',
-      },
-      troubleshootingSteps: [
-        { id: 'tr-spare-1', text: 'Confirm spare transformer is on isolator before energisation.' },
-        { id: 'tr-spare-2', text: 'Check MV cubicle 66-15-020c-1 — open position confirmed.' },
+//     // ── TR Spare + TR Compressor LV ─────────────────────────────────────────────
+    // {
+      // id: 'TR-SPARE',
+    // position: { x: 0, y: 0 },
+      // name: 'TR Spare — 3 150 kVA',
+      // assetType: 'transformer',
+      // layer: 'transformer',
+      // status: 'investigation',
+      // displayTier: 2,
+      // subsystem: 'lv-400v',
+      // physicalLocation: {
+        // building: 'utility',
+        // zone: 'utility-ground',
+        // floor: 'Ground',
+        // elevation: '0 m',
+        // area: 'Transformer bay UG09 (TR-S)',
+        // gridRef: '66-15-020c-1',
+      // },
+      // specs: {
+        // voltage: '26 kV / 400 V',
+        // power: '3 150 kVA',
+        // notes: 'Spare transformer — standby for main feeder transformer replacement. Fed from MAIN PANEL Cell 11 tie position.',
+      // },
+      // troubleshootingSteps: [
+        // { id: 'tr-spare-1', text: 'Confirm spare transformer is on isolator before energisation.' },
+        // { id: 'tr-spare-2', text: 'Check MV cubicle 66-15-020c-1 — open position confirmed.' },
       ],
       docs: [
         {
@@ -695,26 +695,26 @@ Plant Manager (ref.: risk waiver RW-2026-008) pending repair.`,
 
   edges: [
 
-    // ── 26 kV MAIN PANEL busbar + feeder risers (cells 1–11 → TR-01…04) ────────
-    ...buildMainPanelEdges(),
+//     // ── 26 kV MAIN PANEL busbar + feeder risers (cells 1–11 → TR-01…04) ────────
+    // ...buildMainPanelEdges(),
 
-    // ── HV incoming from external Substation is in substation.ts ─────────────────
+//     // ── HV incoming from external Substation is in substation.ts ─────────────────
 
-    // ── TR-02 (Utility) → LV distribution chain ────────────────────────────────
-    {
-      id: 'LV-TR02-TO-UTMDP',
-      name: 'LV Feed TR-02 → UT-MDP',
-      source: 'TR-02',
-      target: 'UT-MDP',
-      edgeType: 'power',
-      status: 'operational',
-      specs: {
-        voltage: '400 V',
-        notes: 'Main utility LV distribution — TR-02 secondary to UT-MDP incoming.',
-      },
-      route: { pathType: 'internal', spansBuildings: false },
-      troubleshootingSteps: [
-        { id: 'tr02-utmdp-1', text: 'Measure voltage at TR-02 LV busbar and UT-MDP incoming — 400 V ±5%.' },
+//     // ── TR-02 (Utility) → LV distribution chain ────────────────────────────────
+    // {
+      // id: 'LV-TR02-TO-UTMDP',
+      // name: 'LV Feed TR-02 → UT-MDP',
+      // source: 'TR-02',
+      // target: 'UT-MDP',
+      // edgeType: 'power',
+      // status: 'operational',
+      // specs: {
+        // voltage: '400 V',
+        // notes: 'Main utility LV distribution — TR-02 secondary to UT-MDP incoming.',
+      // },
+      // route: { pathType: 'internal', spansBuildings: false },
+      // troubleshootingSteps: [
+        // { id: 'tr02-utmdp-1', text: 'Measure voltage at TR-02 LV busbar and UT-MDP incoming — 400 V ±5%.' },
       ],
     },
     {

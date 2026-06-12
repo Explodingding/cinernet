@@ -8,28 +8,28 @@ import type { TopologyEdgeInput } from '@/types/topology';
  */
 export const siteFeederEdges: TopologyEdgeInput[] = [
 
-  // ── Utility → Furnace 10: TR-01 → TR-DP1.1 ─────────────────────────────────
-  {
-    id: 'LV-TR01-TO-DP1-1',
-    name: 'LV Feeder TR-01 → TR-DP1.1 (Furnace 10)',
-    source: 'TR-01',
-    target: 'TR-DP1-1',
-    edgeType: 'power',
-    status: 'operational',
-    specs: {
-      voltage: '400 V AC',
-      notes: 'LV output from TR-01 (MAIN PANEL Cell 4 feeder) to TR-DP1.1 PFC panel (Furnace 10).',
-    },
-    route: {
-      pathType: 'underground',
-      spansBuildings: true,
-      fromBuilding: 'utility',
-      toBuilding: 'furnace-10',
-    },
-    troubleshootingSteps: [
-      { id: 'tr01-dp11-1', text: 'Measure LV voltage at TR-01 secondary terminals.' },
-      { id: 'tr01-dp11-2', text: 'Measure voltage at TR-DP1.1 incoming terminals — expected 395–405 V.' },
-      { id: 'tr01-dp11-3', text: 'Check ACB in TR-DP1.1 — confirm not tripped.' },
+//   // ── Utility → Furnace 10: TR-01 → TR-DP1.1 ─────────────────────────────────
+  // {
+    // id: 'LV-TR01-TO-DP1-1',
+    // name: 'LV Feeder TR-01 → TR-DP1.1 (Furnace 10)',
+    // source: 'TR-01',
+    // target: 'TR-DP1-1',
+    // edgeType: 'power',
+    // status: 'operational',
+    // specs: {
+      // voltage: '400 V AC',
+      // notes: 'LV output from TR-01 (MAIN PANEL Cell 4 feeder) to TR-DP1.1 PFC panel (Furnace 10).',
+    // },
+    // route: {
+      // pathType: 'underground',
+      // spansBuildings: true,
+      // fromBuilding: 'utility',
+      // toBuilding: 'furnace-10',
+    // },
+    // troubleshootingSteps: [
+      // { id: 'tr01-dp11-1', text: 'Measure LV voltage at TR-01 secondary terminals.' },
+      // { id: 'tr01-dp11-2', text: 'Measure voltage at TR-DP1.1 incoming terminals — expected 395–405 V.' },
+      // { id: 'tr01-dp11-3', text: 'Check ACB in TR-DP1.1 — confirm not tripped.' },
     ],
   },
 

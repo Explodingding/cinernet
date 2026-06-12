@@ -7,7 +7,7 @@
     "plcItemCount": 169,
     "powerItemCount": 491
   },
-  "nodes": [
+  "_nodes": [
     {
       "id": "TB10",
       "name": "Terminal Box TB10",

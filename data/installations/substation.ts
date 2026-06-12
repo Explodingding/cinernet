@@ -15,32 +15,32 @@ export const substationInstallation: SiteInstallation = {
   id: 'substation',
   label: 'Distribution Building — External',
   nodes: [
-    {
-      id: 'GRID-FEED-A',
-    position: { x: 0, y: 0 },
-      name: 'Fluvius Grid Feeder A (H05/H06)',
-      assetType: 'hv-feed',
-      layer: 'hv-feed',
-      status: 'operational',
-      displayTier: 1,
-      subsystem: 'hv',
-      allowFaultInjection: false,
-      physicalLocation: {
-        building: 'substation',
-        zone: 'substation-hv',
-        floor: 'Basement',
-        elevation: '−3 m',
-        area: 'Distribution Building — Fluvius interface cubicle A',
-        gridRef: 'H05/H06',
-      },
-      specs: {
-        voltage: '26 kV (future 30 kV)',
-        notes: 'Primary grid intake — EAXECWB 3×1×630/26 kV, 5.5 km from Fluvius substation. External asset — no internal fault simulation.',
-        manufacturer: 'Schneider Electric GHA 40.5-31-12',
-      },
-      troubleshootingSteps: [
-        { id: 'gfa-1', text: 'Contact Fluvius grid operator for upstream outage — do not operate external switchgear.' },
-        { id: 'gfa-2', text: 'Verify SICAM-Q100 energy quality at grid interface (read-only).' },
+    // {
+      // id: 'GRID-FEED-A',
+    // position: { x: 0, y: 0 },
+      // name: 'Fluvius Grid Feeder A (H05/H06)',
+      // assetType: 'hv-feed',
+      // layer: 'hv-feed',
+      // status: 'operational',
+      // displayTier: 1,
+      // subsystem: 'hv',
+      // allowFaultInjection: false,
+      // physicalLocation: {
+        // building: 'substation',
+        // zone: 'substation-hv',
+        // floor: 'Basement',
+        // elevation: '−3 m',
+        // area: 'Distribution Building — Fluvius interface cubicle A',
+        // gridRef: 'H05/H06',
+      // },
+      // specs: {
+        // voltage: '26 kV (future 30 kV)',
+        // notes: 'Primary grid intake — EAXECWB 3×1×630/26 kV, 5.5 km from Fluvius substation. External asset — no internal fault simulation.',
+        // manufacturer: 'Schneider Electric GHA 40.5-31-12',
+      // },
+      // troubleshootingSteps: [
+        // { id: 'gfa-1', text: 'Contact Fluvius grid operator for upstream outage — do not operate external switchgear.' },
+        // { id: 'gfa-2', text: 'Verify SICAM-Q100 energy quality at grid interface (read-only).' },
       ],
     },
     {
@@ -74,27 +74,27 @@ export const substationInstallation: SiteInstallation = {
 
   edges: [
     // Track 1 — single main incoming cable
-    {
-      id: 'HV-SUPPLY-MAIN',
-      name: 'HV Supply Main — Feeder A → MAIN PANEL Cell 1',
-      source: 'GRID-FEED-A',
-      target: 'MAIN-HV-CELL-01',
-      edgeType: 'hv',
-      status: 'operational',
-      specs: {
-        crossSection: '2×3(1×240) mm² 26 kV EXeCG',
-        voltage: '26 kV',
-        length: '5.5 km',
-        notes: 'Track 1 — main incoming. Reference 66-15-014a-3. Nominal 26 kV, rated 30 kV.',
-      },
-      route: {
-        pathType: 'underground',
-        spansBuildings: true,
-        fromBuilding: 'substation',
-        toBuilding: 'utility',
-      },
-      troubleshootingSteps: [
-        { id: 'hv-main-1', text: 'Measure voltage at Utility MAIN incomer — 26 kV ±5%.' },
+    // {
+      // id: 'HV-SUPPLY-MAIN',
+      // name: 'HV Supply Main — Feeder A → MAIN PANEL Cell 1',
+      // source: 'GRID-FEED-A',
+      // target: 'MAIN-HV-CELL-01',
+      // edgeType: 'hv',
+      // status: 'operational',
+      // specs: {
+        // crossSection: '2×3(1×240) mm² 26 kV EXeCG',
+        // voltage: '26 kV',
+        // length: '5.5 km',
+        // notes: 'Track 1 — main incoming. Reference 66-15-014a-3. Nominal 26 kV, rated 30 kV.',
+      // },
+      // route: {
+        // pathType: 'underground',
+        // spansBuildings: true,
+        // fromBuilding: 'substation',
+        // toBuilding: 'utility',
+      // },
+      // troubleshootingSteps: [
+        // { id: 'hv-main-1', text: 'Measure voltage at Utility MAIN incomer — 26 kV ±5%.' },
       ],
     },
     // Track 2 — redundant twin cables (parallel pair, same source→target)
