@@ -39,23 +39,7 @@ function cellNode(cellNumber: number, notes: string): TopologyNodeInput {
 }
 
 /** Cells 1–11 — contiguous 26 kV MAIN PANEL lineup at Utility ground floor (0 m). */
-export const mainHvPanelCells: TopologyNodeInput[] = Array.from({ length: CELL_COUNT }, (_, i) => {
-  const n = i + 1;
-  const roleNotes: Record<number, string> = {
-    1: 'MAIN SUPPLY-1 — Track 1 incomer from Fluvius Distribution Building (GRID-FEED-A).',
-    2: 'MAIN SUPPLY-2A — Track 2 redundant cable A from Distribution Building (GRID-FEED-B).',
-    3: 'MAIN SUPPLY-2B — Track 2 redundant cable B (parallel pair with Cell 2).',
-    4: 'FUR 10 — outgoing feeder cubicle to TR-01 / Furnace 10 supply.',
-    5: 'Bus section / metering between F10 and Utility feeder positions.',
-    6: 'Utility services feeder — outgoing to TR-02 (UT-MDP / TR-DPC).',
-    7: 'Bus section between Utility and Batch House feeder positions.',
-    8: 'Batch House feeder — outgoing to TR-03 (DC-BH-01 incoming).',
-    9: 'Bus section — Furnace 20 reserve feeder bay.',
-    10: 'FUR 20 — outgoing feeder cubicle to TR-04 (future scope, normally isolated).',
-    11: 'RING 10-20 — bus end / tie cubicle to F10 & F20 HV switchgear sections.',
-  };
-  return cellNode(n, roleNotes[n] ?? `Main panel cubicle ${n} on the 26 kV busbar.`);
-});
+export const mainHvPanelCells: TopologyNodeInput[] = [];
 
 function feederTransformer(
   id: string,
@@ -91,120 +75,9 @@ function feederTransformer(
   };
 }
 
-export const mainFeedTransformers: TopologyNodeInput[] = [
-  feederTransformer(
-    'TR-01',
-    'Transformer TR 01 — Furnace 10',
-    3,
-    {
-      voltage: '26 kV / 400 V',
-      power: '2 500 kVA',
-      notes: 'Fed from MAIN PANEL Cell 4. LV output → TR-DP1.1 PFC panel (Furnace 10).',
-    },
-    {
-      troubleshootingSteps: [
-        { id: 'tr01-1', text: 'Check winding temperature — max 80 °C (thermistor).' },
-        { id: 'tr01-2', text: 'Measure LV output: 395–405 V before energising F10 PFC panel.' },
-      ],
-    }
-  ),
-  feederTransformer(
-    'TR-02',
-    'Transformer TR 02 — Utility',
-    5,
-    {
-      voltage: '26 kV / 400 V',
-      power: '3 150 kVA',
-      notes: 'Fed from MAIN PANEL Cell 6. LV output → UT-MDP and TR-DPC utility distribution.',
-    },
-    {
-      troubleshootingSteps: [
-        { id: 'tr02-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr02-2', text: 'Verify LV feeds to UT-MDP and TR-DPC — 400 V ±5%.' },
-      ],
-    }
-  ),
-  feederTransformer(
-    'TR-03',
-    'Transformer TR 03 — Batch House',
-    7,
-    {
-      voltage: '26 kV / 400 V',
-      power: '2 500 kVA',
-      notes: 'Fed from MAIN PANEL Cell 8. LV output → DC-BH-01 (Batch House main incoming).',
-    },
-    {
-      troubleshootingSteps: [
-        { id: 'tr03-1', text: 'Check winding temperature — max 80 °C.' },
-        { id: 'tr03-2', text: 'Measure LV at DC-BH-01 incoming — 400 V ±5%.' },
-      ],
-    }
-  ),
-  feederTransformer(
-    'TR-04',
-    'Transformer TR 04 — Future Scope / F20',
-    9,
-    {
-      voltage: '26 kV / 400 V',
-      power: '2 500 kVA',
-      notes: 'Fed from MAIN PANEL Cell 10. Reserved for Furnace 20 — cubicle normally isolated.',
-    },
-    {
-      displayTier: 3,
-      status: 'investigation',
-      troubleshootingSteps: [
-        { id: 'tr04-1', text: 'Future scope — do not energise until F20 commissioning plan approved.' },
-      ],
-    }
-  ),
-];
+export const mainFeedTransformers: TopologyNodeInput[] = [];
 
 /** Internal busbar + feeder edges within the MAIN PANEL lineup. */
 export function buildMainPanelEdges(): TopologyEdgeInput[] {
-  const edges: TopologyEdgeInput[] = [];
-
-  // Contiguous busbar — cells 1 → 2 → … → 11
-  for (let i = 1; i < CELL_COUNT; i++) {
-    const from = `MAIN-HV-CELL-${String(i).padStart(2, '0')}`;
-    const to = `MAIN-HV-CELL-${String(i + 1).padStart(2, '0')}`;
-    edges.push({
-      id: `HV-BUS-${String(i).padStart(2, '0')}-${String(i + 1).padStart(2, '0')}`,
-      name: `26 kV busbar — Cell ${i} ↔ Cell ${i + 1}`,
-      source: from,
-      target: to,
-      edgeType: 'hv',
-      status: 'operational',
-      specs: { voltage: '26 kV', notes: 'Internal busbar connection within MAIN PANEL lineup.' },
-      route: { pathType: 'internal', spansBuildings: false },
-      troubleshootingSteps: [],
-    });
-  }
-
-  const feeders: { cell: number; tr: string; label: string }[] = [
-    { cell: 4, tr: 'TR-01', label: 'Furnace 10' },
-    { cell: 6, tr: 'TR-02', label: 'Utility' },
-    { cell: 8, tr: 'TR-03', label: 'Batch House' },
-    { cell: 10, tr: 'TR-04', label: 'Furnace 20 (future)' },
-  ];
-
-  for (const { cell, tr, label } of feeders) {
-    const cellId = `MAIN-HV-CELL-${String(cell).padStart(2, '0')}`;
-    edges.push({
-      id: `HV-CELL${cell}-TO-${tr}`,
-      name: `26 kV feeder Cell ${cell} → ${tr} (${label})`,
-      source: cellId,
-      target: tr,
-      edgeType: 'power',
-      status: tr === 'TR-04' ? 'investigation' : 'operational',
-      specs: {
-        voltage: '26 kV',
-        crossSection: '3(1×95) mm² 26 kV EXeCG',
-        notes: `Vertical riser from MAIN PANEL Cell ${cell} to ${tr} — orthogonal feeder run.`,
-      },
-      route: { pathType: 'riser', spansBuildings: false },
-      troubleshootingSteps: [],
-    });
-  }
-
-  return edges;
+  return [];
 }

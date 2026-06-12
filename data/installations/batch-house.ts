@@ -18,27 +18,7 @@ const importedNodes = importedTb.nodes as TopologyNodeInput[];
 export const batchHouseInstallation: SiteInstallation = {
   id: 'batch-house',
   label: 'Batch House + Cullet Tower',
-  nodes: [
-    // {
-      // id: 'DC-BH-01',
-    // position: { x: 0, y: 0 },
-      // name: 'Distribution Cabinet BH-01',
-      // assetType: 'cabinet',
-      // layer: 'cabinet',
-      // status: 'operational',
-      // physicalLocation: {
-        // building: 'batch-house',
-        // zone: 'batch-house-ground',
-        // floor: 'Ground',
-        // elevation: '0 m',
-        // area: 'Batch hall — main LV feed',
-        // gridRef: 'BH-DC-01',
-      // },
-      // specs: { voltage: '400V AC', current: '250 A', manufacturer: 'Rittal' },
-      // troubleshootingSteps: [
-        // { id: 'dcbh1', text: 'Check breaker Q1 (ON).' },
-        // { id: 'dcbh2', text: 'Measure output bus: 400 V ±2%.' },
-      ],
+  nodes: [],
     },
     {
       id: 'BH-TB-SUMMARY',
@@ -337,24 +317,7 @@ export const batchHouseInstallation: SiteInstallation = {
     position: { x: 10175, y: 1540 },
   },
 ],
-  edges: [
-    // ── Cullet Tower subsystem feeders ────────────────────────────────────────
-    // {
-      // id: 'LV-BH-TO-CT',
-      // name: 'LV Feed DC-BH-01 → CT-DC-01 (Cullet Tower)',
-      // source: 'DC-BH-01',
-      // target: 'CT-DC-01',
-      // edgeType: 'power',
-      // status: 'operational',
-      // specs: {
-        // voltage: '400 V AC',
-        // crossSection: '4×70 mm² Cu',
-        // notes: 'Sub-distribution feed for the Cullet Tower switchroom.',
-      // },
-      // route: { pathType: 'cable-tray', spansBuildings: false },
-      // troubleshootingSteps: [
-        // { id: 'bh-ct-1', text: 'Check outgoing MCCB Q-CT in DC-BH-01.' },
-      ],
+  edges: [],
     },
     {
       id: 'LOAD-CT-CRUSHER',
