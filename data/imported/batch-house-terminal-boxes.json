@@ -14,17 +14,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 1
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB10",
+        "area": "Batch House \u2014 terminal box TB10",
         "gridRef": "TB10"
       },
       "specs": {
@@ -34,51 +30,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB10-MCC2-0",
-          "text": "[power] MCC2 — Top row (8220 page 95)"
+          "text": "[power] MCC2 \u2014 Top row (8220 page 95)"
         },
         {
           "id": "TB10-MCC3-1",
-          "text": "[power] MCC3 — Top row (8220 page 95)"
+          "text": "[power] MCC3 \u2014 Top row (8220 page 95)"
         },
         {
           "id": "TB10-MCC4-2",
-          "text": "[power] MCC4 — Upper middle row (8220 page 95)"
+          "text": "[power] MCC4 \u2014 Upper middle row (8220 page 95)"
         },
         {
           "id": "TB10-MCC5-3",
-          "text": "[power] MCC5 — Upper middle row (8220 page 95)"
+          "text": "[power] MCC5 \u2014 Upper middle row (8220 page 95)"
         },
         {
           "id": "TB10-IM-F1-4",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2582)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DI-F1-5",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2582)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DI-F2-6",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2582)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DI-F3-7",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2582)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DI-F4-8",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2582)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DI-F5-9",
-          "text": "[fuse] DI-F5 — Top row (8220 page 2582)"
+          "text": "[fuse] DI-F5 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DO-F1-10",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2582)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2582)"
         },
         {
           "id": "TB10-DO-F2-11",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2582)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2582)"
         }
       ],
       "terminalBox": {
@@ -886,6 +882,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -894,17 +894,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 2
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB20",
+        "area": "Batch House \u2014 terminal box TB20",
         "gridRef": "TB20"
       },
       "specs": {
@@ -914,51 +910,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB20-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2584)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2584)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2584)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2584)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DI-F4-4",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2584)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DI-F5-5",
-          "text": "[fuse] DI-F5 — Top row (8220 page 2584)"
+          "text": "[fuse] DI-F5 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DI-F6-6",
-          "text": "[fuse] DI-F6 — Top row (8220 page 2584)"
+          "text": "[fuse] DI-F6 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DO-F1-7",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2584)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DO-F2-8",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2584)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DO-F3-9",
-          "text": "[fuse] DO-F3 — Top row (8220 page 2584)"
+          "text": "[fuse] DO-F3 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DCU7527-CU1-F11-10",
-          "text": "[fuse] DCU7527-CU1-F11 — Top row (8220 page 2584)"
+          "text": "[fuse] DCU7527-CU1-F11 \u2014 Top row (8220 page 2584)"
         },
         {
           "id": "TB20-DCU7527-K101-11",
-          "text": "[field] DCU7527-K101 — Top row (8220 page 2584)"
+          "text": "[field] DCU7527-K101 \u2014 Top row (8220 page 2584)"
         }
       ],
       "terminalBox": {
@@ -1629,6 +1625,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -1637,17 +1637,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 3
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB30",
+        "area": "Batch House \u2014 terminal box TB30",
         "gridRef": "TB30"
       },
       "specs": {
@@ -1657,51 +1653,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB30-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2586)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F4-4",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F5-5",
-          "text": "[fuse] DI-F5 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F5 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F6-6",
-          "text": "[fuse] DI-F6 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F6 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F7-7",
-          "text": "[fuse] DI-F7 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F7 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F8-8",
-          "text": "[fuse] DI-F8 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F8 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F9-9",
-          "text": "[fuse] DI-F9 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F9 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F10-10",
-          "text": "[fuse] DI-F10 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F10 \u2014 Top row (8220 page 2586)"
         },
         {
           "id": "TB30-DI-F11-11",
-          "text": "[fuse] DI-F11 — Top row (8220 page 2586)"
+          "text": "[fuse] DI-F11 \u2014 Top row (8220 page 2586)"
         }
       ],
       "terminalBox": {
@@ -3681,6 +3677,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -3689,17 +3689,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 4
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB40",
+        "area": "Batch House \u2014 terminal box TB40",
         "gridRef": "TB40"
       },
       "specs": {
@@ -3709,51 +3705,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB40-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2588)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2588)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2588)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2588)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DI-F4-4",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2588)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DI-F5-5",
-          "text": "[fuse] DI-F5 — Top row (8220 page 2588)"
+          "text": "[fuse] DI-F5 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DO-F1-6",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2588)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DO-F2-7",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2588)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DO-F3-8",
-          "text": "[fuse] DO-F3 — Top row (8220 page 2588)"
+          "text": "[fuse] DO-F3 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-DO-F4-9",
-          "text": "[fuse] DO-F4 — Top row (8220 page 2588)"
+          "text": "[fuse] DO-F4 \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-G12M-10",
-          "text": "[power] G12M — Top row (8220 page 2588)"
+          "text": "[power] G12M \u2014 Top row (8220 page 2588)"
         },
         {
           "id": "TB40-G14M-11",
-          "text": "[power] G14M — Top row (8220 page 2588)"
+          "text": "[power] G14M \u2014 Top row (8220 page 2588)"
         }
       ],
       "terminalBox": {
@@ -4424,6 +4420,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -4432,17 +4432,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 5
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB50",
+        "area": "Batch House \u2014 terminal box TB50",
         "gridRef": "TB50"
       },
       "specs": {
@@ -4452,51 +4448,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB50-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2590)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2590)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2590)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2590)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DI-F4-4",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2590)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DI-F5-5",
-          "text": "[fuse] DI-F5 — Top row (8220 page 2590)"
+          "text": "[fuse] DI-F5 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DO-F1-6",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2590)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DO-F2-7",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2590)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-AO-F1-8",
-          "text": "[fuse] AO-F1 — Top row (8220 page 2590)"
+          "text": "[fuse] AO-F1 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DCU7532A-CU1-F11-9",
-          "text": "[fuse] DCU7532A-CU1-F11 — Top row (8220 page 2590)"
+          "text": "[fuse] DCU7532A-CU1-F11 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DCU7532B-CU1-F11-10",
-          "text": "[fuse] DCU7532B-CU1-F11 — Top row (8220 page 2590)"
+          "text": "[fuse] DCU7532B-CU1-F11 \u2014 Top row (8220 page 2590)"
         },
         {
           "id": "TB50-DCU7532A-K101-11",
-          "text": "[field] DCU7532A-K101 — Top row (8220 page 2590)"
+          "text": "[field] DCU7532A-K101 \u2014 Top row (8220 page 2590)"
         }
       ],
       "terminalBox": {
@@ -5150,6 +5146,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -5158,17 +5158,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 6
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB60",
+        "area": "Batch House \u2014 terminal box TB60",
         "gridRef": "TB60"
       },
       "specs": {
@@ -5178,51 +5174,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB60-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2592)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2592)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-AI-F1-4",
-          "text": "[fuse] AI-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] AI-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-DO-F1-5",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-AI01-U1-F1-6",
-          "text": "[fuse] AI01-U1-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] AI01-U1-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-AI01-U2-F1-7",
-          "text": "[fuse] AI01-U2-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] AI01-U2-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-AI02-U1-F1-8",
-          "text": "[fuse] AI02-U1-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] AI02-U1-F1 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-DCU7533A-CU1-F11-9",
-          "text": "[fuse] DCU7533A-CU1-F11 — Top row (8220 page 2592)"
+          "text": "[fuse] DCU7533A-CU1-F11 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-DCU7533B-CU1-F11-10",
-          "text": "[fuse] DCU7533B-CU1-F11 — Top row (8220 page 2592)"
+          "text": "[fuse] DCU7533B-CU1-F11 \u2014 Top row (8220 page 2592)"
         },
         {
           "id": "TB60-AI03-U1-F1-11",
-          "text": "[fuse] AI03-U1-F1 — Top row (8220 page 2592)"
+          "text": "[fuse] AI03-U1-F1 \u2014 Top row (8220 page 2592)"
         }
       ],
       "terminalBox": {
@@ -5910,6 +5906,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -5918,17 +5918,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 7
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB70",
+        "area": "Batch House \u2014 terminal box TB70",
         "gridRef": "TB70"
       },
       "specs": {
@@ -5938,51 +5934,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB70-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2594)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2594)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2594)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2594)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DI-F4-4",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2594)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DI-F5-5",
-          "text": "[fuse] DI-F5 — Top row (8220 page 2594)"
+          "text": "[fuse] DI-F5 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DI-F6-6",
-          "text": "[fuse] DI-F6 — Top row (8220 page 2594)"
+          "text": "[fuse] DI-F6 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DO-F1-7",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2594)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DO-F2-8",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2594)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DO-F3-9",
-          "text": "[fuse] DO-F3 — Top row (8220 page 2594)"
+          "text": "[fuse] DO-F3 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DO-F4-10",
-          "text": "[fuse] DO-F4 — Top row (8220 page 2594)"
+          "text": "[fuse] DO-F4 \u2014 Top row (8220 page 2594)"
         },
         {
           "id": "TB70-DO-F5-11",
-          "text": "[fuse] DO-F5 — Top row (8220 page 2594)"
+          "text": "[fuse] DO-F5 \u2014 Top row (8220 page 2594)"
         }
       ],
       "terminalBox": {
@@ -7282,6 +7278,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -7290,17 +7290,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 8
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB80",
+        "area": "Batch House \u2014 terminal box TB80",
         "gridRef": "TB80"
       },
       "specs": {
@@ -7310,51 +7306,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB80-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2596)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2596)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2596)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DO-F1-3",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2596)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7561-CU1-F11-4",
-          "text": "[fuse] DCU7561-CU1-F11 — Top row (8220 page 2596)"
+          "text": "[fuse] DCU7561-CU1-F11 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7562-CU1-F11-5",
-          "text": "[fuse] DCU7562-CU1-F11 — Top row (8220 page 2596)"
+          "text": "[fuse] DCU7562-CU1-F11 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7563-CU1-F11-6",
-          "text": "[fuse] DCU7563-CU1-F11 — Top row (8220 page 2596)"
+          "text": "[fuse] DCU7563-CU1-F11 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7564-CU1-F11-7",
-          "text": "[fuse] DCU7564-CU1-F11 — Top row (8220 page 2596)"
+          "text": "[fuse] DCU7564-CU1-F11 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7561-K101-8",
-          "text": "[field] DCU7561-K101 — Top row (8220 page 2596)"
+          "text": "[field] DCU7561-K101 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7562-K101-9",
-          "text": "[field] DCU7562-K101 — Top row (8220 page 2596)"
+          "text": "[field] DCU7562-K101 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7563-K101-10",
-          "text": "[field] DCU7563-K101 — Top row (8220 page 2596)"
+          "text": "[field] DCU7563-K101 \u2014 Top row (8220 page 2596)"
         },
         {
           "id": "TB80-DCU7564-K101-11",
-          "text": "[field] DCU7564-K101 — Top row (8220 page 2596)"
+          "text": "[field] DCU7564-K101 \u2014 Top row (8220 page 2596)"
         }
       ],
       "terminalBox": {
@@ -7838,6 +7834,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -7846,17 +7846,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 9
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB90",
+        "area": "Batch House \u2014 terminal box TB90",
         "gridRef": "TB90"
       },
       "specs": {
@@ -7866,51 +7862,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB90-PTP1600-LCP1-0",
-          "text": "[field] PTP1600-LCP1 — Field terminal row (8220 page 96)"
+          "text": "[field] PTP1600-LCP1 \u2014 Field terminal row (8220 page 96)"
         },
         {
           "id": "TB90-MI1955-LCP1-1",
-          "text": "[power] MI1955-LCP1 — Field terminal row (8220 page 96)"
+          "text": "[power] MI1955-LCP1 \u2014 Field terminal row (8220 page 96)"
         },
         {
           "id": "TB90-PFS1991-LCP1-2",
-          "text": "[field] PFS1991-LCP1 — Field terminal row (8220 page 96)"
+          "text": "[field] PFS1991-LCP1 \u2014 Field terminal row (8220 page 96)"
         },
         {
           "id": "TB90-IM-F1-3",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2598)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-DI-F1-4",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2598)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-DO-F1-5",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2598)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-DO-F2-6",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2598)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-DCU7566-CU1-F11-7",
-          "text": "[fuse] DCU7566-CU1-F11 — Top row (8220 page 2598)"
+          "text": "[fuse] DCU7566-CU1-F11 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-MI1955-K32-8",
-          "text": "[power] MI1955-K32 — Top row (8220 page 2598)"
+          "text": "[power] MI1955-K32 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-MI1955-K33-9",
-          "text": "[power] MI1955-K33 — Top row (8220 page 2598)"
+          "text": "[power] MI1955-K33 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-DCU7566-K10-10",
-          "text": "[field] DCU7566-K10 — Top row (8220 page 2598)"
+          "text": "[field] DCU7566-K10 \u2014 Top row (8220 page 2598)"
         },
         {
           "id": "TB90-DCU7566-K11-11",
-          "text": "[field] DCU7566-K11 — Top row (8220 page 2598)"
+          "text": "[field] DCU7566-K11 \u2014 Top row (8220 page 2598)"
         }
       ],
       "terminalBox": {
@@ -8412,6 +8408,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -8420,17 +8420,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 10
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB100",
+        "area": "Batch House \u2014 terminal box TB100",
         "gridRef": "TB100"
       },
       "specs": {
@@ -8440,51 +8436,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB100-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2600)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2600)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-AI-F1-2",
-          "text": "[fuse] AI-F1 — Top row (8220 page 2600)"
+          "text": "[fuse] AI-F1 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DO-F1-3",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2600)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DCU7541-CU1-F11-4",
-          "text": "[fuse] DCU7541-CU1-F11 — Top row (8220 page 2600)"
+          "text": "[fuse] DCU7541-CU1-F11 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DCU7544-CU1-F11-5",
-          "text": "[fuse] DCU7544-CU1-F11 — Top row (8220 page 2600)"
+          "text": "[fuse] DCU7544-CU1-F11 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DCU7541-K101-6",
-          "text": "[field] DCU7541-K101 — Top row (8220 page 2600)"
+          "text": "[field] DCU7541-K101 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DCU7544-K101-7",
-          "text": "[field] DCU7544-K101 — Top row (8220 page 2600)"
+          "text": "[field] DCU7544-K101 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DCU7541-CU1-X1-8",
-          "text": "[field] DCU7541-CU1-X1 — Top row (8220 page 2600)"
+          "text": "[field] DCU7541-CU1-X1 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-DCU7544-CU1-X1-9",
-          "text": "[field] DCU7544-CU1-X1 — Top row (8220 page 2600)"
+          "text": "[field] DCU7544-CU1-X1 \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-G12M-10",
-          "text": "[power] G12M — Top row (8220 page 2600)"
+          "text": "[power] G12M \u2014 Top row (8220 page 2600)"
         },
         {
           "id": "TB100-G14M-11",
-          "text": "[power] G14M — Top row (8220 page 2600)"
+          "text": "[power] G14M \u2014 Top row (8220 page 2600)"
         }
       ],
       "terminalBox": {
@@ -9002,6 +8998,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -9010,17 +9010,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 11
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB110",
+        "area": "Batch House \u2014 terminal box TB110",
         "gridRef": "TB110"
       },
       "specs": {
@@ -9030,51 +9026,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB110-IM-F1-0",
-          "text": "[fuse] IM-F1 — Top row (8220 page 2602)"
+          "text": "[fuse] IM-F1 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-DI-F1-1",
-          "text": "[fuse] DI-F1 — Top row (8220 page 2602)"
+          "text": "[fuse] DI-F1 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-DI-F2-2",
-          "text": "[fuse] DI-F2 — Top row (8220 page 2602)"
+          "text": "[fuse] DI-F2 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-DI-F3-3",
-          "text": "[fuse] DI-F3 — Top row (8220 page 2602)"
+          "text": "[fuse] DI-F3 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-DI-F4-4",
-          "text": "[fuse] DI-F4 — Top row (8220 page 2602)"
+          "text": "[fuse] DI-F4 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-DO-F1-5",
-          "text": "[fuse] DO-F1 — Top row (8220 page 2602)"
+          "text": "[fuse] DO-F1 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-DO-F2-6",
-          "text": "[fuse] DO-F2 — Top row (8220 page 2602)"
+          "text": "[fuse] DO-F2 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-G12M-7",
-          "text": "[power] G12M — Top row (8220 page 2602)"
+          "text": "[power] G12M \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-G14M-8",
-          "text": "[power] G14M — Top row (8220 page 2602)"
+          "text": "[power] G14M \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-24X1-9",
-          "text": "[power] 24X1 — Top row (8220 page 2602)"
+          "text": "[power] 24X1 \u2014 Top row (8220 page 2602)"
         },
         {
           "id": "TB110-L0141-X11-10",
-          "text": "[field] L0141-X11 — Upper middle row (8220 page 2602)"
+          "text": "[field] L0141-X11 \u2014 Upper middle row (8220 page 2602)"
         },
         {
           "id": "TB110-XPE-11",
-          "text": "[earth] XPE — Field terminal row (8220 page 2602)"
+          "text": "[earth] XPE \u2014 Field terminal row (8220 page 2602)"
         }
       ],
       "terminalBox": {
@@ -9473,6 +9469,10 @@
             "signalLayer": "plc"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -9481,17 +9481,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 12
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB120A",
+        "area": "Batch House \u2014 terminal box TB120A",
         "gridRef": "TB120A"
       },
       "specs": {
@@ -9501,51 +9497,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB120A-MI5111-MS1-0",
-          "text": "[power] MI5111-MS1 — Upper middle row (8220 page 97)"
+          "text": "[power] MI5111-MS1 \u2014 Upper middle row (8220 page 97)"
         },
         {
           "id": "TB120A-MI5211-MS1-1",
-          "text": "[power] MI5211-MS1 — Upper middle row (8220 page 97)"
+          "text": "[power] MI5211-MS1 \u2014 Upper middle row (8220 page 97)"
         },
         {
           "id": "TB120A-MI5311-MS1-2",
-          "text": "[power] MI5311-MS1 — Field terminal row (8220 page 97)"
+          "text": "[power] MI5311-MS1 \u2014 Field terminal row (8220 page 97)"
         },
         {
           "id": "TB120A-MCC6,-3",
-          "text": "[power] MCC6, — Field terminal row (8220 page 97)"
+          "text": "[power] MCC6, \u2014 Field terminal row (8220 page 97)"
         },
         {
           "id": "TB120A-MCC7,-4",
-          "text": "[power] MCC7, — Lower IO row (8220 page 97)"
+          "text": "[power] MCC7, \u2014 Lower IO row (8220 page 97)"
         },
         {
           "id": "TB120A-DCU7551A-K101-5",
-          "text": "[field] DCU7551A-K101 — Top row (8220 page 2641)"
+          "text": "[field] DCU7551A-K101 \u2014 Top row (8220 page 2641)"
         },
         {
           "id": "TB120A-DCU7552A-K101-6",
-          "text": "[field] DCU7552A-K101 — Top row (8220 page 2641)"
+          "text": "[field] DCU7552A-K101 \u2014 Top row (8220 page 2641)"
         },
         {
           "id": "TB120A-DCU7553A-K101-7",
-          "text": "[field] DCU7553A-K101 — Top row (8220 page 2641)"
+          "text": "[field] DCU7553A-K101 \u2014 Top row (8220 page 2641)"
         },
         {
           "id": "TB120A-DCU7554A-K101-8",
-          "text": "[field] DCU7554A-K101 — Top row (8220 page 2641)"
+          "text": "[field] DCU7554A-K101 \u2014 Top row (8220 page 2641)"
         },
         {
           "id": "TB120A-DCU7551A-CU1-F24-9",
-          "text": "[fuse] DCU7551A-CU1-F24 — Top row (8220 page 2641)"
+          "text": "[fuse] DCU7551A-CU1-F24 \u2014 Top row (8220 page 2641)"
         },
         {
           "id": "TB120A-DCU7552A-CU1-F11-10",
-          "text": "[fuse] DCU7552A-CU1-F11 — Top row (8220 page 2641)"
+          "text": "[fuse] DCU7552A-CU1-F11 \u2014 Top row (8220 page 2641)"
         },
         {
           "id": "TB120A-DCU7553A-CU1-F11-11",
-          "text": "[fuse] DCU7553A-CU1-F11 — Top row (8220 page 2641)"
+          "text": "[fuse] DCU7553A-CU1-F11 \u2014 Top row (8220 page 2641)"
         }
       ],
       "terminalBox": {
@@ -9992,6 +9988,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -10000,17 +10000,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 13
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB130A",
+        "area": "Batch House \u2014 terminal box TB130A",
         "gridRef": "TB130A"
       },
       "specs": {
@@ -10020,51 +10016,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB130A-DCU7555A-K101-0",
-          "text": "[field] DCU7555A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7555A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7556A-K101-1",
-          "text": "[field] DCU7556A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7556A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7557A-K101-2",
-          "text": "[field] DCU7557A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7557A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7558A-K101-3",
-          "text": "[field] DCU7558A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7558A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7581A-K101-4",
-          "text": "[field] DCU7581A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7581A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7582A-K101-5",
-          "text": "[field] DCU7582A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7582A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7583A-K101-6",
-          "text": "[field] DCU7583A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7583A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7584A-K101-7",
-          "text": "[field] DCU7584A-K101 — Top row (8220 page 2643)"
+          "text": "[field] DCU7584A-K101 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7555A-CU1-F24-8",
-          "text": "[fuse] DCU7555A-CU1-F24 — Top row (8220 page 2643)"
+          "text": "[fuse] DCU7555A-CU1-F24 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7556A-CU1-F11-9",
-          "text": "[fuse] DCU7556A-CU1-F11 — Top row (8220 page 2643)"
+          "text": "[fuse] DCU7556A-CU1-F11 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7557A-CU1-F11-10",
-          "text": "[fuse] DCU7557A-CU1-F11 — Top row (8220 page 2643)"
+          "text": "[fuse] DCU7557A-CU1-F11 \u2014 Top row (8220 page 2643)"
         },
         {
           "id": "TB130A-DCU7558A-CU1-F11-11",
-          "text": "[fuse] DCU7558A-CU1-F11 — Top row (8220 page 2643)"
+          "text": "[fuse] DCU7558A-CU1-F11 \u2014 Top row (8220 page 2643)"
         }
       ],
       "terminalBox": {
@@ -10662,6 +10658,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -10670,17 +10670,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 14
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB200A",
+        "area": "Batch House \u2014 terminal box TB200A",
         "gridRef": "TB200A"
       },
       "specs": {
@@ -10690,31 +10686,31 @@
       "troubleshootingSteps": [
         {
           "id": "TB200A-TB200A-X20-0",
-          "text": "[field] TB200A-X20 — Upper middle row (8220 page 2645)"
+          "text": "[field] TB200A-X20 \u2014 Upper middle row (8220 page 2645)"
         },
         {
           "id": "TB200A-TB200A-X30-1",
-          "text": "[field] TB200A-X30 — Upper middle row (8220 page 2645)"
+          "text": "[field] TB200A-X30 \u2014 Upper middle row (8220 page 2645)"
         },
         {
           "id": "TB200A-TB200A-C9121A-X30-2",
-          "text": "[field] TB200A-C9121A-X30 — Upper middle row (8220 page 2645)"
+          "text": "[field] TB200A-C9121A-X30 \u2014 Upper middle row (8220 page 2645)"
         },
         {
           "id": "TB200A-TB200A-C9111A-X30-3",
-          "text": "[field] TB200A-C9111A-X30 — Upper middle row (8220 page 2645)"
+          "text": "[field] TB200A-C9111A-X30 \u2014 Upper middle row (8220 page 2645)"
         },
         {
           "id": "TB200A-TB200A-X10-4",
-          "text": "[field] TB200A-X10 — Field terminal row (8220 page 2645)"
+          "text": "[field] TB200A-X10 \u2014 Field terminal row (8220 page 2645)"
         },
         {
           "id": "TB200A-TB200A-X11-5",
-          "text": "[field] TB200A-X11 — Field terminal row (8220 page 2645)"
+          "text": "[field] TB200A-X11 \u2014 Field terminal row (8220 page 2645)"
         },
         {
           "id": "TB200A-TB200A-X12-6",
-          "text": "[field] TB200A-X12 — Field terminal row (8220 page 2645)"
+          "text": "[field] TB200A-X12 \u2014 Field terminal row (8220 page 2645)"
         }
       ],
       "terminalBox": {
@@ -10852,6 +10848,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -10860,17 +10860,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 15
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB210A",
+        "area": "Batch House \u2014 terminal box TB210A",
         "gridRef": "TB210A"
       },
       "specs": {
@@ -10880,35 +10876,35 @@
       "troubleshootingSteps": [
         {
           "id": "TB210A-TB210A-X12-0",
-          "text": "[field] TB210A-X12 — Top row (8220 page 2647)"
+          "text": "[field] TB210A-X12 \u2014 Top row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-X20-1",
-          "text": "[field] TB210A-X20 — Top row (8220 page 2647)"
+          "text": "[field] TB210A-X20 \u2014 Top row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-C9131A-X30-2",
-          "text": "[field] TB210A-C9131A-X30 — Top row (8220 page 2647)"
+          "text": "[field] TB210A-C9131A-X30 \u2014 Top row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-C9141A-X30-3",
-          "text": "[field] TB210A-C9141A-X30 — Top row (8220 page 2647)"
+          "text": "[field] TB210A-C9141A-X30 \u2014 Top row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-C9221A-X30-4",
-          "text": "[field] TB210A-C9221A-X30 — Top row (8220 page 2647)"
+          "text": "[field] TB210A-C9221A-X30 \u2014 Top row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-X30-5",
-          "text": "[field] TB210A-X30 — Top row (8220 page 2647)"
+          "text": "[field] TB210A-X30 \u2014 Top row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-X10-6",
-          "text": "[field] TB210A-X10 — Field terminal row (8220 page 2647)"
+          "text": "[field] TB210A-X10 \u2014 Field terminal row (8220 page 2647)"
         },
         {
           "id": "TB210A-TB210A-X11-7",
-          "text": "[field] TB210A-X11 — Field terminal row (8220 page 2647)"
+          "text": "[field] TB210A-X11 \u2014 Field terminal row (8220 page 2647)"
         }
       ],
       "terminalBox": {
@@ -11063,6 +11059,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -11071,17 +11071,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 16
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB220A",
+        "area": "Batch House \u2014 terminal box TB220A",
         "gridRef": "TB220A"
       },
       "specs": {
@@ -11091,51 +11087,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB220A-DCU7586A-K101-0",
-          "text": "[field] DCU7586A-K101 — Top row (8220 page 2649)"
+          "text": "[field] DCU7586A-K101 \u2014 Top row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X20-1",
-          "text": "[field] TB220A-X20 — Upper middle row (8220 page 2649)"
+          "text": "[field] TB220A-X20 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X30-2",
-          "text": "[field] TB220A-X30 — Upper middle row (8220 page 2649)"
+          "text": "[field] TB220A-X30 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X601-3",
-          "text": "[field] TB220A-X601 — Upper middle row (8220 page 2649)"
+          "text": "[field] TB220A-X601 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-C9241A-X30-4",
-          "text": "[field] TB220A-C9241A-X30 — Upper middle row (8220 page 2649)"
+          "text": "[field] TB220A-C9241A-X30 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-C9291A-X30-5",
-          "text": "[field] TB220A-C9291A-X30 — Upper middle row (8220 page 2649)"
+          "text": "[field] TB220A-C9291A-X30 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-HC9271A-X30-6",
-          "text": "[field] TB220A-HC9271A-X30 — Upper middle row (8220 page 2649)"
+          "text": "[field] TB220A-HC9271A-X30 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-DCU7586A-CU1-X24-7",
-          "text": "[field] DCU7586A-CU1-X24 — Upper middle row (8220 page 2649)"
+          "text": "[field] DCU7586A-CU1-X24 \u2014 Upper middle row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X10-8",
-          "text": "[field] TB220A-X10 — Field terminal row (8220 page 2649)"
+          "text": "[field] TB220A-X10 \u2014 Field terminal row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X11-9",
-          "text": "[field] TB220A-X11 — Field terminal row (8220 page 2649)"
+          "text": "[field] TB220A-X11 \u2014 Field terminal row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X12-10",
-          "text": "[field] TB220A-X12 — Field terminal row (8220 page 2649)"
+          "text": "[field] TB220A-X12 \u2014 Field terminal row (8220 page 2649)"
         },
         {
           "id": "TB220A-TB220A-X13-11",
-          "text": "[field] TB220A-X13 — Field terminal row (8220 page 2649)"
+          "text": "[field] TB220A-X13 \u2014 Field terminal row (8220 page 2649)"
         }
       ],
       "terminalBox": {
@@ -11375,6 +11371,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -11383,17 +11383,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 17
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB230A",
+        "area": "Batch House \u2014 terminal box TB230A",
         "gridRef": "TB230A"
       },
       "specs": {
@@ -11403,51 +11399,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB230A-DCU7568A-K101-0",
-          "text": "[field] DCU7568A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7568A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7571A-K101-1",
-          "text": "[field] DCU7571A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7571A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7574A-K101-2",
-          "text": "[field] DCU7574A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7574A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7575A-K101-3",
-          "text": "[field] DCU7575A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7575A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7577A-K101-4",
-          "text": "[field] DCU7577A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7577A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7579A-K101-5",
-          "text": "[field] DCU7579A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7579A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7587A-K101-6",
-          "text": "[field] DCU7587A-K101 — Top row (8220 page 2651)"
+          "text": "[field] DCU7587A-K101 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7568A-CU1-F11-7",
-          "text": "[fuse] DCU7568A-CU1-F11 — Top row (8220 page 2651)"
+          "text": "[fuse] DCU7568A-CU1-F11 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7571A-CU1-F11-8",
-          "text": "[fuse] DCU7571A-CU1-F11 — Top row (8220 page 2651)"
+          "text": "[fuse] DCU7571A-CU1-F11 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7574A-CU1-F11-9",
-          "text": "[fuse] DCU7574A-CU1-F11 — Top row (8220 page 2651)"
+          "text": "[fuse] DCU7574A-CU1-F11 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7575A-CU1-F11-10",
-          "text": "[fuse] DCU7575A-CU1-F11 — Top row (8220 page 2651)"
+          "text": "[fuse] DCU7575A-CU1-F11 \u2014 Top row (8220 page 2651)"
         },
         {
           "id": "TB230A-DCU7577A-CU1-F24-11",
-          "text": "[fuse] DCU7577A-CU1-F24 — Top row (8220 page 2651)"
+          "text": "[fuse] DCU7577A-CU1-F24 \u2014 Top row (8220 page 2651)"
         }
       ],
       "terminalBox": {
@@ -12011,6 +12007,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -12019,17 +12019,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 18
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB240A",
+        "area": "Batch House \u2014 terminal box TB240A",
         "gridRef": "TB240A"
       },
       "specs": {
@@ -12039,51 +12035,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB240A-DCU7528A-K101-0",
-          "text": "[field] DCU7528A-K101 — Top row (8220 page 2653)"
+          "text": "[field] DCU7528A-K101 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7529A-K101-1",
-          "text": "[field] DCU7529A-K101 — Top row (8220 page 2653)"
+          "text": "[field] DCU7529A-K101 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7531A-K101-2",
-          "text": "[field] DCU7531A-K101 — Top row (8220 page 2653)"
+          "text": "[field] DCU7531A-K101 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7528A-CU1-F24-3",
-          "text": "[fuse] DCU7528A-CU1-F24 — Top row (8220 page 2653)"
+          "text": "[fuse] DCU7528A-CU1-F24 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7529A-CU1-F11-4",
-          "text": "[fuse] DCU7529A-CU1-F11 — Top row (8220 page 2653)"
+          "text": "[fuse] DCU7529A-CU1-F11 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7531A-CU1-F11-5",
-          "text": "[fuse] DCU7531A-CU1-F11 — Top row (8220 page 2653)"
+          "text": "[fuse] DCU7531A-CU1-F11 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-TB230A-X20-6",
-          "text": "[field] TB230A-X20 — Top row (8220 page 2653)"
+          "text": "[field] TB230A-X20 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7528A-CU1-X24-7",
-          "text": "[field] DCU7528A-CU1-X24 — Top row (8220 page 2653)"
+          "text": "[field] DCU7528A-CU1-X24 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7529A-CU1-X24-8",
-          "text": "[field] DCU7529A-CU1-X24 — Top row (8220 page 2653)"
+          "text": "[field] DCU7529A-CU1-X24 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-DCU7531A-CU1-X24-9",
-          "text": "[field] DCU7531A-CU1-X24 — Top row (8220 page 2653)"
+          "text": "[field] DCU7531A-CU1-X24 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-TB240A-CU1-X24-10",
-          "text": "[field] TB240A-CU1-X24 — Top row (8220 page 2653)"
+          "text": "[field] TB240A-CU1-X24 \u2014 Top row (8220 page 2653)"
         },
         {
           "id": "TB240A-TB240A-X14-11",
-          "text": "[field] TB240A-X14 — Upper middle row (8220 page 2653)"
+          "text": "[field] TB240A-X14 \u2014 Upper middle row (8220 page 2653)"
         }
       ],
       "terminalBox": {
@@ -12443,6 +12439,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -12451,17 +12451,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 19
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB250A",
+        "area": "Batch House \u2014 terminal box TB250A",
         "gridRef": "TB250A"
       },
       "specs": {
@@ -12471,19 +12467,19 @@
       "troubleshootingSteps": [
         {
           "id": "TB250A-TB250A-X11-0",
-          "text": "[field] TB250A-X11 — Upper middle row (8220 page 2655)"
+          "text": "[field] TB250A-X11 \u2014 Upper middle row (8220 page 2655)"
         },
         {
           "id": "TB250A-TB250A-X20-1",
-          "text": "[field] TB250A-X20 — Upper middle row (8220 page 2655)"
+          "text": "[field] TB250A-X20 \u2014 Upper middle row (8220 page 2655)"
         },
         {
           "id": "TB250A-TB250A-X10-2",
-          "text": "[field] TB250A-X10 — Upper middle row (8220 page 2655)"
+          "text": "[field] TB250A-X10 \u2014 Upper middle row (8220 page 2655)"
         },
         {
           "id": "TB250A-TB250A-X600-3",
-          "text": "[field] TB250A-X600 — Upper middle row (8220 page 2655)"
+          "text": "[field] TB250A-X600 \u2014 Upper middle row (8220 page 2655)"
         }
       ],
       "terminalBox": {
@@ -12570,6 +12566,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     },
     {
@@ -12578,17 +12578,13 @@
       "assetType": "junction-box",
       "layer": "junction",
       "status": "investigation",
-      "layout": {
-        "building": "batch-house",
-        "branchIndex": 20
-      },
       "mapScope": "building-detail",
       "physicalLocation": {
         "building": "batch-house",
         "zone": "batch-house-ground",
         "floor": "Ground",
         "elevation": "0 m",
-        "area": "Batch House — terminal box TB260A",
+        "area": "Batch House \u2014 terminal box TB260A",
         "gridRef": "TB260A"
       },
       "specs": {
@@ -12598,51 +12594,51 @@
       "troubleshootingSteps": [
         {
           "id": "TB260A-DCU1332A-K101-0",
-          "text": "[field] DCU1332A-K101 — Top row (8220 page 2657)"
+          "text": "[field] DCU1332A-K101 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1333A-K101-1",
-          "text": "[field] DCU1333A-K101 — Top row (8220 page 2657)"
+          "text": "[field] DCU1333A-K101 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1342A-K101-2",
-          "text": "[field] DCU1342A-K101 — Top row (8220 page 2657)"
+          "text": "[field] DCU1342A-K101 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1332A-K11-3",
-          "text": "[field] DCU1332A-K11 — Top row (8220 page 2657)"
+          "text": "[field] DCU1332A-K11 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1333A-K11-4",
-          "text": "[field] DCU1333A-K11 — Top row (8220 page 2657)"
+          "text": "[field] DCU1333A-K11 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1342A-K11-5",
-          "text": "[field] DCU1342A-K11 — Top row (8220 page 2657)"
+          "text": "[field] DCU1342A-K11 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1332A-CU1-F24-6",
-          "text": "[fuse] DCU1332A-CU1-F24 — Top row (8220 page 2657)"
+          "text": "[fuse] DCU1332A-CU1-F24 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1333A-CU1-F11-7",
-          "text": "[fuse] DCU1333A-CU1-F11 — Top row (8220 page 2657)"
+          "text": "[fuse] DCU1333A-CU1-F11 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-DCU1342A-CU1-F11-8",
-          "text": "[fuse] DCU1342A-CU1-F11 — Top row (8220 page 2657)"
+          "text": "[fuse] DCU1342A-CU1-F11 \u2014 Top row (8220 page 2657)"
         },
         {
           "id": "TB260A-TB260A-X14-9",
-          "text": "[field] TB260A-X14 — Upper middle row (8220 page 2657)"
+          "text": "[field] TB260A-X14 \u2014 Upper middle row (8220 page 2657)"
         },
         {
           "id": "TB260A-TB260A-X15-10",
-          "text": "[field] TB260A-X15 — Upper middle row (8220 page 2657)"
+          "text": "[field] TB260A-X15 \u2014 Upper middle row (8220 page 2657)"
         },
         {
           "id": "TB260A-TB260A-X20-11",
-          "text": "[field] TB260A-X20 — Upper middle row (8220 page 2657)"
+          "text": "[field] TB260A-X20 \u2014 Upper middle row (8220 page 2657)"
         }
       ],
       "terminalBox": {
@@ -13053,6 +13049,10 @@
             "signalLayer": "power"
           }
         ]
+      },
+      "position": {
+        "x": 100,
+        "y": 100
       }
     }
   ]
